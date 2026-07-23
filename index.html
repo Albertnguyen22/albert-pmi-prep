@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- BUILD: ALBERT-PMI-LOGIN-GATE-V3 · 2026-07-23 -->
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -441,41 +442,137 @@
     .tutor-auth-lock{inset:76px 0 0}.tutor-auth-lock-card{padding:18px 14px}
   }
 
+
+  /* ---------- Compact header account control (placed left of Training) ---------- */
+  .header-actions{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:8px;
+    min-width:0;
+  }
+  .header-actions .tabs{margin-left:0!important;flex:none}
+
+  #auth-bar{
+    position:relative!important;
+    inset:auto!important;
+    top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+    z-index:80!important;
+    width:auto!important;max-width:none!important;max-height:none!important;
+    overflow:visible!important;
+    padding:0!important;margin:0!important;
+    background:transparent!important;color:inherit!important;
+    border:0!important;border-radius:0!important;
+    box-shadow:none!important;
+    font-size:13px!important;
+    transition:none!important;
+  }
+  #auth-bar[data-auth-state="in"]{width:auto!important}
+  #auth-bar.auth-attention{animation:none!important}
+  #auth-bar.auth-attention .auth-trigger{animation:authTriggerAttention .65s ease 2}
+  @keyframes authTriggerAttention{
+    0%,100%{transform:translateX(0);box-shadow:0 0 0 0 rgba(224,145,47,0)}
+    30%{transform:translateX(-4px);box-shadow:0 0 0 4px rgba(224,145,47,.22)}
+    60%{transform:translateX(3px);box-shadow:0 0 0 2px rgba(224,145,47,.14)}
+  }
+
+  #auth-bar .auth-trigger{
+    min-height:40px;
+    max-width:190px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:8px 10px!important;
+    color:var(--paper)!important;
+    background:rgba(255,255,255,.07)!important;
+    border:1px solid rgba(255,255,255,.15)!important;
+    border-radius:9px!important;
+    box-shadow:none!important;
+    font:inherit!important;
+    font-size:12px!important;
+    font-weight:750!important;
+    line-height:1!important;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:background .16s ease,border-color .16s ease,transform .16s ease!important;
+  }
+  #auth-bar .auth-trigger:hover,
+  #auth-bar.open .auth-trigger{
+    background:rgba(255,255,255,.13)!important;
+    border-color:rgba(255,255,255,.27)!important;
+  }
+  #auth-bar .auth-trigger:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  .auth-trigger-icon{font-size:14px;line-height:1}
+  .auth-trigger-text{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:122px}
+  .auth-trigger-chevron{font-size:10px;color:#aebdd0;transition:transform .16s ease}
+  #auth-bar.open .auth-trigger-chevron{transform:rotate(180deg)}
+  .auth-trigger-dot{width:7px;height:7px;border-radius:50%;background:#f0a08c;box-shadow:0 0 0 2px rgba(240,160,140,.16);flex:none}
+  #auth-bar[data-auth-state="in"] .auth-trigger-dot{background:#7fd39b;box-shadow:0 0 0 2px rgba(127,211,155,.16)}
+  #auth-bar[data-auth-state="in"] .auth-trigger{border-color:rgba(127,211,155,.34)!important;background:rgba(127,211,155,.08)!important}
+
+  #auth-bar .auth-popover{
+    display:none;
+    position:absolute;
+    top:calc(100% + 10px);
+    right:0;
+    width:min(390px,calc(100vw - 28px));
+    max-height:min(620px,calc(100vh - 92px));
+    overflow:auto;
+    padding:13px;
+    color:var(--ink);
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 22px 60px -24px rgba(15,28,46,.68);
+  }
+  #auth-bar.open .auth-popover{display:block;animation:authPopoverIn .16s ease}
+  @keyframes authPopoverIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+  #auth-bar .auth-popover::before{
+    content:"";
+    position:absolute;
+    top:-6px;right:22px;
+    width:11px;height:11px;
+    background:var(--white);
+    border-left:1px solid var(--line);
+    border-top:1px solid var(--line);
+    transform:rotate(45deg);
+  }
+  #auth-bar .auth-card-head{position:relative;z-index:1;margin-bottom:10px}
+  #auth-bar .row{display:block!important;max-width:none!important;margin:0!important}
+  #auth-bar #auth-logged-out{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.82fr);gap:8px!important}
+  #auth-bar #auth-logged-out .auth-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  #auth-bar #auth-logged-in{display:flex;align-items:center;gap:10px!important;justify-content:space-between;min-width:0}
+  #auth-bar input{background:var(--paper)!important;color:var(--ink)!important;border:1px solid var(--line)!important}
+  #auth-bar .auth-help{margin-bottom:0}
+
+  @media(max-width:760px){
+    .bar{align-items:center}
+    .header-actions{width:100%;margin-left:0;justify-content:flex-start;gap:6px}
+    .header-actions .tabs{flex:1;min-width:0}
+    .header-actions .tabs button{flex:1;min-width:0}
+    #auth-bar{flex:none}
+    #auth-bar .auth-trigger{width:42px;min-width:42px;max-width:42px;padding:8px!important}
+    .auth-trigger-text,.auth-trigger-chevron{display:none}
+    #auth-bar .auth-popover{
+      left:0;right:auto;
+      width:min(390px,calc(100vw - 28px));
+      max-height:calc(100vh - 132px);
+    }
+    #auth-bar .auth-popover::before{left:15px;right:auto}
+    body,body.pmi-session-in{padding-bottom:0!important}
+  }
+  @media(max-width:430px){
+    #auth-bar .auth-popover{width:calc(100vw - 28px)}
+    #auth-bar #auth-logged-out{grid-template-columns:1fr}
+    #auth-bar #auth-logged-out .auth-actions{grid-column:auto}
+  }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
-<!-- ALBERT PMI Prep · Always-visible Supabase account card -->
-<div id="auth-bar" data-auth-state="out" aria-label="Tài khoản ALBERT PMI Prep">
-  <div class="auth-card-head">
-    <div>
-      <strong>🔐 Tài khoản ALBERT</strong>
-      <small>Đăng nhập để dùng AI &amp; Mock Test</small>
-    </div>
-    <span id="auth-status-pill" class="auth-status-pill">Chưa đăng nhập</span>
-  </div>
-  <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
-  <div class="row">
-    <div id="auth-logged-out">
-      <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
-      <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password"
-             onkeydown="if(event.key==='Enter'){event.preventDefault();pmiSignIn();}">
-      <div class="auth-actions">
-        <button class="a-signup" onclick="pmiSignUp()">Đăng ký</button>
-        <button class="a-signin" onclick="pmiSignIn()">Đăng nhập</button>
-      </div>
-    </div>
-    <div id="auth-logged-in" style="display:none">
-      <div class="auth-user-block">
-        <small>Đang đăng nhập</small>
-        <span id="auth-user-email"></span>
-      </div>
-      <button class="a-signout" onclick="pmiSignOut()">Đăng xuất</button>
-    </div>
-  </div>
-  <p class="auth-help">Training vẫn xem được khi chưa đăng nhập. AI Tutor và toàn bộ Mock Test chỉ mở sau khi đăng nhập.</p>
-</div>
 
 <!-- Login-required dialog shown when a protected feature is selected -->
 <div id="login-gate" class="login-gate" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="login-gate-title"
@@ -487,12 +584,12 @@
     <h2 id="login-gate-title">Đăng nhập để tiếp tục</h2>
     <p id="login-gate-message">Bạn cần đăng nhập để sử dụng tính năng này.</p>
     <div class="login-gate-pills"><span>AI Study Tutor</span><span>10 Mock Tests</span><span>Mistake Notebook</span></div>
-    <button class="btn primary" type="button" onclick="pmiFocusLogin()">Đăng nhập ngay</button>
+    <button class="btn primary" type="button" onclick="pmiFocusLogin(event)">Đăng nhập ngay</button>
     <button class="btn ghost" type="button" onclick="pmiCloseLoginGate()">Tiếp tục xem Training</button>
   </div>
 </div>
 
-<!-- Revised 2026-07-23: PMBOK 8 / PMP ECO 2026 alignment, enhanced mock engine, mistake notebook, compact account footer. -->
+<!-- Revised 2026-07-23 v4: minimal account dropdown immediately left of Training; logged-in email stays inside the popover; AI and Mock Test remain protected. -->
 
 <header>
   <div class="bar">
@@ -500,9 +597,54 @@
       <b><span class="albert">ALBERT</span> PMI&nbsp;Prep</b>
       <span class="tag">PMBOK 8th · 2026 Exam</span>
     </div>
-    <div class="tabs" role="tablist">
-      <button id="tab-train" class="active" onclick="showView('train')" role="tab">Training</button>
-      <button id="tab-mock" class="auth-required" onclick="showView('mock')" role="tab" data-locked="true">🔒 Mock Test</button>
+
+    <div class="header-actions">
+      <!-- Compact account control: immediately to the left of Training -->
+      <div id="auth-bar" data-auth-state="out" aria-label="Tài khoản ALBERT PMI Prep">
+        <button id="auth-trigger" class="auth-trigger" type="button"
+                aria-expanded="false" aria-controls="auth-popover"
+                onclick="pmiToggleAuthMenu(event)" title="Mở đăng nhập">
+          <span id="auth-trigger-icon" class="auth-trigger-icon" aria-hidden="true">🔐</span>
+          <span id="auth-trigger-text" class="auth-trigger-text">Đăng nhập</span>
+          <span class="auth-trigger-dot" aria-hidden="true"></span>
+          <span class="auth-trigger-chevron" aria-hidden="true">▾</span>
+        </button>
+
+        <div id="auth-popover" class="auth-popover" role="dialog" aria-label="Đăng nhập tài khoản ALBERT" aria-hidden="true">
+          <div class="auth-card-head">
+            <div>
+              <strong>🔐 Tài khoản ALBERT</strong>
+              <small>Đăng nhập để dùng AI &amp; Mock Test</small>
+            </div>
+            <span id="auth-status-pill" class="auth-status-pill">Chưa đăng nhập</span>
+          </div>
+          <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
+          <div class="row">
+            <div id="auth-logged-out">
+              <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
+              <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password"
+                     onkeydown="if(event.key==='Enter'){event.preventDefault();pmiSignIn();}">
+              <div class="auth-actions">
+                <button class="a-signup" type="button" onclick="pmiSignUp()">Đăng ký</button>
+                <button class="a-signin" type="button" onclick="pmiSignIn()">Đăng nhập</button>
+              </div>
+            </div>
+            <div id="auth-logged-in" style="display:none">
+              <div class="auth-user-block">
+                <small>Đang đăng nhập</small>
+                <span id="auth-user-email"></span>
+              </div>
+              <button class="a-signout" type="button" onclick="pmiSignOut()">Đăng xuất</button>
+            </div>
+          </div>
+          <p class="auth-help">Training vẫn xem được khi chưa đăng nhập. AI Tutor và toàn bộ Mock Test chỉ mở sau khi đăng nhập.</p>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button id="tab-train" class="active" onclick="showView('train')" role="tab">Training</button>
+        <button id="tab-mock" class="auth-required" onclick="showView('mock')" role="tab" data-locked="true">🔒 Mock Test</button>
+      </div>
     </div>
   </div>
 </header>
@@ -596,7 +738,7 @@
 
         <div id="account-footer" style="display:none">
           <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Module 16 · Exam Prep Strategy</span></div>
-          <p class="account-note"><b>AI Tutor và Mock Test yêu cầu đăng nhập.</b> Thẻ đăng nhập luôn hiển thị ở góc màn hình, tương tự app HSK Albert. Khi đăng xuất, app tự khóa AI, dừng bài thi đang chạy và quay về Training.</p>
+          <p class="account-note"><b>AI Tutor và Mock Test yêu cầu đăng nhập.</b> Nút tài khoản nhỏ nằm ngay bên trái tab Training; bấm vào để mở form đăng nhập. Khi đăng xuất, app tự khóa AI, dừng bài thi đang chạy và quay về Training.</p>
         </div>
       </div>
     </div>
@@ -9202,6 +9344,34 @@ var pmiPendingFeature = null;
   }
 })();
 
+function pmiOpenAuthMenu(){
+  var bar = document.getElementById('auth-bar');
+  var pop = document.getElementById('auth-popover');
+  var trigger = document.getElementById('auth-trigger');
+  if(!bar || !pop || !trigger) return;
+  bar.classList.add('open');
+  pop.setAttribute('aria-hidden','false');
+  trigger.setAttribute('aria-expanded','true');
+}
+
+function pmiCloseAuthMenu(){
+  var bar = document.getElementById('auth-bar');
+  var pop = document.getElementById('auth-popover');
+  var trigger = document.getElementById('auth-trigger');
+  if(!bar || !pop || !trigger) return;
+  bar.classList.remove('open');
+  pop.setAttribute('aria-hidden','true');
+  trigger.setAttribute('aria-expanded','false');
+}
+
+function pmiToggleAuthMenu(event){
+  if(event){ event.preventDefault(); event.stopPropagation(); }
+  var bar = document.getElementById('auth-bar');
+  if(!bar) return;
+  if(bar.classList.contains('open')) pmiCloseAuthMenu();
+  else pmiOpenAuthMenu();
+}
+
 function pmiFeatureName(feature){
   return feature==='mock' ? 'Mock Test' : 'AI Study Tutor';
 }
@@ -9226,15 +9396,17 @@ function pmiCloseLoginGate(){
   if(gate){ gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); }
 }
 
-function pmiFocusLogin(){
+function pmiFocusLogin(event){
+  if(event){ event.preventDefault(); event.stopPropagation(); }
   pmiCloseLoginGate();
+  pmiOpenAuthMenu();
   var bar = document.getElementById('auth-bar');
   if(bar){ bar.classList.remove('auth-attention'); void bar.offsetWidth; bar.classList.add('auth-attention'); }
   setTimeout(function(){
     var email = document.getElementById('auth-email');
     var pass = document.getElementById('auth-password');
     if(email && !email.value) email.focus(); else if(pass) pass.focus();
-  },80);
+  },100);
 }
 
 function pmiApplyFeatureLocks(){
@@ -9266,6 +9438,9 @@ function pmiUpdateAuthUI(){
   var em  = document.getElementById('auth-user-email');
   var bar = document.getElementById('auth-bar');
   var pill = document.getElementById('auth-status-pill');
+  var trigger = document.getElementById('auth-trigger');
+  var triggerText = document.getElementById('auth-trigger-text');
+  var triggerIcon = document.getElementById('auth-trigger-icon');
   if(!out || !inn || !em) return;
   document.body.classList.toggle('pmi-session-in', !!pmiCurrentUser);
   if(pmiCurrentUser){
@@ -9273,10 +9448,16 @@ function pmiUpdateAuthUI(){
     em.textContent = pmiCurrentUser.email || 'Đã đăng nhập';
     if(bar) bar.setAttribute('data-auth-state','in');
     if(pill) pill.textContent='Đã đăng nhập';
+    if(triggerText) triggerText.textContent='Tài khoản';
+    if(triggerIcon) triggerIcon.textContent='👤';
+    if(trigger){ trigger.title='Tài khoản: '+(pmiCurrentUser.email || 'Đã đăng nhập'); trigger.setAttribute('aria-label','Mở tài khoản đã đăng nhập'); }
   }else{
     out.style.display='grid'; inn.style.display='none'; em.textContent='';
     if(bar) bar.setAttribute('data-auth-state','out');
     if(pill) pill.textContent='Chưa đăng nhập';
+    if(triggerText) triggerText.textContent='Đăng nhập';
+    if(triggerIcon) triggerIcon.textContent='🔐';
+    if(trigger){ trigger.title='Đăng nhập để dùng AI và Mock Test'; trigger.setAttribute('aria-label','Mở form đăng nhập'); }
   }
   pmiApplyFeatureLocks();
 }
@@ -9301,6 +9482,7 @@ async function pmiRequireAuth(feature){
 
 function pmiHandleAuthSuccess(){
   pmiCloseLoginGate();
+  pmiCloseAuthMenu();
   var pending = pmiPendingFeature;
   pmiPendingFeature = null;
   if(pending==='mock'){
@@ -9385,10 +9567,18 @@ async function pmiSignOut(){
   pmiSetAuthBusy(true);
   try{ if(window.pmiSupabase) await pmiSupabase.auth.signOut(); }
   finally{
-    pmiCurrentUser=null; pmiPendingFeature=null; pmiUpdateAuthUI(); pmiHandleSignedOut(); pmiSetAuthBusy(false);
+    pmiCurrentUser=null; pmiPendingFeature=null; pmiUpdateAuthUI(); pmiHandleSignedOut(); pmiCloseAuthMenu(); pmiSetAuthBusy(false);
   }
 }
 
+
+document.addEventListener('click', function(event){
+  var bar = document.getElementById('auth-bar');
+  if(bar && bar.classList.contains('open') && !bar.contains(event.target)) pmiCloseAuthMenu();
+});
+document.addEventListener('keydown', function(event){
+  if(event.key==='Escape') pmiCloseAuthMenu();
+});
 
 /* ---------- init ---------- */
 applyTrainingSourcePolicy();
