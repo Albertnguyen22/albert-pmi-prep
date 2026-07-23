@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<!-- BUILD: ALBERT-PMI-LOGIN-GATE-V3 · 2026-07-23 -->
+<!-- BUILD: ALBERT-PMI-SINGLE-FILE-ADMIN-APPROVAL-V1 · 2026-07-23 -->
+<!-- DEPLOYMENT: Upload only this file as /index.html in the GitHub Pages repository root. No .nojekyll or local assets are required. -->
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="albert-build" content="single-file-admin-approval-v1">
 <title>ALBERT PMI Prep · PMBOK 8th Edition · PMP July 2026</title>
 <style>
   :root{
@@ -571,6 +573,85 @@
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style id="pmi-admin-approval-css">
+  body.pmi-approval-blocked{overflow:hidden!important}
+
+  /* Approval status inside the compact account popover */
+  .auth-approval-note{display:block;margin-top:3px;font-size:10px;font-weight:800;line-height:1.3}
+  .auth-session-actions{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;flex:none}
+  #admin-open-btn{display:none;background:var(--blue,#1a4a8a)!important;color:#fff!important;white-space:nowrap}
+  #admin-open-btn:hover{filter:brightness(.94)}
+  #auth-bar[data-approval-state="checking"] .auth-status-pill{background:#eef3f8;color:#486078}
+  #auth-bar[data-approval-state="pending"] .auth-status-pill{background:#fbf3e6;color:var(--amber-deep)}
+  #auth-bar[data-approval-state="rejected"] .auth-status-pill,
+  #auth-bar[data-approval-state="error"] .auth-status-pill{background:#f6e2dc;color:var(--red)}
+  #auth-bar[data-approval-state="approved"] .auth-status-pill,
+  #auth-bar[data-approval-state="admin"] .auth-status-pill{background:#e3f0e6;color:var(--green)}
+  #auth-bar[data-approval-state="checking"] .auth-trigger-dot{background:#91a1b4;box-shadow:0 0 0 2px rgba(145,161,180,.18)}
+  #auth-bar[data-approval-state="pending"] .auth-trigger-dot{background:var(--amber);box-shadow:0 0 0 2px rgba(224,145,47,.20)}
+  #auth-bar[data-approval-state="rejected"] .auth-trigger-dot,
+  #auth-bar[data-approval-state="error"] .auth-trigger-dot{background:#f0a08c;box-shadow:0 0 0 2px rgba(240,160,140,.18)}
+  #auth-bar[data-approval-state="approved"] .auth-trigger-dot,
+  #auth-bar[data-approval-state="admin"] .auth-trigger-dot{background:#7fd39b;box-shadow:0 0 0 2px rgba(127,211,155,.18)}
+  #auth-bar[data-approval-state="pending"] .auth-trigger{border-color:rgba(224,145,47,.45)!important;background:rgba(224,145,47,.10)!important}
+  #auth-bar[data-approval-state="rejected"] .auth-trigger,
+  #auth-bar[data-approval-state="error"] .auth-trigger{border-color:rgba(240,160,140,.45)!important;background:rgba(240,160,140,.09)!important}
+
+  /* Full-screen account approval gate. Pending/rejected users cannot use the app. */
+  #approval-gate{position:fixed;inset:0;z-index:2147483600;background:rgba(247,244,236,.98);display:none;align-items:center;justify-content:center;padding:20px;font-family:var(--sans);backdrop-filter:blur(5px)}
+  #approval-gate.open{display:flex;animation:fade .18s ease}
+  #approval-gate .gate-card{width:min(470px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;padding:30px 28px;text-align:center;box-shadow:0 28px 90px rgba(15,28,46,.30)}
+  #approval-gate .gate-icon{font-size:46px;line-height:1;margin-bottom:9px}
+  #approval-gate h2{font-family:var(--serif);font-size:26px;line-height:1.2;margin:5px 0 10px;color:var(--ink)}
+  #approval-gate p{color:var(--muted);font-size:14px;line-height:1.65;margin:8px auto;max-width:44ch}
+  #approval-gate .gate-email{font-weight:800;color:var(--amber-deep);overflow-wrap:anywhere}
+  #approval-gate .gate-sub{font-size:12px;background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:9px 11px;margin-top:14px;color:#3d4b5b}
+  #approval-gate .gate-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:18px}
+  #approval-gate button{border:0;border-radius:9px;padding:10px 15px;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+  #approval-retry-btn{background:var(--amber);color:var(--ink)}
+  #approval-retry-btn:disabled{opacity:.55;cursor:wait}
+  #approval-gate .gate-signout{background:var(--red);color:#fff}
+
+  /* Admin member approval panel */
+  #admin-panel{position:fixed;inset:0;z-index:2147483500;background:rgba(9,18,31,.74);display:none;align-items:flex-start;justify-content:center;padding:34px 16px;overflow:auto;font-family:var(--sans);backdrop-filter:blur(5px)}
+  #admin-panel.open{display:flex;animation:fade .18s ease}
+  #admin-panel .ap-card{width:min(900px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 28px 90px rgba(0,0,0,.38)}
+  #admin-panel .ap-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  #admin-panel h2{font-family:var(--serif);font-size:24px;line-height:1.2;margin:0;color:var(--ink)}
+  #admin-panel .ap-sub{font-size:12.5px;color:var(--muted);margin-top:4px}
+  #admin-panel .ap-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0 10px}
+  #admin-summary{font-size:12px;color:var(--muted);font-weight:700}
+  #admin-panel .ap-table-wrap{width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  #admin-panel table{width:100%;min-width:690px;border-collapse:collapse;font-size:13px;background:#fff}
+  #admin-panel th,#admin-panel td{text-align:left;padding:10px 11px;border-bottom:1px solid #ebe5d9;vertical-align:middle}
+  #admin-panel tr:last-child td{border-bottom:0}
+  #admin-panel th{background:var(--paper-2);color:var(--muted);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;position:sticky;top:0}
+  #admin-panel .ap-status{display:inline-block;font-weight:800;padding:3px 8px;border-radius:999px;font-size:10.5px;white-space:nowrap}
+  #admin-panel .ap-pending{background:#fbf3e6;color:var(--amber-deep)}
+  #admin-panel .ap-approved{background:#e3f0e6;color:var(--green)}
+  #admin-panel .ap-rejected{background:#f6e2dc;color:var(--red)}
+  #admin-panel .ap-btn{border:0;border-radius:8px;padding:7px 10px;font:inherit;font-size:11.5px;font-weight:800;cursor:pointer;margin:2px 5px 2px 0;white-space:nowrap}
+  #admin-panel .ap-approve{background:var(--green);color:#fff}
+  #admin-panel .ap-reject{background:var(--red);color:#fff}
+  #admin-panel .ap-refresh{background:var(--ink);color:var(--paper)}
+  #admin-panel .ap-close{background:var(--paper-2);color:var(--ink);font-size:13px;margin:0}
+  #admin-panel .ap-loading,#admin-panel .ap-error,#admin-panel .ap-empty{padding:26px;text-align:center;color:var(--muted)}
+  #admin-panel .ap-error{color:var(--red)}
+  #admin-panel .ap-admin-label{color:#1a4a8a;font-weight:800;font-size:11.5px}
+
+  @media(max-width:700px){
+    .auth-session-actions{width:100%;display:grid;grid-template-columns:1fr 1fr}
+    .auth-session-actions #admin-open-btn:only-child{grid-column:1/-1}
+    #admin-panel{padding:0;align-items:stretch}
+    #admin-panel .ap-card{min-height:100svh;border-radius:0;padding:16px 13px}
+    #admin-panel .ap-head{position:sticky;top:0;z-index:3;background:var(--white);padding-top:3px}
+    #approval-gate .gate-card{padding:26px 18px}
+    #approval-gate .gate-actions{display:grid;grid-template-columns:1fr;width:100%}
+    #approval-gate button{width:100%}
+  }
+</style>
+
 </head>
 <body>
 
@@ -584,12 +665,46 @@
     <h2 id="login-gate-title">Đăng nhập để tiếp tục</h2>
     <p id="login-gate-message">Bạn cần đăng nhập để sử dụng tính năng này.</p>
     <div class="login-gate-pills"><span>AI Study Tutor</span><span>10 Mock Tests</span><span>Mistake Notebook</span></div>
-    <button class="btn primary" type="button" onclick="pmiFocusLogin(event)">Đăng nhập ngay</button>
+    <button class="btn primary" type="button" onclick="pmiFocusLogin()">Đăng nhập ngay</button>
     <button class="btn ghost" type="button" onclick="pmiCloseLoginGate()">Tiếp tục xem Training</button>
   </div>
 </div>
 
-<!-- Revised 2026-07-23 v4: minimal account dropdown immediately left of Training; logged-in email stays inside the popover; AI and Mock Test remain protected. -->
+
+<!-- Account must be approved by an administrator before the app can be used. -->
+<div id="approval-gate" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="approval-gate-title">
+  <div class="gate-card">
+    <div id="approval-gate-icon" class="gate-icon">⏳</div>
+    <span class="eyebrow">Member approval · Duyệt thành viên</span>
+    <h2 id="approval-gate-title">Tài khoản đang chờ duyệt</h2>
+    <p>Tài khoản <span class="gate-email" id="gate-email"></span> đã đăng nhập, nhưng chỉ được sử dụng app sau khi quản trị viên duyệt.</p>
+    <p id="gate-extra" class="gate-sub">Trạng thái hiện tại: chờ duyệt.</p>
+    <div class="gate-actions">
+      <button id="approval-retry-btn" type="button" onclick="pmiRetryApproval()">Kiểm tra lại trạng thái</button>
+      <button class="gate-signout" type="button" onclick="pmiGateSignOut()">Đăng xuất</button>
+    </div>
+  </div>
+</div>
+
+<div id="admin-panel" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="admin-panel-title"
+     onclick="if(event.target===this)pmiCloseAdminPanel()">
+  <div class="ap-card">
+    <div class="ap-head">
+      <div>
+        <h2 id="admin-panel-title">🛡️ Quản trị thành viên</h2>
+        <div class="ap-sub">Duyệt hoặc từ chối tài khoản mới. Chỉ tài khoản quản trị viên nhìn thấy khu vực này.</div>
+      </div>
+      <button class="ap-btn ap-close" type="button" onclick="pmiCloseAdminPanel()">Đóng</button>
+    </div>
+    <div class="ap-toolbar">
+      <div id="admin-summary">Đang tải danh sách…</div>
+      <button class="ap-btn ap-refresh" type="button" onclick="pmiOpenAdminPanel(true)">↻ Tải lại</button>
+    </div>
+    <div id="admin-list" class="ap-loading">Đang tải…</div>
+  </div>
+</div>
+
+<!-- Revised 2026-07-23 v6 · admin approval tested: minimal account dropdown immediately left of Training; logged-in email stays inside the popover; AI and Mock Test remain protected. -->
 
 <header>
   <div class="bar">
@@ -633,11 +748,15 @@
               <div class="auth-user-block">
                 <small>Đang đăng nhập</small>
                 <span id="auth-user-email"></span>
+                <small id="auth-approval-note" class="auth-approval-note"></small>
               </div>
-              <button class="a-signout" type="button" onclick="pmiSignOut()">Đăng xuất</button>
+              <div class="auth-session-actions">
+                <button id="admin-open-btn" type="button" onclick="pmiOpenAdminPanel()">🛡️ Quản trị</button>
+                <button class="a-signout" type="button" onclick="pmiSignOut()">Đăng xuất</button>
+              </div>
             </div>
           </div>
-          <p class="auth-help">Training vẫn xem được khi chưa đăng nhập. AI Tutor và toàn bộ Mock Test chỉ mở sau khi đăng nhập.</p>
+          <p class="auth-help">Training vẫn xem được khi chưa đăng nhập. Sau khi đăng ký, quản trị viên phải duyệt tài khoản trước khi AI Tutor và Mock Test được mở.</p>
         </div>
       </div>
 
@@ -729,16 +848,16 @@
           <div id="tutor-auth-lock" class="tutor-auth-lock">
             <div class="tutor-auth-lock-card">
               <div class="lock-mark">🔒</div>
-              <b>Đăng nhập để sử dụng AI Study Tutor</b>
-              <span>Training vẫn mở để bạn học. Đăng nhập Supabase để đặt câu hỏi cho AI.</span>
-              <button type="button" onclick="pmiShowLoginGate('ai')">Đăng nhập để hỏi AI</button>
+              <b id="tutor-lock-title">Đăng nhập để sử dụng AI Study Tutor</b>
+              <span id="tutor-lock-message">Training vẫn mở để bạn học. Đăng nhập Supabase để đặt câu hỏi cho AI.</span>
+              <button id="tutor-lock-action" type="button" onclick="pmiShowLoginGate('ai')">Đăng nhập để hỏi AI</button>
             </div>
           </div>
         </div>
 
         <div id="account-footer" style="display:none">
           <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Module 16 · Exam Prep Strategy</span></div>
-          <p class="account-note"><b>AI Tutor và Mock Test yêu cầu đăng nhập.</b> Nút tài khoản nhỏ nằm ngay bên trái tab Training; bấm vào để mở form đăng nhập. Khi đăng xuất, app tự khóa AI, dừng bài thi đang chạy và quay về Training.</p>
+          <p class="account-note"><b>AI Tutor và Mock Test yêu cầu tài khoản đã được duyệt.</b> Sau khi đăng ký, tài khoản ở trạng thái chờ duyệt. Quản trị viên mở nút 🛡️ Quản trị trong menu tài khoản để duyệt hoặc từ chối thành viên.</p>
         </div>
       </div>
     </div>
@@ -8476,6 +8595,7 @@ STYLE:
 
 /* ---------- AI transport: Supabase Edge Function -> OpenRouter (free) ---------- */
 async function pmiAskTutor(system, messages){
+  if(!pmiHasApprovedAccess()) throw new Error('Tài khoản chưa được quản trị viên duyệt để dùng AI Tutor.');
   if(!window.pmiSupabase) throw new Error('Chưa cấu hình Supabase URL/Key trong file HTML.');
   const sess = await pmiSupabase.auth.getSession();
   if(sess.error || !sess.data || !sess.data.session){
@@ -9324,6 +9444,11 @@ var pmiCurrentUser = null;
 var pmiAuthReady = false;
 var pmiAuthSubscription = null;
 var pmiPendingFeature = null;
+var pmiApprovalStatus = 'signed_out'; // signed_out | checking | pending | approved | rejected | error
+var pmiIsAdmin = false;
+var pmiApprovalCheckedAt = 0;
+var pmiApprovalRequest = null;
+var pmiApprovalError = '';
 
 (function pmiInitSupabase(){
   try{
@@ -9343,6 +9468,240 @@ var pmiPendingFeature = null;
     console.error('Không khởi tạo được Supabase:', e);
   }
 })();
+
+
+function pmiHasApprovedAccess(){
+  return !!(pmiCurrentUser && pmiCurrentUser.id && (pmiIsAdmin || pmiApprovalStatus==='approved'));
+}
+
+function pmiApprovalLabel(){
+  if(pmiIsAdmin) return 'Quản trị viên';
+  if(pmiApprovalStatus==='approved') return 'Đã duyệt';
+  if(pmiApprovalStatus==='pending') return 'Chờ duyệt';
+  if(pmiApprovalStatus==='rejected') return 'Bị từ chối';
+  if(pmiApprovalStatus==='checking') return 'Đang kiểm tra';
+  if(pmiApprovalStatus==='error') return 'Lỗi kiểm tra';
+  return 'Chưa đăng nhập';
+}
+
+function pmiHideApprovalGate(){
+  var gate=document.getElementById('approval-gate');
+  if(gate){ gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); }
+  document.body.classList.remove('pmi-approval-blocked');
+}
+
+function pmiStopProtectedActivityForApproval(){
+  try{
+    if(typeof EXAM!=='undefined' && EXAM){
+      clearInterval(EXAM.timerId); clearInterval(EXAM.breakTimerId); EXAM=null;
+    }
+  }catch(e){}
+  var run=document.getElementById('mock-run'),result=document.getElementById('mock-result'),home=document.getElementById('mock-home');
+  var notebook=document.getElementById('mistake-panel'),select=document.getElementById('exam-select-area');
+  if(run)run.style.display='none'; if(result)result.style.display='none'; if(home)home.style.display='block';
+  if(notebook)notebook.style.display='none'; if(select)select.style.display='block';
+  var mock=document.getElementById('view-mock');
+  if(mock&&mock.classList.contains('active'))showView('train');
+}
+
+function pmiShowApprovalGate(status){
+  if(!pmiCurrentUser || pmiHasApprovedAccess()){ pmiHideApprovalGate(); return; }
+  pmiStopProtectedActivityForApproval();
+  status=status||pmiApprovalStatus||'pending';
+  var gate=document.getElementById('approval-gate');
+  var icon=document.getElementById('approval-gate-icon');
+  var title=document.getElementById('approval-gate-title');
+  var email=document.getElementById('gate-email');
+  var extra=document.getElementById('gate-extra');
+  var retry=document.getElementById('approval-retry-btn');
+  if(email) email.textContent=pmiCurrentUser.email||'';
+  if(status==='rejected'){
+    if(icon) icon.textContent='⛔';
+    if(title) title.textContent='Tài khoản chưa được cấp quyền';
+    if(extra) extra.textContent='Tài khoản đã bị từ chối. Liên hệ quản trị viên nếu bạn cho rằng đây là nhầm lẫn.';
+  }else if(status==='error'){
+    if(icon) icon.textContent='⚠️';
+    if(title) title.textContent='Không kiểm tra được quyền truy cập';
+    if(extra) extra.textContent=pmiApprovalError || 'Không thể đọc trạng thái duyệt từ Supabase. Kiểm tra RPC my_status và kết nối mạng.';
+  }else if(status==='checking'){
+    if(icon) icon.textContent='🔎';
+    if(title) title.textContent='Đang kiểm tra quyền truy cập';
+    if(extra) extra.textContent='Vui lòng chờ trong giây lát…';
+  }else{
+    if(icon) icon.textContent='⏳';
+    if(title) title.textContent='Tài khoản đang chờ duyệt';
+    if(extra) extra.textContent='Trạng thái hiện tại: chờ quản trị viên duyệt.';
+  }
+  if(retry){ retry.disabled=status==='checking'; retry.textContent=status==='checking'?'Đang kiểm tra…':'Kiểm tra lại trạng thái'; }
+  if(gate){ gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); }
+  document.body.classList.add('pmi-approval-blocked');
+  pmiCloseAuthMenu();
+  pmiCloseLoginGate();
+}
+
+function pmiResetApprovalState(){
+  pmiApprovalStatus='signed_out';
+  pmiIsAdmin=false;
+  pmiApprovalCheckedAt=0;
+  pmiApprovalError='';
+  window.pmiApprovalStatus=pmiApprovalStatus;
+  window.pmiIsAdmin=pmiIsAdmin;
+  pmiHideApprovalGate();
+  var adminBtn=document.getElementById('admin-open-btn');
+  if(adminBtn) adminBtn.style.display='none';
+}
+
+async function pmiCheckApproval(force){
+  if(!pmiCurrentUser || !pmiCurrentUser.id){ pmiResetApprovalState(); pmiUpdateAuthUI(); return false; }
+  if(!window.pmiSupabase){
+    pmiApprovalStatus='error'; pmiApprovalError='Chưa kết nối Supabase.'; pmiIsAdmin=false;
+    pmiUpdateAuthUI(); pmiShowApprovalGate('error'); return false;
+  }
+  var age=Date.now()-pmiApprovalCheckedAt;
+  if(!force && pmiHasApprovedAccess() && age<60000) return true;
+  if(pmiApprovalRequest) return pmiApprovalRequest;
+
+  var hadAccess=pmiHasApprovedAccess();
+  if(!hadAccess){pmiApprovalStatus='checking';pmiApprovalError='';pmiUpdateAuthUI();}
+  pmiApprovalRequest=(async function(){
+    try{
+      var sb=window.pmiSupabase;
+      var row=null;
+      var r=await sb.rpc('my_status');
+      if(r && !r.error){
+        if(Array.isArray(r.data)) row=r.data[0]||null;
+        else if(r.data && typeof r.data==='object') row=r.data;
+      }
+      if((!row || !row.status) && r && r.error){
+        // Fallback for projects that allow users to read their own profile.
+        try{
+          var q=await sb.from('profiles').select('status,is_admin').eq('id',pmiCurrentUser.id).maybeSingle();
+          if(q && !q.error && q.data) row=q.data;
+          else throw (q&&q.error)||r.error;
+        }catch(fallbackError){ throw r.error || fallbackError; }
+      }
+      var status=row && String(row.status||'').toLowerCase();
+      if(!['pending','approved','rejected'].includes(status)) status='pending';
+      pmiApprovalStatus=status;
+      pmiIsAdmin=!!(row && row.is_admin);
+      pmiApprovalCheckedAt=Date.now();
+      pmiApprovalError='';
+      window.pmiApprovalStatus=pmiApprovalStatus;
+      window.pmiIsAdmin=pmiIsAdmin;
+      pmiUpdateAuthUI();
+      if(pmiHasApprovedAccess()) pmiHideApprovalGate();
+      else pmiShowApprovalGate(pmiApprovalStatus);
+      return pmiHasApprovedAccess();
+    }catch(e){
+      pmiApprovalStatus='error'; pmiIsAdmin=false; pmiApprovalCheckedAt=Date.now();
+      pmiApprovalError='Lỗi kiểm tra trạng thái duyệt: '+(e&&e.message?e.message:String(e));
+      window.pmiApprovalStatus=pmiApprovalStatus;
+      window.pmiIsAdmin=pmiIsAdmin;
+      console.warn(pmiApprovalError);
+      pmiUpdateAuthUI(); pmiShowApprovalGate('error');
+      return false;
+    }finally{
+      pmiApprovalRequest=null;
+    }
+  })();
+  return pmiApprovalRequest;
+}
+window.pmiCheckApproval=pmiCheckApproval;
+
+async function pmiRetryApproval(){
+  var btn=document.getElementById('approval-retry-btn');
+  if(btn){btn.disabled=true;btn.textContent='Đang kiểm tra…';}
+  var allowed=await pmiCheckApproval(true);
+  if(allowed){
+    pmiHideApprovalGate();
+    pmiHandleAuthSuccess();
+  }else if(btn){
+    btn.disabled=false;btn.textContent='Kiểm tra lại trạng thái';
+  }
+}
+
+async function pmiGateSignOut(){
+  await pmiSignOut();
+}
+
+function pmiEscapeHtml(value){
+  return String(value==null?'':value).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});
+}
+function pmiEscapeJs(value){
+  return String(value==null?'':value).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\r/g,'\\r').replace(/\n/g,'\\n');
+}
+
+async function pmiOpenAdminPanel(forceReload){
+  var allowed=await pmiCheckApproval(!!forceReload);
+  if(!allowed || !pmiIsAdmin){ alert('Chỉ quản trị viên mới được mở danh sách thành viên.'); return false; }
+  var panel=document.getElementById('admin-panel');
+  var list=document.getElementById('admin-list');
+  var summary=document.getElementById('admin-summary');
+  if(panel){panel.classList.add('open');panel.setAttribute('aria-hidden','false');}
+  if(list){list.className='ap-loading';list.textContent='Đang tải danh sách…';}
+  if(summary)summary.textContent='Đang tải danh sách…';
+  pmiCloseAuthMenu();
+  try{
+    var r=await window.pmiSupabase.from('profiles').select('id,email,status,is_admin,created_at').order('created_at',{ascending:false});
+    if(r.error) throw r.error;
+    pmiRenderAdminList(r.data||[]);
+    return true;
+  }catch(e){
+    if(list){list.className='ap-error';list.textContent='Lỗi tải danh sách: '+(e&&e.message?e.message:e);}
+    if(summary)summary.textContent='Không tải được dữ liệu.';
+    return false;
+  }
+}
+window.pmiOpenAdminPanel=pmiOpenAdminPanel;
+
+function pmiCloseAdminPanel(){
+  var panel=document.getElementById('admin-panel');
+  if(panel){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');}
+}
+window.pmiCloseAdminPanel=pmiCloseAdminPanel;
+
+function pmiRenderAdminList(rows){
+  var list=document.getElementById('admin-list');
+  var summary=document.getElementById('admin-summary');
+  if(!list)return;
+  var counts={pending:0,approved:0,rejected:0,admin:0};
+  rows.forEach(function(p){
+    if(p.is_admin)counts.admin++;
+    var s=['pending','approved','rejected'].includes(p.status)?p.status:'pending';
+    counts[s]++;
+  });
+  if(summary)summary.textContent=rows.length+' tài khoản · '+counts.pending+' chờ duyệt · '+counts.approved+' đã duyệt · '+counts.rejected+' từ chối · '+counts.admin+' admin';
+  if(!rows.length){list.className='ap-empty';list.textContent='Chưa có tài khoản nào.';return;}
+  var html='<div class="ap-table-wrap"><table><thead><tr><th>Email</th><th>Trạng thái</th><th>Ngày đăng ký</th><th>Thao tác</th></tr></thead><tbody>';
+  rows.forEach(function(p){
+    var status=['pending','approved','rejected'].includes(p.status)?p.status:'pending';
+    var cls=status==='approved'?'ap-approved':(status==='rejected'?'ap-rejected':'ap-pending');
+    var label=status==='approved'?'Đã duyệt':(status==='rejected'?'Từ chối':'Chờ duyệt');
+    var when='';
+    try{when=p.created_at?new Date(p.created_at).toLocaleString('vi-VN',{dateStyle:'short',timeStyle:'short'}):'';}catch(e){when=p.created_at||'';}
+    var actions='';
+    if(p.is_admin){actions='<span class="ap-admin-label">Admin</span>';}
+    else{
+      if(status!=='approved')actions+='<button class="ap-btn ap-approve" onclick="pmiAdminSetStatus(\''+pmiEscapeHtml(pmiEscapeJs(p.id))+'\',\'approved\',\''+pmiEscapeHtml(pmiEscapeJs(p.email||''))+'\')">Duyệt</button>';
+      if(status!=='rejected')actions+='<button class="ap-btn ap-reject" onclick="pmiAdminSetStatus(\''+pmiEscapeHtml(pmiEscapeJs(p.id))+'\',\'rejected\',\''+pmiEscapeHtml(pmiEscapeJs(p.email||''))+'\')">Từ chối</button>';
+    }
+    html+='<tr><td><b>'+pmiEscapeHtml(p.email||'')+'</b></td><td><span class="ap-status '+cls+'">'+label+'</span></td><td>'+pmiEscapeHtml(when)+'</td><td>'+actions+'</td></tr>';
+  });
+  html+='</tbody></table></div>';
+  list.className='';list.innerHTML=html;
+}
+
+async function pmiAdminSetStatus(targetId,newStatus,email){
+  if(!pmiIsAdmin){alert('Bạn không có quyền quản trị.');return;}
+  if(newStatus==='rejected' && !confirm('Từ chối tài khoản '+(email||'này')+'?'))return;
+  try{
+    var r=await window.pmiSupabase.rpc('set_user_status',{target_id:targetId,new_status:newStatus});
+    if(r.error)throw r.error;
+    await pmiOpenAdminPanel(true);
+  }catch(e){alert('Không cập nhật được trạng thái: '+(e&&e.message?e.message:e));}
+}
+window.pmiAdminSetStatus=pmiAdminSetStatus;
+
 
 function pmiOpenAuthMenu(){
   var bar = document.getElementById('auth-bar');
@@ -9396,8 +9755,7 @@ function pmiCloseLoginGate(){
   if(gate){ gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); }
 }
 
-function pmiFocusLogin(event){
-  if(event){ event.preventDefault(); event.stopPropagation(); }
+function pmiFocusLogin(){
   pmiCloseLoginGate();
   pmiOpenAuthMenu();
   var bar = document.getElementById('auth-bar');
@@ -9410,89 +9768,112 @@ function pmiFocusLogin(event){
 }
 
 function pmiApplyFeatureLocks(){
-  var loggedIn = !!(pmiCurrentUser && pmiCurrentUser.id);
-  var tutor = document.getElementById('pmi-tutor');
-  var ask = document.getElementById('ask');
-  var send = document.getElementById('sendBtn');
-  var tab = document.getElementById('tab-mock');
-  if(tutor) tutor.classList.toggle('auth-locked', !loggedIn);
+  var loggedIn=!!(pmiCurrentUser&&pmiCurrentUser.id);
+  var allowed=pmiHasApprovedAccess();
+  var tutor=document.getElementById('pmi-tutor');
+  var ask=document.getElementById('ask');
+  var send=document.getElementById('sendBtn');
+  var tab=document.getElementById('tab-mock');
+  var lockTitle=document.getElementById('tutor-lock-title');
+  var lockMessage=document.getElementById('tutor-lock-message');
+  var lockAction=document.getElementById('tutor-lock-action');
+  if(tutor)tutor.classList.toggle('auth-locked',!allowed);
   if(ask){
-    ask.disabled = !loggedIn;
-    ask.placeholder = loggedIn
-      ? 'Hỏi bằng tiếng Anh hoặc tiếng Việt… / Ask in English or Vietnamese…'
-      : 'Đăng nhập để dùng AI Tutor…';
+    ask.disabled=!allowed;
+    ask.placeholder=allowed?'Hỏi bằng tiếng Anh hoặc tiếng Việt… / Ask in English or Vietnamese…':(!loggedIn?'Đăng nhập để dùng AI Tutor…':(pmiApprovalStatus==='pending'?'Tài khoản đang chờ duyệt…':'Tài khoản chưa được cấp quyền…'));
   }
-  if(send) send.disabled = !loggedIn;
+  if(send)send.disabled=!allowed;
   if(tab){
-    tab.classList.toggle('auth-required', !loggedIn);
-    tab.setAttribute('data-locked', loggedIn ? 'false' : 'true');
+    tab.classList.toggle('auth-required',!allowed);
+    tab.setAttribute('data-locked',allowed?'false':'true');
     tab.removeAttribute('aria-disabled');
-    tab.textContent = loggedIn ? 'Mock Test' : '🔒 Mock Test';
-    tab.title = loggedIn ? 'Mở 10 đề thi thử' : 'Đăng nhập để mở Mock Test';
+    tab.textContent=allowed?'Mock Test':(!loggedIn?'🔒 Mock Test':'⏳ Mock Test');
+    tab.title=allowed?'Mở 10 đề thi thử':(!loggedIn?'Đăng nhập để mở Mock Test':'Tài khoản phải được quản trị viên duyệt');
+  }
+  if(lockTitle)lockTitle.textContent=allowed?'AI Study Tutor đã mở':(!loggedIn?'Đăng nhập để sử dụng AI Study Tutor':(pmiApprovalStatus==='rejected'?'Tài khoản chưa được cấp quyền':'Tài khoản đang chờ quản trị viên duyệt'));
+  if(lockMessage)lockMessage.textContent=!loggedIn?'Training vẫn mở để bạn học. Sau khi đăng ký, quản trị viên phải duyệt tài khoản trước khi AI được mở.':(pmiApprovalStatus==='rejected'?'Tài khoản đã bị từ chối. Liên hệ quản trị viên để được hỗ trợ.':'AI Tutor và Mock Test sẽ mở ngay sau khi tài khoản được duyệt.');
+  if(lockAction){
+    if(!loggedIn){lockAction.textContent='Đăng nhập để hỏi AI';lockAction.onclick=function(){pmiShowLoginGate('ai');};}
+    else{lockAction.textContent='Kiểm tra trạng thái duyệt';lockAction.onclick=function(){pmiShowApprovalGate(pmiApprovalStatus);};}
   }
 }
 
 function pmiUpdateAuthUI(){
-  var out = document.getElementById('auth-logged-out');
-  var inn = document.getElementById('auth-logged-in');
-  var em  = document.getElementById('auth-user-email');
-  var bar = document.getElementById('auth-bar');
-  var pill = document.getElementById('auth-status-pill');
-  var trigger = document.getElementById('auth-trigger');
-  var triggerText = document.getElementById('auth-trigger-text');
-  var triggerIcon = document.getElementById('auth-trigger-icon');
-  if(!out || !inn || !em) return;
-  document.body.classList.toggle('pmi-session-in', !!pmiCurrentUser);
+  var out=document.getElementById('auth-logged-out');
+  var inn=document.getElementById('auth-logged-in');
+  var em=document.getElementById('auth-user-email');
+  var note=document.getElementById('auth-approval-note');
+  var adminBtn=document.getElementById('admin-open-btn');
+  var bar=document.getElementById('auth-bar');
+  var pill=document.getElementById('auth-status-pill');
+  var trigger=document.getElementById('auth-trigger');
+  var triggerText=document.getElementById('auth-trigger-text');
+  var triggerIcon=document.getElementById('auth-trigger-icon');
+  if(!out||!inn||!em)return;
+  document.body.classList.toggle('pmi-session-in',!!pmiCurrentUser);
   if(pmiCurrentUser){
-    out.style.display='none'; inn.style.display='flex';
-    em.textContent = pmiCurrentUser.email || 'Đã đăng nhập';
-    if(bar) bar.setAttribute('data-auth-state','in');
-    if(pill) pill.textContent='Đã đăng nhập';
-    if(triggerText) triggerText.textContent='Tài khoản';
-    if(triggerIcon) triggerIcon.textContent='👤';
-    if(trigger){ trigger.title='Tài khoản: '+(pmiCurrentUser.email || 'Đã đăng nhập'); trigger.setAttribute('aria-label','Mở tài khoản đã đăng nhập'); }
+    out.style.display='none';inn.style.display='flex';
+    em.textContent=pmiCurrentUser.email||'Đã đăng nhập';
+    var label=pmiApprovalLabel();
+    var approvalAttr=pmiIsAdmin?'admin':pmiApprovalStatus;
+    if(bar){bar.setAttribute('data-auth-state','in');bar.setAttribute('data-approval-state',approvalAttr);}
+    if(pill)pill.textContent=label;
+    if(note){note.textContent=pmiIsAdmin?'Có quyền duyệt thành viên':(pmiApprovalStatus==='approved'?'Tài khoản đã được phép dùng AI & Mock Test':(pmiApprovalStatus==='pending'?'Đang chờ quản trị viên duyệt':(pmiApprovalStatus==='rejected'?'Tài khoản đã bị từ chối':(pmiApprovalStatus==='error'?'Không kiểm tra được trạng thái duyệt':'Đang kiểm tra quyền truy cập…'))));note.style.color=pmiHasApprovedAccess()?'var(--green)':(pmiApprovalStatus==='pending'?'var(--amber-deep)':'var(--red)');}
+    if(adminBtn)adminBtn.style.display=pmiIsAdmin?'inline-block':'none';
+    if(triggerText)triggerText.textContent=pmiIsAdmin?'Quản trị':(pmiApprovalStatus==='pending'?'Chờ duyệt':(pmiApprovalStatus==='rejected'?'Bị từ chối':'Tài khoản'));
+    if(triggerIcon)triggerIcon.textContent=pmiIsAdmin?'🛡️':(pmiApprovalStatus==='pending'?'⏳':(pmiApprovalStatus==='rejected'||pmiApprovalStatus==='error'?'⛔':'👤'));
+    if(trigger){trigger.title='Tài khoản: '+(pmiCurrentUser.email||'')+' · '+label;trigger.setAttribute('aria-label','Mở tài khoản · '+label);}
   }else{
-    out.style.display='grid'; inn.style.display='none'; em.textContent='';
-    if(bar) bar.setAttribute('data-auth-state','out');
-    if(pill) pill.textContent='Chưa đăng nhập';
-    if(triggerText) triggerText.textContent='Đăng nhập';
-    if(triggerIcon) triggerIcon.textContent='🔐';
-    if(trigger){ trigger.title='Đăng nhập để dùng AI và Mock Test'; trigger.setAttribute('aria-label','Mở form đăng nhập'); }
+    out.style.display='grid';inn.style.display='none';em.textContent='';
+    if(note)note.textContent='';
+    if(adminBtn)adminBtn.style.display='none';
+    if(bar){bar.setAttribute('data-auth-state','out');bar.setAttribute('data-approval-state','signed_out');}
+    if(pill)pill.textContent='Chưa đăng nhập';
+    if(triggerText)triggerText.textContent='Đăng nhập';
+    if(triggerIcon)triggerIcon.textContent='🔐';
+    if(trigger){trigger.title='Đăng nhập và chờ duyệt để dùng AI và Mock Test';trigger.setAttribute('aria-label','Mở form đăng nhập');}
   }
   pmiApplyFeatureLocks();
 }
 
-async function pmiRefreshSession(){
-  if(!window.pmiSupabase){ pmiCurrentUser=null; pmiUpdateAuthUI(); return null; }
+async function pmiRefreshSession(checkApproval){
+  if(!window.pmiSupabase){pmiCurrentUser=null;pmiResetApprovalState();pmiUpdateAuthUI();return null;}
   try{
-    var res = await pmiSupabase.auth.getSession();
-    pmiCurrentUser = res && res.data && res.data.session ? res.data.session.user : null;
-  }catch(e){ pmiCurrentUser=null; }
-  pmiUpdateAuthUI();
+    var res=await pmiSupabase.auth.getSession();
+    pmiCurrentUser=res&&res.data&&res.data.session?res.data.session.user:null;
+  }catch(e){pmiCurrentUser=null;}
+  if(pmiCurrentUser){
+    pmiApprovalStatus='checking';pmiIsAdmin=false;pmiApprovalError='';pmiUpdateAuthUI();
+    if(checkApproval!==false)await pmiCheckApproval(true);
+  }else{
+    pmiResetApprovalState();pmiUpdateAuthUI();
+  }
   return pmiCurrentUser;
 }
 
 async function pmiRequireAuth(feature){
-  if(pmiCurrentUser && pmiCurrentUser.id) return true;
-  await pmiRefreshSession();
-  if(pmiCurrentUser && pmiCurrentUser.id) return true;
-  pmiShowLoginGate(feature);
+  pmiPendingFeature=feature||pmiPendingFeature||'ai';
+  if(!pmiCurrentUser||!pmiCurrentUser.id)await pmiRefreshSession(true);
+  if(!pmiCurrentUser||!pmiCurrentUser.id){pmiShowLoginGate(feature);return false;}
+  if(pmiHasApprovedAccess() && (Date.now()-pmiApprovalCheckedAt)<60000)return true;
+  var allowed=await pmiCheckApproval(true);
+  if(allowed)return true;
+  pmiShowApprovalGate(pmiApprovalStatus);
   return false;
 }
 
 function pmiHandleAuthSuccess(){
-  pmiCloseLoginGate();
-  pmiCloseAuthMenu();
-  var pending = pmiPendingFeature;
-  pmiPendingFeature = null;
-  if(pending==='mock'){
-    setTimeout(function(){ showView('mock'); },50);
-  }else if(pending==='ai'){
-    setTimeout(function(){ var ask=document.getElementById('ask'); if(ask) ask.focus(); },80);
-  }
+  if(!pmiHasApprovedAccess()){pmiShowApprovalGate(pmiApprovalStatus);return false;}
+  pmiHideApprovalGate();pmiCloseLoginGate();pmiCloseAuthMenu();
+  var pending=pmiPendingFeature;pmiPendingFeature=null;
+  if(pending==='mock')setTimeout(function(){showView('mock');},50);
+  else if(pending==='ai')setTimeout(function(){var ask=document.getElementById('ask');if(ask)ask.focus();},80);
+  return true;
 }
 
 function pmiHandleSignedOut(){
+  pmiResetApprovalState();
+  pmiCloseAdminPanel();
   try{
     if(typeof EXAM!=='undefined' && EXAM){
       clearInterval(EXAM.timerId); clearInterval(EXAM.breakTimerId); EXAM=null;
@@ -9506,20 +9887,24 @@ function pmiHandleSignedOut(){
 }
 
 async function pmiInitAuth(){
-  if(!window.pmiSupabase){ pmiAuthReady=true; pmiUpdateAuthUI(); return; }
-  await pmiRefreshSession();
+  if(!window.pmiSupabase){pmiAuthReady=true;pmiUpdateAuthUI();return;}
+  await pmiRefreshSession(true);
   pmiAuthReady=true;
   try{
-    if(!pmiAuthSubscription && pmiSupabase.auth.onAuthStateChange){
-      var sub = pmiSupabase.auth.onAuthStateChange(function(event,session){
-        pmiCurrentUser = session && session.user ? session.user : null;
-        pmiUpdateAuthUI();
-        if(pmiCurrentUser) pmiHandleAuthSuccess();
-        else if(event==='SIGNED_OUT') pmiHandleSignedOut();
+    if(!pmiAuthSubscription&&pmiSupabase.auth.onAuthStateChange){
+      var sub=pmiSupabase.auth.onAuthStateChange(async function(event,session){
+        pmiCurrentUser=session&&session.user?session.user:null;
+        if(pmiCurrentUser){
+          pmiApprovalStatus='checking';pmiIsAdmin=false;pmiApprovalError='';pmiUpdateAuthUI();
+          await pmiCheckApproval(true);
+        }else{
+          pmiResetApprovalState();pmiUpdateAuthUI();
+          if(event==='SIGNED_OUT')pmiHandleSignedOut();
+        }
       });
-      pmiAuthSubscription = sub && sub.data ? sub.data.subscription : sub;
+      pmiAuthSubscription=sub&&sub.data?sub.data.subscription:sub;
     }
-  }catch(e){ console.warn('Không đăng ký được auth listener:',e); }
+  }catch(e){console.warn('Không đăng ký được auth listener:',e);}
 }
 
 function pmiSetAuthBusy(busy){
@@ -9528,46 +9913,55 @@ function pmiSetAuthBusy(busy){
 }
 
 async function pmiSignUp(){
-  if(!window.pmiSupabase){ alert('Chưa cấu hình Supabase trong file HTML.'); return; }
+  if(!window.pmiSupabase){alert('Chưa cấu hình Supabase trong file HTML.');return;}
   var email=(document.getElementById('auth-email')||{}).value||'';
-  var pass =(document.getElementById('auth-password')||{}).value||'';
+  var pass=(document.getElementById('auth-password')||{}).value||'';
   email=email.trim();
-  if(!email||!pass){ alert('Bạn cần nhập email và mật khẩu.'); return; }
+  if(!email||!pass){alert('Bạn cần nhập email và mật khẩu.');return;}
   pmiSetAuthBusy(true);
   try{
-    var r = await pmiSupabase.auth.signUp({ email:email, password:pass });
-    if(r.error){ alert('Đăng ký lỗi: '+r.error.message); return; }
-    if(r.data && r.data.session && r.data.user){
-      pmiCurrentUser=r.data.user; pmiUpdateAuthUI(); pmiHandleAuthSuccess();
-      alert('Đăng ký và đăng nhập thành công.');
+    var r=await pmiSupabase.auth.signUp({email:email,password:pass});
+    if(r.error){alert('Đăng ký lỗi: '+r.error.message);return;}
+    if(r.data&&r.data.session&&r.data.user){
+      pmiCurrentUser=r.data.user;pmiApprovalStatus='checking';pmiIsAdmin=false;pmiUpdateAuthUI();
+      var allowed=await pmiCheckApproval(true);
+      pmiCloseAuthMenu();
+      if(allowed){pmiHandleAuthSuccess();alert('Tài khoản đã được duyệt và có thể sử dụng app.');}
+      else if(pmiApprovalStatus==='rejected')alert('Đăng ký thành công nhưng tài khoản hiện bị từ chối.');
+      else if(pmiApprovalStatus==='error')alert('Đăng ký thành công nhưng chưa kiểm tra được trạng thái duyệt.');
+      else alert('Đăng ký thành công. Tài khoản đang chờ quản trị viên duyệt trước khi sử dụng app.');
     }else{
-      alert('Đăng ký thành công. Nếu Supabase yêu cầu xác nhận email, hãy mở email xác nhận rồi đăng nhập.');
+      alert('Đăng ký thành công. Hãy xác nhận email nếu Supabase yêu cầu, sau đó đăng nhập. Tài khoản mới sẽ ở trạng thái chờ quản trị viên duyệt.');
     }
-  }finally{ pmiSetAuthBusy(false); }
+  }finally{pmiSetAuthBusy(false);}
 }
 
 async function pmiSignIn(){
-  if(!window.pmiSupabase){ alert('Chưa cấu hình Supabase trong file HTML.'); return; }
+  if(!window.pmiSupabase){alert('Chưa cấu hình Supabase trong file HTML.');return;}
   var email=(document.getElementById('auth-email')||{}).value||'';
-  var pass =(document.getElementById('auth-password')||{}).value||'';
+  var pass=(document.getElementById('auth-password')||{}).value||'';
   email=email.trim();
-  if(!email||!pass){ alert('Bạn cần nhập email và mật khẩu.'); return; }
+  if(!email||!pass){alert('Bạn cần nhập email và mật khẩu.');return;}
   pmiSetAuthBusy(true);
   try{
-    var r = await pmiSupabase.auth.signInWithPassword({ email:email, password:pass });
-    if(r.error){ alert('Đăng nhập lỗi: '+r.error.message); return; }
-    pmiCurrentUser = r.data.user; pmiUpdateAuthUI();
-    var passInput=document.getElementById('auth-password'); if(passInput) passInput.value='';
-    pmiHandleAuthSuccess();
-    alert('Đăng nhập thành công. AI Tutor và Mock Test đã được mở khóa.');
-  }finally{ pmiSetAuthBusy(false); }
+    var r=await pmiSupabase.auth.signInWithPassword({email:email,password:pass});
+    if(r.error){alert('Đăng nhập lỗi: '+r.error.message);return;}
+    pmiCurrentUser=r.data.user;pmiApprovalStatus='checking';pmiIsAdmin=false;pmiUpdateAuthUI();
+    var passInput=document.getElementById('auth-password');if(passInput)passInput.value='';
+    var allowed=await pmiCheckApproval(true);
+    pmiCloseAuthMenu();
+    if(allowed){pmiHandleAuthSuccess();alert(pmiIsAdmin?'Đăng nhập quản trị thành công.':'Đăng nhập thành công. Tài khoản đã được duyệt; AI Tutor và Mock Test đã mở khóa.');}
+    else if(pmiApprovalStatus==='rejected')alert('Đăng nhập thành công nhưng tài khoản đã bị từ chối.');
+    else if(pmiApprovalStatus==='error')alert('Đăng nhập thành công nhưng hệ thống chưa kiểm tra được quyền truy cập.');
+    else alert('Đăng nhập thành công. Tài khoản đang chờ quản trị viên duyệt.');
+  }finally{pmiSetAuthBusy(false);}
 }
 
 async function pmiSignOut(){
   pmiSetAuthBusy(true);
-  try{ if(window.pmiSupabase) await pmiSupabase.auth.signOut(); }
+  try{if(window.pmiSupabase)await pmiSupabase.auth.signOut();}
   finally{
-    pmiCurrentUser=null; pmiPendingFeature=null; pmiUpdateAuthUI(); pmiHandleSignedOut(); pmiCloseAuthMenu(); pmiSetAuthBusy(false);
+    pmiCurrentUser=null;pmiPendingFeature=null;pmiResetApprovalState();pmiUpdateAuthUI();pmiHandleSignedOut();pmiCloseAuthMenu();pmiSetAuthBusy(false);
   }
 }
 
@@ -9577,8 +9971,18 @@ document.addEventListener('click', function(event){
   if(bar && bar.classList.contains('open') && !bar.contains(event.target)) pmiCloseAuthMenu();
 });
 document.addEventListener('keydown', function(event){
-  if(event.key==='Escape') pmiCloseAuthMenu();
+  if(event.key==='Escape'){
+    pmiCloseAuthMenu();
+    var adminPanel=document.getElementById('admin-panel');
+    if(adminPanel&&adminPanel.classList.contains('open'))pmiCloseAdminPanel();
+  }
 });
+document.addEventListener('visibilitychange',function(){
+  if(!document.hidden&&pmiCurrentUser&&pmiCurrentUser.id)pmiCheckApproval(true);
+});
+setInterval(function(){
+  if(pmiCurrentUser&&pmiCurrentUser.id)pmiCheckApproval(true);
+},90000);
 
 /* ---------- init ---------- */
 applyTrainingSourcePolicy();
