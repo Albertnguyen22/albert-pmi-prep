@@ -381,10 +381,117 @@
   @media(max-width:820px){.framework-cards{grid-template-columns:1fr 1fr}.process-columns{grid-template-columns:1fr 1fr}}
   @media(max-width:600px){.framework-cards,.process-columns{grid-template-columns:1fr}.framework-cards details:nth-child(4){grid-column:auto}.match-row{grid-template-columns:1fr}.kanban-mini,.hotspot-board{grid-template-columns:1fr 1fr}.break-card{padding:26px 16px}.break-time{font-size:42px}.format-badge{display:inline-block;margin-top:5px}.account-caption{align-items:flex-start}}
 
+
+
+  /* ---------- Restored login card + protected feature gate ---------- */
+  #auth-bar{
+    position:fixed!important;top:78px!important;right:14px!important;left:auto!important;z-index:99990!important;
+    width:min(460px,calc(100vw - 28px));max-width:none!important;
+    background:var(--white)!important;color:var(--ink)!important;
+    border:1px solid var(--line)!important;border-radius:14px!important;
+    padding:12px!important;font-size:13px!important;
+    box-shadow:0 16px 48px -20px rgba(15,28,46,.55)!important;
+    transition:transform .18s ease,box-shadow .18s ease,width .18s ease!important;
+  }
+  #auth-bar.auth-attention{animation:authAttention .7s ease 2}
+  @keyframes authAttention{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+  #auth-bar .auth-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+  #auth-bar .auth-card-head strong{display:block;font-family:var(--serif);font-size:16px;color:var(--ink);line-height:1.2}
+  #auth-bar .auth-card-head small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+  .auth-status-pill{flex:none;border-radius:999px;padding:4px 8px;background:#f6e2dc;color:var(--red);font-size:10px;font-weight:800;white-space:nowrap}
+  #auth-bar[data-auth-state="in"] .auth-status-pill{background:#e3f0e6;color:var(--green)}
+  #auth-bar .row{max-width:none!important;margin:0!important;display:block!important}
+  #auth-logged-out{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:8px!important;align-items:center;flex:1}
+  #auth-logged-out .auth-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  #auth-logged-in{display:flex;align-items:center;gap:10px!important;justify-content:space-between;flex:1;min-width:0}
+  #auth-bar input{width:100%!important;min-width:0!important;background:var(--paper)!important;border:1px solid var(--line)!important;color:var(--ink)!important;border-radius:8px!important;padding:9px 10px!important;font:inherit!important;font-size:13px!important}
+  #auth-bar input:focus{outline:2px solid var(--amber);border-color:transparent!important}
+  #auth-bar input::placeholder{color:var(--muted)!important}
+  #auth-bar button{border:0;border-radius:8px;padding:9px 12px;font-weight:800;cursor:pointer;font:inherit;font-size:12px}
+  #auth-bar button:disabled{opacity:.55;cursor:wait}
+  #auth-user-email{display:block;color:var(--amber-deep)!important;overflow-wrap:anywhere;font-weight:800;line-height:1.25}
+  .auth-user-block{min-width:0}.auth-user-block small{display:block;color:var(--muted);font-size:10px;margin-bottom:2px}
+  #auth-config-warning{color:var(--red)!important;margin:0 0 8px!important;font-size:11px;font-weight:800}
+  .auth-help{font-size:10.5px;color:var(--muted);margin:9px 0 0;line-height:1.4}
+  #auth-bar[data-auth-state="in"]{width:min(390px,calc(100vw - 28px))}
+  #auth-bar[data-auth-state="in"] .auth-help{display:none}
+
+  .tutor{position:relative}
+  .tutor.auth-locked .chat,.tutor.auth-locked .chips,.tutor.auth-locked .composer{opacity:.18;filter:blur(.4px);pointer-events:none;user-select:none}
+  .tutor-auth-lock{display:none;position:absolute;inset:55px 0 0;z-index:8;align-items:center;justify-content:center;padding:18px;background:rgba(15,28,46,.94);backdrop-filter:blur(3px)}
+  .tutor.auth-locked .tutor-auth-lock{display:flex}
+  .tutor-auth-lock-card{max-width:430px;text-align:center;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);border-radius:14px;padding:22px;color:var(--paper);box-shadow:0 18px 50px rgba(0,0,0,.25)}
+  .tutor-auth-lock-card .lock-mark{font-size:30px;margin-bottom:8px}.tutor-auth-lock-card b{display:block;font-family:var(--serif);font-size:19px}.tutor-auth-lock-card span{display:block;color:#aebdd0;font-size:12.5px;margin:7px 0 14px}.tutor-auth-lock-card button{border:0;border-radius:9px;background:var(--amber);color:var(--ink);font:inherit;font-weight:800;padding:10px 16px;cursor:pointer}
+  #tab-mock.auth-required{opacity:.78}#tab-mock.auth-required::after{content:""}
+
+  .login-gate{position:fixed;inset:0;z-index:100000;background:rgba(9,18,31,.72);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
+  .login-gate.open{display:flex;animation:fade .18s ease}.login-gate-card{position:relative;width:min(500px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;padding:30px;text-align:center;box-shadow:0 28px 90px rgba(0,0,0,.38)}
+  .login-gate-close{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:var(--paper-2);color:var(--ink);font-size:22px;cursor:pointer}.login-gate-icon{font-size:42px;margin-bottom:4px}.login-gate-card h2{font-family:var(--serif);font-size:25px;margin:7px 0}.login-gate-card p{color:var(--muted);font-size:14px;margin:0 auto 14px;max-width:44ch}.login-gate-pills{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:0 0 18px}.login-gate-pills span{background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:700}.login-gate-card>.btn{margin:4px;min-width:170px}
+
+  #account-footer{margin-top:18px;border-top:1px dashed var(--line);padding-top:12px}
+  #account-footer .account-note{background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:10px 12px;margin:0;font-size:11.5px}
+
+  @media(max-width:700px){
+    body{padding-bottom:250px}
+    body.pmi-session-in{padding-bottom:105px}
+    #auth-bar{top:auto!important;bottom:10px!important;left:10px!important;right:10px!important;width:auto!important;max-height:62vh;overflow:auto}
+    #auth-bar[data-auth-state="in"]{left:auto!important;width:min(370px,calc(100vw - 20px))!important}
+    #auth-logged-out{grid-template-columns:1fr}#auth-logged-out .auth-actions{grid-column:auto}
+    .login-gate-card{padding:26px 18px}.login-gate-card>.btn{width:100%;margin:4px 0}
+    .tutor-auth-lock{inset:76px 0 0}.tutor-auth-lock-card{padding:18px 14px}
+  }
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+
+<!-- ALBERT PMI Prep · Always-visible Supabase account card -->
+<div id="auth-bar" data-auth-state="out" aria-label="Tài khoản ALBERT PMI Prep">
+  <div class="auth-card-head">
+    <div>
+      <strong>🔐 Tài khoản ALBERT</strong>
+      <small>Đăng nhập để dùng AI &amp; Mock Test</small>
+    </div>
+    <span id="auth-status-pill" class="auth-status-pill">Chưa đăng nhập</span>
+  </div>
+  <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
+  <div class="row">
+    <div id="auth-logged-out">
+      <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
+      <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password"
+             onkeydown="if(event.key==='Enter'){event.preventDefault();pmiSignIn();}">
+      <div class="auth-actions">
+        <button class="a-signup" onclick="pmiSignUp()">Đăng ký</button>
+        <button class="a-signin" onclick="pmiSignIn()">Đăng nhập</button>
+      </div>
+    </div>
+    <div id="auth-logged-in" style="display:none">
+      <div class="auth-user-block">
+        <small>Đang đăng nhập</small>
+        <span id="auth-user-email"></span>
+      </div>
+      <button class="a-signout" onclick="pmiSignOut()">Đăng xuất</button>
+    </div>
+  </div>
+  <p class="auth-help">Training vẫn xem được khi chưa đăng nhập. AI Tutor và toàn bộ Mock Test chỉ mở sau khi đăng nhập.</p>
+</div>
+
+<!-- Login-required dialog shown when a protected feature is selected -->
+<div id="login-gate" class="login-gate" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="login-gate-title"
+     onclick="if(event.target===this)pmiCloseLoginGate()">
+  <div class="login-gate-card">
+    <button class="login-gate-close" type="button" onclick="pmiCloseLoginGate()" aria-label="Đóng">×</button>
+    <div class="login-gate-icon">🔒</div>
+    <span class="eyebrow">Protected feature · Tính năng yêu cầu tài khoản</span>
+    <h2 id="login-gate-title">Đăng nhập để tiếp tục</h2>
+    <p id="login-gate-message">Bạn cần đăng nhập để sử dụng tính năng này.</p>
+    <div class="login-gate-pills"><span>AI Study Tutor</span><span>10 Mock Tests</span><span>Mistake Notebook</span></div>
+    <button class="btn primary" type="button" onclick="pmiFocusLogin()">Đăng nhập ngay</button>
+    <button class="btn ghost" type="button" onclick="pmiCloseLoginGate()">Tiếp tục xem Training</button>
+  </div>
+</div>
+
 <!-- Revised 2026-07-23: PMBOK 8 / PMP ECO 2026 alignment, enhanced mock engine, mistake notebook, compact account footer. -->
 
 <header>
@@ -395,7 +502,7 @@
     </div>
     <div class="tabs" role="tablist">
       <button id="tab-train" class="active" onclick="showView('train')" role="tab">Training</button>
-      <button id="tab-mock" onclick="showView('mock')" role="tab">Mock Test</button>
+      <button id="tab-mock" class="auth-required" onclick="showView('mock')" role="tab" data-locked="true">🔒 Mock Test</button>
     </div>
   </div>
 </header>
@@ -462,7 +569,7 @@
         <article class="lesson" id="lesson"></article>
 
         <!-- AI Tutor -->
-        <div class="tutor">
+        <div class="tutor auth-locked" id="pmi-tutor">
           <div class="tutor-head">
             <span class="dot"></span>
             <b>AI Study Tutor</b>
@@ -473,30 +580,23 @@
           </div>
           <div class="chips" id="chips"></div>
           <div class="composer">
-            <input id="ask" type="text" placeholder="Hỏi bằng tiếng Anh hoặc tiếng Việt… / Ask in English or Vietnamese…" autocomplete="off"
+            <input id="ask" type="text" placeholder="Đăng nhập để dùng AI Tutor…" autocomplete="off"
                    onkeydown="if(event.key==='Enter')sendChat()">
             <button id="sendBtn" onclick="sendChat()">Ask</button>
+          </div>
+          <div id="tutor-auth-lock" class="tutor-auth-lock">
+            <div class="tutor-auth-lock-card">
+              <div class="lock-mark">🔒</div>
+              <b>Đăng nhập để sử dụng AI Study Tutor</b>
+              <span>Training vẫn mở để bạn học. Đăng nhập Supabase để đặt câu hỏi cho AI.</span>
+              <button type="button" onclick="pmiShowLoginGate('ai')">Đăng nhập để hỏi AI</button>
+            </div>
           </div>
         </div>
 
         <div id="account-footer" style="display:none">
-          <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Đặt nhỏ dưới mục 16 · Exam Prep Strategy</span></div>
-          <div id="auth-bar">
-            <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
-            <div class="row">
-              <div id="auth-logged-out">
-                <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
-                <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
-                <button class="a-signup" onclick="pmiSignUp()">Đăng ký</button>
-                <button class="a-signin" onclick="pmiSignIn()">Đăng nhập</button>
-              </div>
-              <div id="auth-logged-in" style="display:none">
-                <span id="auth-user-email"></span>
-                <button class="a-signout" onclick="pmiSignOut()">Đăng xuất</button>
-              </div>
-            </div>
-          </div>
-          <p class="account-note">AI Tutor cần đăng nhập. Tiến độ mock test và Mistake Notebook được lưu trong trình duyệt này.</p>
+          <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Module 16 · Exam Prep Strategy</span></div>
+          <p class="account-note"><b>AI Tutor và Mock Test yêu cầu đăng nhập.</b> Thẻ đăng nhập luôn hiển thị ở góc màn hình, tương tự app HSK Albert. Khi đăng xuất, app tự khóa AI, dừng bài thi đang chạy và quay về Training.</p>
         </div>
       </div>
     </div>
@@ -8051,12 +8151,15 @@ const QUESTION_BANK = [
 /* ================= PMI Prep App ================= */
 
 /* ---------- View switching ---------- */
-function showView(v){
+async function showView(v){
+  if(v==='mock' && !(await pmiRequireAuth('mock'))) return false;
+  if(v==='train') pmiPendingFeature=null;
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
   document.getElementById('view-'+v).classList.add('active');
   document.getElementById('tab-train').classList.toggle('active', v==='train');
   document.getElementById('tab-mock').classList.toggle('active', v==='mock');
   window.scrollTo({top:0,behavior:'smooth'});
+  return true;
 }
 
 /* ================= TRAINING ================= */
@@ -8170,6 +8273,7 @@ function addMsg(role, text){
 
 async function sendChat(){
   const input = document.getElementById('ask');
+  if(!(await pmiRequireAuth('ai'))) return false;
   const btn = document.getElementById('sendBtn');
   const q = input.value.trim();
   if(!q) return;
@@ -8221,7 +8325,7 @@ STYLE:
     chatHistory.push({role:'assistant', content:text});
   }catch(e){
     const msg = (e && e.message) ? e.message : String(e);
-    thinking.innerHTML = "Tutor chưa trả lời được.<br><span style='opacity:.8'>"+msg.replace(/</g,'&lt;')+"</span><br><br>Kiểm tra: (1) đã đăng nhập ở khu vực Tài khoản dưới mục 16 chưa, (2) Edge Function <b>albert-pmi-tutor</b> đã deploy và có OPENROUTER_API_KEY chưa. Bạn vẫn học bài và làm mock test offline bình thường.";
+    thinking.innerHTML = "Tutor chưa trả lời được.<br><span style='opacity:.8'>"+msg.replace(/</g,'&lt;')+"</span><br><br>Kiểm tra: (1) đã đăng nhập ở thẻ Tài khoản góc màn hình chưa, (2) Edge Function <b>albert-pmi-tutor</b> đã deploy và có OPENROUTER_API_KEY chưa. Bạn vẫn có thể xem nội dung Training; AI và Mock Test cần phiên đăng nhập hợp lệ.";
   }finally{
     btn.disabled=false; btn.textContent='Ask';
     document.getElementById('chat').scrollTop = 999999;
@@ -8831,7 +8935,8 @@ const _mem={};
 function localStorage_get(k){try{return localStorage.getItem(k);}catch(e){return _mem[k];}}
 function localStorage_set(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
 
-function startExam(n){
+async function startExam(n){
+  if(!(await pmiRequireAuth('mock'))) return false;
   const count=parseInt(document.getElementById('set-count').value,10);
   const timeLimit=parseInt(document.getElementById('set-time').value,10);
   const mode=document.getElementById('set-mode').value;
@@ -9009,7 +9114,8 @@ function updateMistakeCountBadge(){
   const el=document.getElementById('mistake-count');if(!el)return;const n=Object.keys(loadMistakes()).length;el.textContent=n?` (${n})`:'';
 }
 function clearMistakes(){if(confirm('Clear the entire mistake notebook?')){localStorage_set('pmi_mistakes','{}');renderMistakeNotebook();updateMistakeCountBadge();}}
-function openMistakeNotebook(){
+async function openMistakeNotebook(){
+  if(!(await pmiRequireAuth('mock'))) return false;
   document.getElementById('mock-home').style.display='block';document.getElementById('exam-select-area').style.display='none';
   const panel=document.getElementById('mistake-panel');panel.style.display='block';renderMistakeNotebook();window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -9073,6 +9179,9 @@ var PMI_SUPABASE_URL = "https://pdsxreonrlrfcotszblj.supabase.co";
 var PMI_SUPABASE_KEY = "sb_publishable_HifldsDyYLTfaAVPhOVrAA_oCdXFAxw";
 window.pmiSupabase = null;
 var pmiCurrentUser = null;
+var pmiAuthReady = false;
+var pmiAuthSubscription = null;
+var pmiPendingFeature = null;
 
 (function pmiInitSupabase(){
   try{
@@ -9080,59 +9189,213 @@ var pmiCurrentUser = null;
     var okUrl = /^https:\/\/[^\s]+\.supabase\.co\/?$/.test(String(PMI_SUPABASE_URL||''));
     var okKey = String(PMI_SUPABASE_KEY||'').length > 20 && !String(PMI_SUPABASE_KEY).includes('PASTE_');
     if(!okUrl || !okKey){ if(warn) warn.style.display='block'; return; }
-    if(!window.supabase){ console.warn('Supabase JS chưa tải được.'); return; }
+    if(!window.supabase){
+      if(warn){ warn.style.display='block'; warn.textContent='Không tải được Supabase JS. Kiểm tra kết nối mạng.'; }
+      console.warn('Supabase JS chưa tải được.');
+      return;
+    }
     window.pmiSupabase = window.supabase.createClient(PMI_SUPABASE_URL.replace(/\/$/,''), PMI_SUPABASE_KEY);
-  }catch(e){ console.error('Không khởi tạo được Supabase:', e); }
+  }catch(e){
+    var warning = document.getElementById('auth-config-warning');
+    if(warning){ warning.style.display='block'; warning.textContent='Không khởi tạo được Supabase.'; }
+    console.error('Không khởi tạo được Supabase:', e);
+  }
 })();
+
+function pmiFeatureName(feature){
+  return feature==='mock' ? 'Mock Test' : 'AI Study Tutor';
+}
+
+function pmiShowLoginGate(feature){
+  pmiPendingFeature = feature || pmiPendingFeature || 'ai';
+  var gate = document.getElementById('login-gate');
+  var title = document.getElementById('login-gate-title');
+  var msg = document.getElementById('login-gate-message');
+  var name = pmiFeatureName(pmiPendingFeature);
+  if(title) title.textContent = 'Đăng nhập để dùng ' + name;
+  if(msg) msg.textContent = pmiPendingFeature==='mock'
+    ? 'Toàn bộ 10 đề thi thử, đồng hồ thi, kết quả và Mistake Notebook chỉ mở cho tài khoản đã đăng nhập.'
+    : 'AI Tutor cần phiên đăng nhập Supabase hợp lệ trước khi gửi câu hỏi tới Edge Function.';
+  if(gate){ gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); }
+  var bar = document.getElementById('auth-bar');
+  if(bar){ bar.classList.remove('auth-attention'); void bar.offsetWidth; bar.classList.add('auth-attention'); }
+}
+
+function pmiCloseLoginGate(){
+  var gate = document.getElementById('login-gate');
+  if(gate){ gate.classList.remove('open'); gate.setAttribute('aria-hidden','true'); }
+}
+
+function pmiFocusLogin(){
+  pmiCloseLoginGate();
+  var bar = document.getElementById('auth-bar');
+  if(bar){ bar.classList.remove('auth-attention'); void bar.offsetWidth; bar.classList.add('auth-attention'); }
+  setTimeout(function(){
+    var email = document.getElementById('auth-email');
+    var pass = document.getElementById('auth-password');
+    if(email && !email.value) email.focus(); else if(pass) pass.focus();
+  },80);
+}
+
+function pmiApplyFeatureLocks(){
+  var loggedIn = !!(pmiCurrentUser && pmiCurrentUser.id);
+  var tutor = document.getElementById('pmi-tutor');
+  var ask = document.getElementById('ask');
+  var send = document.getElementById('sendBtn');
+  var tab = document.getElementById('tab-mock');
+  if(tutor) tutor.classList.toggle('auth-locked', !loggedIn);
+  if(ask){
+    ask.disabled = !loggedIn;
+    ask.placeholder = loggedIn
+      ? 'Hỏi bằng tiếng Anh hoặc tiếng Việt… / Ask in English or Vietnamese…'
+      : 'Đăng nhập để dùng AI Tutor…';
+  }
+  if(send) send.disabled = !loggedIn;
+  if(tab){
+    tab.classList.toggle('auth-required', !loggedIn);
+    tab.setAttribute('data-locked', loggedIn ? 'false' : 'true');
+    tab.removeAttribute('aria-disabled');
+    tab.textContent = loggedIn ? 'Mock Test' : '🔒 Mock Test';
+    tab.title = loggedIn ? 'Mở 10 đề thi thử' : 'Đăng nhập để mở Mock Test';
+  }
+}
 
 function pmiUpdateAuthUI(){
   var out = document.getElementById('auth-logged-out');
   var inn = document.getElementById('auth-logged-in');
   var em  = document.getElementById('auth-user-email');
+  var bar = document.getElementById('auth-bar');
+  var pill = document.getElementById('auth-status-pill');
   if(!out || !inn || !em) return;
+  document.body.classList.toggle('pmi-session-in', !!pmiCurrentUser);
   if(pmiCurrentUser){
     out.style.display='none'; inn.style.display='flex';
     em.textContent = pmiCurrentUser.email || 'Đã đăng nhập';
+    if(bar) bar.setAttribute('data-auth-state','in');
+    if(pill) pill.textContent='Đã đăng nhập';
   }else{
-    out.style.display='flex'; inn.style.display='none'; em.textContent='';
+    out.style.display='grid'; inn.style.display='none'; em.textContent='';
+    if(bar) bar.setAttribute('data-auth-state','out');
+    if(pill) pill.textContent='Chưa đăng nhập';
+  }
+  pmiApplyFeatureLocks();
+}
+
+async function pmiRefreshSession(){
+  if(!window.pmiSupabase){ pmiCurrentUser=null; pmiUpdateAuthUI(); return null; }
+  try{
+    var res = await pmiSupabase.auth.getSession();
+    pmiCurrentUser = res && res.data && res.data.session ? res.data.session.user : null;
+  }catch(e){ pmiCurrentUser=null; }
+  pmiUpdateAuthUI();
+  return pmiCurrentUser;
+}
+
+async function pmiRequireAuth(feature){
+  if(pmiCurrentUser && pmiCurrentUser.id) return true;
+  await pmiRefreshSession();
+  if(pmiCurrentUser && pmiCurrentUser.id) return true;
+  pmiShowLoginGate(feature);
+  return false;
+}
+
+function pmiHandleAuthSuccess(){
+  pmiCloseLoginGate();
+  var pending = pmiPendingFeature;
+  pmiPendingFeature = null;
+  if(pending==='mock'){
+    setTimeout(function(){ showView('mock'); },50);
+  }else if(pending==='ai'){
+    setTimeout(function(){ var ask=document.getElementById('ask'); if(ask) ask.focus(); },80);
   }
 }
-async function pmiInitAuth(){
-  if(!window.pmiSupabase){ pmiUpdateAuthUI(); return; }
-  var res = await pmiSupabase.auth.getUser();
-  pmiCurrentUser = (res && res.data) ? res.data.user : null;
-  pmiUpdateAuthUI();
+
+function pmiHandleSignedOut(){
+  try{
+    if(typeof EXAM!=='undefined' && EXAM){
+      clearInterval(EXAM.timerId); clearInterval(EXAM.breakTimerId); EXAM=null;
+    }
+  }catch(e){}
+  var run=document.getElementById('mock-run'), result=document.getElementById('mock-result'), home=document.getElementById('mock-home');
+  var notebook=document.getElementById('mistake-panel'), select=document.getElementById('exam-select-area');
+  if(run) run.style.display='none'; if(result) result.style.display='none'; if(home) home.style.display='block';
+  if(notebook) notebook.style.display='none'; if(select) select.style.display='block';
+  if(document.getElementById('view-mock') && document.getElementById('view-mock').classList.contains('active')) showView('train');
 }
+
+async function pmiInitAuth(){
+  if(!window.pmiSupabase){ pmiAuthReady=true; pmiUpdateAuthUI(); return; }
+  await pmiRefreshSession();
+  pmiAuthReady=true;
+  try{
+    if(!pmiAuthSubscription && pmiSupabase.auth.onAuthStateChange){
+      var sub = pmiSupabase.auth.onAuthStateChange(function(event,session){
+        pmiCurrentUser = session && session.user ? session.user : null;
+        pmiUpdateAuthUI();
+        if(pmiCurrentUser) pmiHandleAuthSuccess();
+        else if(event==='SIGNED_OUT') pmiHandleSignedOut();
+      });
+      pmiAuthSubscription = sub && sub.data ? sub.data.subscription : sub;
+    }
+  }catch(e){ console.warn('Không đăng ký được auth listener:',e); }
+}
+
+function pmiSetAuthBusy(busy){
+  var buttons=document.querySelectorAll('#auth-bar button');
+  buttons.forEach(function(b){b.disabled=!!busy;});
+}
+
 async function pmiSignUp(){
   if(!window.pmiSupabase){ alert('Chưa cấu hình Supabase trong file HTML.'); return; }
   var email=(document.getElementById('auth-email')||{}).value||'';
   var pass =(document.getElementById('auth-password')||{}).value||'';
   email=email.trim();
-  if(!email||!pass){ alert('Nhập email và mật khẩu.'); return; }
-  var r = await pmiSupabase.auth.signUp({ email:email, password:pass });
-  if(r.error){ alert('Đăng ký lỗi: '+r.error.message); return; }
-  alert('Đăng ký thành công. Nếu Supabase yêu cầu xác nhận email, hãy mở email rồi đăng nhập.');
+  if(!email||!pass){ alert('Bạn cần nhập email và mật khẩu.'); return; }
+  pmiSetAuthBusy(true);
+  try{
+    var r = await pmiSupabase.auth.signUp({ email:email, password:pass });
+    if(r.error){ alert('Đăng ký lỗi: '+r.error.message); return; }
+    if(r.data && r.data.session && r.data.user){
+      pmiCurrentUser=r.data.user; pmiUpdateAuthUI(); pmiHandleAuthSuccess();
+      alert('Đăng ký và đăng nhập thành công.');
+    }else{
+      alert('Đăng ký thành công. Nếu Supabase yêu cầu xác nhận email, hãy mở email xác nhận rồi đăng nhập.');
+    }
+  }finally{ pmiSetAuthBusy(false); }
 }
+
 async function pmiSignIn(){
   if(!window.pmiSupabase){ alert('Chưa cấu hình Supabase trong file HTML.'); return; }
   var email=(document.getElementById('auth-email')||{}).value||'';
   var pass =(document.getElementById('auth-password')||{}).value||'';
   email=email.trim();
-  if(!email||!pass){ alert('Nhập email và mật khẩu.'); return; }
-  var r = await pmiSupabase.auth.signInWithPassword({ email:email, password:pass });
-  if(r.error){ alert('Đăng nhập lỗi: '+r.error.message); return; }
-  pmiCurrentUser = r.data.user; pmiUpdateAuthUI();
+  if(!email||!pass){ alert('Bạn cần nhập email và mật khẩu.'); return; }
+  pmiSetAuthBusy(true);
+  try{
+    var r = await pmiSupabase.auth.signInWithPassword({ email:email, password:pass });
+    if(r.error){ alert('Đăng nhập lỗi: '+r.error.message); return; }
+    pmiCurrentUser = r.data.user; pmiUpdateAuthUI();
+    var passInput=document.getElementById('auth-password'); if(passInput) passInput.value='';
+    pmiHandleAuthSuccess();
+    alert('Đăng nhập thành công. AI Tutor và Mock Test đã được mở khóa.');
+  }finally{ pmiSetAuthBusy(false); }
 }
+
 async function pmiSignOut(){
-  if(window.pmiSupabase) await pmiSupabase.auth.signOut();
-  pmiCurrentUser=null; pmiUpdateAuthUI();
+  pmiSetAuthBusy(true);
+  try{ if(window.pmiSupabase) await pmiSupabase.auth.signOut(); }
+  finally{
+    pmiCurrentUser=null; pmiPendingFeature=null; pmiUpdateAuthUI(); pmiHandleSignedOut(); pmiSetAuthBusy(false);
+  }
 }
+
 
 /* ---------- init ---------- */
 applyTrainingSourcePolicy();
 buildToc();
 renderLesson(0);
 renderExamGrid();
+pmiUpdateAuthUI();
 const countSetting = document.getElementById('set-count');
 if(countSetting) countSetting.addEventListener('change',()=>{ const t=document.getElementById('set-time'); if(t) delete t.dataset.manual; syncExamSettings(); });
 syncExamSettings();
