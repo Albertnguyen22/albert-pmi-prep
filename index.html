@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALBERT PMI Prep · PMBOK 8th Edition Training & Mock Exams</title>
+<title>ALBERT PMI Prep · PMBOK 8th Edition · PMP July 2026</title>
 <style>
   :root{
     --ink:#0f1c2e;        /* deep ink navy */
@@ -292,27 +292,100 @@
   @media(hover:none){
     .opt,.btn,.tabs button,.chips button,nav.toc button{min-height:44px}
   }
+
+
+  /* ---------- PMBOK 8 / PMP 2026 alignment additions ---------- */
+  .framework-board{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 24px;box-shadow:var(--shadow)}
+  .framework-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+  .framework-head h2{font-family:var(--serif);font-size:23px;margin:2px 0 0}
+  .framework-status{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:#e3f0e6;color:var(--green);padding:5px 10px;border-radius:20px}
+  .framework-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .framework-cards details{border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:10px 12px;min-width:0}
+  .framework-cards details:nth-child(4){grid-column:1/-1}
+  .framework-cards summary{cursor:pointer;font-weight:800;color:var(--ink);font-size:13.5px}
+  .framework-cards ol,.framework-cards ul{margin:9px 0 0;padding-left:20px;font-size:12.8px;color:#33414f}
+  .framework-note{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+  .process-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:12px}
+  .process-columns>div{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:10px}
+  .process-columns b{font-size:12.5px;color:var(--amber-deep)}
+  .process-columns ol{font-size:11.7px;margin:5px 0 10px}
+  .source-policy{margin-top:12px;padding:10px 12px;border-radius:9px;background:#eef3f8;color:#34465a;font-size:12.7px}
+
+  #account-footer{margin-top:18px;border-top:1px dashed var(--line);padding-top:14px}
+  .account-caption{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:11px;color:var(--muted);margin-bottom:7px;flex-wrap:wrap}
+  #auth-bar{position:static!important;top:auto!important;z-index:auto!important;background:var(--paper-2)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:10px;padding:7px 9px!important;font-size:12px!important}
+  #auth-bar .row{max-width:none!important;margin:0!important;gap:6px!important}
+  #auth-bar input{background:var(--white)!important;border:1px solid var(--line)!important;color:var(--ink)!important;border-radius:7px!important;padding:7px 9px!important;font-size:12px!important}
+  #auth-bar input::placeholder{color:var(--muted)!important}
+  #auth-bar button{padding:7px 10px!important;font-size:12px!important;border-radius:7px!important}
+  #auth-user-email{color:var(--amber-deep)!important;overflow-wrap:anywhere}
+  #auth-config-warning{color:var(--red)!important;margin:0 0 5px!important;font-size:11px}
+  .account-note{font-size:11px;color:var(--muted);margin:5px 2px 0}
+
+  .exam-facts{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .exam-facts span{background:var(--ink);color:var(--paper);border-radius:20px;padding:6px 11px;font-size:12px}
+  .exam-facts b{color:var(--amber)}
+  .mock-disclaimer{margin-bottom:14px}
+  .mock-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;color:var(--muted);font-size:12.5px}
+  .section-pill{font-size:11px;font-weight:800;background:var(--paper-2);color:var(--amber-deep);border:1px solid var(--line);padding:4px 9px;border-radius:20px;white-space:nowrap}
+  .format-badge{font-size:10px;background:#eef3f8;color:#486078;padding:2px 8px;border-radius:20px;margin-left:6px}
+  .case-box{margin:14px 0;background:#eef3f8;border:1px solid #cbd8e5;border-radius:10px;padding:10px 13px}
+  .case-box summary{cursor:pointer;font-weight:800;color:var(--ink)}
+  .case-box p{font-size:13.5px;color:#33465a;margin:8px 0 2px}
+  .visual-box{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+  .data-table{border-collapse:collapse;width:100%;font-size:13px}
+  .data-table th,.data-table td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+  .data-table th{background:var(--ink);color:var(--paper)}
+  .kanban-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .kanban-mini>div{border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;background:var(--white)}
+  .kanban-mini .hot{border-color:var(--red);background:#f9ebe7}
+  .kanban-mini span{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+  .multi-instruction{font-size:12px;font-weight:700;color:var(--amber-deep);margin-bottom:8px}
+  .match-wrap{display:grid;gap:12px}
+  .match-bank{display:flex;flex-wrap:wrap;gap:7px;padding:10px;border:1px dashed var(--line);border-radius:9px;background:var(--paper)}
+  .match-chip{border:1px solid var(--line);background:var(--white);border-radius:18px;padding:6px 10px;font-size:12px;cursor:grab}
+  .match-chip.used{opacity:.5}
+  .match-rows{display:grid;gap:8px}
+  .match-row{display:grid;grid-template-columns:minmax(150px,1fr) minmax(190px,1.4fr);gap:10px;align-items:center;border:1px solid var(--line);border-radius:9px;padding:10px;background:var(--paper)}
+  .match-row.correct{border-color:var(--green);background:#eef6f0}.match-row.wrong{border-color:var(--red);background:#f9ebe7}
+  .match-left{font-weight:700;font-size:13px}
+  .match-row select{width:100%;font:inherit;font-size:13px;padding:8px;border:1px solid var(--line);border-radius:7px;background:var(--white)}
+  .fill-answer{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}
+  .fill-answer label{font-weight:700;font-size:13px}.fill-answer input{display:block;width:100%;margin-top:7px;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit}
+  .fill-answer.correct{border-color:var(--green);background:#eef6f0}.fill-answer.wrong{border-color:var(--red);background:#f9ebe7}
+  .dropdown-answer{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--paper)}
+  .dropdown-answer label{font-size:13px;font-weight:800}.dropdown-answer select{display:block;width:100%;margin-top:7px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--white);font:inherit}
+  .dropdown-answer.correct{border-color:var(--green);background:#eef6f0}.dropdown-answer.wrong{border-color:var(--red);background:#f9ebe7}
+  .hotspot-wrap{border:1px solid var(--line);border-radius:11px;padding:14px;background:var(--paper)}
+  .hotspot-title{font-size:12px;font-weight:800;color:var(--amber-deep);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .hotspot-board{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .hotspot-target{min-height:72px;border:2px dashed #b9c4cf;border-radius:10px;background:var(--white);color:var(--ink);font:inherit;font-size:13px;font-weight:700;cursor:crosshair;padding:10px}
+  .hotspot-target:hover,.hotspot-target.sel{border-color:var(--amber);background:#fbf3e6}.hotspot-target.correct{border-style:solid;border-color:var(--green);background:#eef6f0}.hotspot-target.wrong{border-style:solid;border-color:var(--red);background:#f9ebe7}
+  .question-map{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 20px}
+  .map-cell{width:44px;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--muted);font-weight:700;font-size:12px;cursor:pointer}
+  .map-cell.answered{background:var(--amber);color:var(--ink)}.map-cell.flagged{box-shadow:0 0 0 2px var(--red)}.map-cell.current{outline:2px solid var(--ink)}
+  .map-note{font-size:13px;color:var(--muted)}
+  .section-review h2,.break-card h2{font-family:var(--serif);margin:5px 0 8px}
+  .break-card{background:var(--ink);color:var(--paper);border-radius:16px;padding:38px;text-align:center;box-shadow:var(--shadow)}
+  .break-card .eyebrow{color:var(--amber)}.break-time{font-family:var(--mono);font-size:54px;font-weight:800;margin:12px 0}.break-card p{color:#aebdd0}
+  .score-disclaimer{font-size:11.5px;color:#aebdd0;margin-top:10px}
+  .pretest-tag{display:inline-block;margin-left:7px;font-size:10px;background:#eef3f8;color:#486078;padding:2px 7px;border-radius:14px}
+  .result-actions{margin:8px 0 22px}
+  .notebook-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .weak-area{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0 18px}
+  .weak-area>div{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.weak-chip{font-size:11px;background:var(--paper-2);color:var(--amber-deep);padding:5px 9px;border-radius:16px}
+  .note-label{display:block;margin-top:12px;font-size:12px;font-weight:800;color:var(--ink)}
+  .note-label textarea{display:block;width:100%;min-height:72px;margin-top:5px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px;background:var(--paper)}
+  .mistake-meta{font-size:11px;color:var(--muted);margin-top:7px}
+
+  @media(max-width:820px){.framework-cards{grid-template-columns:1fr 1fr}.process-columns{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.framework-cards,.process-columns{grid-template-columns:1fr}.framework-cards details:nth-child(4){grid-column:auto}.match-row{grid-template-columns:1fr}.kanban-mini,.hotspot-board{grid-template-columns:1fr 1fr}.break-card{padding:26px 16px}.break-time{font-size:42px}.format-badge{display:inline-block;margin-top:5px}.account-caption{align-items:flex-start}}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
-<!-- ALBERT PMI Prep · Supabase Auth Bar -->
-<div id="auth-bar">
-  <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
-  <div class="row">
-    <div id="auth-logged-out">
-      <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
-      <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
-      <button class="a-signup" onclick="pmiSignUp()">Đăng ký</button>
-      <button class="a-signin" onclick="pmiSignIn()">Đăng nhập</button>
-    </div>
-    <div id="auth-logged-in" style="display:none">
-      <span id="auth-user-email"></span>
-      <button class="a-signout" onclick="pmiSignOut()">Đăng xuất</button>
-    </div>
-  </div>
-</div>
+<!-- Revised 2026-07-23: PMBOK 8 / PMP ECO 2026 alignment, enhanced mock engine, mistake notebook, compact account footer. -->
 
 <header>
   <div class="bar">
@@ -334,8 +407,49 @@
     <h1 class="page">Training</h1>
 
     <div class="callout">
-      <b>Lưu ý cho kỳ thi 9/7/2026:</b> đề mới bám theo PMBOK&nbsp;8 (6 nguyên tắc · 7 performance domain · 5 focus area · 40 process) và <b>tăng mạnh trọng số domain Business&nbsp;Environment</b>. Đề thi xây trên ECO, không phải học thuộc nội dung sách. &nbsp;·&nbsp; <i>The July 9, 2026 exam aligns with PMBOK 8 and heavily reweights the Business Environment domain.</i>
+      <b>Khung hiện hành từ tháng 7/2026:</b> PMBOK&nbsp;8 gồm <b>6 nguyên tắc · 7 performance domains · 5 focus areas · 40 quy trình không mang tính áp đặt</b>. Đề PMP dùng ECO 2026 với tỷ trọng <b>People 33% · Process 41% · Business Environment 26%</b>; khoảng 40% câu theo predictive và 60% còn lại chia giữa adaptive/agile và hybrid. PMBOK là nền kiến thức, còn ECO quyết định nội dung được kiểm tra.
     </div>
+
+    <section class="framework-board" aria-label="PMBOK 8 and PMP 2026 coverage map">
+      <div class="framework-head">
+        <div><span class="eyebrow">Coverage map · Bản đồ phạm vi</span><h2>PMBOK 8 + PMP ECO 2026</h2></div>
+        <span class="framework-status">Official framework first</span>
+      </div>
+      <div class="framework-cards">
+        <details open>
+          <summary>6 core principles · 6 nguyên tắc</summary>
+          <ol>
+            <li>Adopt a Holistic View</li><li>Focus on Value</li><li>Embed Quality into Processes and Deliverables</li>
+            <li>Be an Accountable Leader</li><li>Integrate Sustainability Within All Project Areas</li><li>Build an Empowered Culture</li>
+          </ol>
+        </details>
+        <details open>
+          <summary>7 performance domains</summary>
+          <ol><li>Governance</li><li>Scope</li><li>Schedule</li><li>Finance</li><li>Stakeholders</li><li>Resources</li><li>Risk</li></ol>
+        </details>
+        <details open>
+          <summary>5 focus areas</summary>
+          <ol><li>Initiating</li><li>Planning</li><li>Executing</li><li>Monitoring and Controlling</li><li>Closing</li></ol>
+          <p class="framework-note">Focus Areas là các nhóm hành động có thể chồng lấn, không phải năm phase bắt buộc của mọi project life cycle.</p>
+        </details>
+        <details>
+          <summary>40-process checklist · Danh mục kiểm tra</summary>
+          <div class="process-columns">
+            <div><b>Governance · 9</b><ol><li>Initiate Project or Phase</li><li>Integrate and Align Project Plans</li><li>Plan Sourcing Strategy</li><li>Manage Project Execution</li><li>Manage Quality Assurance</li><li>Manage Project Knowledge</li><li>Monitor and Control Project Performance</li><li>Assess and Implement Changes</li><li>Close Project or Phase</li></ol></div>
+            <div><b>Scope · 6</b><ol><li>Plan Scope Management</li><li>Elicit and Analyze Requirements</li><li>Define Scope</li><li>Develop Scope Structure</li><li>Monitor and Control Scope</li><li>Validate Scope</li></ol></div>
+            <div><b>Schedule · 3</b><ol><li>Plan Schedule Management</li><li>Develop Schedule</li><li>Monitor and Control Schedule</li></ol><b>Finance · 4</b><ol><li>Plan Financial Management</li><li>Estimate Costs</li><li>Develop Budget</li><li>Monitor and Control Finances</li></ol></div>
+            <div><b>Stakeholders · 7</b><ol><li>Identify Stakeholders</li><li>Plan Stakeholder Engagement</li><li>Plan Communications Management</li><li>Manage Stakeholder Engagement</li><li>Manage Communications</li><li>Monitor Stakeholder Engagement</li><li>Monitor Communications</li></ol></div>
+            <div><b>Resources · 5</b><ol><li>Plan Resource Management</li><li>Estimate Resources</li><li>Acquire Resources</li><li>Lead the Team</li><li>Monitor and Control Resourcing</li></ol><b>Risk · 6</b><ol><li>Plan Risk Management</li><li>Identify Risks</li><li>Perform Risk Analysis</li><li>Plan Risk Responses</li><li>Implement Risk Responses</li><li>Monitor Risks</li></ol></div>
+          </div>
+        </details>
+        <details>
+          <summary>PMP ECO 2026 · Exam blueprint</summary>
+          <ul><li>People: 33%</li><li>Process: 41%</li><li>Business Environment: 26%</li><li>Predictive: khoảng 40%</li><li>Adaptive/agile + hybrid: khoảng 60%</li></ul>
+          <p class="framework-note">Đề thi đánh giá khả năng áp dụng vào tình huống, không chỉ nhớ tên quy trình hoặc ITTO.</p>
+        </details>
+      </div>
+      <div class="source-policy"><b>Thứ tự ưu tiên nguồn:</b> PMI PMBOK 8 và PMP ECO 2026 là nguồn chuẩn. David McLachlan, Andrew Ramdayal và ScrumPass là nguồn học bổ sung để hệ thống hóa, giải thích và luyện câu hỏi. Khi tài liệu cũ khác khung 2026, app ưu tiên nguồn PMI hiện hành.</div>
+    </section>
 
     <div class="train-wrap">
       <nav class="toc" id="toc" aria-label="Lesson navigation"></nav>
@@ -364,6 +478,26 @@
             <button id="sendBtn" onclick="sendChat()">Ask</button>
           </div>
         </div>
+
+        <div id="account-footer" style="display:none">
+          <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Đặt nhỏ dưới mục 16 · Exam Prep Strategy</span></div>
+          <div id="auth-bar">
+            <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
+            <div class="row">
+              <div id="auth-logged-out">
+                <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
+                <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
+                <button class="a-signup" onclick="pmiSignUp()">Đăng ký</button>
+                <button class="a-signin" onclick="pmiSignIn()">Đăng nhập</button>
+              </div>
+              <div id="auth-logged-in" style="display:none">
+                <span id="auth-user-email"></span>
+                <button class="a-signout" onclick="pmiSignOut()">Đăng xuất</button>
+              </div>
+            </div>
+          </div>
+          <p class="account-note">AI Tutor cần đăng nhập. Tiến độ mock test và Mistake Notebook được lưu trong trình duyệt này.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -372,39 +506,62 @@
   <section id="view-mock" class="view">
     <!-- Exam selection -->
     <div id="mock-home">
-      <span class="eyebrow">Simulate · Full-length exams</span>
-      <h1 class="page">Mock Test</h1>
-      <p class="subtitle">Ten distinct exams, each drawn fresh so no two sittings are alike. Timed like the real thing, balanced across People, Process, and Business Environment, with situational and knowledge questions. Every answer comes with an explanation and an exam-trap note.</p>
+      <div id="exam-select-area">
+        <span class="eyebrow">Simulate · PMP exam currently in effect</span>
+        <h1 class="page">Mock Test</h1>
+        <p class="subtitle">10 practice-exam profiles with a fresh draw on every attempt. Full exams use 180 questions, 240 minutes, a 33/41/26 ECO balance, a case-study opening section, two lockable breaks, simulated pretest items, and a mix of single response, multiple response, enhanced matching, fill-in, graphic/data, point-and-click, and pull-down questions.</p>
 
-      <div class="settings">
-        <label>Questions
-          <select id="set-count">
-            <option value="180" selected>180 (full exam)</option>
-            <option value="60">60 (quick)</option>
-            <option value="30">30 (warm-up)</option>
-          </select>
-        </label>
-        <label>Time limit
-          <select id="set-time">
-            <option value="230" selected>230 min (real pace)</option>
-            <option value="90">90 min</option>
-            <option value="0">No timer</option>
-          </select>
-        </label>
-        <label>Feedback
-          <select id="set-mode">
-            <option value="end" selected>At the end (exam mode)</option>
-            <option value="instant">Instant (study mode)</option>
-          </select>
-        </label>
+        <div class="exam-facts">
+          <span><b>180</b> questions</span><span><b>240</b> minutes</span><span><b>170</b> scored + <b>10</b> simulated pretest</span><span><b>2 × 10 min</b> breaks</span>
+        </div>
+        <div class="callout mock-disclaimer"><b>Practice simulator:</b> câu hỏi trong app là nội dung luyện tập nguyên bản, không phải câu hỏi thật của PMI. Mức độ và ngưỡng điểm chỉ dùng để tự đánh giá.</div>
+
+        <div class="settings">
+          <label>Questions
+            <select id="set-count">
+              <option value="180" selected>180 · full exam</option>
+              <option value="60">60 · focused practice</option>
+              <option value="30">30 · warm-up</option>
+            </select>
+          </label>
+          <label>Time limit
+            <select id="set-time" onchange="markTimeManual()">
+              <option value="240" selected>240 min · official full pace</option>
+              <option value="80">80 min · 60-question pace</option>
+              <option value="40">40 min · 30-question pace</option>
+              <option value="0">No timer</option>
+            </select>
+          </label>
+          <label>Feedback
+            <select id="set-mode">
+              <option value="end" selected>At the end · exam mode</option>
+              <option value="instant">Check each item · study mode</option>
+            </select>
+          </label>
+          <label>Break simulation
+            <select id="set-breaks">
+              <option value="on" selected>Official-style section locks</option>
+              <option value="scaled">Scaled practice breaks</option>
+              <option value="off">No breaks / no section locks</option>
+            </select>
+          </label>
+          <label>Practice target
+            <select id="set-target">
+              <option value="70">70%</option><option value="75" selected>75%</option><option value="80">80%</option><option value="85">85%</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="mock-actions"><button class="btn dark" onclick="openMistakeNotebook()">Mistake Notebook<span id="mistake-count"></span></button><span>Wrong answers, exam traps, weak topics, and personal notes persist in this browser.</span></div>
+        <div class="grid-exams" id="exam-grid"></div>
       </div>
-
-      <div class="grid-exams" id="exam-grid"></div>
+      <div id="mistake-panel" style="display:none"></div>
     </div>
 
     <!-- Exam runner -->
     <div id="mock-run" style="display:none">
       <div class="runbar">
+        <span class="section-pill" id="section-label">Section 1/3</span>
         <div class="timer" id="timer">--:--</div>
         <div class="prog">
           <div class="track"><div class="fill" id="pfill"></div></div>
@@ -449,8 +606,18 @@ const TRAINING = [
 },
 {
 "h": "PMBOK 8 structure · Cấu trúc PMBOK 8th",
-"en": "PMBOK 8 is <b>principle-based</b>: 12 principles guide behaviour, 8 <b>performance domains</b> describe outcome areas (Stakeholder, Team, Development Approach & Life Cycle, Planning, Project Work, Delivery, Measurement, Uncertainty), plus <b>tailoring</b> and <b>models/methods/artifacts</b>. The 2026 exam is built on the ECO (Exam Content Outline), not on memorizing the book.",
-"vi": "PMBOK 8 <b>dựa trên nguyên tắc</b>: 12 nguyên tắc định hướng hành vi, 8 <b>performance domain</b> mô tả các nhóm kết quả (Stakeholder, Team, Development Approach & Life Cycle, Planning, Project Work, Delivery, Measurement, Uncertainty), cùng <b>tailoring</b> và <b>models/methods/artifacts</b>. Đề 2026 xây trên ECO (Exam Content Outline), không phải học thuộc sách.<br><i>Mẹo (Andrew Ramdayal):</i> nắm 3 domain thi People 42% · Process 50% · Business 8% của ECO — nhưng chú ý 2026 tăng nặng Business."
+"en": "PMBOK 8 combines <b>six core principles</b> (Holistic View, Value, Embedded Quality, Accountable Leadership, Sustainability, Empowered Culture) with <b>seven performance domains</b>: Governance, Scope, Schedule, Finance, Stakeholders, Resources, and Risk. It also organizes project-management action into <b>five overlapping Focus Areas</b> and <b>40 non-prescriptive processes</b>. The PMP exam is governed by the ECO, which currently weights People 33%, Process 41%, and Business Environment 26%.",
+"vi": "PMBOK 8 kết hợp <b>6 nguyên tắc cốt lõi</b> (Góc nhìn tổng thể, Giá trị, Chất lượng được tích hợp, Lãnh đạo có trách nhiệm, Bền vững, Văn hóa trao quyền) với <b>7 performance domain</b>: Governance, Scope, Schedule, Finance, Stakeholders, Resources và Risk. Sách còn tổ chức hành động quản lý dự án thành <b>5 Focus Area có thể chồng lấn</b> và <b>40 quy trình không mang tính áp đặt</b>. Đề PMP được quyết định bởi ECO hiện hành: People 33% · Process 41% · Business Environment 26%."
+},
+{
+"h": "Six PMBOK 8 principles · Sáu nguyên tắc cốt lõi",
+"en": "<b>Adopt a Holistic View</b>: manage the project as an interconnected system. <b>Focus on Value</b>: connect decisions and deliverables to outcomes and benefits. <b>Embed Quality</b>: build quality into processes and deliverables instead of relying on final inspection. <b>Be an Accountable Leader</b>: act ethically, transparently, and take responsibility for decisions. <b>Integrate Sustainability</b>: consider long-term environmental, social, and economic effects. <b>Build an Empowered Culture</b>: create trust, psychological safety, collaboration, and appropriate autonomy.",
+"vi": "<b>Adopt a Holistic View</b>: quản lý dự án như một hệ thống có các phần tương tác. <b>Focus on Value</b>: gắn quyết định và deliverable với outcome và benefit. <b>Embed Quality</b>: tích hợp chất lượng vào quy trình và sản phẩm thay vì chỉ kiểm tra cuối. <b>Be an Accountable Leader</b>: hành xử đạo đức, minh bạch và chịu trách nhiệm về quyết định. <b>Integrate Sustainability</b>: cân nhắc tác động môi trường, xã hội và kinh tế dài hạn. <b>Build an Empowered Culture</b>: tạo niềm tin, psychological safety, hợp tác và quyền tự chủ phù hợp."
+},
+{
+"h": "Tailoring, inputs/outputs, tools & techniques · Điều chỉnh và bộ tham chiếu",
+"en": "PMBOK 8 treats every domain as an integrated system of <b>key concepts, processes, tailoring considerations, interactions, and result checks</b>. Tailoring means: select an initial development approach, tailor for the organization, tailor for the project, then improve continuously. The guide also provides reference catalogs for <b>inputs and outputs</b> and <b>tools and techniques</b>. Use them to choose fit-for-purpose practices—not as a rigid ITTO sequence to memorize.",
+"vi": "PMBOK 8 xem mỗi domain như một hệ thống tích hợp gồm <b>khái niệm chính, quy trình, tailoring, tương tác giữa domain và kiểm tra kết quả</b>. Tailoring gồm: chọn development approach ban đầu, điều chỉnh theo tổ chức, điều chỉnh theo dự án, rồi cải tiến liên tục. Sách còn có bộ tham chiếu <b>inputs/outputs</b> và <b>tools & techniques</b>. Hãy chọn thực hành phù hợp bối cảnh, không học như một chuỗi ITTO cứng nhắc."
 },
 {
 "h": "Development Approaches · Cách tiếp cận phát triển",
@@ -459,14 +626,14 @@ const TRAINING = [
 },
 {
 "h": "Project Lifecycle & Charter · Vòng đời & Charter",
-"en": "The <b>project lifecycle</b> is the phases a project passes through (Initiating, Planning, Executing, Monitoring & Controlling, Closing — framed as focus areas). The <b>project charter</b> formally recognizes the project and gives the PM <b>authority</b>; it is issued and signed by the <b>sponsor</b>, not the PM.",
-"vi": "<b>Vòng đời dự án</b> là chuỗi giai đoạn (Khởi tạo, Lập kế hoạch, Thực thi, Giám sát & Kiểm soát, Đóng). <b>Project Charter</b> chính thức công nhận dự án và trao cho PM <b>quyền hạn</b>; do <b>sponsor</b> ký và ban hành — <b>không phải</b> PM tự ký.<br><i>Lỗi thường gặp:</i> nghĩ PM tự phê duyệt dự án — sai, quyền đó thuộc sponsor."
+"en": "A <b>project life cycle</b> contains context-specific phases chosen for the work. In PMBOK 8, Initiating, Planning, Executing, Monitoring and Controlling, and Closing are <b>Focus Areas</b>—overlapping categories of action that may operate within each phase, not five mandatory phases. The <b>project charter</b> formally authorizes the project and gives the PM authority; it is issued by the <b>sponsor or initiating authority</b>, not by the PM.",
+"vi": "<b>Project life cycle</b> gồm các phase được lựa chọn theo bối cảnh của dự án. Trong PMBOK 8, Initiating, Planning, Executing, Monitoring and Controlling và Closing là <b>Focus Area</b>—các nhóm hành động có thể chồng lấn và xuất hiện trong từng phase, không phải năm phase bắt buộc. <b>Project Charter</b> chính thức cấp quyền cho dự án và PM; do <b>sponsor hoặc initiating authority</b> ban hành, không phải PM tự ký."
 }
 ],
 "traps": [
 {"en": "Project = temporary + unique; Operation = permanent + repetitive.", "vi": "Dự án = tạm thời + duy nhất; Vận hành = lâu dài + lặp lại."},
 {"en": "The sponsor (not the PM) signs the charter and authorizes the project.", "vi": "Sponsor (không phải PM) ký charter và phê duyệt dự án."},
-{"en": "PMBOK 8 is principle- and performance-domain-based; the exam tests the ECO.", "vi": "PMBOK 8 dựa trên nguyên tắc & performance domain; đề thi kiểm tra ECO."}
+{"en": "PMBOK 8 uses 6 principles, 7 performance domains, 5 Focus Areas, and 40 non-prescriptive processes; the PMP exam tests the ECO.", "vi": "PMBOK 8 dùng 6 nguyên tắc, 7 performance domain, 5 Focus Area và 40 quy trình linh hoạt; đề PMP kiểm tra theo ECO."}
 ]
 },
 {
@@ -481,8 +648,8 @@ const TRAINING = [
 "sections": [
 {
 "h": "Why it matters more in 2026 · Vì sao 2026 nặng hơn",
-"en": "In the July 2026 exam the <b>Business Environment</b> domain grows sharply (from ~8% toward roughly a quarter of questions). PMI wants PMs who connect projects to <b>enterprise strategy and value</b>, not just execute tasks.",
-"vi": "Trong kỳ thi 7/2026, domain <b>Business Environment</b> tăng mạnh (từ ~8% lên khoảng một phần tư số câu). PMI muốn PM biết kết nối dự án với <b>chiến lược và giá trị doanh nghiệp</b>, không chỉ làm xong việc.<br><i>Lưu ý ôn thi:</i> đừng học nhẹ domain này như các bản trước."
+"en": "The PMP ECO currently weights <b>Business Environment at 26%</b>, up from 8% in the prior blueprint. People is 33% and Process is 41%. The domain emphasizes governance, strategy, value, compliance, external change, sustainability, and accountable use of AI.",
+"vi": "ECO PMP hiện hành đặt <b>Business Environment ở mức 26%</b>, tăng từ 8% trong blueprint trước. People là 33% và Process là 41%. Domain này nhấn mạnh governance, chiến lược, giá trị, tuân thủ, thay đổi bên ngoài, bền vững và sử dụng AI có trách nhiệm."
 },
 {
 "h": "Business case & benefits · Business case & lợi ích",
@@ -1005,11 +1172,14 @@ const TRAINING = [
 {
 "id": "examprep",
 "title": "16 · Exam Prep Strategy",
-"blurb": "Chiến lược ôn & thi: mindset PMI, cách loại đáp án, dùng 3 nguồn David & Andrew hiệu quả.",
+"blurb": "Chiến lược ôn & thi: mindset PMI, cách loại đáp án, kết hợp PMI chính thức với 4 nhóm nguồn David, Andrew và ScrumPass.",
 "sources": [
 {"label": "David McLachlan — PMP Cheat Sheet (tổng hợp)", "note": "(1) Dùng làm bản đồ kiến thức tổng thể, tra nhanh trước khi thi."},
-{"label": "David McLachlan — 100 Waterfall · 200 Agile · 100 Drag & Drop Questions", "note": "(2) Mỗi video xem 20–50 câu để nắm cách tiếp cận từng dạng."},
-{"label": "Andrew Ramdayal — Udemy PMP Course", "note": "(3) Nền tảng cho người mới bắt đầu; xem lại section còn yếu."}
+{"label": "David McLachlan — 100 Waterfall Questions", "note": "(2a) Xem theo block 20–50 câu để luyện predictive và integrated change control."},
+{"label": "David McLachlan — 200 Agile Questions", "note": "(2b) Xem theo block 20–50 câu để luyện servant leadership, Scrum, flow và value."},
+{"label": "David McLachlan — 100+ Drag & Drop Questions", "note": "(2c) Luyện matching, sequencing, roles, risk responses và quality tools."},
+{"label": "Andrew Ramdayal — Udemy PMP Course", "note": "(3) Nền tảng cho người mới bắt đầu; xem lại section còn yếu."},
+{"label": "ScrumPass — Tổng hợp kiến thức PMP/PMBOK bằng tiếng Việt", "note": "(4) Dùng để đối chiếu và ôn nhanh; ưu tiên PMI 2026 nếu bài cũ còn theo blueprint trước."}
 ],
 "sections": [
 {
@@ -1023,21 +1193,21 @@ const TRAINING = [
 "vi": "Đọc <b>câu cuối cùng</b> trước để biết đề thật sự hỏi gì. Loại đáp án sai rõ ràng, rồi chọn 'hành động tiếp theo tốt nhất'. Cảnh giác từ tuyệt đối ('luôn/không bao giờ') và bẫy như thực hiện/từ chối thay đổi mà không phân tích. Quản lý thời gian: ~1 phút/câu trên tổng 180.<br><i>Nguồn (David videos):</i> luyện nhận diện dạng câu qua 100 Waterfall / 200 Agile / 100 Drag & Drop."
 },
 {
-"h": "How to use the 3 sources · Dùng 3 nguồn thế nào",
-"en": "Blend the three: use <b>Andrew Ramdayal's Udemy course</b> to build the foundation topic by topic; use <b>David McLachlan's Cheat Sheet</b> as a structured map to review and self-test; and drill <b>David's question videos</b> (100 Waterfall, 200 Agile, 100 Drag & Drop) — 20–50 questions each — to master each question style. Ask this AI tutor to quiz you or explain any weak area.",
-"vi": "Kết hợp cả ba: dùng <b>khóa Udemy của Andrew Ramdayal</b> để xây nền từng chủ đề; dùng <b>Cheat Sheet của David McLachlan</b> làm bản đồ có hệ thống để ôn và tự kiểm tra; và luyện <b>các video câu hỏi của David</b> (100 Waterfall, 200 Agile, 100 Drag & Drop) — mỗi video 20–50 câu — để thành thạo từng dạng. Nhờ AI tutor này ra đề hỏi lại hoặc giải thích chỗ còn yếu.<br><i>Mẹo:</i> mình thích cách David chia kiến thức theo mục — dễ hiểu và hệ thống."
+"h": "How to use the source stack · Kết hợp các nguồn thế nào",
+"en": "Use <b>official PMI PMBOK 8 and the 2026 ECO</b> as the source of truth. Build foundations topic by topic with <b>Andrew Ramdayal's Udemy course</b>; use <b>David McLachlan's Cheat Sheet</b> as a structured map; drill David's Waterfall, Agile, and Drag & Drop videos in 20–50 question blocks; and use <b>ScrumPass</b> for Vietnamese summaries and comparison. When an older third-party page conflicts with the current PMI framework, follow PMI.",
+"vi": "Dùng <b>PMI PMBOK 8 và ECO 2026</b> làm nguồn chuẩn. Xây nền từng chủ đề bằng <b>khóa Udemy của Andrew Ramdayal</b>; dùng <b>Cheat Sheet của David McLachlan</b> làm bản đồ hệ thống; luyện video Waterfall, Agile và Drag & Drop của David theo từng block 20–50 câu; và dùng <b>ScrumPass</b> để đối chiếu tiếng Việt. Khi tài liệu bên thứ ba cũ khác khung PMI hiện hành, ưu tiên PMI."
 },
 {
 "h": "Exam-day logistics · Hậu cần ngày thi",
-"en": "The July 9, 2026 exam has <b>180 questions</b> in <b>230 minutes</b> with two 10-minute breaks. Answer every question (no penalty for guessing), flag uncertain ones for review, and stay calm. Trust your preparation and the PMI mindset.",
-"vi": "Đề 9/7/2026 có <b>180 câu</b> trong <b>230 phút</b> với hai lần nghỉ 10 phút. Trả lời mọi câu (đoán không bị trừ điểm), đánh dấu câu chưa chắc để xem lại, và giữ bình tĩnh. Tin vào quá trình ôn và tư duy PMI.<br><i>Nhớ:</i> làm mock test ở tab Mock Test cho quen nhịp độ."
+"en": "The current PMP exam has <b>180 questions</b> in <b>240 minutes</b>. Ten questions are unscored pretest items. There are two 10-minute breaks; once a break starts, the previous section is locked. Question formats include single and multiple response, drag-and-drop/enhanced matching, case or scenario sets, graphic/data items, point-and-click, pull-down lists, fill-in, and hands-on practicum-style tasks. Answer every item and manage time by section.",
+"vi": "Đề PMP hiện hành có <b>180 câu</b> trong <b>240 phút</b>; 10 câu là pretest không tính điểm. Có hai lần nghỉ 10 phút; khi bắt đầu nghỉ thì section trước bị khóa. Dạng câu gồm single/multiple response, drag-and-drop/enhanced matching, case hoặc scenario, câu dựa trên biểu đồ/dữ liệu, fill-in và practicum tương tác. Hãy trả lời mọi câu và quản lý thời gian theo từng section."
 }
 ],
 "traps": [
 {"en": "When stuck between two options, pick the proactive, collaborative, PMI-preferred one.", "vi": "Kẹt giữa hai đáp án, chọn cái chủ động, hợp tác, đúng tư duy PMI."},
 {"en": "Never leave a question blank — there's no penalty for guessing.", "vi": "Đừng bỏ trống câu nào — đoán không bị trừ điểm."},
 {"en": "'Always' and 'never' options are usually traps.", "vi": "Đáp án có 'luôn'/'không bao giờ' thường là bẫy."},
-{"en": "Use all 3 sources together: Andrew for foundation, David's cheat sheet to map, David's videos to drill.", "vi": "Dùng cả 3 nguồn: Andrew xây nền, cheat sheet David để hệ thống, video David để luyện."}
+{"en": "Use PMI as the source of truth; Andrew for foundations, David for structure and question approach, and ScrumPass for Vietnamese review.", "vi": "Dùng PMI làm nguồn chuẩn; Andrew xây nền, David để hệ thống và luyện cách tiếp cận, ScrumPass để đối chiếu tiếng Việt."}
 ]
 }
 ];
@@ -7950,12 +8120,15 @@ function renderLesson(i, keepScroll){
     const slabel = lang==='en' ? 'Study sources for this module' : (lang==='vi' ? 'Nguồn học thêm cho module này' : 'Study sources · Nguồn học thêm');
     html += `<div class="sources"><span class="eyebrow">📚 ${slabel}</span><ul>`;
     t.sources.forEach(s=>{
-      html += `<li><b>${s.label}</b>${s.note?`<span class="note">${s.note}</span>`:''}</li>`;
+      const sourceLabel = s.url ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer"><b>${s.label}</b></a>` : `<b>${s.label}</b>`;
+      html += `<li>${sourceLabel}${s.note?`<span class="note">${s.note}</span>`:''}</li>`;
     });
     html += `</ul></div>`;
   }
 
   el.innerHTML = html;
+  const accountFooter = document.getElementById('account-footer');
+  if(accountFooter) accountFooter.style.display = (i===TRAINING.length-1) ? 'block' : 'none';
 
   document.querySelectorAll('#toc button').forEach(b=>b.classList.remove('active'));
   const active = document.getElementById('toc-'+i);
@@ -8013,15 +8186,20 @@ async function sendChat(){
   const traps = (t.traps||[]).map(tr=>`EN: ${tr.en} | VI: ${tr.vi}`).join('\n');
   const sources = (t.sources||[]).map(s=>`- ${s.label}${s.note?` (${s.note})`:''}`).join('\n');
 
-  const system = `You are a friendly, expert PMP/PMI exam tutor helping a candidate prepare for the PMP exam aligned to the PMBOK Guide 8th Edition (July 9, 2026 exam). The course is taught bilingually in English and Vietnamese.
+  const system = `You are a friendly, expert PMP/PMI exam tutor helping a candidate prepare for the PMP exam currently in effect since July 2026 and aligned to the PMBOK Guide Eighth Edition. The course is taught bilingually in English and Vietnamese.
 
 The student is currently studying the module: "${t.title}".
 Lesson content they are reading (bilingual):
 ${lessonText}
 Key exam traps for this module:
 ${traps}
-Recommended study sources for this module (you may cite these by name when relevant):
+Recommended study references for this module:
 ${sources}
+
+SOURCE DISCIPLINE:
+- Treat official PMI PMBOK 8 and the July 2026 PMP ECO as the source of truth when older material conflicts.
+- David McLachlan, Andrew Ramdayal, and ScrumPass are recommended study references. Do not pretend the full copyrighted source text is present unless it appears in the lesson context above.
+- Clearly label any useful explanation that goes beyond the supplied lesson as general PMP knowledge.
 
 LANGUAGE RULE (very important):
 - Detect the language of the student's message. If they write in Vietnamese, answer in Vietnamese. If they write in English, answer in English. If they mix, mirror their dominant language. If they explicitly ask for a translation or "cả hai thứ tiếng", give both.
@@ -8043,7 +8221,7 @@ STYLE:
     chatHistory.push({role:'assistant', content:text});
   }catch(e){
     const msg = (e && e.message) ? e.message : String(e);
-    thinking.innerHTML = "Tutor chưa trả lời được.<br><span style='opacity:.8'>"+msg.replace(/</g,'&lt;')+"</span><br><br>Kiểm tra: (1) đã đăng nhập ở thanh trên cùng chưa, (2) Edge Function <b>albert-pmi-tutor</b> đã deploy và có OPENROUTER_API_KEY chưa. Bạn vẫn học bài và làm mock test offline bình thường.";
+    thinking.innerHTML = "Tutor chưa trả lời được.<br><span style='opacity:.8'>"+msg.replace(/</g,'&lt;')+"</span><br><br>Kiểm tra: (1) đã đăng nhập ở khu vực Tài khoản dưới mục 16 chưa, (2) Edge Function <b>albert-pmi-tutor</b> đã deploy và có OPENROUTER_API_KEY chưa. Bạn vẫn học bài và làm mock test offline bình thường.";
   }finally{
     btn.disabled=false; btn.textContent='Ask';
     document.getElementById('chat').scrollTop = 999999;
@@ -8077,298 +8255,814 @@ async function pmiAskTutor(system, messages){
   return String(answer);
 }
 
-/* ================= MOCK TEST ENGINE ================= */
-/* Real PMP blueprint weighting (2026-leaning): People ~35%, Process ~40%, Business ~25% */
-const BLUEPRINT = {People:0.35, Process:0.40, Business:0.25};
+/* ================= MOCK TEST ENGINE · PMBOK 8 / PMP ECO JULY 2026 ================= */
+const BLUEPRINT = {People:0.33, Process:0.41, Business:0.26};
+const APPROACH_BLUEPRINT = {Predictive:0.40, Agile:0.30, Hybrid:0.30};
+const PRACTICE_TARGET_DEFAULT = 75;
+const FORMULA_TOPICS = new Set([
+  'evm','evm-eac','evm-eac-alt','evm-variance','evm-index','pert','emv','float','tcpi',
+  'payback','npv','comm-channels','comm-channels-calc','sched-estimate','risk-emv'
+]);
+const FORMAT_LABELS = {
+  single:'Single response', multi:'Multiple response', matching:'Enhanced matching',
+  fill:'Fill in the blank', graphic:'Graphic/data', hotspot:'Point and click', dropdown:'Pull-down list', case:'Case study'
+};
 
-// seeded RNG so each exam # is reproducible but exams differ from each other
-function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function shuffle(arr, rnd){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
+function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
+function escapeAttr(v){return escapeHtml(v).replace(/`/g,'&#96;');}
+function stableHash(str){let h=2166136261>>>0;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 
-const byDomain = {People:[],Process:[],Business:[]};
-QUESTION_BANK.forEach((q,idx)=>{q._id=idx; byDomain[q.domain].push(q);});
-
-/* Build a specific exam (1-10) with a given count. Deterministic per (examNo,count). */
-function buildExam(examNo, count){
-  const rnd = mulberry32(examNo*7919 + count*13);
-  let picks = [];
-  const domains = Object.keys(BLUEPRINT);
-  // target counts per domain
-  let targets = {};
-  let assigned = 0;
-  domains.forEach((d,i)=>{
-    let n = Math.round(count*BLUEPRINT[d]);
-    targets[d]=n; assigned+=n;
-  });
-  // fix rounding to hit exact count
-  let diff = count - assigned;
-  const order = ['Process','People','Business'];
-  let oi=0;
-  while(diff!==0){ const d=order[oi%order.length]; targets[d]+= (diff>0?1:-1); diff+= (diff>0?-1:1); oi++; }
-
-  domains.forEach(d=>{
-    const pool = shuffle(byDomain[d], rnd);
-    let need = targets[d];
-    // rotate starting offset by examNo so different exams favor different questions
-    const offset = (examNo*17) % Math.max(pool.length,1);
-    const rotated = pool.slice(offset).concat(pool.slice(0,offset));
-    for(let i=0;i<need;i++){
-      picks.push(rotated[i % rotated.length]);
-    }
-  });
-  // de-dup within this exam where possible, backfill from global shuffled pool
-  const seen = new Set(); const unique=[];
-  const backfill = shuffle(QUESTION_BANK, rnd);
-  for(const q of picks){ if(!seen.has(q._id)){seen.add(q._id);unique.push(q);} }
-  let bi=0;
-  while(unique.length<count && bi<backfill.length){
-    const q=backfill[bi++]; if(!seen.has(q._id)){seen.add(q._id);unique.push(q);}
-  }
-  // final shuffle of question order + per-question option shuffle (stable per exam)
-  const finalQs = shuffle(unique, rnd).slice(0,count).map((q,qi)=>{
-    const optRnd = mulberry32(examNo*3301 + q._id*7 + qi);
-    const idxs = shuffle(q.options.map((_,i)=>i), optRnd);
-    return {
-      ref:q,
-      stem:q.stem,
-      domain:q.domain,
-      options: idxs.map(i=>q.options[i]),
-      correct: idxs.indexOf(q.correct),
-      expl:q.expl, trap:q.trap
-    };
-  });
-  return finalQs;
+function inferApproach(q){
+  const s=((q.stem||'')+' '+(q.topic||'')).toLowerCase();
+  if(/hybrid/.test(s)) return 'Hybrid';
+  if(/agile|scrum|sprint|backlog|kanban|product owner|scrum master|story point|velocity|iteration|retrospective|burndown|burnup|mvp/.test(s)) return 'Agile';
+  if(FORMULA_TOPICS.has(q.topic) || /critical path|wbs|baseline|change control|ccb|charter|fixed price|earned value|procurement/.test(s)) return 'Predictive';
+  return 'General';
 }
 
-/* ---------- exam state ---------- */
-let EXAM = null; // {no,count,timeLimit,mode,questions,answers,flags,idx,startTs,timerId,remaining}
+function normalizeQuestion(q, qid, familyId){
+  const type=q.type || 'single';
+  return Object.assign({},q,{
+    qid,
+    familyId:familyId||qid,
+    type,
+    approach:q.approach||inferApproach(q),
+    difficulty:q.difficulty||3,
+    topic:q.topic||'general',
+    sourceTag:q.sourceTag||'Original practice item'
+  });
+}
+
+const CONTEXT_VARIANTS = {
+  Predictive:[
+    'A regulated infrastructure project is using a predictive delivery approach. ',
+    'A capital project has approved scope, schedule, and cost baselines. ',
+    'A public-sector project is governed through formal stage gates. ',
+    'A construction program is being managed with detailed upfront planning. '
+  ],
+  Agile:[
+    'A cross-functional product team is working in short iterations. ',
+    'A digital product team uses Scrum and frequent customer feedback. ',
+    'An adaptive team releases small increments and reprioritizes often. ',
+    'A Kanban-based service team is optimizing flow and limiting WIP. '
+  ],
+  Hybrid:[
+    'A hybrid transformation uses stage gates for regulated work and iterations for product delivery. ',
+    'A program combines predictive governance with adaptive software delivery. ',
+    'A hybrid project has fixed external milestones but evolving solution requirements. ',
+    'A global rollout uses formal baselines while product teams deliver incrementally. '
+  ]
+};
+
+function buildContextualBasePool(){
+  const pool=[];
+  QUESTION_BANK.forEach((raw,idx)=>{
+    const base=normalizeQuestion(raw,'base-'+idx,'base-family-'+idx);
+    pool.push(base);
+    if(FORMULA_TOPICS.has(base.topic)) return;
+    let approaches;
+    if(base.approach==='Agile') approaches=['Agile','Hybrid'];
+    else if(base.approach==='Predictive') approaches=['Predictive','Hybrid'];
+    else if(base.approach==='Hybrid') approaches=['Hybrid','Agile'];
+    else approaches=['Predictive','Agile','Hybrid'];
+    approaches.forEach((approach,j)=>{
+      const prefixes=CONTEXT_VARIANTS[approach];
+      const prefix=prefixes[(idx+j*3)%prefixes.length];
+      pool.push(normalizeQuestion(Object.assign({},raw,{
+        stem:prefix+raw.stem,
+        approach,
+        sourceTag:'Contextual scenario variant'
+      }),`base-${idx}-${approach.toLowerCase()}`,`base-family-${idx}`));
+    });
+  });
+  return pool;
+}
+
+const ENHANCED_BASE = [
+  {type:'multi',domain:'People',approach:'Hybrid',topic:'stakeholder-actions',selectCount:2,
+   stem:'A high-power stakeholder becomes resistant after a major design decision. Which TWO actions should the project manager take first?',
+   options:['Meet privately to understand the stakeholder’s concerns','Reduce the stakeholder’s access to project information','Review and tailor the engagement strategy','Ask the sponsor to remove the stakeholder','Ignore the resistance because the decision is approved'],
+   correct:[0,2],expl:'The PM should understand the concern and tailor engagement. Resistance is managed through targeted, transparent engagement, not exclusion or premature escalation.',trap:'An approved decision does not remove the need to manage stakeholder engagement.'},
+  {type:'multi',domain:'Business',approach:'Hybrid',topic:'ai-governance-controls',selectCount:2,
+   stem:'A project will use an AI model to recommend supplier selections. Which TWO controls are most important before relying on its output?',
+   options:['Validate data quality and potential bias','Make the model the final accountable decision-maker','Define human review and decision accountability','Hide use of AI from bidders','Remove audit logs to protect confidentiality'],
+   correct:[0,2],expl:'AI may augment analysis, but data quality, bias controls, transparency, and human accountability remain essential.',trap:'Delegating final accountability to the model is never the PMI-preferred answer.'},
+  {type:'multi',domain:'Process',approach:'Predictive',topic:'change-control-steps',selectCount:2,
+   stem:'A customer asks for a significant change to an approved baseline. Which TWO actions belong before implementation?',
+   options:['Document the change request','Analyze impacts across scope, schedule, finance, risk, and quality','Implement the change immediately and document later','Ask the team to absorb the work informally','Update the baseline before approval'],
+   correct:[0,1],expl:'A change is documented and its cross-domain impact is analyzed before the authorized decision and implementation.',trap:'Updating a baseline or performing work before approval bypasses governance.'},
+  {type:'multi',domain:'People',approach:'Agile',topic:'servant-leadership-actions',selectCount:2,
+   stem:'Which TWO behaviors best demonstrate servant leadership on an adaptive team?',
+   options:['Remove impediments that the team cannot resolve alone','Assign every task to individual developers','Coach the team to solve problems and improve','Use positional power to settle routine disagreements','Shield performance information from stakeholders'],
+   correct:[0,2],expl:'Servant leaders enable, coach, and remove systemic blockers while preserving team ownership.',trap:'Servant leadership is not task assignment or command-and-control.'},
+  {type:'multi',domain:'Business',approach:'General',topic:'benefits-realization',selectCount:2,
+   stem:'Which TWO indicators best show that a completed project is realizing value?',
+   options:['Target users have adopted the new capability','The planned business outcome metrics are improving','The team produced more status reports than planned','All team members logged their full allocation','The project held every scheduled meeting'],
+   correct:[0,1],expl:'Value is reflected in adoption and improved outcomes, not activity or utilization metrics.',trap:'Outputs and effort are not the same as benefits.'},
+  {type:'multi',domain:'Process',approach:'Agile',topic:'kanban-response',selectCount:2,
+   stem:'Testing is the bottleneck on a Kanban board. Which TWO responses support better flow?',
+   options:['Stop starting new work when the WIP limit is reached','Swarm to help clear testing','Raise every WIP limit immediately','Push more items into testing to keep people busy','Hide blocked items from the board'],
+   correct:[0,1],expl:'Respect WIP limits and swarm on the bottleneck so work finishes before more starts.',trap:'More WIP usually makes a bottleneck worse.'},
+  {type:'multi',domain:'Business',approach:'Predictive',topic:'sustainability-actions',selectCount:2,
+   stem:'A lower-cost delivery option creates significant environmental harm. Which TWO actions align with accountable leadership and sustainability?',
+   options:['Make the impact visible to decision-makers','Evaluate alternatives and lifecycle trade-offs','Choose the cheapest option automatically','Treat environmental impact as outside project management','Conceal the impact until after delivery'],
+   correct:[0,1],expl:'The PM surfaces impacts and supports an informed trade-off that considers long-term value and stewardship.',trap:'Cost and schedule do not override accountability for material impacts.'},
+  {type:'multi',domain:'Process',approach:'Predictive',topic:'quality-signals',selectCount:2,
+   stem:'Which TWO observations suggest a process should be investigated even when every point is within the control limits?',
+   options:['Seven consecutive points appear on one side of the mean','A non-random trend is visible','One point is close to the mean','The histogram is symmetrical','The specification limits are wider than control limits'],
+   correct:[0,1],expl:'Runs and trends can signal an assignable cause even without a point outside the limits.',trap:'Within control limits does not automatically mean statistically stable.'},
+  {type:'multi',domain:'People',approach:'General',topic:'psychological-safety',selectCount:2,
+   stem:'Which TWO actions most directly strengthen psychological safety?',
+   options:['Invite dissenting views without punishment','Respond to mistakes with learning-oriented questions','Publicly rank people after every meeting','Discourage junior members from challenging experts','Treat every question as a sign of weak competence'],
+   correct:[0,1],expl:'Psychological safety grows when people can speak up and learn from mistakes without humiliation.',trap:'Accountability and psychological safety can coexist; public shaming is not accountability.'},
+  {type:'multi',domain:'Process',approach:'Hybrid',topic:'risk-actions',selectCount:2,
+   stem:'A newly identified risk could affect both a fixed regulatory milestone and an evolving product backlog. Which TWO actions are appropriate?',
+   options:['Record and analyze the risk','Plan a response that addresses both governance and delivery effects','Wait until the risk occurs before discussing it','Convert the risk directly into an issue','Remove the related backlog items without review'],
+   correct:[0,1],expl:'The risk is documented, analyzed, and addressed across the relevant parts of the hybrid system.',trap:'A risk remains uncertain; it is not an issue until it occurs.'},
+
+  {type:'matching',domain:'Process',approach:'General',topic:'focus-area-match',
+   stem:'Match each PMBOK 8 Focus Area to its primary intent.',
+   pairs:[{left:'Initiating',right:'Authorize and align the project or phase'},{left:'Planning',right:'Define objectives and the course of action'},{left:'Executing',right:'Perform and support the planned work'},{left:'Monitoring and Controlling',right:'Evaluate performance and adapt'},{left:'Closing',right:'Formally complete and transition'}],
+   expl:'Focus Areas describe overlapping categories of action across the project life cycle; they are not mandatory life-cycle phases.',trap:'Do not treat the five Focus Areas as a rigid sequence of project phases.'},
+  {type:'matching',domain:'Process',approach:'General',topic:'domain-match',
+   stem:'Match each PMBOK 8 Performance Domain to the question it primarily answers.',
+   pairs:[{left:'Governance',right:'How is the project directed, integrated, and controlled?'},{left:'Scope',right:'What value-producing work and deliverables are included?'},{left:'Schedule',right:'When will the work be performed and completed?'},{left:'Finance',right:'How will financial resources be planned and controlled?'},{left:'Risk',right:'What uncertainty could affect objectives?'}],
+   expl:'The seven domains provide complementary lenses for managing one integrated project system.',trap:'PMBOK performance domains are not the same as the three ECO exam domains.'},
+  {type:'matching',domain:'People',approach:'General',topic:'conflict-mode-match',
+   stem:'Match the conflict approach to the situation where it is most appropriate.',
+   pairs:[{left:'Collaborate',right:'A durable win-win solution is important'},{left:'Compromise',right:'A quick partial agreement is acceptable'},{left:'Withdraw',right:'A temporary cooling-off period is needed'},{left:'Force',right:'An immediate safety decision is required'}],
+   expl:'Collaborate is generally best; other modes are situational tools.',trap:'Withdraw is only a temporary tactic, and force is reserved for genuine urgency or safety.'},
+  {type:'matching',domain:'Process',approach:'General',topic:'risk-response-match',
+   stem:'Match each risk response to its meaning.',
+   pairs:[{left:'Avoid',right:'Eliminate the threat or its cause'},{left:'Transfer',right:'Shift ownership or financial impact to a third party'},{left:'Mitigate',right:'Reduce probability or impact'},{left:'Exploit',right:'Ensure an opportunity occurs'},{left:'Enhance',right:'Increase an opportunity’s probability or impact'}],
+   expl:'Threat and opportunity responses use related but distinct strategy sets.',trap:'Transfer does not eliminate a threat; exploit is stronger than enhance.'},
+  {type:'matching',domain:'Process',approach:'General',topic:'quality-tool-match',
+   stem:'Match each quality tool to its primary use.',
+   pairs:[{left:'Fishbone diagram',right:'Explore possible root causes'},{left:'Pareto chart',right:'Prioritize the vital few categories'},{left:'Control chart',right:'Assess process stability over time'},{left:'Scatter diagram',right:'Explore correlation between variables'}],
+   expl:'Each quality tool answers a different analytical question.',trap:'Pareto prioritizes categories; fishbone explores causes of a problem.'},
+  {type:'matching',domain:'Process',approach:'Predictive',topic:'contract-match',
+   stem:'Match each contract type to the most fitting situation.',
+   pairs:[{left:'Firm Fixed Price',right:'Scope is clear and the seller should carry cost risk'},{left:'Cost Reimbursable',right:'Scope is uncertain and the buyer accepts more cost risk'},{left:'Time and Materials',right:'Small or urgent work with uncertain effort'}],
+   expl:'Contract selection reflects scope clarity and risk allocation.',trap:'Fixed price shifts more cost risk to the seller; cost reimbursable shifts more to the buyer.'},
+  {type:'matching',domain:'People',approach:'Agile',topic:'scrum-role-match',
+   stem:'Match each Scrum accountability to its responsibility.',
+   pairs:[{left:'Product Owner',right:'Maximize value and order the Product Backlog'},{left:'Scrum Master',right:'Coach Scrum and help remove impediments'},{left:'Developers',right:'Create a usable Increment each Sprint'}],
+   expl:'Scrum accountabilities are distinct and mutually supporting.',trap:'The Scrum Master does not prioritize the Product Backlog or assign developer tasks.'},
+  {type:'matching',domain:'People',approach:'General',topic:'communication-method-match',
+   stem:'Match each communication method to the example.',
+   pairs:[{left:'Interactive',right:'Live workshop to resolve a sensitive disagreement'},{left:'Push',right:'Status report emailed to named recipients'},{left:'Pull',right:'Dashboard available for stakeholders to retrieve'}],
+   expl:'Interactive is best for complex or sensitive exchange; push distributes; pull makes information available.',trap:'A dashboard is pull communication even when it updates automatically.'},
+
+  {type:'fill',domain:'Process',approach:'Predictive',topic:'formula-pert-fill',
+   stem:'Using PERT, O=4, M=7, and P=16 days. Enter the expected duration.',correctNumber:8,tolerance:0.01,
+   expl:'PERT = (O + 4M + P) / 6 = (4 + 28 + 16) / 6 = 8.',trap:'Weight the most likely estimate by four.'},
+  {type:'fill',domain:'Process',approach:'General',topic:'formula-channels-fill',
+   stem:'A team has 12 people. Enter the number of communication channels using n(n−1)/2.',correctNumber:66,tolerance:0,
+   expl:'12×11/2 = 66 communication channels.',trap:'Do not use n².'},
+  {type:'fill',domain:'Process',approach:'Predictive',topic:'formula-emv-fill',
+   stem:'A threat has a 35% probability and a $80,000 impact. Enter its EMV in dollars.',correctNumber:28000,tolerance:1,
+   expl:'EMV = 0.35 × 80,000 = 28,000.',trap:'Convert the percentage to a decimal.'},
+  {type:'fill',domain:'Process',approach:'Predictive',topic:'formula-eac-fill',
+   stem:'BAC is $360,000 and CPI is 0.90. Assuming current performance continues, enter EAC.',correctNumber:400000,tolerance:1,
+   expl:'EAC = BAC/CPI = 360,000/0.90 = 400,000.',trap:'A CPI below 1 produces an EAC above BAC.'},
+  {type:'fill',domain:'Business',approach:'General',topic:'pmbok-structure-fill',
+   stem:'How many core project management principles are in the PMBOK Guide Eighth Edition?',correctNumber:6,tolerance:0,
+   expl:'PMBOK 8 contains six core principles.',trap:'Twelve principles and eight domains belong to the PMBOK 7 structure.'},
+
+  {type:'graphic',domain:'People',approach:'General',topic:'stakeholder-grid-graphic',
+   stem:'Based on the table, which stakeholder should be managed most closely?',
+   visual:'<table class="data-table"><tr><th>Stakeholder</th><th>Power</th><th>Interest</th></tr><tr><td>A</td><td>High</td><td>Low</td></tr><tr><td>B</td><td>Low</td><td>High</td></tr><tr><td>C</td><td>High</td><td>High</td></tr><tr><td>D</td><td>Low</td><td>Low</td></tr></table>',
+   options:['Stakeholder A','Stakeholder B','Stakeholder C','Stakeholder D'],correct:2,
+   expl:'High power and high interest means manage closely.',trap:'High power and low interest is keep satisfied, not manage closely.'},
+  {type:'graphic',domain:'Process',approach:'General',topic:'risk-matrix-graphic',
+   stem:'Which risk should receive the highest priority based on probability × impact?',
+   visual:'<table class="data-table"><tr><th>Risk</th><th>Probability</th><th>Impact</th></tr><tr><td>R1</td><td>0.20</td><td>5</td></tr><tr><td>R2</td><td>0.70</td><td>3</td></tr><tr><td>R3</td><td>0.40</td><td>4</td></tr><tr><td>R4</td><td>0.90</td><td>1</td></tr></table>',
+   options:['R1','R2','R3','R4'],correct:1,
+   expl:'R2 has the highest score: 0.70×3=2.10.',trap:'Do not prioritize on probability alone.'},
+  {type:'graphic',domain:'Process',approach:'Agile',topic:'kanban-graphic',
+   stem:'Which column is the clearest bottleneck?',
+   visual:'<div class="kanban-mini"><div><b>Ready</b><span>2 items</span></div><div><b>Build</b><span>3 / WIP 4</span></div><div class="hot"><b>Test</b><span>7 / WIP 4</span></div><div><b>Done</b><span>12 items</span></div></div>',
+   options:['Ready','Build','Test','Done'],correct:2,
+   expl:'Testing exceeds its WIP limit and has accumulated work, indicating a bottleneck.',trap:'The response is to finish work and improve flow, not start more work.'},
+  {type:'graphic',domain:'Process',approach:'Predictive',topic:'evm-table-graphic',
+   stem:'What is the project’s current performance?',
+   visual:'<table class="data-table"><tr><th>PV</th><th>EV</th><th>AC</th></tr><tr><td>$120,000</td><td>$100,000</td><td>$90,000</td></tr></table>',
+   options:['Ahead of schedule and over budget','Behind schedule and under budget','Ahead of schedule and under budget','Behind schedule and over budget'],correct:1,
+   expl:'SV=EV−PV=-20,000, so behind schedule. CV=EV−AC=+10,000, so under budget.',trap:'EV comes first in both variance formulas.'},
+  {type:'graphic',domain:'Business',approach:'Hybrid',topic:'benefits-dashboard-graphic',
+   stem:'Which result most strongly indicates the project is not yet realizing its intended benefit?',
+   visual:'<table class="data-table"><tr><th>Measure</th><th>Target</th><th>Actual</th></tr><tr><td>System availability</td><td>99.9%</td><td>99.95%</td></tr><tr><td>User adoption</td><td>80%</td><td>34%</td></tr><tr><td>Delivery date</td><td>30 Jun</td><td>28 Jun</td></tr><tr><td>Budget variance</td><td>±5%</td><td>+1%</td></tr></table>',
+   options:['Availability','User adoption','Delivery date','Budget variance'],correct:1,
+   expl:'The technical output is performing, but low adoption blocks benefits realization.',trap:'On-time and on-budget delivery does not prove value.'},
+
+  {type:'hotspot',domain:'People',approach:'General',topic:'stakeholder-hotspot',
+   stem:'Point and click the power/interest quadrant for a stakeholder with high power and high interest.',
+   hotspotTitle:'Power / Interest grid',hotspots:['Monitor','Keep informed','Keep satisfied','Manage closely'],correct:3,
+   expl:'High power and high interest means manage closely.',trap:'High power and low interest is keep satisfied.'},
+  {type:'hotspot',domain:'Process',approach:'Agile',topic:'scrum-hotspot',
+   stem:'Point and click the Scrum event that inspects and improves how the team worked.',
+   hotspotTitle:'Sprint events',hotspots:['Sprint Planning','Daily Scrum','Sprint Review','Sprint Retrospective'],correct:3,
+   expl:'The Sprint Retrospective inspects the team process and identifies improvements.',trap:'Sprint Review inspects the product increment with stakeholders.'},
+  {type:'dropdown',domain:'Process',approach:'General',topic:'risk-dropdown',
+   stem:'Complete the statement: A threat outside the project manager’s authority should normally be ___.',
+   options:['mitigated without informing anyone','escalated to the appropriate level','converted directly into an issue','ignored until it occurs'],correct:1,
+   expl:'Escalation is appropriate when the threat is outside project authority or scope.',trap:'Escalate is not the default for risks the team can manage.'},
+  {type:'dropdown',domain:'Business',approach:'General',topic:'pmbok-dropdown',
+   stem:'Complete the statement: In PMBOK 8, Initiating, Planning, Executing, Monitoring and Controlling, and Closing are ___.',
+   options:['five mandatory life-cycle phases','five Focus Areas that can overlap','the seven performance domains','the three ECO exam domains'],correct:1,
+   expl:'They are Focus Areas—categories of action that may overlap within project phases.',trap:'Do not treat Focus Areas as a mandatory five-phase life cycle.'}
+];
+
+function buildEnhancedPool(){
+  const pool=[];
+  ENHANCED_BASE.forEach((raw,idx)=>{
+    const type=raw.type==='graphic'?'single':raw.type;
+    const normalized=normalizeQuestion(Object.assign({},raw,{type,visual:raw.visual||null}),`enh-${idx}`,`enh-family-${idx}`);
+    pool.push(normalized);
+    if(raw.type==='matching' || raw.type==='fill') return;
+    const approaches=raw.approach==='General'?['Predictive','Agile','Hybrid']:[raw.approach,raw.approach==='Agile'?'Hybrid':'Agile'];
+    approaches.forEach((approach,j)=>{
+      const prefix=CONTEXT_VARIANTS[approach][(idx+j)%CONTEXT_VARIANTS[approach].length];
+      pool.push(normalizeQuestion(Object.assign({},raw,{
+        type,
+        visual:raw.visual||null,
+        stem:prefix+raw.stem,
+        approach,
+        sourceTag:'Enhanced-format scenario variant'
+      }),`enh-${idx}-${approach.toLowerCase()}`,`enh-family-${idx}`));
+    });
+  });
+  return pool;
+}
+
+const CASE_BASES = [
+  {id:'fintech-ai',approach:'Hybrid',title:'AI Lending Platform',
+   text:'{{ORG}}, a regional bank in {{REGION}}, must launch an AI-assisted lending platform before a fixed regulatory date. Software squads work iteratively, while compliance approval and vendor controls follow formal stage gates. Early testing shows inconsistent recommendations for some customer groups. A senior compliance stakeholder is resistant because the model’s decision logic is not sufficiently transparent.',
+   questions:[
+    {domain:'Business',topic:'case-ai-accountability',stem:'What should the project manager do FIRST about the inconsistent recommendations?',options:['Let the model continue learning in production','Pause affected use, validate data and bias risks, and establish human review','Ask the vendor to make the final decisions','Remove the compliance stakeholder from reviews'],correct:1,expl:'Potential bias and data-quality issues require controlled validation and human accountability before broader use.',trap:'Speed does not override ethical, regulatory, and quality controls.'},
+    {domain:'People',topic:'case-resistant-stakeholder',stem:'What is the best next action with the resistant compliance stakeholder?',options:['Meet directly to understand concerns and agree on evidence needed','Escalate immediately to the CEO','Limit the stakeholder’s access to model information','Continue because the launch date is fixed'],correct:0,expl:'Direct, transparent engagement is the first step to move resistance toward support.',trap:'A fixed date does not justify bypassing a high-power stakeholder.'},
+    {domain:'Process',topic:'case-hybrid-approach',stem:'Which development approach best fits the case?',options:['Fully predictive','Fully agile with no gates','Hybrid','Ad hoc'],correct:2,expl:'The work combines iterative product development with fixed regulatory governance.',trap:'Tailor the approach to different parts of the work.'},
+    {type:'multi',selectCount:2,domain:'Business',topic:'case-ai-controls',stem:'Which TWO controls should be included in the release decision?',options:['Documented human accountability','Bias and data-quality validation','Vendor self-certification only','Removal of audit logs','Automatic approval of every model recommendation'],correct:[0,1],expl:'Human accountability and validated data/model behavior are core controls.',trap:'The vendor or model cannot replace accountable governance.'},
+    {domain:'Business',topic:'case-value-measure',stem:'Which measure best demonstrates value after launch?',options:['Number of model runs','Reduction in decision time while approval quality and fairness remain acceptable','Hours spent training the model','Number of status meetings'],correct:1,expl:'Value combines outcome improvement with acceptable quality and fairness.',trap:'Activity volume is not a benefit.'}
+   ]},
+  {id:'telecom-rollout',approach:'Hybrid',title:'National Network Rollout',
+   text:'{{ORG}} is rolling out a new network across {{REGION}}. Tower construction and spectrum milestones are fixed, while customer-facing software is delivered iteratively. A key equipment supplier warns of a possible four-week delay. Local communities are concerned about construction impact, and the sponsor wants the original date maintained without additional budget.',
+   questions:[
+    {domain:'Process',topic:'case-supplier-risk',stem:'What should the project manager do first after receiving the supplier warning?',options:['Record and analyze the risk and its cross-domain impacts','Immediately replace the supplier','Ignore it until the delay occurs','Add four weeks to the schedule without approval'],correct:0,expl:'The warning is an uncertain future event that should be documented and analyzed before selecting a response.',trap:'Do not treat a risk as an issue before it occurs.'},
+    {domain:'People',topic:'case-community-engagement',stem:'How should the PM address community concerns?',options:['Use targeted engagement to understand concerns and adapt mitigation/communication','Stop sharing project information','Ask security to remove community representatives','Wait until construction begins'],correct:0,expl:'Early stakeholder engagement reduces resistance and exposes material impacts.',trap:'Low formal authority does not mean low interest can be ignored.'},
+    {domain:'Process',topic:'case-compression',stem:'If schedule compression is needed and no extra budget exists, which technique may be considered after risk analysis?',options:['Crashing','Fast tracking','Resource leveling','Gold-plating'],correct:1,expl:'Fast tracking overlaps work and may shorten time without direct added cost, but it increases risk and rework.',trap:'Crashing normally adds cost.'},
+    {domain:'Business',topic:'case-sustainability',stem:'Construction impact on local communities should be treated as:',options:['Outside project scope','A sustainability and stakeholder consideration to integrate into planning','A communications problem only','A reason to hide the schedule'],correct:1,expl:'Long-term environmental and social impacts belong in responsible value delivery.',trap:'Sustainability is not an optional afterthought.'},
+    {domain:'Process',topic:'case-change',stem:'The sponsor requests a cheaper tower design that may reduce coverage. What should the PM do first?',options:['Implement it immediately','Reject it immediately','Document and analyze the change against value, scope, schedule, finance, risk, and quality','Ask the supplier to decide'],correct:2,expl:'The proposed trade-off requires integrated impact analysis before authorization.',trap:'Neither immediate implementation nor immediate rejection is correct.'}
+   ]},
+  {id:'hospital-ehr',approach:'Hybrid',title:'Hospital EHR Deployment',
+   text:'{{ORG}} is deploying an electronic health-record system across hospitals in {{REGION}}. Core privacy and patient-safety requirements are fixed, but clinical workflows are refined through pilot iterations. Physicians report training gaps, nurses fear increased workload, and the planned cutover is six weeks away.',
+   questions:[
+    {domain:'People',topic:'case-change-adoption',stem:'What should the PM do first about the adoption concerns?',options:['Conduct targeted engagement and readiness assessment with clinical groups','Mandate adoption without discussion','Delay all work indefinitely','Replace resistant clinicians'],correct:0,expl:'Understanding readiness, workflow concerns, and training needs supports effective change adoption.',trap:'Resistance often contains useful information.'},
+    {domain:'Business',topic:'case-compliance',stem:'How should privacy and patient-safety requirements be handled?',options:['As optional backlog items','Built into acceptance criteria, governance, and testing from the start','Deferred until after go-live','Owned only by the vendor'],correct:1,expl:'Compliance and safety are planned and verified throughout delivery.',trap:'Compliance cannot be bolted on at the end.'},
+    {domain:'Process',topic:'case-pilot',stem:'What is the best use of the pilot?',options:['Validate workflows and assumptions before broader rollout','Prove that no further change is allowed','Replace formal testing','Avoid stakeholder feedback'],correct:0,expl:'A pilot provides evidence and feedback to refine the solution and rollout.',trap:'A pilot complements, not replaces, required verification.'},
+    {type:'multi',selectCount:2,domain:'People',topic:'case-training',stem:'Which TWO actions best address the skill and workload concerns?',options:['Role-based training and coaching','Workflow simulations with end users','Publicly rank clinicians by speed','Remove feedback channels','Assume users will learn after cutover'],correct:[0,1],expl:'Targeted training and realistic practice build ability and surface workflow problems.',trap:'Awareness without ability does not create adoption.'},
+    {domain:'Business',topic:'case-benefit',stem:'Which outcome best demonstrates realized value?',options:['The system was installed on time','Clinicians adopt it and patient-information quality improves without unacceptable safety impact','The vendor submitted all invoices','The project produced a large training deck'],correct:1,expl:'Benefits require adoption and improved outcomes, not just installation.',trap:'Output delivery is not the same as benefits realization.'}
+   ]},
+  {id:'green-construction',approach:'Predictive',title:'Sustainable Campus Construction',
+   text:'{{ORG}} is building a new campus in {{REGION}} under a fixed-price contract. The scope includes strict energy and biodiversity targets. Midway through construction, an executive asks for an unapproved premium lobby feature. A quality audit also finds that a subcontractor is not following the agreed inspection process.',
+   questions:[
+    {domain:'Process',topic:'case-gold-plating',stem:'How should the premium lobby request be handled?',options:['Add it because an executive requested it','Document and analyze it through change control','Ask the team to build it after hours','Ignore all executive requests'],correct:1,expl:'The request changes approved scope and must be evaluated through governance.',trap:'Executive influence does not replace change authorization.'},
+    {domain:'Process',topic:'case-quality-assurance',stem:'The audit of the subcontractor’s process is primarily:',options:['Validate Scope','Manage Quality Assurance','Control Scope','Close Procurement'],correct:1,expl:'Auditing whether an agreed process is followed is quality assurance.',trap:'Inspection of the deliverable itself would be control quality.'},
+    {domain:'Business',topic:'case-sustainability-target',stem:'The biodiversity target should be:',options:['Removed if it increases cost','Integrated into scope, acceptance criteria, risk, and supplier oversight','Treated only as marketing','Checked only after project closure'],correct:1,expl:'Material sustainability commitments are integrated into project planning and control.',trap:'Sustainability is not a separate late-stage checklist.'},
+    {domain:'Process',topic:'case-contract-risk',stem:'Under the fixed-price contract, who generally carries more cost risk for defined work?',options:['Buyer','Seller','End user','PMO'],correct:1,expl:'With clear scope, fixed price places more cost risk on the seller.',trap:'The buyer still owns change and acceptance decisions.'},
+    {domain:'People',topic:'case-contractor-conflict',stem:'The PM and subcontractor disagree about the audit finding. What is the best first step?',options:['Facilitate a fact-based review of requirements, evidence, and root cause','Threaten immediate termination','Ignore it to protect schedule','Ask the sponsor to choose a side'],correct:0,expl:'Collaborative problem solving uses evidence and addresses root cause.',trap:'Premature escalation and threats usually worsen the conflict.'}
+   ]},
+  {id:'erp-global',approach:'Hybrid',title:'Global ERP Transformation',
+   text:'{{ORG}} is implementing an ERP platform across business units in {{REGION}}. Global finance controls and the go-live window are fixed, while local workflow configurations are developed iteratively. Functional managers compete for scarce data specialists, and several business units are not completing data cleansing.',
+   questions:[
+    {domain:'People',topic:'case-resource-negotiation',stem:'What should the PM do first about the scarce specialists?',options:['Negotiate priorities and availability with functional managers','Demand the resources using positional power','Ignore the shortage','Hire anyone without checking competence'],correct:0,expl:'Matrix resource conflicts are addressed through collaborative negotiation and transparent priorities.',trap:'Escalation is not the first move.'},
+    {domain:'Business',topic:'case-data-adoption',stem:'Incomplete data cleansing most directly threatens:',options:['Benefits realization and operational readiness','Only the project logo','The number of meetings','The team charter'],correct:0,expl:'Poor data readiness can prevent adoption and undermine expected outcomes.',trap:'Technical go-live can occur while business value still fails.'},
+    {domain:'Process',topic:'case-hybrid-tailoring',stem:'Why is a hybrid approach suitable?',options:['It removes the need for planning','It combines fixed enterprise controls with iterative local configuration','It guarantees no change','It lets every unit use a different governance model'],correct:1,expl:'Hybrid delivery tailors different approaches to different components while preserving integration.',trap:'Hybrid is intentional tailoring, not a lack of standards.'},
+    {type:'multi',selectCount:2,domain:'People',topic:'case-knowledge-transfer',stem:'Which TWO actions support sustainable knowledge transfer?',options:['Pair local users with experienced specialists','Create reusable guidance and communities of practice','Keep expertise only with the vendor','Delay training until after go-live','Rotate specialists without handover'],correct:[0,1],expl:'Pairing and reusable knowledge structures build local capability.',trap:'Vendor dependency is not knowledge transfer.'},
+    {domain:'Process',topic:'case-status',stem:'A unit asks to go live despite incomplete cleansing. What should the PM do first?',options:['Assess readiness and impacts against agreed criteria and governance','Approve it to protect the date','Reject it without analysis','Delete the missing-data risks'],correct:0,expl:'Readiness and impact are assessed against defined criteria before a go/no-go decision.',trap:'Schedule pressure does not replace evidence-based governance.'}
+   ]},
+  {id:'saas-migration',approach:'Agile',title:'Cloud Service Migration',
+   text:'{{ORG}} is migrating a customer service platform to the cloud in {{REGION}}. The team uses Kanban. Work is accumulating in security testing, production incidents interrupt planned work, and two senior engineers disagree about the migration pattern. Customer satisfaction has begun to fall.',
+   questions:[
+    {domain:'Process',topic:'case-kanban-bottleneck',stem:'What should the team do about the testing bottleneck?',options:['Respect WIP limits and swarm to clear testing','Start more development work','Hide the queue','Remove testing from the workflow'],correct:0,expl:'Finishing work and addressing the bottleneck improves flow.',trap:'More work in progress increases delay.'},
+    {domain:'People',topic:'case-architecture-conflict',stem:'How should the PM address the engineers’ disagreement?',options:['Facilitate a collaborative review of assumptions and evidence','Choose based on seniority','Ask the team to vote immediately','Escalate before discussion'],correct:0,expl:'Collaboration addresses the technical and relational root causes.',trap:'Authority and voting may produce a decision without resolving the conflict.'},
+    {domain:'Business',topic:'case-customer-value',stem:'Which signal deserves the strongest value-focused response?',options:['Falling customer satisfaction','The team completed more tasks','The board has many cards','Engineers logged overtime'],correct:0,expl:'Customer outcomes are a direct value signal.',trap:'Output and activity metrics can mask declining value.'},
+    {domain:'Process',topic:'case-unplanned-work',stem:'How should recurring production incidents be handled?',options:['Make them visible, analyze root causes, and reserve capacity based on policy','Keep them outside the board','Treat every incident as a future risk only','Stop all stakeholder communication'],correct:0,expl:'Operational work must be visible and managed; recurring incidents need root-cause improvement.',trap:'An incident is an issue now, not merely a risk.'},
+    {domain:'People',topic:'case-team-focus',stem:'What leadership behavior best protects team focus?',options:['Clarify intake policies and remove systemic interruptions','Assign blame for every interruption','Accept all urgent requests without prioritization','Centralize every technical decision'],correct:0,expl:'A servant leader improves the system and protects focus while maintaining transparency.',trap:'Protection is not isolation from legitimate stakeholder needs.'}
+   ]},
+  {id:'public-transit',approach:'Predictive',title:'Public Transit Expansion',
+   text:'{{ORG}} is delivering a public transit expansion in {{REGION}}. Funding is released through stage gates. Community groups, regulators, and local businesses have conflicting expectations. A proposed station relocation may improve ridership but could delay environmental approval.',
+   questions:[
+    {domain:'Business',topic:'case-governance-gate',stem:'What is the purpose of the next stage-gate review?',options:['Decide whether to continue, adjust, or stop based on evidence','Replace all stakeholder engagement','Approve every pending change automatically','Evaluate individual team performance only'],correct:0,expl:'A stage gate is a governance decision point informed by value, risk, compliance, and readiness.',trap:'It is not merely a status meeting.'},
+    {domain:'People',topic:'case-conflicting-stakeholders',stem:'What should the PM do first about conflicting expectations?',options:['Facilitate shared understanding of interests, constraints, and decision criteria','Select the most powerful view immediately','Stop communicating until approval','Ask each group to submit complaints only'],correct:0,expl:'Alignment begins with understanding interests and transparent criteria.',trap:'Power alone does not determine the best project decision.'},
+    {domain:'Process',topic:'case-station-change',stem:'How should the station relocation be handled?',options:['Through documented impact analysis and the authorized change process','By the design team alone','Implemented because ridership may improve','Rejected because it affects the schedule'],correct:0,expl:'The value opportunity and approval risk require integrated analysis and governance.',trap:'A potentially valuable change is still a change.'},
+    {domain:'Business',topic:'case-compliance-approval',stem:'Environmental approval is best viewed as:',options:['A compliance and external-environment constraint to plan and monitor','An optional stakeholder preference','A quality tool','A team motivation issue'],correct:0,expl:'Regulatory approval is an external compliance requirement that affects strategy and delivery.',trap:'External does not mean outside project responsibility.'},
+    {domain:'Business',topic:'case-ridership-benefit',stem:'Which document should explain how improved ridership will be measured after delivery?',options:['Benefits management plan','Issue log','Team charter','WBS dictionary'],correct:0,expl:'The benefits management plan defines benefit measures, timing, and ownership.',trap:'The business case justifies; the benefits plan tracks realization.'}
+   ]},
+  {id:'renewable-portfolio',approach:'Hybrid',title:'Renewable Energy Initiative',
+   text:'{{ORG}} is launching a renewable-energy initiative in {{REGION}}. Construction packages follow predictive controls, while analytics and customer services are developed iteratively. Commodity prices are volatile, community support varies by site, and executives expect measurable carbon reduction and financial return.',
+   questions:[
+    {domain:'Business',topic:'case-strategy-value',stem:'Which factor should drive continued investment most strongly?',options:['Strategic alignment and expected environmental/financial benefits','The amount already spent','The number of work packages','The preference of one technical lead'],correct:0,expl:'Portfolio and project decisions are driven by forward-looking value and strategy.',trap:'Past spending is a sunk cost.'},
+    {domain:'Process',topic:'case-commodity-risk',stem:'How should commodity-price volatility be managed?',options:['Identify, analyze, plan responses, and monitor it','Ignore it because it is external','Record it only after a price increase','Treat it as a quality defect'],correct:0,expl:'External uncertainty is still managed as project risk.',trap:'A risk can be external and still require an owner and response.'},
+    {domain:'People',topic:'case-community-support',stem:'Community support varies by site. What is the best approach?',options:['Tailor stakeholder engagement to each site’s needs and influence','Use the same generic message everywhere','Engage only supportive groups','Wait until construction starts'],correct:0,expl:'Stakeholder engagement is contextual and continuous.',trap:'One-size-fits-all communication is weak tailoring.'},
+    {domain:'Business',topic:'case-carbon-metric',stem:'Which metric most directly represents a sustainability benefit?',options:['Verified reduction in lifecycle carbon emissions','Number of project emails','Percentage of timesheets submitted','Length of the project plan'],correct:0,expl:'Benefits are outcome measures tied to the intended value.',trap:'Administrative activity is not sustainability impact.'},
+    {domain:'Process',topic:'case-finance',stem:'If forecast cost performance is expected to continue, which metric helps estimate total final cost?',options:['EAC','SV','Free float','Communication channels'],correct:0,expl:'Estimate at Completion forecasts total project cost.',trap:'SV is a schedule variance, not a final cost forecast.'}
+   ]},
+  {id:'cyber-compliance',approach:'Hybrid',title:'Cybersecurity Compliance Program',
+   text:'{{ORG}} must meet a new cybersecurity regulation in {{REGION}}. Policy and audit evidence have fixed deadlines, while technical controls are delivered in increments. A vendor has not provided required test evidence, teams disagree on risk severity, and leaders want to declare compliance early.',
+   questions:[
+    {domain:'Business',topic:'case-compliance-evidence',stem:'What should the PM do about the request to declare compliance early?',options:['Use objective acceptance and audit evidence before making the claim','Approve it because leaders requested it','Let the vendor decide','Hide missing evidence'],correct:0,expl:'Compliance claims require evidence and accountable governance.',trap:'Schedule or leadership pressure cannot replace proof.'},
+    {domain:'Process',topic:'case-vendor-evidence',stem:'The missing vendor evidence should first be managed by:',options:['Reviewing contract requirements, logging the issue, and engaging the vendor','Deleting the requirement','Paying the invoice immediately','Moving it to lessons learned only'],correct:0,expl:'The missing evidence is a current issue tied to procurement and acceptance obligations.',trap:'It is not merely a future risk.'},
+    {domain:'People',topic:'case-risk-disagreement',stem:'Teams disagree on risk severity. What should the PM do?',options:['Facilitate use of agreed probability/impact criteria and evidence','Choose the loudest opinion','Average random scores','Avoid documenting the risk'],correct:0,expl:'Shared criteria and evidence improve consistency and collaboration.',trap:'Consensus without criteria can still be poor risk analysis.'},
+    {type:'multi',selectCount:2,domain:'Process',topic:'case-control-delivery',stem:'Which TWO practices best support incremental delivery without losing compliance control?',options:['Definition of Done includes required security evidence','Frequent control testing and feedback','Compliance review only after the final release','Undocumented exceptions','Removal of traceability'],correct:[0,1],expl:'Compliance is embedded into completion criteria and verified continuously.',trap:'Late inspection is weaker than built-in quality and traceability.'},
+    {domain:'Business',topic:'case-external-change',stem:'The new regulation is an example of:',options:['An external business-environment change that must be assessed and integrated','An OPA the team owns','A team charter update only','A reason to ignore the current plan'],correct:0,expl:'Regulation is an external factor that can change project requirements and governance.',trap:'External factors must be adapted to, not ignored.'}
+   ]},
+  {id:'retail-omnichannel',approach:'Agile',title:'Omnichannel Retail Product',
+   text:'{{ORG}} is building an omnichannel retail experience for customers in {{REGION}}. The Product Owner receives conflicting requests from marketing, stores, and customer support. The team’s velocity is stable, but conversion has not improved after three releases. A major campaign date is approaching.',
+   questions:[
+    {domain:'People',topic:'case-po-priority',stem:'Who should make the final backlog ordering decision?',options:['Product Owner','Scrum Master','Sponsor','Any developer'],correct:0,expl:'The Product Owner is accountable for ordering the backlog to maximize value.',trap:'Stakeholders influence priorities but do not individually own the backlog.'},
+    {domain:'Business',topic:'case-outcome-vs-output',stem:'Stable velocity but unchanged conversion suggests:',options:['Outputs are being delivered without proven business outcome improvement','The team should automatically work faster','Velocity is the primary benefit metric','The backlog must never change'],correct:0,expl:'Delivery metrics do not substitute for customer and business outcomes.',trap:'Velocity is a forecast tool, not value itself.'},
+    {domain:'Process',topic:'case-experiment',stem:'What should the team do next?',options:['Use customer data and experiments to test value assumptions and reprioritize','Add more features without feedback','Freeze the backlog until the campaign','Compare velocity with another team'],correct:0,expl:'Adaptive delivery uses feedback to test assumptions and change priorities.',trap:'More output is not the answer when value is not improving.'},
+    {domain:'People',topic:'case-stakeholder-alignment',stem:'How should conflicting stakeholder requests be handled?',options:['Make decision criteria and value trade-offs transparent through facilitated engagement','Allow the most senior stakeholder to bypass the backlog','Hide the product roadmap','Accept every request in the next sprint'],correct:0,expl:'Transparent value-based prioritization aligns expectations.',trap:'Not every stakeholder request can or should be included.'},
+    {domain:'Process',topic:'case-campaign-date',stem:'The fixed campaign date with evolving features suggests which approach?',options:['Hybrid planning around the date with adaptive scope prioritization','No planning at all','Purely predictive with frozen learning','Cancel all iterations'],correct:0,expl:'A fixed milestone can coexist with adaptive prioritization of the highest-value scope.',trap:'Hybrid does not mean abandoning agile feedback.'}
+   ]}
+];
+
+const CASE_VARIANTS=[
+  {org:'Aster Group',region:'Singapore'},{org:'Northstar Holdings',region:'Australia'},{org:'Lotus Enterprise',region:'Vietnam'}
+];
+function replaceCaseTokens(text,ctx){return text.replace(/\{\{ORG\}\}/g,ctx.org).replace(/\{\{REGION\}\}/g,ctx.region);}
+function buildCaseSets(){
+  const sets=[];
+  CASE_BASES.forEach((base,bi)=>{
+    CASE_VARIANTS.forEach((ctx,vi)=>{
+      const id=`${base.id}-v${vi+1}`;
+      sets.push({
+        id,baseId:base.id,title:`${base.title} · ${ctx.org}`,
+        text:replaceCaseTokens(base.text,ctx),approach:base.approach,
+        questions:base.questions.map((raw,qi)=>normalizeQuestion(Object.assign({},raw,{
+          caseId:id,caseTitle:`${base.title} · ${ctx.org}`,caseText:replaceCaseTokens(base.text,ctx),
+          approach:raw.approach||base.approach,sourceTag:'Original case-study practice item'
+        }),`case-${id}-${qi}`,`case-family-${base.id}-${qi}`))
+      });
+    });
+  });
+  return sets;
+}
+
+const INDEPENDENT_POOL = buildContextualBasePool().concat(buildEnhancedPool());
+const CASE_SETS = buildCaseSets();
+
+function exactTargets(count,weights){
+  const keys=Object.keys(weights); const result={}; let assigned=0;
+  keys.forEach(k=>{result[k]=Math.floor(count*weights[k]);assigned+=result[k];});
+  let left=count-assigned;
+  const fractional=keys.slice().sort((a,b)=>(count*weights[b]-Math.floor(count*weights[b]))-(count*weights[a]-Math.floor(count*weights[a])));
+  for(let i=0;i<left;i++) result[fractional[i%fractional.length]]++;
+  return result;
+}
+function questionIsEnhanced(q){return q.type!=='single' || !!q.visual;}
+function questionFormula(q){return FORMULA_TOPICS.has(q.topic) || /^formula-/.test(q.topic);}
+
+function selectCaseSets(seed,neededSets){
+  const rnd=mulberry32(seed^0xA53C9E21); const ordered=shuffle(CASE_SETS,rnd);
+  const selected=[]; const bases=new Set();
+  for(const set of ordered){
+    if(bases.has(set.baseId)) continue;
+    selected.push(set); bases.add(set.baseId);
+    if(selected.length>=neededSets) break;
+  }
+  return selected;
+}
+
+function chooseIndependentQuestions(seed,needed,remainingDomains,remainingApproaches){
+  const rnd=mulberry32(seed^0xC0FFEE); const candidates=shuffle(INDEPENDENT_POOL,rnd);
+  const selected=[]; const usedFamilies=new Set(); const topicCounts={};
+  let formulaCount=0; const formulaCap=Math.max(3,Math.round(needed*0.12));
+  let enhancedNeed=Math.max(needed>=150?26:needed>=50?9:4,0);
+  const domainSlots=[];
+  Object.entries(remainingDomains).forEach(([d,n])=>{for(let i=0;i<n;i++) domainSlots.push(d);});
+  shuffle(domainSlots,rnd).forEach(domain=>{
+    const approachPriority=Object.keys(remainingApproaches).sort((a,b)=>remainingApproaches[b]-remainingApproaches[a]);
+    let best=null,bestScore=Infinity;
+    for(let ci=0;ci<candidates.length;ci++){
+      const q=candidates[ci];
+      if(!q || q.domain!==domain || usedFamilies.has(q.familyId)) continue;
+      const isFormula=questionFormula(q); const tcount=topicCounts[q.topic]||0;
+      const topicCap=isFormula?2:3;
+      if(tcount>=topicCap) continue;
+      if(isFormula && formulaCount>=formulaCap) continue;
+      const ap=q.approach==='General'?approachPriority[0]:q.approach;
+      if((remainingApproaches[ap]||0)<=0) continue;
+      let score=rnd();
+      if(enhancedNeed>0 && !questionIsEnhanced(q)) score+=1.6;
+      if(enhancedNeed<=0 && questionIsEnhanced(q)) score+=0.15;
+      score+=tcount*0.9;
+      if(score<bestScore){best={q,ci,ap,isFormula};bestScore=score;}
+    }
+    if(!best){
+      for(let ci=0;ci<candidates.length;ci++){
+        const q=candidates[ci];
+        if(!q || q.domain!==domain || usedFamilies.has(q.familyId)) continue;
+        const ap=q.approach==='General'?approachPriority[0]:q.approach;
+        if((remainingApproaches[ap]||0)<=0) continue;
+        best={q,ci,ap,isFormula:questionFormula(q)};break;
+      }
+    }
+    if(!best){
+      for(let ci=0;ci<candidates.length;ci++){
+        const q=candidates[ci];
+        if(!q || q.domain!==domain || usedFamilies.has(q.familyId)) continue;
+        const ap=q.approach==='General'?approachPriority[0]:q.approach;
+        best={q,ci,ap,isFormula:questionFormula(q)};break;
+      }
+    }
+    if(!best) return;
+    const chosen=best.q.approach==='General'?Object.assign({},best.q,{approach:best.ap,assignedApproach:true}):best.q;
+    selected.push(chosen); candidates[best.ci]=null; usedFamilies.add(best.q.familyId);
+    topicCounts[best.q.topic]=(topicCounts[best.q.topic]||0)+1;
+    if(best.isFormula) formulaCount++;
+    if(questionIsEnhanced(best.q)) enhancedNeed=Math.max(0,enhancedNeed-1);
+    if(remainingApproaches[best.ap]>0) remainingApproaches[best.ap]--;
+  });
+  // Last-resort backfill if a restrictive pool left gaps.
+  if(selected.length<needed){
+    for(const q of candidates){
+      if(!q || usedFamilies.has(q.familyId)) continue;
+      selected.push(q); usedFamilies.add(q.familyId);
+      if(selected.length>=needed) break;
+    }
+  }
+  return selected.slice(0,needed);
+}
+
+function cloneQuestionForExam(q,seed,index){
+  const rnd=mulberry32(seed^stableHash(q.qid)^Math.imul(index+1,2654435761));
+  const out=Object.assign({},q);
+  if(q.type==='single' || q.type==='dropdown'){
+    const idxs=shuffle(q.options.map((_,i)=>i),rnd);
+    out.options=idxs.map(i=>q.options[i]);
+    out.correct=idxs.indexOf(q.correct);
+  }else if(q.type==='multi'){
+    const idxs=shuffle(q.options.map((_,i)=>i),rnd);
+    out.options=idxs.map(i=>q.options[i]);
+    out.correct=q.correct.map(old=>idxs.indexOf(old)).sort((a,b)=>a-b);
+  }else if(q.type==='matching'){
+    const rights=q.pairs.map(p=>p.right);
+    const idxs=shuffle(rights.map((_,i)=>i),rnd);
+    out.pairs=q.pairs.map(p=>({left:p.left,right:p.right}));
+    out.matchChoices=idxs.map(i=>rights[i]);
+    out.correct=q.pairs.map(p=>out.matchChoices.indexOf(p.right));
+  }
+  return out;
+}
+
+function buildExam(examNo,count,attemptNo){
+  const seed=stableHash(`pmi-${examNo}-${count}-${attemptNo}`);
+  const caseSetCount=count>=180?4:count>=60?2:1;
+  const caseSets=selectCaseSets(seed,caseSetCount);
+  const caseRaw=[];
+  caseSets.forEach(set=>set.questions.forEach(q=>caseRaw.push(q)));
+  const domainTargets=exactTargets(count,BLUEPRINT);
+  const approachTargets=exactTargets(count,APPROACH_BLUEPRINT);
+  caseRaw.forEach(q=>{
+    domainTargets[q.domain]=Math.max(0,(domainTargets[q.domain]||0)-1);
+    const ap=q.approach==='General'?'Hybrid':q.approach;
+    approachTargets[ap]=Math.max(0,(approachTargets[ap]||0)-1);
+  });
+  let independentNeeded=count-caseRaw.length;
+  let remainingSum=Object.values(domainTargets).reduce((a,b)=>a+b,0);
+  if(remainingSum!==independentNeeded){
+    const diff=independentNeeded-remainingSum;
+    domainTargets.Process=Math.max(0,domainTargets.Process+diff);
+  }
+  const independent=chooseIndependentQuestions(seed,independentNeeded,domainTargets,approachTargets);
+  const independentShuffled=shuffle(independent,mulberry32(seed^0x1BADB002));
+  const rawQuestions=caseRaw.concat(independentShuffled).slice(0,count);
+  const questions=rawQuestions.map((q,i)=>cloneQuestionForExam(q,seed,i));
+  if(count===180){
+    const positions=shuffle(Array.from({length:count},(_,i)=>i),mulberry32(seed^0xDEADBEEF)).slice(0,10);
+    positions.forEach(i=>{questions[i].pretest=true;});
+  }
+  return {questions,caseQuestionCount:caseRaw.length,seed};
+}
+
+function initialAnswer(q){
+  if(q.type==='multi') return [];
+  if(q.type==='matching') return new Array(q.pairs.length).fill(null);
+  if(q.type==='fill') return '';
+  return null;
+}
+function isAnswered(q,a){
+  if(q.type==='single' || q.type==='dropdown' || q.type==='hotspot') return Number.isInteger(a);
+  if(q.type==='multi') return Array.isArray(a) && a.length>0;
+  if(q.type==='matching') return Array.isArray(a) && a.length===q.pairs.length && a.every(v=>Number.isInteger(v));
+  if(q.type==='fill') return String(a??'').trim()!=='';
+  return false;
+}
+function arraysEqual(a,b){return a.length===b.length && a.every((v,i)=>v===b[i]);}
+function isCorrectAnswer(q,a){
+  if(q.type==='single' || q.type==='dropdown' || q.type==='hotspot') return a===q.correct;
+  if(q.type==='multi') return arraysEqual((a||[]).slice().sort((x,y)=>x-y),q.correct.slice().sort((x,y)=>x-y));
+  if(q.type==='matching') return Array.isArray(a) && arraysEqual(a,q.correct);
+  if(q.type==='fill'){
+    const raw=String(a??'').trim().replace(/[$,%\s,]/g,'');
+    const num=Number(raw);
+    if(Number.isFinite(q.correctNumber) && Number.isFinite(num)) return Math.abs(num-q.correctNumber)<=(q.tolerance??0);
+    return (q.correctText||[]).map(v=>String(v).trim().toLowerCase()).includes(String(a).trim().toLowerCase());
+  }
+  return false;
+}
+function correctAnswerText(q){
+  const keys='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if(q.type==='single' || q.type==='dropdown') return `${keys[q.correct]}. ${q.options[q.correct]}`;
+  if(q.type==='hotspot') return q.hotspots[q.correct];
+  if(q.type==='multi') return q.correct.map(i=>`${keys[i]}. ${q.options[i]}`).join(' · ');
+  if(q.type==='matching') return q.pairs.map((p,i)=>`${p.left} → ${q.matchChoices[q.correct[i]]}`).join(' · ');
+  if(q.type==='fill') return Number.isFinite(q.correctNumber)?String(q.correctNumber):(q.correctText||[]).join(' / ');
+  return '';
+}
+function userAnswerText(q,a){
+  const keys='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if(!isAnswered(q,a)) return 'Not answered';
+  if(q.type==='single' || q.type==='dropdown') return `${keys[a]}. ${q.options[a]}`;
+  if(q.type==='hotspot') return q.hotspots[a];
+  if(q.type==='multi') return a.map(i=>`${keys[i]}. ${q.options[i]}`).join(' · ');
+  if(q.type==='matching') return q.pairs.map((p,i)=>`${p.left} → ${q.matchChoices[a[i]]}`).join(' · ');
+  return String(a);
+}
+
+let EXAM=null;
+let _dragChoice=null;
+
+function getAttemptNo(n){
+  const attempts=JSON.parse(localStorage_get('pmi_attempts')||'{}');
+  attempts[n]=(attempts[n]||0)+1;
+  localStorage_set('pmi_attempts',JSON.stringify(attempts));
+  return attempts[n];
+}
+function syncExamSettings(){
+  const count=parseInt(document.getElementById('set-count').value,10);
+  const time=document.getElementById('set-time');
+  if(time && !time.dataset.manual){time.value=count===180?'240':count===60?'80':'40';}
+  const breaks=document.getElementById('set-breaks');
+  if(breaks) breaks.value=count===180?'on':'scaled';
+}
+function markTimeManual(){const time=document.getElementById('set-time');if(time) time.dataset.manual='1';}
 
 function renderExamGrid(){
-  const grid = document.getElementById('exam-grid');
+  const grid=document.getElementById('exam-grid'); if(!grid) return;
   grid.innerHTML='';
-  const best = JSON.parse(localStorage_get('pmi_best')||'{}');
+  const best=JSON.parse(localStorage_get('pmi_best')||'{}');
   for(let n=1;n<=10;n++){
-    const card = document.createElement('div');
-    card.className='exam-card';
-    card.onclick=()=>startExam(n);
-    let badge='';
-    if(best[n]!==undefined){
-      const p = best[n];
-      badge = `<span class="best ${p>=76?'pass':'fail'}">${p}%</span>`;
-    }
-    card.innerHTML = `${badge}<div class="no">${String(n).padStart(2,'0')}</div>
-      <div class="lbl">Practice Exam</div>
-      <div class="meta">Unique question set · balanced domains</div>`;
+    const card=document.createElement('div'); card.className='exam-card'; card.onclick=()=>startExam(n);
+    const saved=typeof best[n]==='object'?best[n]?.score:best[n];
+    const badge=saved!==undefined?`<span class="best ${saved>=PRACTICE_TARGET_DEFAULT?'pass':'fail'}">Best ${saved}%</span>`:'';
+    card.innerHTML=`${badge}<div class="no">${String(n).padStart(2,'0')}</div><div class="lbl">Practice Exam</div><div class="meta">Fresh draw · ECO 33/41/26 · case + enhanced items</div>`;
     grid.appendChild(card);
   }
+  updateMistakeCountBadge();
 }
 
-/* localStorage may be blocked in artifacts; wrap safely (in-memory fallback) */
 const _mem={};
 function localStorage_get(k){try{return localStorage.getItem(k);}catch(e){return _mem[k];}}
 function localStorage_set(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
 
 function startExam(n){
-  const count = parseInt(document.getElementById('set-count').value);
-  const timeLimit = parseInt(document.getElementById('set-time').value);
-  const mode = document.getElementById('set-mode').value;
-  const questions = buildExam(n, count);
-  EXAM = {
-    no:n, count, timeLimit, mode, questions,
-    answers:new Array(count).fill(null),
-    flags:new Array(count).fill(false),
-    idx:0, remaining:timeLimit*60, timerId:null, submitted:false
-  };
+  const count=parseInt(document.getElementById('set-count').value,10);
+  const timeLimit=parseInt(document.getElementById('set-time').value,10);
+  const mode=document.getElementById('set-mode').value;
+  const breakMode=document.getElementById('set-breaks').value;
+  const target=parseInt(document.getElementById('set-target').value,10)||PRACTICE_TARGET_DEFAULT;
+  const attemptNo=getAttemptNo(n);
+  const built=buildExam(n,count,attemptNo);
+  const first=built.caseQuestionCount;
+  const boundaries=breakMode==='off'?[]:[first, first+Math.round((count-first)/2)].filter((v,i,a)=>v>0&&v<count&&a.indexOf(v)===i).sort((a,b)=>a-b);
+  EXAM={no:n,attemptNo,count,timeLimit,mode,breakMode,target,questions:built.questions,
+    answers:built.questions.map(initialAnswer),checked:new Array(count).fill(false),flags:new Array(count).fill(false),
+    idx:0,remaining:timeLimit*60,timerId:null,submitted:false,boundaries,lockedUntil:0,
+    onBreak:false,breakTimerId:null,reviewBoundary:null,caseQuestionCount:first};
   document.getElementById('mock-home').style.display='none';
+  document.getElementById('mistake-panel').style.display='none';
   document.getElementById('mock-result').style.display='none';
   document.getElementById('mock-run').style.display='block';
-  if(timeLimit>0){ startTimer(); } else { document.getElementById('timer').textContent='∞'; }
-  renderQuestion();
-  window.scrollTo({top:0,behavior:'smooth'});
+  if(timeLimit>0) startTimer(); else document.getElementById('timer').textContent='∞';
+  renderQuestion(); window.scrollTo({top:0,behavior:'smooth'});
 }
-
+function updateTimerDisplay(){
+  if(!EXAM) return; const el=document.getElementById('timer');
+  if(EXAM.timeLimit<=0){el.textContent='∞';return;}
+  const m=Math.floor(Math.max(0,EXAM.remaining)/60),s=Math.max(0,EXAM.remaining)%60;
+  el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.classList.toggle('warn',EXAM.remaining<=600);
+}
 function startTimer(){
-  const tEl=document.getElementById('timer');
-  clearInterval(EXAM.timerId);
-  EXAM.timerId=setInterval(()=>{
-    EXAM.remaining--;
-    const m=Math.floor(EXAM.remaining/60), s=EXAM.remaining%60;
-    tEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    tEl.classList.toggle('warn', EXAM.remaining<=300);
-    if(EXAM.remaining<=0){ clearInterval(EXAM.timerId); submitExam(true); }
-  },1000);
+  clearInterval(EXAM.timerId); updateTimerDisplay();
+  EXAM.timerId=setInterval(()=>{if(EXAM.onBreak)return;EXAM.remaining--;updateTimerDisplay();if(EXAM.remaining<=0){clearInterval(EXAM.timerId);submitExam(true);}},1000);
 }
-
+function currentSection(){
+  let start=EXAM.lockedUntil; let end=EXAM.count;
+  for(const b of EXAM.boundaries){if(b>start){end=b;break;}}
+  const number=EXAM.boundaries.filter(b=>b<=start).length+1;
+  return {start,end,number,total:EXAM.boundaries.length+1};
+}
+function formatBadge(q){
+  const labels=[];
+  if(q.caseId) labels.push('Case study');
+  if(q.type==='multi') labels.push('Multiple response');
+  else if(q.type==='matching') labels.push('Enhanced matching');
+  else if(q.type==='fill') labels.push('Fill in');
+  else if(q.type==='hotspot') labels.push('Point and click');
+  else if(q.type==='dropdown') labels.push('Pull-down list');
+  else if(q.visual) labels.push('Graphic/data');
+  else labels.push('Single response');
+  return labels.join(' · ');
+}
+function renderOptions(q,answer,showFeedback){
+  const keys='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  if(q.type==='hotspot') return `<div class="hotspot-wrap"><div class="hotspot-title">${escapeHtml(q.hotspotTitle||'Point and click')}</div><div class="hotspot-board">${q.hotspots.map((label,i)=>{let cls='hotspot-target';if(answer===i)cls+=' sel';if(showFeedback){if(i===q.correct)cls+=' correct';else if(answer===i)cls+=' wrong';}return `<button class="${cls}" onclick="pickHotspot(${i})">${escapeHtml(label)}</button>`;}).join('')}</div></div>`;
+  if(q.type==='dropdown'){
+    const cls=showFeedback?(isCorrectAnswer(q,answer)?'dropdown-answer correct':'dropdown-answer wrong'):'dropdown-answer';
+    return `<div class="${cls}"><label>Select the best completion<select onchange="pickDropdown(this.value)" ${showFeedback?'disabled':''}><option value="">Choose…</option>${q.options.map((o,i)=>`<option value="${i}" ${answer===i?'selected':''}>${escapeHtml(o)}</option>`).join('')}</select></label></div>`;
+  }
+  if(q.type==='single') return `<div class="opts">${q.options.map((o,i)=>{
+    let cls='opt'; if(answer===i)cls+=' sel'; if(showFeedback){if(i===q.correct)cls+=' correct';else if(answer===i)cls+=' wrong';}
+    return `<div class="${cls}" onclick="pickSingle(${i})"><span class="key">${keys[i]}</span><span>${escapeHtml(o)}</span></div>`;
+  }).join('')}</div>`;
+  if(q.type==='multi') return `<div class="multi-instruction">Select ${q.selectCount||q.correct.length} answers.</div><div class="opts">${q.options.map((o,i)=>{
+    const selected=(answer||[]).includes(i); let cls='opt multi-opt'; if(selected)cls+=' sel';
+    if(showFeedback){if(q.correct.includes(i))cls+=' correct';else if(selected)cls+=' wrong';}
+    return `<div class="${cls}" onclick="toggleMulti(${i})"><span class="key">${selected?'✓':keys[i]}</span><span>${escapeHtml(o)}</span></div>`;
+  }).join('')}</div>`;
+  if(q.type==='matching'){
+    const used=new Set((answer||[]).filter(Number.isInteger));
+    return `<div class="match-wrap"><div class="match-bank">${q.matchChoices.map((c,i)=>`<button draggable="true" ondragstart="dragMatch(event,${i})" class="match-chip ${used.has(i)?'used':''}">${escapeHtml(c)}</button>`).join('')}</div><div class="match-rows">${q.pairs.map((p,row)=>{
+      const val=answer[row]; let cls='match-row'; if(showFeedback)cls+=val===q.correct[row]?' correct':' wrong';
+      return `<div class="${cls}" ondragover="event.preventDefault()" ondrop="dropMatch(event,${row})"><div class="match-left">${escapeHtml(p.left)}</div><select onchange="setMatch(${row},this.value)"><option value="">Choose…</option>${q.matchChoices.map((c,i)=>`<option value="${i}" ${val===i?'selected':''}>${escapeHtml(c)}</option>`).join('')}</select></div>`;
+    }).join('')}</div></div>`;
+  }
+  if(q.type==='fill'){
+    const cls=showFeedback?(isCorrectAnswer(q,answer)?'fill-answer correct':'fill-answer wrong'):'fill-answer';
+    return `<div class="${cls}"><label>Enter your answer<input type="text" inputmode="decimal" value="${escapeAttr(answer)}" oninput="setFill(this.value)" ${showFeedback?'disabled':''}></label></div>`;
+  }
+  return '';
+}
+function renderFeedback(q,a,ok){
+  return `<div class="expl ${ok?'ok':'no'}"><div class="band">${ok?'Correct':'Incorrect — study this'}</div><div class="body"><p><b>Correct answer:</b> ${escapeHtml(correctAnswerText(q))}</p><p>${escapeHtml(q.expl)}</p><div class="trap"><b>Exam trap:</b> ${escapeHtml(q.trap)}</div></div></div>`;
+}
 function renderQuestion(){
-  const q = EXAM.questions[EXAM.idx];
-  const host = document.getElementById('qhost');
-  const answered = EXAM.answers[EXAM.idx];
-  const showFeedback = (EXAM.mode==='instant' && answered!==null);
-  const keys=['A','B','C','D'];
-
-  let opts = q.options.map((o,i)=>{
-    let cls='opt';
-    if(answered===i) cls+=' sel';
-    if(showFeedback){
-      if(i===q.correct) cls+=' correct';
-      else if(answered===i) cls+=' wrong';
-    }
-    return `<div class="${cls}" onclick="pick(${i})">
-      <span class="key">${keys[i]}</span><span>${o}</span></div>`;
-  }).join('');
-
-  let expl='';
-  if(showFeedback){
-    const ok = answered===q.correct;
-    expl = `<div class="expl ${ok?'ok':'no'}">
-      <div class="band">${ok?'Correct':'Incorrect — study this'}</div>
-      <div class="body">
-        <p>${q.expl}</p>
-        <div class="trap"><b>Exam trap:</b> ${q.trap}</div>
-      </div></div>`;
-  }
-
-  host.innerHTML = `<div class="qcard">
-    <div><span class="qnum">Question ${EXAM.idx+1} of ${EXAM.count}</span><span class="dom">${q.domain}</span></div>
-    <div class="stem">${q.stem}</div>
-    <div class="opts">${opts}</div>
-    ${expl}
-    <div class="navrow">
-      <button class="btn ghost" onclick="nav(-1)" ${EXAM.idx===0?'disabled':''}>Previous</button>
-      <button class="btn primary" onclick="nav(1)">${EXAM.idx===EXAM.count-1?'Review & finish':'Next'}</button>
-      <button class="flagbtn ${EXAM.flags[EXAM.idx]?'on':''}" onclick="toggleFlag()">${EXAM.flags[EXAM.idx]?'★ Flagged':'☆ Flag'}</button>
-    </div>
-  </div>`;
-
-  const done = EXAM.answers.filter(a=>a!==null).length;
-  document.getElementById('pfill').style.width = (done/EXAM.count*100)+'%';
-  document.getElementById('pinfo').textContent = `Answered ${done}/${EXAM.count}` + (EXAM.flags.filter(Boolean).length?` · ${EXAM.flags.filter(Boolean).length} flagged`:'');
-}
-
-function pick(i){
-  if(EXAM.mode==='instant' && EXAM.answers[EXAM.idx]!==null) return; // lock after answer in study mode
-  EXAM.answers[EXAM.idx]=i;
-  renderQuestion();
-}
-function nav(d){
-  if(d>0 && EXAM.idx===EXAM.count-1){ jumpGrid(); return; }
-  EXAM.idx=Math.max(0,Math.min(EXAM.count-1,EXAM.idx+d));
-  renderQuestion();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function toggleFlag(){ EXAM.flags[EXAM.idx]=!EXAM.flags[EXAM.idx]; renderQuestion(); }
-
-function jumpGrid(){
+  if(!EXAM||EXAM.onBreak)return;
+  const q=EXAM.questions[EXAM.idx],answer=EXAM.answers[EXAM.idx];
+  const showFeedback=EXAM.mode==='instant'&&EXAM.checked[EXAM.idx];
+  const ok=showFeedback?isCorrectAnswer(q,answer):false;
+  const section=currentSection();
+  document.getElementById('section-label').textContent=`Section ${section.number}/${section.total}`;
+  let caseHtml=q.caseId?`<details class="case-box" open><summary>${escapeHtml(q.caseTitle||'Case study')}</summary><p>${escapeHtml(q.caseText)}</p></details>`:'';
+  let visual=q.visual?`<div class="visual-box">${q.visual}</div>`:'';
+  let check='';
+  if(EXAM.mode==='instant'&&!EXAM.checked[EXAM.idx]) check=`<button class="btn dark" onclick="checkCurrent()" ${isAnswered(q,answer)?'':'disabled'}>Check answer</button>`;
   const host=document.getElementById('qhost');
+  host.innerHTML=`<div class="qcard"><div><span class="qnum">Question ${EXAM.idx+1} of ${EXAM.count}</span><span class="dom">${escapeHtml(q.domain)}</span><span class="format-badge">${escapeHtml(formatBadge(q))}</span></div>${caseHtml}${visual}<div class="stem">${escapeHtml(q.stem)}</div>${renderOptions(q,answer,showFeedback)}${showFeedback?renderFeedback(q,answer,ok):''}<div class="navrow"><button class="btn ghost" onclick="nav(-1)" ${EXAM.idx<=section.start?'disabled':''}>Previous</button>${check}<button class="btn primary" onclick="nav(1)">${EXAM.idx===section.end-1?(section.end<EXAM.count?'Review section':'Review & finish'):'Next'}</button><button class="flagbtn ${EXAM.flags[EXAM.idx]?'on':''}" onclick="toggleFlag()">${EXAM.flags[EXAM.idx]?'★ Flagged':'☆ Flag'}</button></div></div>`;
+  updateProgress();
+}
+function updateProgress(){
+  const done=EXAM.answers.reduce((n,a,i)=>n+(isAnswered(EXAM.questions[i],a)?1:0),0);
+  document.getElementById('pfill').style.width=(done/EXAM.count*100)+'%';
+  document.getElementById('pinfo').textContent=`Answered ${done}/${EXAM.count}`+(EXAM.flags.filter(Boolean).length?` · ${EXAM.flags.filter(Boolean).length} flagged`:'');
+}
+function pickSingle(i){if(EXAM.mode==='instant'&&EXAM.checked[EXAM.idx])return;EXAM.answers[EXAM.idx]=i;renderQuestion();}
+function pickHotspot(i){if(EXAM.mode==='instant'&&EXAM.checked[EXAM.idx])return;EXAM.answers[EXAM.idx]=i;renderQuestion();}
+function pickDropdown(v){if(EXAM.mode==='instant'&&EXAM.checked[EXAM.idx])return;EXAM.answers[EXAM.idx]=v===''?null:parseInt(v,10);renderQuestion();}
+function toggleMulti(i){
+  if(EXAM.mode==='instant'&&EXAM.checked[EXAM.idx])return;
+  const q=EXAM.questions[EXAM.idx],a=EXAM.answers[EXAM.idx]; const pos=a.indexOf(i);
+  if(pos>=0)a.splice(pos,1);else if(a.length<(q.selectCount||q.correct.length))a.push(i);else{a.shift();a.push(i);} a.sort((x,y)=>x-y);renderQuestion();
+}
+function setMatch(row,val){if(EXAM.mode==='instant'&&EXAM.checked[EXAM.idx])return;EXAM.answers[EXAM.idx][row]=val===''?null:parseInt(val,10);renderQuestion();}
+function dragMatch(e,choice){_dragChoice=choice;e.dataTransfer.setData('text/plain',String(choice));}
+function dropMatch(e,row){e.preventDefault();const v=e.dataTransfer.getData('text/plain');setMatch(row,v===''?_dragChoice:v);}
+function setFill(v){EXAM.answers[EXAM.idx]=v;updateProgress();const btn=document.querySelector('.navrow .btn.dark');if(btn&&btn.textContent==='Check answer')btn.disabled=!isAnswered(EXAM.questions[EXAM.idx],v);}
+function checkCurrent(){const q=EXAM.questions[EXAM.idx],a=EXAM.answers[EXAM.idx];if(!isAnswered(q,a))return;EXAM.checked[EXAM.idx]=true;renderQuestion();}
+function toggleFlag(){EXAM.flags[EXAM.idx]=!EXAM.flags[EXAM.idx];renderQuestion();}
+function nav(d){
+  const section=currentSection();
+  if(d<0){EXAM.idx=Math.max(section.start,EXAM.idx-1);renderQuestion();return;}
+  if(EXAM.idx===section.end-1){if(section.end<EXAM.count)showSectionReview(section.end);else jumpGrid();return;}
+  EXAM.idx=Math.min(section.end-1,EXAM.idx+1);renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
+function jumpToQuestion(i){const s=currentSection();if(i<s.start||i>=s.end)return;EXAM.idx=i;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}
+function questionMapHtml(start,end){
   let cells='';
-  EXAM.questions.forEach((q,i)=>{
-    const a=EXAM.answers[i];
-    let bg = a!==null?'var(--amber)':'var(--paper-2)';
-    let col = a!==null?'var(--ink)':'var(--muted)';
-    let ring = EXAM.flags[i]?'box-shadow:0 0 0 2px var(--red);':'';
-    cells+=`<button onclick="EXAM.idx=${i};renderQuestion();window.scrollTo({top:0,behavior:'smooth'})"
-      style="width:44px;height:38px;border:1px solid var(--line);border-radius:8px;background:${bg};color:${col};font-weight:700;font-size:12px;cursor:pointer;${ring}">${i+1}</button>`;
-  });
-  const done=EXAM.answers.filter(a=>a!==null).length;
-  host.innerHTML=`<div class="qcard">
-    <span class="eyebrow">Question map</span>
-    <h2 style="font-family:var(--serif);margin:6px 0 4px">${done} of ${EXAM.count} answered</h2>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:16px">Amber = answered. Red outline = flagged. Tap a number to jump. When you're ready, submit for scoring and full explanations.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px">${cells}</div>
-    <div class="navrow">
-      <button class="btn ghost" onclick="renderQuestion()">Back to questions</button>
-      <button class="btn primary" onclick="submitExam(false)">Submit for scoring</button>
-    </div>
-  </div>`;
+  for(let i=start;i<end;i++){
+    const answered=isAnswered(EXAM.questions[i],EXAM.answers[i]);
+    const cls=['map-cell',answered?'answered':'',EXAM.flags[i]?'flagged':'',i===EXAM.idx?'current':''].filter(Boolean).join(' ');
+    cells+=`<button class="${cls}" onclick="jumpToQuestion(${i})">${i+1}</button>`;
+  }
+  return cells;
+}
+function jumpGrid(){
+  const s=currentSection(),done=EXAM.answers.slice(s.start,s.end).reduce((n,a,i)=>n+(isAnswered(EXAM.questions[s.start+i],a)?1:0),0);
+  document.getElementById('qhost').innerHTML=`<div class="qcard"><span class="eyebrow">Question map · Section ${s.number}/${s.total}</span><h2 style="font-family:var(--serif);margin:6px 0 4px">${done} of ${s.end-s.start} answered in this section</h2><p class="map-note">Only the current section is available. Previous sections are locked after a break.</p><div class="question-map">${questionMapHtml(s.start,s.end)}</div><div class="navrow"><button class="btn ghost" onclick="renderQuestion()">Back to questions</button><button class="btn primary" onclick="submitExam(false)">Submit exam</button></div></div>`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
+function showSectionReview(boundary){
+  EXAM.reviewBoundary=boundary; const s=currentSection();
+  const unanswered=EXAM.answers.slice(s.start,boundary).reduce((n,a,i)=>n+(!isAnswered(EXAM.questions[s.start+i],a)?1:0),0);
+  document.getElementById('qhost').innerHTML=`<div class="qcard section-review"><span class="eyebrow">End of section ${s.number}</span><h2>Review before break</h2><p>${unanswered?`You have <b>${unanswered}</b> unanswered question(s) in this section.`:'All questions in this section have an answer.'} You may return now. Once the break starts, this section is locked.</p><div class="question-map">${questionMapHtml(s.start,boundary)}</div><div class="navrow"><button class="btn ghost" onclick="renderQuestion()">Return to section</button><button class="btn primary" onclick="beginBreak()">Start 10-minute break & lock section</button></div></div>`;
+}
+function beginBreak(){
+  const boundary=EXAM.reviewBoundary; if(!boundary)return;
+  EXAM.lockedUntil=boundary; EXAM.onBreak=true; clearInterval(EXAM.timerId);
+  const breakSeconds=EXAM.breakMode==='scaled'?(EXAM.count<=30?180:300):600;
+  const breakMinutes=Math.round(breakSeconds/60); let remaining=breakSeconds; const host=document.getElementById('qhost');
+  const draw=()=>{const m=Math.floor(remaining/60),s=remaining%60;host.innerHTML=`<div class="break-card"><span class="eyebrow">Section locked</span><h2>${breakMinutes}-minute break</h2><div class="break-time">${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</div><p>The exam timer is paused. You cannot return to the previous section.</p><button class="btn primary" onclick="finishBreak()">End break early</button></div>`;};
+  draw(); clearInterval(EXAM.breakTimerId); EXAM.breakTimerId=setInterval(()=>{remaining--;draw();if(remaining<=0)finishBreak();},1000);
+}
+function finishBreak(){
+  clearInterval(EXAM.breakTimerId); EXAM.onBreak=false; EXAM.reviewBoundary=null; EXAM.idx=EXAM.lockedUntil;
+  if(EXAM.timeLimit>0)startTimer(); renderQuestion();window.scrollTo({top:0,behavior:'smooth'});
+}
 function submitExam(auto){
-  if(EXAM.submitted) return;
-  const unanswered = EXAM.answers.filter(a=>a===null).length;
-  if(!auto && unanswered>0){
-    if(!confirm(`You have ${unanswered} unanswered question(s). They will be marked incorrect. Submit anyway?`)) return;
-  }
-  EXAM.submitted=true;
-  clearInterval(EXAM.timerId);
-  showResults();
+  if(!EXAM||EXAM.submitted)return;
+  const unanswered=EXAM.answers.reduce((n,a,i)=>n+(!isAnswered(EXAM.questions[i],a)?1:0),0);
+  if(!auto&&unanswered>0&&!confirm(`You have ${unanswered} unanswered question(s). They will be marked incorrect. Submit anyway?`))return;
+  EXAM.submitted=true;clearInterval(EXAM.timerId);clearInterval(EXAM.breakTimerId);showResults();
+}
+
+function mistakeKey(q){return q.familyId||q.qid||String(stableHash(q.stem));}
+function loadMistakes(){try{return JSON.parse(localStorage_get('pmi_mistakes')||'{}');}catch(e){return {};}}
+function saveMistakesFromExam(){
+  const book=loadMistakes(); const now=new Date().toISOString();
+  EXAM.questions.forEach((q,i)=>{
+    if(isCorrectAnswer(q,EXAM.answers[i]))return;
+    const key=mistakeKey(q),old=book[key]||{};
+    book[key]={key,count:(old.count||0)+1,lastWrong:now,domain:q.domain,topic:q.topic,approach:q.approach,
+      stem:q.stem,caseTitle:q.caseTitle||'',correct:correctAnswerText(q),expl:q.expl,trap:q.trap,note:old.note||'',pretest:!!q.pretest};
+  });
+  localStorage_set('pmi_mistakes',JSON.stringify(book));updateMistakeCountBadge();
+}
+function saveMistakeNote(key,value){const book=loadMistakes();if(book[key]){book[key].note=value;localStorage_set('pmi_mistakes',JSON.stringify(book));}}
+function updateMistakeCountBadge(){
+  const el=document.getElementById('mistake-count');if(!el)return;const n=Object.keys(loadMistakes()).length;el.textContent=n?` (${n})`:'';
+}
+function clearMistakes(){if(confirm('Clear the entire mistake notebook?')){localStorage_set('pmi_mistakes','{}');renderMistakeNotebook();updateMistakeCountBadge();}}
+function openMistakeNotebook(){
+  document.getElementById('mock-home').style.display='block';document.getElementById('exam-select-area').style.display='none';
+  const panel=document.getElementById('mistake-panel');panel.style.display='block';renderMistakeNotebook();window.scrollTo({top:0,behavior:'smooth'});
+}
+function closeMistakeNotebook(){document.getElementById('mistake-panel').style.display='none';document.getElementById('exam-select-area').style.display='block';}
+function openMistakeNotebookFromResults(){document.getElementById('mock-result').style.display='none';openMistakeNotebook();}
+function renderMistakeNotebook(){
+  const panel=document.getElementById('mistake-panel'),book=loadMistakes();
+  const items=Object.values(book).sort((a,b)=>(b.count-a.count)||String(b.lastWrong).localeCompare(String(a.lastWrong)));
+  if(!items.length){panel.innerHTML=`<div class="qcard"><span class="eyebrow">Mistake notebook</span><h2>No saved mistakes yet</h2><p class="subtitle">Wrong answers will be saved here with the explanation, exam trap, and your personal note.</p><button class="btn primary" onclick="closeMistakeNotebook()">Back to exams</button></div>`;return;}
+  const topic={};items.forEach(x=>{const k=x.topic||'general';topic[k]=(topic[k]||0)+x.count;});
+  const weak=Object.entries(topic).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,v])=>`<span class="weak-chip">${escapeHtml(k)} · ${v}</span>`).join('');
+  panel.innerHTML=`<div class="notebook-head"><div><span class="eyebrow">Persistent review</span><h1 class="page">Mistake Notebook</h1><p class="subtitle">Saved in this browser. Repeated misses move to the top.</p></div><div class="navrow"><button class="btn ghost" onclick="closeMistakeNotebook()">Back to exams</button><button class="btn ghost" onclick="clearMistakes()">Clear all</button></div></div><div class="weak-area"><b>Weak areas</b><div>${weak}</div></div>${items.map(x=>`<div class="review-item wrong"><div class="q">${escapeHtml(x.stem)} <span class="dom">${escapeHtml(x.domain)}</span></div><div class="a key">Correct: ${escapeHtml(x.correct)}</div><div class="ex"><b>Why:</b> ${escapeHtml(x.expl)}<br><b style="color:var(--amber-deep)">Exam trap:</b> ${escapeHtml(x.trap)}</div><label class="note-label">My note<textarea oninput="saveMistakeNote('${escapeAttr(x.key)}',this.value)" placeholder="Write the rule, trigger word, or mistake pattern you want to remember…">${escapeHtml(x.note||'')}</textarea></label><div class="mistake-meta">Missed ${x.count} time(s) · ${escapeHtml(x.approach||'General')}${x.pretest?' · Included once as simulated pretest':''}</div></div>`).join('')}`;
 }
 
 function showResults(){
-  document.getElementById('mock-run').style.display='none';
-  const res=document.getElementById('mock-result');
-  res.style.display='block';
-
-  let correct=0;
-  const domStat={People:[0,0],Process:[0,0],Business:[0,0]};
-  EXAM.questions.forEach((q,i)=>{
-    domStat[q.domain][1]++;
-    if(EXAM.answers[i]===q.correct){correct++;domStat[q.domain][0]++;}
-  });
-  const pct=Math.round(correct/EXAM.count*100);
-  const pass=pct>=76; // ~ target proficiency threshold
-  // store best
-  const best=JSON.parse(localStorage_get('pmi_best')||'{}');
-  if(best[EXAM.no]===undefined || pct>best[EXAM.no]) best[EXAM.no]=pct;
-  localStorage_set('pmi_best',JSON.stringify(best));
-
-  const timeUsed = EXAM.timeLimit>0 ? (EXAM.timeLimit*60 - EXAM.remaining) : null;
-  const tstr = timeUsed!==null ? `${Math.floor(timeUsed/60)}m ${timeUsed%60}s used` : 'Untimed';
-
-  let domHtml='';
-  domHtml = Object.entries(domStat).map(([d,arr])=>{
-    const [c,t]=arr; const p=t?Math.round(c/t*100):0;
-    return `<div class="d"><div class="n">${d}</div><div class="v">${p}%</div>
-      <div style="font-size:12px;color:var(--muted)">${c}/${t} correct</div>
-      <div class="track"><i style="width:${p}%"></i></div></div>`;
-  }).join('');
-
-  // review — wrong first, then flagged, then rest
-  const order = EXAM.questions.map((q,i)=>i)
-    .sort((a,b)=>{
-      const wa=EXAM.answers[a]!==EXAM.questions[a].correct?0:1;
-      const wb=EXAM.answers[b]!==EXAM.questions[b].correct?0:1;
-      if(wa!==wb) return wa-wb;
-      return a-b;
-    });
-  const keys=['A','B','C','D'];
-  let review='';
-  order.forEach(i=>{
-    const q=EXAM.questions[i]; const a=EXAM.answers[i]; const ok=a===q.correct;
-    review+=`<div class="review-item ${ok?'right':'wrong'}">
-      <div class="q">${i+1}. ${q.stem} <span class="dom">${q.domain}</span></div>
-      ${a!==null?`<div class="a ${ok?'key':'you'}">Your answer: ${keys[a]}. ${q.options[a]}</div>`:`<div class="a you">Not answered</div>`}
-      ${!ok?`<div class="a key">Correct: ${keys[q.correct]}. ${q.options[q.correct]}</div>`:''}
-      <div class="ex"><b>Why:</b> ${q.expl}<br><b style="color:var(--amber-deep)">Exam trap:</b> ${q.trap}</div>
-    </div>`;
-  });
-
-  res.innerHTML=`
-    <div class="score-hero">
-      <span class="eyebrow" style="color:var(--amber)">Practice Exam ${String(EXAM.no).padStart(2,'0')} · Result</span>
-      <div class="big">${pct}%</div>
-      <div class="verdict ${pass?'pass':'fail'}">${pass?'Above Target — on track':'Below Target — keep practicing'}</div>
-      <div class="sub">${correct} of ${EXAM.count} correct · ${tstr}</div>
-    </div>
-    <div class="dom-break">${domHtml}</div>
-    <div class="navrow" style="margin:8px 0 22px">
-      <button class="btn primary" onclick="backHome()">Back to exams</button>
-      <button class="btn ghost" onclick="startExam(${EXAM.no})">Retake this exam (new draw)</button>
-    </div>
-    <span class="eyebrow">Full review · wrong answers first</span>
-    <h2 class="page" style="font-size:22px;margin:4px 0 14px">Answer explanations & traps</h2>
-    ${review}
-  `;
+  document.getElementById('mock-run').style.display='none';const res=document.getElementById('mock-result');res.style.display='block';
+  let correct=0,scored=0,pretest=0;const domStat={People:[0,0],Process:[0,0],Business:[0,0]};
+  EXAM.questions.forEach((q,i)=>{if(q.pretest){pretest++;return;}scored++;domStat[q.domain][1]++;if(isCorrectAnswer(q,EXAM.answers[i])){correct++;domStat[q.domain][0]++;}});
+  const pct=scored?Math.round(correct/scored*100):0;const reached=pct>=EXAM.target;
+  const best=JSON.parse(localStorage_get('pmi_best')||'{}');const old=typeof best[EXAM.no]==='object'?best[EXAM.no]?.score:best[EXAM.no];
+  if(old===undefined||pct>old)best[EXAM.no]={score:pct,attempt:EXAM.attemptNo,date:new Date().toISOString()};localStorage_set('pmi_best',JSON.stringify(best));
+  saveMistakesFromExam();
+  const timeUsed=EXAM.timeLimit>0?(EXAM.timeLimit*60-EXAM.remaining):null;const tstr=timeUsed!==null?`${Math.floor(timeUsed/60)}m ${timeUsed%60}s used`:'Untimed';
+  const domHtml=Object.entries(domStat).map(([d,[c,t]])=>{const p=t?Math.round(c/t*100):0;return `<div class="d"><div class="n">${d}</div><div class="v">${p}%</div><div style="font-size:12px;color:var(--muted)">${c}/${t} scored correct</div><div class="track"><i style="width:${p}%"></i></div></div>`;}).join('');
+  const order=EXAM.questions.map((q,i)=>i).sort((a,b)=>{const wa=isCorrectAnswer(EXAM.questions[a],EXAM.answers[a])?1:0,wb=isCorrectAnswer(EXAM.questions[b],EXAM.answers[b])?1:0;return wa-wb||a-b;});
+  const review=order.map(i=>{const q=EXAM.questions[i],a=EXAM.answers[i],ok=isCorrectAnswer(q,a),key=mistakeKey(q),note=(loadMistakes()[key]||{}).note||'';return `<div class="review-item ${ok?'right':'wrong'}"><div class="q">${i+1}. ${escapeHtml(q.stem)} <span class="dom">${escapeHtml(q.domain)}</span>${q.pretest?'<span class="pretest-tag">Simulated pretest · unscored</span>':''}</div><div class="a ${ok?'key':'you'}">Your answer: ${escapeHtml(userAnswerText(q,a))}</div>${!ok?`<div class="a key">Correct: ${escapeHtml(correctAnswerText(q))}</div>`:''}<div class="ex"><b>Why:</b> ${escapeHtml(q.expl)}<br><b style="color:var(--amber-deep)">Exam trap:</b> ${escapeHtml(q.trap)}</div>${!ok?`<label class="note-label">My note<textarea oninput="saveMistakeNote('${escapeAttr(key)}',this.value)" placeholder="Write what you will do differently next time…">${escapeHtml(note)}</textarea></label>`:''}</div>`;}).join('');
+  res.innerHTML=`<div class="score-hero"><span class="eyebrow" style="color:var(--amber)">Practice Exam ${String(EXAM.no).padStart(2,'0')} · Attempt ${EXAM.attemptNo}</span><div class="big">${pct}%</div><div class="verdict ${reached?'pass':'fail'}">${reached?'Practice target reached':'Practice target not reached'}</div><div class="sub">${correct} of ${scored} scored questions correct · ${pretest} simulated pretest question(s) unscored · ${tstr}</div><div class="score-disclaimer">PMI does not publish a fixed passing percentage. The ${EXAM.target}% threshold is your practice target only.</div></div><div class="dom-break">${domHtml}</div><div class="navrow result-actions"><button class="btn primary" onclick="backHome()">Back to exams</button><button class="btn ghost" onclick="startExam(${EXAM.no})">Retake with a fresh draw</button><button class="btn ghost" onclick="openMistakeNotebookFromResults()">Mistake Notebook</button></div><span class="eyebrow">Full review · wrong answers first</span><h2 class="page" style="font-size:22px;margin:4px 0 14px">Answer explanations, traps & notes</h2>${review}`;
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function backHome(){document.getElementById('mock-result').style.display='none';document.getElementById('mock-run').style.display='none';document.getElementById('mock-home').style.display='block';document.getElementById('mistake-panel').style.display='none';document.getElementById('exam-select-area').style.display='block';renderExamGrid();window.scrollTo({top:0,behavior:'smooth'});}
 
-function backHome(){
-  document.getElementById('mock-result').style.display='none';
-  document.getElementById('mock-run').style.display='none';
-  document.getElementById('mock-home').style.display='block';
-  renderExamGrid();
-  window.scrollTo({top:0,behavior:'smooth'});
+/* Training-source policy: official PMI defines the framework; third-party sources are supplemental. */
+function applyTrainingSourcePolicy(){
+  const pmiPmbok={label:'PMI — PMBOK® Guide Eighth Edition overview',note:'Nguồn chính thức cho 6 nguyên tắc, 7 performance domains và cấu trúc PMBOK 8.',url:'https://www.pmi.org/standards/pmbok'};
+  const pmiEco={label:'PMI — PMP® Examination Content Outline, July 2026',note:'Nguồn chính thức cho blueprint 33% People · 41% Process · 26% Business Environment và định dạng thi.',url:'https://www.pmi.org/-/media/pmi/documents/public/pdf/certifications/new-pmp-examination-content-outline-2026.pdf'};
+  const scrumPass={label:'ScrumPass — Project Management / PMP knowledge summaries',note:'Nguồn đối chiếu tiếng Việt. Một số bài cũ còn theo PMBOK 7 hoặc đề 230 phút; khi khác biệt, ưu tiên PMI PMBOK 8 và ECO 2026.',url:'https://scrumpass.com/category/project-management/'};
+  const sourceLinks=[
+    [/PMP Cheat Sheet/i,'https://www.youtube.com/watch?v=5qDVekl5_tA'],
+    [/100 Waterfall/i,'https://www.youtube.com/watch?v=xIH-u81XCxM'],
+    [/200 Agile/i,'https://www.youtube.com/watch?v=tNIHysh2ZW4'],
+    [/Drag\s*&?\s*Drop|Drag & Drop/i,'https://www.youtube.com/playlist?list=PLEWFSKHjyrwyuhLAiIY-9KPaQO52tx3Og'],
+    [/Andrew Ramdayal|Udemy PMP/i,'https://www.udemy.com/course/pmp-certification-exam-prep-course-pmbok-6th-edition/'],
+    [/ScrumPass/i,'https://scrumpass.com/category/project-management/']
+  ];
+  TRAINING.forEach(t=>{
+    t.sources=t.sources||[];
+    t.sources.forEach(src=>{if(!src.url){const hit=sourceLinks.find(([re])=>re.test(src.label||''));if(hit)src.url=hit[1];}});
+    if(!t.sources.some(s=>/ScrumPass/i.test(s.label)))t.sources.push(scrumPass);
+    if(['intro','business','governance','examprep'].includes(t.id)&&!t.sources.some(s=>/^PMI/i.test(s.label)))t.sources.push(pmiPmbok);
+    if(['business','examprep'].includes(t.id)&&!t.sources.some(s=>/Examination Content Outline/i.test(s.label)))t.sources.push(pmiEco);
+  });
 }
+
 
 /* =========================================================
    ALBERT PMI Prep — Supabase Auth + AI via Edge Function
@@ -8435,9 +9129,13 @@ async function pmiSignOut(){
 }
 
 /* ---------- init ---------- */
+applyTrainingSourcePolicy();
 buildToc();
 renderLesson(0);
 renderExamGrid();
+const countSetting = document.getElementById('set-count');
+if(countSetting) countSetting.addEventListener('change',()=>{ const t=document.getElementById('set-time'); if(t) delete t.dataset.manual; syncExamSettings(); });
+syncExamSettings();
 pmiInitAuth();
 
 </script>
