@@ -251,6 +251,7 @@
   #auth-bar button{border:0;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer;font:inherit;font-size:13px}
   .a-signup{background:var(--amber);color:var(--ink)}
   .a-signin{background:var(--green);color:#fff}
+  .a-auth-helper{background:#eef3f8;color:var(--ink)}
   .a-signout{background:var(--red);color:#fff}
   #auth-user-email{font-weight:700;color:var(--amber)}
   #auth-config-warning{color:#f0a08c;font-weight:700;max-width:1080px;margin:0 auto 6px}
@@ -736,12 +737,14 @@
           <div id="auth-config-warning" style="display:none">Chưa cấu hình Supabase URL/Key trong file HTML.</div>
           <div class="row">
             <div id="auth-logged-out">
-              <input id="auth-email" type="email" placeholder="Email" autocomplete="username">
-              <input id="auth-password" type="password" placeholder="Mật khẩu" autocomplete="current-password"
+              <input id="auth-email" type="email" name="albert-email" placeholder="Email" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+              <input id="auth-password" type="password" name="albert-password" placeholder="Mật khẩu" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false"
                      onkeydown="if(event.key==='Enter'){event.preventDefault();pmiSignIn();}">
               <div class="auth-actions">
                 <button class="a-signup" type="button" onclick="pmiSignUp()">Đăng ký</button>
                 <button class="a-signin" type="button" onclick="pmiSignIn()">Đăng nhập</button>
+                <button id="auth-toggle-password" class="a-auth-helper" type="button" onclick="pmiTogglePassword()">Hiện mật khẩu</button>
+                <button class="a-auth-helper" type="button" onclick="pmiForgotPassword()">Quên mật khẩu</button>
               </div>
             </div>
             <div id="auth-logged-in" style="display:none">
@@ -9439,10 +9442,12 @@ function applyTrainingSourcePolicy(){
    ========================================================= */
 var PMI_SUPABASE_URL = "https://pdsxreonrlrfcotszblj.supabase.co";
 var PMI_SUPABASE_KEY = "sb_publishable_HifldsDyYLTfaAVPhOVrAA_oCdXFAxw";
+var ALBERT_SHARED_AUTH_STORAGE_KEY = "sb-pdsxreonrlrfcotszblj-auth-token";
 window.pmiSupabase = null;
 var pmiCurrentUser = null;
 var pmiAuthReady = false;
 var pmiAuthSubscription = null;
+var pmiRecoveryInProgress = false;
 var pmiPendingFeature = null;
 var pmiApprovalStatus = 'signed_out'; // signed_out | checking | pending | approved | rejected | error
 var pmiIsAdmin = false;
@@ -9461,7 +9466,14 @@ var pmiApprovalError = '';
       console.warn('Supabase JS chưa tải được.');
       return;
     }
-    window.pmiSupabase = window.supabase.createClient(PMI_SUPABASE_URL.replace(/\/$/,''), PMI_SUPABASE_KEY);
+    window.pmiSupabase = window.supabase.createClient(PMI_SUPABASE_URL.replace(/\/$/,''), PMI_SUPABASE_KEY, {
+      auth: {
+        storageKey: ALBERT_SHARED_AUTH_STORAGE_KEY,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    });
   }catch(e){
     var warning = document.getElementById('auth-config-warning');
     if(warning){ warning.style.display='block'; warning.textContent='Không khởi tạo được Supabase.'; }
@@ -9892,15 +9904,20 @@ async function pmiInitAuth(){
   pmiAuthReady=true;
   try{
     if(!pmiAuthSubscription&&pmiSupabase.auth.onAuthStateChange){
-      var sub=pmiSupabase.auth.onAuthStateChange(async function(event,session){
-        pmiCurrentUser=session&&session.user?session.user:null;
-        if(pmiCurrentUser){
-          pmiApprovalStatus='checking';pmiIsAdmin=false;pmiApprovalError='';pmiUpdateAuthUI();
-          await pmiCheckApproval(true);
-        }else{
-          pmiResetApprovalState();pmiUpdateAuthUI();
-          if(event==='SIGNED_OUT')pmiHandleSignedOut();
-        }
+      var sub=pmiSupabase.auth.onAuthStateChange(function(event,session){
+        // Delay Supabase calls until the auth callback has returned. This avoids
+        // an auth lock/deadlock and also keeps HSK + PMI sessions synchronized.
+        setTimeout(async function(){
+          pmiCurrentUser=session&&session.user?session.user:null;
+          if(pmiCurrentUser){
+            pmiApprovalStatus='checking';pmiIsAdmin=false;pmiApprovalError='';pmiUpdateAuthUI();
+            if(event==='PASSWORD_RECOVERY')await pmiCompletePasswordRecovery();
+            await pmiCheckApproval(true);
+          }else{
+            pmiResetApprovalState();pmiUpdateAuthUI();
+            if(event==='SIGNED_OUT')pmiHandleSignedOut();
+          }
+        },0);
       });
       pmiAuthSubscription=sub&&sub.data?sub.data.subscription:sub;
     }
@@ -9912,16 +9929,79 @@ function pmiSetAuthBusy(busy){
   buttons.forEach(function(b){b.disabled=!!busy;});
 }
 
+function pmiNormalizeEmail(value){
+  return String(value||'').trim().toLowerCase();
+}
+
+function pmiFriendlyAuthError(error,password){
+  var raw=String(error&&error.message?error.message:error||'');
+  var low=raw.toLowerCase();
+  if(low.includes('invalid login credentials')){
+    var dotHint=String(password||'').endsWith('.')
+      ? '\n\nMật khẩu hiện đang kết thúc bằng dấu chấm (.). Nếu đây là ký tự nhập nhầm trên điện thoại, hãy xóa dấu chấm rồi thử lại.'
+      : '';
+    return 'Email hoặc mật khẩu không đúng. Lưu ý: bấm “Đăng ký” lần nữa không thay đổi mật khẩu của tài khoản đã tồn tại. Hãy kiểm tra mật khẩu cũ hoặc chọn “Quên mật khẩu”.'+dotHint;
+  }
+  if(low.includes('email not confirmed'))return 'Email chưa được xác nhận. Hãy mở thư xác nhận do hệ thống gửi rồi đăng nhập lại.';
+  if(low.includes('too many requests')||low.includes('rate limit'))return 'Bạn đã thử quá nhiều lần. Vui lòng chờ vài phút rồi thử lại.';
+  if(low.includes('password should be at least'))return 'Mật khẩu phải có ít nhất 6 ký tự.';
+  return raw||'Không thể kết nối hệ thống đăng nhập. Vui lòng thử lại.';
+}
+
+function pmiTogglePassword(){
+  var input=document.getElementById('auth-password');
+  var button=document.getElementById('auth-toggle-password');
+  if(!input)return;
+  var showing=input.type==='text';
+  input.type=showing?'password':'text';
+  if(button)button.textContent=showing?'Hiện mật khẩu':'Ẩn mật khẩu';
+  input.focus();
+}
+
+async function pmiForgotPassword(){
+  if(!window.pmiSupabase){alert('Chưa kết nối được hệ thống đăng nhập.');return;}
+  var input=document.getElementById('auth-email');
+  var email=pmiNormalizeEmail(input&&input.value);
+  if(!email)email=pmiNormalizeEmail(window.prompt('Nhập email đã đăng ký để nhận liên kết đặt lại mật khẩu:')||'');
+  if(!email)return;
+  pmiSetAuthBusy(true);
+  try{
+    var redirectTo=window.location.origin+window.location.pathname;
+    var r=await pmiSupabase.auth.resetPasswordForEmail(email,{redirectTo:redirectTo});
+    if(r.error)throw r.error;
+    alert('Đã gửi email đặt lại mật khẩu tới '+email+'. Hãy mở liên kết trong email và tạo mật khẩu mới. Nếu không thấy thư, kiểm tra Spam/Junk.');
+  }catch(e){
+    alert('Không gửi được email đặt lại mật khẩu: '+pmiFriendlyAuthError(e));
+  }finally{pmiSetAuthBusy(false);}
+}
+
+async function pmiCompletePasswordRecovery(){
+  if(pmiRecoveryInProgress||!window.pmiSupabase)return;
+  pmiRecoveryInProgress=true;
+  try{
+    var first=window.prompt('Tạo mật khẩu mới (ít nhất 6 ký tự):');
+    if(first===null)return;
+    if(first.length<6){alert('Mật khẩu mới phải có ít nhất 6 ký tự.');return;}
+    var second=window.prompt('Nhập lại mật khẩu mới:');
+    if(second!==first){alert('Hai lần nhập mật khẩu không khớp. Vui lòng mở lại liên kết trong email và thử lại.');return;}
+    var r=await pmiSupabase.auth.updateUser({password:first});
+    if(r.error)throw r.error;
+    alert('Đã đổi mật khẩu thành công. Mật khẩu mới dùng chung cho cả app HSK và app PMI.');
+  }catch(e){
+    alert('Không đổi được mật khẩu: '+pmiFriendlyAuthError(e));
+  }finally{pmiRecoveryInProgress=false;}
+}
+
 async function pmiSignUp(){
   if(!window.pmiSupabase){alert('Chưa cấu hình Supabase trong file HTML.');return;}
   var email=(document.getElementById('auth-email')||{}).value||'';
   var pass=(document.getElementById('auth-password')||{}).value||'';
-  email=email.trim();
+  email=pmiNormalizeEmail(email);
   if(!email||!pass){alert('Bạn cần nhập email và mật khẩu.');return;}
   pmiSetAuthBusy(true);
   try{
     var r=await pmiSupabase.auth.signUp({email:email,password:pass});
-    if(r.error){alert('Đăng ký lỗi: '+r.error.message);return;}
+    if(r.error)throw r.error;
     if(r.data&&r.data.session&&r.data.user){
       pmiCurrentUser=r.data.user;pmiApprovalStatus='checking';pmiIsAdmin=false;pmiUpdateAuthUI();
       var allowed=await pmiCheckApproval(true);
@@ -9931,8 +10011,10 @@ async function pmiSignUp(){
       else if(pmiApprovalStatus==='error')alert('Đăng ký thành công nhưng chưa kiểm tra được trạng thái duyệt.');
       else alert('Đăng ký thành công. Tài khoản đang chờ quản trị viên duyệt trước khi sử dụng app.');
     }else{
-      alert('Đăng ký thành công. Hãy xác nhận email nếu Supabase yêu cầu, sau đó đăng nhập. Tài khoản mới sẽ ở trạng thái chờ quản trị viên duyệt.');
+      alert('Đã gửi yêu cầu đăng ký/xác nhận email. Nếu email này đã có tài khoản, nút “Đăng ký” sẽ không đổi mật khẩu cũ. Khi đó hãy đăng nhập bằng mật khẩu cũ hoặc chọn “Quên mật khẩu”.');
     }
+  }catch(e){
+    alert('Đăng ký lỗi: '+pmiFriendlyAuthError(e,pass));
   }finally{pmiSetAuthBusy(false);}
 }
 
@@ -9940,12 +10022,12 @@ async function pmiSignIn(){
   if(!window.pmiSupabase){alert('Chưa cấu hình Supabase trong file HTML.');return;}
   var email=(document.getElementById('auth-email')||{}).value||'';
   var pass=(document.getElementById('auth-password')||{}).value||'';
-  email=email.trim();
+  email=pmiNormalizeEmail(email);
   if(!email||!pass){alert('Bạn cần nhập email và mật khẩu.');return;}
   pmiSetAuthBusy(true);
   try{
     var r=await pmiSupabase.auth.signInWithPassword({email:email,password:pass});
-    if(r.error){alert('Đăng nhập lỗi: '+r.error.message);return;}
+    if(r.error)throw r.error;
     pmiCurrentUser=r.data.user;pmiApprovalStatus='checking';pmiIsAdmin=false;pmiUpdateAuthUI();
     var passInput=document.getElementById('auth-password');if(passInput)passInput.value='';
     var allowed=await pmiCheckApproval(true);
@@ -9954,6 +10036,8 @@ async function pmiSignIn(){
     else if(pmiApprovalStatus==='rejected')alert('Đăng nhập thành công nhưng tài khoản đã bị từ chối.');
     else if(pmiApprovalStatus==='error')alert('Đăng nhập thành công nhưng hệ thống chưa kiểm tra được quyền truy cập.');
     else alert('Đăng nhập thành công. Tài khoản đang chờ quản trị viên duyệt.');
+  }catch(e){
+    alert('Đăng nhập lỗi: '+pmiFriendlyAuthError(e,pass));
   }finally{pmiSetAuthBusy(false);}
 }
 
