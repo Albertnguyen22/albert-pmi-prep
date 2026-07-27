@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- BUILD: ALBERT-PMI-SINGLE-FILE-ADMIN-APPROVAL-V1 · 2026-07-23 -->
+<!-- BUILD: ALBERT-PMI-PMBOK8-PMP24-DUAL-TUTOR-V2 · 2026-07-27 -->
 <!-- DEPLOYMENT: Upload only this file as /index.html in the GitHub Pages repository root. No .nojekyll or local assets are required. -->
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="albert-build" content="single-file-admin-approval-v1">
+<meta name="albert-build" content="pmbok8-pmp24-dual-tutor-v2">
 <title>ALBERT PMI Prep · PMBOK 8th Edition · PMP July 2026</title>
 <style>
   :root{
@@ -651,6 +651,78 @@
     #approval-gate .gate-actions{display:grid;grid-template-columns:1fr;width:100%}
     #approval-gate button{width:100%}
   }
+
+  /* PMBOK 8 + PMP Version 2.4 knowledge coverage */
+  .pmp24-board{background:var(--ink);color:var(--paper);border-radius:16px;padding:22px;margin:0 0 24px;box-shadow:var(--shadow)}
+  .pmp24-board .framework-head{margin-bottom:12px}
+  .pmp24-board h2{color:var(--paper);margin:2px 0 0}
+  .pmp24-board .framework-status{background:rgba(127,211,155,.14);color:#9ce0b3;border:1px solid rgba(127,211,155,.25)}
+  .coverage-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0}
+  .coverage-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 12px}
+  .coverage-stat b{display:block;color:var(--amber);font-family:var(--serif);font-size:23px;line-height:1.1}
+  .coverage-stat span{display:block;color:#aebdd0;font-size:11px;margin-top:3px}
+  .coverage-search{display:flex;gap:9px;margin:14px 0 10px}
+  .coverage-search input{flex:1;min-width:0;background:rgba(255,255,255,.08);color:var(--paper);border:1px solid rgba(255,255,255,.18);border-radius:9px;padding:10px 12px;font:inherit}
+  .coverage-search input::placeholder{color:#91a3b7}
+  .coverage-search button{border:0;border-radius:9px;background:var(--amber);color:var(--ink);font:inherit;font-weight:800;padding:0 15px;cursor:pointer}
+  .chapter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .chapter-card{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);border-radius:10px;padding:11px;color:var(--paper);cursor:pointer;text-align:left;font:inherit}
+  .chapter-card:hover{border-color:var(--amber);background:rgba(224,145,47,.10)}
+  .chapter-card b{display:block;font-size:12.5px;line-height:1.35}
+  .chapter-card span{display:block;color:#9fb0c3;font-size:10.5px;margin-top:4px}
+  .slide-results{display:none;margin-top:10px;border:1px solid rgba(255,255,255,.14);border-radius:10px;overflow:hidden}
+  .slide-results.open{display:block}
+  .slide-result{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:center;width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--paper);padding:9px 11px;font:inherit;cursor:pointer}
+  .slide-result:last-child{border-bottom:0}.slide-result:hover{background:rgba(224,145,47,.12)}
+  .slide-result .slide-no{font-family:var(--mono);font-size:10px;color:var(--amber)}
+  .slide-result .slide-title{font-size:12.5px}.slide-result .slide-module{font-size:10px;color:#9fb0c3;text-align:right}
+  .coverage-note{font-size:11.5px;color:#9fb0c3;margin:10px 0 0}
+
+  /* Dual-source Study Tutor */
+  .tutor-modes{display:flex;gap:7px;padding:12px 22px 0;flex-wrap:wrap}
+  .tutor-modes button{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#aebdd0;border-radius:9px;padding:8px 12px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+  .tutor-modes button.active{background:var(--amber);border-color:var(--amber);color:var(--ink)}
+  .tutor-mode-note{padding:8px 22px 0;color:#9fb0c3;font-size:11.5px}
+  .tutor-config{margin:10px 22px 0;padding:12px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(255,255,255,.05)}
+  .tutor-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .tutor-config label{display:block;color:#aebdd0;font-size:10.5px;font-weight:800}
+  .tutor-config select,.tutor-config input{display:block;width:100%;margin-top:5px;background:var(--ink-2);color:var(--paper);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 9px;font:inherit;font-size:12px}
+  .tutor-config small{display:block;color:#8fa2b8;font-size:10.5px;line-height:1.45;margin-top:8px}
+  .tutor-config a{color:#f4b765}
+  .tutor.auth-locked .tutor-modes,.tutor.auth-locked .tutor-mode-note,.tutor.auth-locked .tutor-config,.tutor.auth-locked .chat,.tutor.auth-locked .chips,.tutor.auth-locked .composer{opacity:.18;filter:blur(.4px);pointer-events:none;user-select:none}
+
+  /* PMI-style project template builder */
+  .template-builder{margin-top:26px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  .template-builder h2{font-family:var(--serif);font-size:23px;margin:2px 0 4px}
+  .template-builder .template-sub{font-size:12.5px;color:var(--muted);margin:0 0 14px}
+  .template-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px}
+  .template-grid label{font-size:11px;font-weight:800;color:var(--muted)}
+  .template-grid select,.template-grid input,.template-context,.template-output{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:9px 10px;font:inherit;font-size:13px}
+  .template-context{min-height:72px;resize:vertical;margin:10px 0 0}
+  .template-output{min-height:330px;resize:vertical;font-family:var(--mono);font-size:12px;line-height:1.5;background:#fbfaf6}
+  .template-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:11px 0}
+  .template-actions button{border:0;border-radius:8px;padding:9px 12px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+  .template-actions .generate{background:var(--ink);color:var(--paper)}
+  .template-actions .copy,.template-actions .download{background:var(--paper-2);color:var(--ink);border:1px solid var(--line)}
+  .template-actions .enhance{background:var(--amber);color:var(--ink)}
+  .template-status{font-size:11px;color:var(--muted);margin-left:auto}
+  .template-disclaimer{font-size:10.5px;color:var(--muted);margin:8px 0 0}
+
+  @media(max-width:820px){
+    .chapter-grid{grid-template-columns:1fr 1fr}
+    .coverage-stats{grid-template-columns:1fr 1fr}
+    .template-grid{grid-template-columns:1fr 1fr}
+    .template-grid label:first-child{grid-column:1/-1}
+  }
+  @media(max-width:600px){
+    .pmp24-board{padding:17px 14px}.chapter-grid,.template-grid,.tutor-config-grid{grid-template-columns:1fr}
+    .template-grid label:first-child{grid-column:auto}.coverage-search{flex-direction:column}.coverage-search button{min-height:42px}
+    .slide-result{grid-template-columns:54px 1fr}.slide-result .slide-module{grid-column:2;text-align:left}
+    .tutor-modes,.tutor-mode-note{padding-left:16px;padding-right:16px}.tutor-config{margin-left:16px;margin-right:16px}
+    .tutor-head .dot{flex-basis:auto!important;order:0!important;margin-left:0!important}
+    .tutor-head #tutor-ctx{flex-basis:100%;order:3;margin-left:0}
+    .template-builder{padding:18px 15px}.template-status{width:100%;margin-left:0}
+  }
 </style>
 
 </head>
@@ -822,6 +894,26 @@
       <div class="source-policy"><b>Thứ tự ưu tiên nguồn:</b> PMI PMBOK 8 và PMP ECO 2026 là nguồn chuẩn. David McLachlan, Andrew Ramdayal và ScrumPass là nguồn học bổ sung để hệ thống hóa, giải thích và luyện câu hỏi. Khi tài liệu cũ khác khung 2026, app ưu tiên nguồn PMI hiện hành.</div>
     </section>
 
+    <section class="pmp24-board" aria-label="PMP Version 2.4 slide coverage">
+      <div class="framework-head">
+        <div><span class="eyebrow" style="color:var(--amber)">Version 2.4 · Traceability</span><h2>843-slide Coverage Map</h2></div>
+        <span class="framework-status" id="pmp24-coverage-status">Đang lập chỉ mục…</span>
+      </div>
+      <div class="coverage-stats">
+        <div class="coverage-stat"><b id="pmp24-slide-count">843</b><span>slides được lập chỉ mục</span></div>
+        <div class="coverage-stat"><b>15</b><span>chapter ranges</span></div>
+        <div class="coverage-stat"><b>17</b><span>module học song ngữ</span></div>
+        <div class="coverage-stat"><b>2</b><span>hướng Study Tutor</span></div>
+      </div>
+      <div class="coverage-search">
+        <input id="pmp24-search" type="search" placeholder="Tìm theo slide, chủ đề hoặc thuật ngữ: EVM, stakeholder, Scrum…" oninput="renderPmp24Coverage(this.value)">
+        <button type="button" onclick="document.getElementById('pmp24-search').value='';renderPmp24Coverage('')">Xoá</button>
+      </div>
+      <div class="chapter-grid" id="pmp24-chapters"></div>
+      <div class="slide-results" id="pmp24-search-results" aria-live="polite"></div>
+      <p class="coverage-note">Mỗi số slide trong PMP Version 2.4 được ánh xạ tới một module. App dùng bản tóm lược nguyên bản và thuật ngữ để học/tra cứu; không sao chép nguyên văn toàn bộ slide có bản quyền. Sáu slide chỉ có hình vẫn được giữ trong chỉ mục theo chapter.</p>
+    </section>
+
     <div class="train-wrap">
       <nav class="toc" id="toc" aria-label="Lesson navigation"></nav>
       <div>
@@ -832,15 +924,37 @@
         </div>
         <article class="lesson" id="lesson"></article>
 
-        <!-- AI Tutor -->
+        <!-- Dual-source Study Tutor -->
         <div class="tutor auth-locked" id="pmi-tutor">
           <div class="tutor-head">
             <span class="dot"></span>
-            <b>AI Study Tutor</b>
+            <b>Study Tutor · 2 hướng</b>
             <span id="tutor-ctx">Context: —</span>
           </div>
+          <div class="tutor-modes" role="tablist" aria-label="Study Tutor data source">
+            <button id="tutor-mode-local" class="active" type="button" role="tab" aria-selected="true" onclick="setTutorMode('local')">① Local Knowledge</button>
+            <button id="tutor-mode-external" type="button" role="tab" aria-selected="false" onclick="setTutorMode('external')">② External AI</button>
+          </div>
+          <div class="tutor-mode-note" id="tutor-mode-note">Tra cứu từ PMBOK 8, PMP ECO 2026 và bản đồ 843 slide Version 2.4 — không gọi API ngoài.</div>
+          <div class="tutor-config" id="tutor-config" hidden>
+            <div class="tutor-config-grid">
+              <label>Kết nối
+                <select id="tutor-transport" disabled aria-label="Kết nối AI được bảo vệ">
+                  <option value="gateway">Supabase Gateway · API key được bảo vệ</option>
+                </select>
+              </label>
+              <label>Model
+                <select id="tutor-model">
+                  <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite · khuyến nghị</option>
+                  <option value="gemini-3.6-flash">Gemini 3.6 Flash · chuyên sâu hơn</option>
+                </select>
+              </label>
+            </div>
+            <small id="tutor-config-help">API key chỉ được lưu trong Supabase Secrets và không nằm trong file HTML. Edge Function xác thực đăng nhập, kiểm tra trạng thái đã phê duyệt, ưu tiên Gemini và tự chuyển sang OpenRouter khi Gemini hết quota hoặc tạm lỗi.</small>
+            <small id="tutor-runtime-status" aria-live="polite">Trạng thái AI: sẵn sàng qua Supabase Gateway.</small>
+          </div>
           <div class="chat" id="chat">
-            <div class="hint">Hỏi về chủ đề đang học, nhờ giải thích thuật ngữ, hoặc xin ví dụ kiểu đề thi — bằng <b>tiếng Anh hoặc tiếng Việt</b>. Tutor sẽ trả lời đúng ngôn ngữ bạn dùng.<br><span style="opacity:.7">Ask in English or Vietnamese — the tutor replies in your language.</span></div>
+            <div class="hint">Chế độ <b>Local Knowledge</b> trả lời từ dữ liệu có sẵn trong app và dẫn về module/slide liên quan. Chuyển sang <b>External AI</b> khi cần ví dụ sâu hơn hoặc giải thích theo ngữ cảnh mới.</div>
           </div>
           <div class="chips" id="chips"></div>
           <div class="composer">
@@ -857,6 +971,42 @@
             </div>
           </div>
         </div>
+
+        <section class="template-builder" id="template-builder">
+          <span class="eyebrow">Project artifacts · Biểu mẫu dự án</span>
+          <h2>PMI-style Template Builder</h2>
+          <p class="template-sub">Tạo nhanh artifact theo thực hành PMI/PMBOK 8 cho predictive, agile hoặc hybrid; sau đó chỉnh trực tiếp hoặc nhờ External AI hoàn thiện theo bối cảnh dự án.</p>
+          <div class="template-grid">
+            <label>Loại template
+              <select id="template-type"></select>
+            </label>
+            <label>Tên dự án
+              <input id="template-project" type="text" placeholder="Ví dụ: Core Network Modernization">
+            </label>
+            <label>Cách tiếp cận
+              <select id="template-approach"><option>Hybrid</option><option>Predictive</option><option>Agile / Adaptive</option></select>
+            </label>
+            <label>Project Manager
+              <input id="template-pm" type="text" placeholder="Họ tên PM">
+            </label>
+            <label>Sponsor / Product Owner
+              <input id="template-sponsor" type="text" placeholder="Họ tên hoặc vai trò">
+            </label>
+            <label>Ngày lập
+              <input id="template-date" type="date">
+            </label>
+          </div>
+          <textarea id="template-context" class="template-context" placeholder="Bối cảnh, mục tiêu, phạm vi, ràng buộc, tiêu chí thành công hoặc dữ liệu bạn đã có…"></textarea>
+          <div class="template-actions">
+            <button class="generate" type="button" onclick="generateProjectTemplate()">Tạo template</button>
+            <button class="enhance" type="button" onclick="enhanceProjectTemplate()">AI hoàn thiện</button>
+            <button class="copy" type="button" onclick="copyProjectTemplate()">Sao chép</button>
+            <button class="download" type="button" onclick="downloadProjectTemplate()">Tải .md</button>
+            <span class="template-status" id="template-status">Chưa tạo template.</span>
+          </div>
+          <textarea id="template-output" class="template-output" spellcheck="false" placeholder="Template sẽ xuất hiện tại đây và có thể chỉnh sửa trực tiếp."></textarea>
+          <p class="template-disclaimer">Đây là bộ biểu mẫu PMI-style do app tạo để hỗ trợ công việc, không phải biểu mẫu chính thức hoặc tài liệu được PMI chứng thực. Hãy tailoring theo governance và quy định của tổ chức.</p>
+        </section>
 
         <div id="account-footer" style="display:none">
           <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Module 16 · Exam Prep Strategy</span></div>
@@ -1575,6 +1725,1058 @@ const TRAINING = [
 ]
 }
 ];
+
+/* ================= PMP VERSION 2.4 · 843-SLIDE TRACEABILITY =================
+   The deck is indexed by slide number/title and summarized into original,
+   bilingual learning notes. Full copyrighted slide bodies are not republished.
+   ========================================================================== */
+const PMP24_CHAPTERS = [
+  {start:1,end:45,id:'intro',title:'Project Management Introduction',concepts:'project vs operations, value delivery, project/program/portfolio, development approaches, lifecycle, EEF/OPA, charter'},
+  {start:46,end:96,id:'stakeholder',title:'Stakeholder Management',concepts:'stakeholder register, organizational structures, engagement planning, issue log, monitor engagement'},
+  {start:97,end:139,id:'communications',title:'Communications Management',concepts:'communication types/media/channels, theories, active listening, meetings, reports, monitoring'},
+  {start:140,end:200,id:'team',title:'Team Management',concepts:'roles, team formation, co-location, Tuckman, coaching, motivation, conflict, leadership'},
+  {start:201,end:253,id:'scope',title:'Scope Management',concepts:'requirements, scope plan/statement, RTM, WBS, control scope, validate scope'},
+  {start:254,end:308,id:'schedule',title:'Schedule Management',concepts:'activities, PDM, estimates, critical path, compression, schedule control'},
+  {start:309,end:363,id:'finance',title:'Cost Management',concepts:'cost types, estimating, reserves, budget, EVM, forecasting, cost control'},
+  {start:364,end:390,id:'resource',title:'Resource Management',concepts:'resource plan, RBS/RAM, estimate, acquire, develop, control resources'},
+  {start:391,end:454,id:'quality',title:'Quality Management',concepts:'quality planning, assurance/control, COQ, metrics, statistics, seven quality tools'},
+  {start:455,end:534,id:'risk',title:'Risk Management',concepts:'risk vs issue, attitudes, register/report, qualitative/quantitative analysis, responses, monitoring'},
+  {start:535,end:600,id:'agile',title:'Agile Mindset & Scrum',concepts:'Agile values/principles, Scrum roles/events/artifacts, pillars, values, Definition of Done'},
+  {start:601,end:653,id:'value',title:'Value-driven Delivery',concepts:'user stories, 3Cs, INVEST, prioritization, Kanban/WIP, flow metrics, verification/validation'},
+  {start:654,end:716,id:'adaptive',title:'Adaptive Planning & Tracking',concepts:'planning onion, rolling wave, story points, boards, burndown, velocity, roadmap, release planning'},
+  {start:717,end:783,id:'procurement',title:'Procurement Management',concepts:'make-or-buy, SOW, RFI/RFQ/RFP, contract types, source selection, control, agile contracting'},
+  {start:784,end:843,id:'examprep',title:'Exam Prep Strategy',concepts:'learning habits, practice, question technique, exam logistics, retake and post-PMP plan'}
+];
+
+const PMP24_VISUAL_ONLY_SLIDES = new Set([353,555,585,631,798,835]);
+
+const PMP24_SLIDE_DATA = `
+0001	Project Management Introduction
+0002	Overview
+0003	Group discussion
+0004	1. Introduction: What is Project?
+0005	1. Introduction: Project vs Operation
+0006	1. Introduction: Where projects come from?
+0007	Why organizations initiate a project?
+0008	Why do we need to manage project?
+0009	1. Introduction: Who are Stakeholders?
+0010	Project Management Expectation vs Reality
+0011	Different Development Approaches
+0012	1. Introduction
+0013	1. Introduction
+0014	Group Discussion
+0015	2. System for Value Delivery
+0016	2. System for Value Delivery
+0017	2. System for Value Delivery
+0018	Group discussion : Phân biệt các khái niệm
+0019	Project, Program, Portfolio Comparison
+0020	3. Development Approaches
+0021	3. Development Approaches
+0022	Traditional approach: 5 Process Groups
+0023	Agile approach: Principle-based
+0024	3. Development Approaches
+0025	3. Development Approaches: Hybrid lifecycle
+0026	4. Project Lifecycle
+0027	4. Project Lifecycle
+0028	4. Project Lifecycle
+0029	Group discussion
+0030	Characteristics of Project Lifecycle
+0031	4. Project Lifecycle
+0032	Group discussion
+0033	5. Project Influential Factors
+0034	5. Project Influential Factors
+0035	5. Project Influential Factors
+0036	Group discussion
+0037	6. Starting a project
+0038	6. Starting a project
+0039	Group discussion
+0040	6. Starting a project
+0041	6. Starting a project: Project Charter
+0042	Review
+0043	Group discussion
+0044	Assignment!!!
+0045	www.pma.edu.vn
+0046	Project Stakeholder Management
+0047	Overview
+0048	Group discussion
+0049	1. Introduction: Who are stakeholders?
+0050	Why we need to manage stakeholders?
+0051	2. Identify Stakeholders
+0052	2. Identify Stakeholders
+0053	Group discussion
+0054	2. Identify Stakeholders
+0055	2. Identify Stakeholders
+0056	2. Identify Stakeholders
+0057	2. Identify Stakeholders
+0058	Group discussion : Identify Stakeholders
+0059	Stakeholder Register Sample
+0060	3. Organizational Structures
+0061	3. Organizational Structures: Projectized
+0062	3. Organizational Structures: Functional
+0063	3. Organizational Structures: Strong Matrix
+0064	3. Organizational Structures
+0065	3. Organizational Structures
+0066	3. Organizational Structures
+0067	3. Organizational Structures
+0068	Group discussion
+0069	Advantages & Disadvantages
+0070	Advantages & Disadvantages
+0071	3. Organizational Structures: Weak matrix
+0072	3. Organizational Structures: Balanced matrix
+0073	Group discussion
+0074	3. Organizational Structures: Composite
+0075	4. Plan Stakeholder Engagement
+0076	4. Plan Stakeholder Engagement
+0077	Group discussion
+0078	4. Plan Stakeholder Engagement
+0079	4. Plan Stakeholder Engagement
+0080	4. Plan Stakeholder Engagement
+0081	4. Plan Stakeholder Engagement
+0082	Group discussion: Lên kế hoạch Quản lý Bên liên
+0083	Stakeholder Engagement Plan
+0084	5. Manage Stakeholder Engagement
+0085	Group discussion
+0086	5. Manage Stakeholder Engagement
+0087	5. Manage Stakeholder Engagement
+0088	5. Manage Stakeholder Engagement
+0089	Issue Log
+0090	6. Monitor Stakeholder Engagement
+0091	6. Monitor Stakeholder Engagement
+0092	6. Monitor Stakeholder Engagement
+0093	Review
+0094	Assignment!!!
+0095	Group discussion
+0096	www.pma.edu.vn
+0097	Project Communications Management
+0098	Overview
+0099	Group discussion: Case study
+0100	1. Introduction: What is Project
+0101	1. Introduction: Communications Types
+0102	1. Introduction: Communication Types
+0103	1. Introduction: Communication Media
+0104	1. Introduction: Project Manager’s communication
+0105	2. Plan Communication Management
+0106	2. Plan Communication Management
+0107	2. Plan Communication Management
+0108	2. Plan Communication Management
+0109	2. Plan Communication Management
+0110	Group discussion: Lên kế hoạch giao tiếp
+0111	Communication Management Plan Sample
+0112	3. Communication theories
+0113	Group discussion : Xếp vào vị trí phù hợp
+0114	3. Communication theories
+0115	3. Communication theories
+0116	3. Communication theories
+0117	3. Communication theories
+0118	3. Communication theories
+0119	Group discussion
+0120	4. Manage Communications
+0121	Group discussion : Mức độ tương tác
+0122	4. Manage communications
+0123	4. Manage communications
+0124	4. Manage communications
+0125	Group discussion : Phân biệt 5 cấp độ lắng nghe
+0126	4. Manage communications
+0127	4. Manage communications
+0128	Group discussion: Xây dựng Meeting Todo-list
+0129	4. Manage communications
+0130	4. Manage communications
+0131	Group discussion : Phân biệt các loại báo cáo
+0132	Status Report Sample
+0133	4. Manage communications
+0134	5. Monitor Communications
+0135	5. Monitor Communications
+0136	Review
+0137	Assignment!!!
+0138	Group discussion
+0139	www.pma.edu.vn
+0140	Project Team Management
+0141	Overview
+0142	Group discussion
+0143	1. Introduction: Team vs Group
+0144	1. Introduction: Great leaders
+0145	1. Introduction: Manager vs Leader
+0146	2. Roles & Responsibilities
+0147	2. Roles & Responsibilities
+0148	2. Roles & Responsibilities
+0149	Group discussion
+0150	3. Form team
+0151	3. Form team
+0152	3. Form team
+0153	Group discussion
+0154	3. Form team
+0155	3. Form team: Co-location benefits
+0156	3. Form team:Caves and Common
+0157	3. Form team
+0158	3. Form team
+0159	3. Form team
+0160	4. Develop Team
+0161	Group discussion
+0162	4. Develop Team
+0163	4. Develop Team
+0164	4. Develop Team
+0165	Group discussion
+0166	Group discussion
+0167	Group discussion
+0168	Group discussion
+0169	Group discussion
+0170	5 stages of Team Development – Tuckman’s ladder
+0171	Group discussion
+0172	4. Develop Team
+0173	Coaching at the team and individual levels
+0174	5. Motivate Team
+0175	5. Motivate Team
+0176	Group discussion: Tháp Maslow
+0177	5. Motivate Team
+0178	5. Motivate Team
+0179	5. Motivate Team
+0180	5. Motivate Team
+0181	6. Manage Team
+0182	6. Manage Team
+0183	6. Manage Team
+0184	6. Manage Team
+0185	Group discussion
+0186	6. Manage Team
+0187	6. Manage Team
+0188	6. Manage Team
+0189	6. Manage Team
+0190	Group discussion
+0191	6. Manage Team
+0192	6. Manage Team
+0193	6. Manage Team
+0194	Group discussion
+0195	6. Manage Team
+0196	Summary
+0197	Summary
+0198	Assignment!!!
+0199	Group discussion
+0200	www.pma.edu.vn
+0201	Project Scope Management
+0202	Overview
+0203	Group discussion
+0204	1. Introduction
+0205	1. Introduction: What is Requirement?
+0206	Group discussion: Phân biệt sự khác nhau
+0207	1. Introduction
+0208	Common mistakes in project scope management
+0209	2. Plan Scope Management
+0210	2. Plan Scope Management
+0211	2. Plan Scope Management
+0212	2. Plan Scope Management
+0213	3. Collect Requirements
+0214	Common mistakes in requirement management
+0215	Group discussion
+0216	3. Collect Requirements
+0217	3. Collect Requirements
+0218	3. Collect Requirements
+0219	3. Collect Requirements
+0220	3. Collect Requirements
+0221	3. Collect Requirements
+0222	3. Collect Requirements
+0223	3. Collect Requirements
+0224	4. Define Scope
+0225	Group discussion
+0226	4. Define Scope
+0227	4. Define Scope
+0228	4. Define Scope
+0229	4. Define Scope
+0230	Group discussion: Xây dựng Scope Statement
+0231	Project Scope Statement Sample
+0232	5. Create WBS
+0233	Group discussion: Mối liên hệ giữa các khái niệm
+0234	5. Create WBS
+0235	5. Create WBS
+0236	5. Create WBS
+0237	5. Create WBS
+0238	5. Create WBS
+0239	5. Create WBS
+0240	5. Create WBS
+0241	Group discussion: Xây dựng WBS
+0242	6. Control Scope
+0243	Group discussion
+0244	6. Control Scope
+0245	6. Control Scope
+0246	7. Validate Scope
+0247	Group discussion
+0248	7. Validate Scope
+0249	7. Validate Scope
+0250	Review
+0251	Assignment!!!
+0252	Group discussion
+0253	www.pma.edu.vn
+0254	Project Schedule Management
+0255	Overview
+0256	Group Discussion:
+0257	1. Introduction: What is project schedule?
+0258	1. Introduction: Why schedule management?
+0259	1. Introduction: Why schedule management?
+0260	2. Plan Schedule Management
+0261	2. Plan Schedule Management
+0262	Group discussion
+0263	3. Define Activities
+0264	3. Define Activities
+0265	3. Define Activities
+0266	3. Define Activities
+0267	Group discussion
+0268	3. Define Activities
+0269	3. Define Activities
+0270	4. Sequence Activities
+0271	4. Sequence Activities
+0272	4. Sequence Activities
+0273	4. Sequence Activities
+0274	Group discussion
+0275	4. Sequence Activities
+0276	4. Sequence Activities
+0277	4. Sequence Activities
+0278	5. Estimate Activity Durations
+0279	5. Estimate Activity Durations
+0280	5. Estimate Activity Durations
+0281	5. Estimate Activity Durations
+0282	5. Estimate Activity Durations
+0283	Group discussion
+0284	5. Estimate Activity Durations
+0285	5. Estimate Activity Durations
+0286	5. Estimate Activity Durations
+0287	5. Estimate Activity Durations
+0288	6. Develop Schedule
+0289	6. Develop Schedule
+0290	Group discussion : Critical Path Method
+0291	6. Develop Schedule
+0292	6. Develop Schedule
+0293	6. Develop Schedule
+0294	6. Develop Schedule
+0295	6. Develop Schedule
+0296	6. Develop Schedule
+0297	6. Develop Schedule
+0298	6. Develop Schedule
+0299	6. Develop Schedule
+0300	6. Develop Schedule
+0301	6. Develop Schedule
+0302	7. Control Schedule
+0303	7. Control Schedule
+0304	Review
+0305	Review
+0306	Assignment!!!
+0307	Group discussion
+0308	www.pma.edu.vn
+0309	Project Cost Management
+0310	Overview
+0311	Group discussion: Case-study
+0312	1. Introduction: What is Project Cost ?
+0313	Group discussion
+0314	1. Introduction: Types of Project Cost
+0315	1. Introduction: Why Project Cost Management?
+0316	2. Plan Cost Management
+0317	2. Plan Cost Management
+0318	Group discussion: Sắp xếp vào ô phù hợp
+0319	2. Plan Cost Management
+0320	3. Estimate Costs
+0321	3. Estimate Costs
+0322	3. Estimate Costs
+0323	3. Estimate Costs
+0324	• Đào tạo • Kiểm thử phá hủy
+0325	3. Estimate Costs
+0326	3. Estimate Costs
+0327	3. Estimate Costs
+0328	3. Estimate Costs
+0329	3. Estimate Costs
+0330	3. Estimate Costs
+0331	Group discussion: Tìm sự tương đồng và xếp cột phù
+0332	4. Determine Budget
+0333	4. Determine Budget
+0334	4. Determine Budget
+0335	4. Determine Budget
+0336	4. Determine Budget
+0337	4. Determine Budget
+0338	4. Determine Budget
+0339	Group discussion
+0340	5. Control Costs
+0341	5. Control Costs
+0342	Garden Building Work Package
+0343	How much over/under budget are we?
+0344	Project Progress
+0345	Project Progress
+0346	Planned Value
+0347	5. Control Costs
+0348	Group discussion
+0349	5. Control Costs
+0350	Earning Rules – Progress Reporting
+0351	Group discussion: Dự án làm 5km đường
+0352	Group discussion
+0353	(image / no extractable text)
+0354	5. Control Costs
+0355	SV = PV AC = CV
+0356	Group discussion: Dự án làm 5km đường
+0357	5. Control Costs
+0358	5. Control Costs
+0359	Group discussion
+0360	Group discussion
+0361	5. Control Costs
+0362	5. Control Costs
+0363	Group discussion
+0364	Project Resource Management
+0365	Overview
+0366	1. Introduction: What is Project Resource?
+0367	1. Introduction: What is Project Resource?
+0368	2. Plan Resource Management
+0369	2. Plan Resource Management
+0370	2. Plan Resource Management
+0371	2. Plan Resource Management
+0372	Group discussion
+0373	3. Estimate Activity Resources
+0374	3. Estimate Activity Resources
+0375	3. Estimate Activity Resources
+0376	3. Estimate Activity Resources
+0377	3. Estimate Activity Resources
+0378	4. Acquire Resources
+0379	4. Acquire Resources
+0380	4. Acquire Resources
+0381	4. Acquire Resources
+0382	4. Acquire Resources
+0383	5. Control Resources
+0384	5. Control Resources
+0385	Review
+0386	Review
+0387	Summary
+0388	Assignment!!!
+0389	Group discussion
+0390	www.pma.edu.vn
+0391	Project Quality Management
+0392	Overview
+0393	Group discussion: Bên nào chất lượng cao hơn ?
+0394	1. Introduction: Product Attributes
+0395	1. Introduction: What is Quality?
+0396	Group discussion
+0397	1. Introduction: Which one is higher quality?
+0398	1. Introduction
+0399	1. Introduction: Which one is more accurate?
+0400	1. Introduction: Accuracy vs Precision
+0401	1. Introduction: Production system
+0402	Group discussion: Phân biệt 2 vai trò
+0403	1. Introduction: Quality Assurance vs Quality
+0404	1. Introduction
+0405	1. Introduction: Why do we need Quality?
+0406	2. Plan Quality Management
+0407	2. Plan Quality Management
+0408	Group discussion: Làm rõ từng loại chi phí
+0409	2. Plan Quality Management
+0410	2. Plan Quality Management
+0411	2. Plan Quality Management
+0412	2. Plan Quality Management
+0413	2. Plan Quality Management
+0414	2. Plan Quality Management
+0415	Group discussion: Xây dựng Metric đo đạc
+0416	Group discussion: Đưa ra Metric cho dự án của bạn
+0417	3. Manage Quality
+0418	3. Manage Quality
+0419	3. Manage Quality
+0420	3. Manage Quality
+0421	Group discussion: Xây dựng Quality Checklist
+0422	Group discussion: Đưa ra Quality Checklist cho dự
+0423	3. Manage Quality
+0424	3. Manage Quality
+0425	3. Manage Quality
+0426	3. Manage Quality
+0427	3. Manage Quality
+0428	3. Manage Quality
+0429	4. Control Quality
+0430	4. Control Quality
+0431	4. Control Quality
+0432	Group discussion: Phân biệt sự khác nhau
+0433	Group discussion: Phân biệt sự khác nhau
+0434	4. Control Quality
+0435	Statistical and Probability Terms
+0436	4. Control Quality
+0437	4. Control Quality
+0438	Group discussion:
+0439	4. Control Quality
+0440	5. Seven Basic Quality Tools
+0441	5. Seven Basic Quality Tools
+0442	5. Seven Basic Quality Tools: Control Chart
+0443	5. Seven Basic Quality Tools
+0444	5. Seven Basic Quality Tools
+0445	5. Seven Basic Quality Tools
+0446	5. Seven Basic Quality Tools
+0447	5. Seven Basic Quality Tools
+0448	Group Discussion: Sắp xếp mức độ hiệu quả
+0449	5 levels of increasingly effective quality
+0450	Review
+0451	Review
+0452	Assignment!!!
+0453	Group discussion
+0454	www.pma.edu.vn
+0455	Project Risk Management
+0456	Overview
+0457	Group discussion
+0458	1. Introduction: What is Project Risk?
+0459	1. Introduction: Risk vs Issue
+0460	1. Introduction: Risk attributes
+0461	1. Introduction: Which project is riskier?
+0462	Individual project risk vs Overall project risk
+0463	1. Introduction: Known or Unknown?
+0464	1. Introduction: Threat or Opportunity?
+0465	Group discussion:
+0466	1. Introduction: Risk attitudes - Utility theory
+0467	1. Introduction: Why Project Risk Management ?
+0468	2. Plan Risk Management
+0469	2. Plan Risk Management
+0470	2. Plan Risk Management
+0471	3. Identify Risks
+0472	3. Identify Risks
+0473	3. Identify Risks
+0474	3. Identify Risks
+0475	3. Identify Risks
+0476	3. Identify Risks
+0477	3. Identify Risks
+0478	3. Identify Risks
+0479	3. Identify Risks
+0480	3. Identify Risks
+0481	Group discussion: Nhận diện rủi ro
+0482	Risk Register Sample
+0483	4. Perform Qualitative Risk Analysis
+0484	4. Perform Qualitative Risk Analysis
+0485	Group discussion
+0486	4. Perform Qualitative Risk Analysis
+0487	4. Perform Qualitative Risk Analysis
+0488	4. Perform Qualitative Risk Analysis
+0489	4. Perform Qualitative Risk Analysis
+0490	4. Perform Qualitative Risk Analysis
+0491	4. Perform Qualitative Risk Analysis
+0492	4. Perform Qualitative Risk Analysis
+0493	Risk Register (Update)
+0494	5. Perform Quantitative Risk Analysis
+0495	5. Perform Quantitative Risk Analysis
+0496	Group discussion: Chơi hay không chơi ?
+0497	5. Perform Quantitative Risk Analysis
+0498	5. Perform Quantitative Risk Analysis
+0499	5. Perform Quantitative Risk Analysis
+0500	Group discussion: Tổ chức trong nhà hay ngoài trời ?
+0501	5. Perform Quantitative Risk Analysis
+0502	5. Perform Quantitative Risk Analysis
+0503	5. Perform Quantitative Risk Analysis
+0504	5. Perform Quantitative Risk Analysis
+0505	5. Perform Quantitative Risk Analysis
+0506	5. Perform Quantitative Risk Analysis
+0507	5. Perform Quantitative Risk Analysis
+0508	5. Perform Quantitative Risk Analysis
+0509	6. Plan Risk Responses
+0510	6. Plan Risk Responses
+0511	Group discussion: Ứng phó với Bão
+0512	6. Plan Risk Responses
+0513	6. Plan Risk Responses
+0514	6. Plan Risk Responses
+0515	6. Plan Risk Responses
+0516	6. Plan Risk Responses
+0517	6. Plan Risk Responses
+0518	6. Plan Risk Responses
+0519	6. Plan Risk Responses
+0520	Group discussion
+0521	6. Plan Risk Responses
+0522	6. Plan Risk Responses
+0523	Group discussion: Lên kế hoạch ứng phó rủi ro
+0524	Risk Register (Update)
+0525	7. Monitor Risks
+0526	7. Monitor Risks
+0527	7. Monitor Risks
+0528	7. Monitor Risks
+0529	7. Monitor Risks
+0530	Review
+0531	Review
+0532	Assignment!!!
+0533	Group discussion
+0534	www.pma.edu.vn
+0535	Agile Mindset & Scrum Framework
+0536	Overview
+0537	Group discussion: Nokia Case-study
+0538	The final steps of the giant
+0539	Group discussion
+0540	One of the reasons
+0541	The other side of the table
+0542	Product Development Styles
+0543	Who use Agile?
+0544	Group discussion : Xếp vào vị trí phù hợp
+0545	Group discussion : Xếp vào vị trí phù hợp
+0546	Agile timeline
+0547	Group discussion
+0548	Agile Manifesto
+0549	Agile is a Mindset
+0550	Agile principles
+0551	Group discussion
+0552	Group discussion
+0553	12 Agile Principles
+0554	Common misunderstandings
+0555	(image / no extractable text)
+0556	Agile is a Mindset
+0557	2. Scrum Introduction: Agile methodologies
+0558	2. Scrum Introduction: Scrum history
+0559	2. Scrum Introduction: Scrum history
+0560	2. Scrum Introduction: What is Scrum?
+0561	2. Scrum Introduction: Scrum framework
+0562	Complex Adaptive System Theory
+0563	Natural Complex Adaptive System
+0564	Empirical Process Control Theory
+0565	Group discussion
+0566	2. Scrum Introduction
+0567	3. Roles & Responsibilities
+0568	Group discussion: Xếp vào ô phù hợp
+0569	Group discussion: Xếp vào ô phù hợp
+0570	3. Roles: Scrum Team Characteristics
+0571	3. Roles & Responsibilities: What if ?
+0572	3. Roles: Generalizing Specialists
+0573	3. Roles & Responsibilities
+0574	3. Roles & Responsibilities
+0575	Servant Leadership
+0576	4. Ceremonies: Timebox and Sprints
+0577	Group discussion: Phân biệt 2 cách phát triển
+0578	Waterfall vs Agile
+0579	4. Ceremonies: Sprints
+0580	Definition of “Done” (DoD)
+0581	Group discussion: 4 sự kiện
+0582	Group discussion: 4 sự kiện
+0583	4. Ceremonies
+0584	Sprint Planning
+0585	(image / no extractable text)
+0586	4. Ceremonies
+0587	4. Ceremonies: Daily Scrum
+0588	4. Ceremonies
+0589	4. Ceremonies
+0590	Group discussion
+0591	5. Artifacts
+0592	5. Artifacts
+0593	5. Artifacts
+0594	Group discussion: Tương phản sự khác biệt
+0595	6. Pillars and Values
+0596	6. Pillars and Values
+0597	Review
+0598	Assignment!!!
+0599	Group discussion
+0600	www.pma.edu.vn
+0601	Value-driven Delivery
+0602	Overview
+0603	1. Introduction
+0604	Group discussion:
+0605	1. Introduction: Agile Delivery Benefits
+0606	1. Introduction: Value, Non-value & Anti-Value
+0607	1. Introduction: Value-driven delivery
+0608	2. Identifying Value: User Story
+0609	2. Identifying Value: 3C of a User story
+0610	User Story Detail
+0611	User Story Acceptance Criteria
+0612	Acceptance Criteria vs Definition of Done
+0613	Group discussion
+0614	2. Identifying Value: INVEST in an User Story
+0615	2. Identifying Value: Risk as anti-value
+0616	2. Identifying Value: Regulatory Compliance
+0617	2. Prioritizing Value
+0618	2. Prioritizing Value
+0619	2. Prioritizing Value
+0620	2. Prioritizing Value
+0621	Group discussion
+0622	2. Prioritizing Value
+0623	2. Prioritizing Value
+0624	2. Prioritizing Value
+0625	Group discussion: Dịch vụ khách sạn
+0626	2. Prioritizing Value
+0627	3. Delivering Value
+0628	3. Delivering Value
+0629	3. Delivering Value: Kanban method
+0630	Group discussion: Bài toán Quán phở
+0631	(image / no extractable text)
+0632	3. Delivering Value: Kanban method
+0633	Lead time vs Cycle time
+0634	Group discussion
+0635	Working in Batches vs Continuous Flow
+0636	Group discussion:
+0637	Xử lý theo lô và Xử lý theo luồng liên tục
+0638	3. Delivering Value: Kanban method
+0639	Software development problem
+0640	5. Verifying and Validating value
+0641	5. Verifying and Validating value
+0642	5. Verifying and Validating value
+0643	5. Verifying and Validating value
+0644	5. Verifying and Validating value
+0645	5. Verifying and Validating value
+0646	5. Verifying and Validating value
+0647	5. Verifying and Validating value
+0648	Group discussion: Phân biệt sự khác nhau
+0649	Group discussion: Phân biệt sự khác nhau
+0650	Review
+0651	Assignment!!!
+0652	Group discussion
+0653	www.pma.edu.vn
+0654	Adaptive Planning & Tracking
+0655	Overview
+0656	Group discussion
+0657	Traditional planning vs Agile planning
+0658	Group discussion
+0659	1. Introduction - Traditional planning fails
+0660	1. Introduction - Traditional planning fails
+0661	1. Introduction - Traditional planning problems
+0662	1. Introduction - Agile Planning Characteristics
+0663	1. Introduction - Agile Planning Characteristics
+0664	1. Introduction - Agile Planning Characteristics
+0665	1. Introduction - Agile Planning Characteristics
+0666	1. Introduction - Agile Planning Characteristics
+0667	1. Introduction - Agile Planning Characteristics
+0668	1. Introduction - Agile Planning Characteristics
+0669	2. Daily Planning
+0670	Group discussion
+0671	3. Iteration Planning
+0672	3. Iteration Planning
+0673	3. Iteration Planning
+0674	Relative Sizing and Story Points
+0675	Planning Poker
+0676	Planning poker - Example
+0677	Group discussion: Thực hành Planning Poker
+0678	Relative Estimating Problem
+0679	Relative Sizing and Story Points
+0680	Estimating the Tasks
+0681	Scrum Board
+0682	Tasks Mon Tues Wed Thur Fri
+0683	A sprint backlog
+0684	Group discussion: Đánh giá kết quả làm việc của
+0685	What a Burndown Chart Can Say?
+0686	Agile Planning Onion
+0687	4. Release planning - Release and Iteration Planning
+0688	4. Release Planning- Release Backlogs
+0689	4. Release Planning
+0690	4. Release planning
+0691	4. Release planning
+0692	4. Release planning - Types of Iterations
+0693	4.Release Planning-Refining (Grooming) the Backlog
+0694	4. Release Planning- Slicing the Stories
+0695	Group discussion: chia nhỏ User Story
+0696	Chia theo flow
+0697	4. Release planning - Affinity Estimating
+0698	Group discussion: Tính Velocity
+0699	4. Release planning - Velocity and Velocity Chart
+0700	4. Release planning - How Much Can We Get Done?
+0701	Group discussion:
+0702	Estimating Velocity for the 1st Iteration
+0703	Agile release planning
+0704	5. High-Level Planning: Product Vision
+0705	Elevator statement (elevator pitch)
+0706	Thực hành: Tạo tầm nhìn sản phẩm
+0707	5. High-Level Planning
+0708	5. High-Level Planning
+0709	5. High-level Planning
+0710	5. High-level Planning
+0711	Product roadmap examples
+0712	5. High-level Planning
+0713	Review
+0714	Assignment!!!
+0715	Group discussion
+0716	www.pma.edu.vn
+0717	Project Procurement Management
+0718	Overview
+0719	Group discussion
+0720	1. Introduction: What is Project Procurement?
+0721	1. Introduction: Seller and Buyer
+0722	1. Introduction: Agreement/Contract
+0723	1. Introduction: Contract Types
+0724	1. Introduction: Contract Types
+0725	1. Introduction: Contract Types
+0726	Group discussion
+0727	Comparison of Major Contract Types
+0728	1. Introduction: Which one is riskier?
+0729	Centralized/ Decentralized Contracting
+0730	Group discussion
+0731	1. Introduction: Roles & Responsibilities
+0732	Procurement Manager vs Project Manager
+0733	2. Plan Procurement Management
+0734	Group discussion: Lên kế hoạch mua Server
+0735	2. Plan Procurement Management
+0736	2. Plan Procurement Management
+0737	2. Plan Procurement Management
+0738	2. Plan Procurement Management
+0739	2. Plan Procurement Management
+0740	2. Plan Procurement Management
+0741	2. Plan Procurement Management
+0742	2. Plan Procurement Management
+0743	2. Plan Procurement Management
+0744	2. Plan Procurement Management
+0745	2. Plan Procurement Management
+0746	2. Plan Procurement Management
+0747	3. Conduct Procurements
+0748	Group discussion: Conduct Procurement
+0749	3. Conduct Procurements
+0750	3. Conduct Procurements
+0751	3. Conduct Procurements
+0752	3. Conduct Procurements
+0753	3. Conduct Procurements
+0754	3. Conduct Procurements
+0755	3. Conduct Procurements
+0756	4. Control Procurements
+0757	4. Control Procurements
+0758	Group discussion
+0759	4. Control Procurements
+0760	4. Control Procurements
+0761	Things you must watch out
+0762	4. Control Procurements
+0763	4. Control Procurements
+0764	4. Control Procurements
+0765	4. Control Procurements
+0766	4. Control Procurements
+0767	4. Control Procurements
+0768	5. Agile Contracting: Problems
+0769	5. Agile Contracting: Change for Free
+0770	5. Agile Contracting: Money for Nothing
+0771	5. Agile Contracting
+0772	5. Agile Contracting
+0773	Group discussion
+0774	Group discussion
+0775	5. Agile Contracting
+0776	6. Closing Project or a Phase
+0777	Group Discussion
+0778	6. Closing Project or a Phase
+0779	6. Closing Project or a Phase
+0780	Review
+0781	Assignment!!!
+0782	Group discussion
+0783	www.pma.edu.vn
+0784	Exam Prep Strategy & Answering Questions
+0785	Thảo luận nhóm
+0786	So sánh giữa 2 giai đoạn
+0787	Hoàn tất Giai đoạn 1
+0788	Why failure?
+0789	Pitfall 1: Prioritization & Procrastination
+0790	Learning habit over learning plan
+0791	Change the priority !
+0792	Change your learning environment
+0793	Build new habit upon the old habit
+0794	Thảo luận nhóm
+0795	Pitfall 2: Some people just love readiiiiiing
+0796	Factors affecting your exam results
+0797	Practising exams over reading textbooks
+0798	(image / no extractable text)
+0799	NEVER GIVE UP!!
+0800	Your failure is your assets
+0801	Improve your knowledge
+0802	Pitfall 3: Go fast, go alone
+0803	No deadline, No commitment, Distraction....
+0804	Go fast, go together
+0805	Learn in a group, learn with mentors
+0806	Way of learning
+0807	Thảo luận nhóm
+0808	Why failure?
+0809	Capability
+0810	English reading skill
+0811	English reading skill
+0812	Emotional state
+0813	Techniques
+0814	Which one is the best answer?
+0815	Problem: you have no idea what they are talking
+0816	Conscious vs Unconscious
+0817	Right intuition
+0818	How to solve a question in around 1 minutes
+0819	From now on, every day practise
+0820	Quyết định thi
+0821	1 ngày trước ngày thi
+0822	Ngày thi
+0823	Ở địa điểm thi
+0824	Bài thi thật
+0825	Exam cheat sheet - People
+0826	Exam cheat sheet - Stakeholders
+0827	Exam cheat sheet - Process
+0828	Xử lý sự cố
+0829	Các trường hợp sẽ bị revoke
+0830	Phúc khảo
+0831	Submit
+0832	Sau kỳ thi
+0833	Làm gì nếu không đỗ trong lần đầu tiên?
+0834	BƯỚC 1: THÁI ĐỘ
+0835	(image / no extractable text)
+0836	BƯỚC 2 – ĐÁNH GIÁ
+0837	BƯỚC 3 – LẬP KẾ HOẠCH CHO SỰ TRỞ LẠI
+0838	BƯỚC 4 – THỰC HIỆN KẾ HOẠCH
+0839	Sau khi đỗ PMP
+0840	Chứng chỉ PMP
+0841	Thảo luận nhóm
+0842	Đỉnh cao tiếp theo sẽ là gì?
+0843	www.pma.edu.vn
+`.trim();
+const PMP24_SLIDE_INDEX = PMP24_SLIDE_DATA.split('\n').map(line=>{
+  const parts=line.split('\t');
+  const page=Number(parts.shift());
+  const chapter=pmp24ChapterForSlide(page);
+  return {page,title:parts.join(' ').trim()||'(visual slide)',moduleId:chapter.id,moduleTitle:chapter.title,visualOnly:PMP24_VISUAL_ONLY_SLIDES.has(page)};
+});
+
+function pmp24ChapterForSlide(page){
+  return PMP24_CHAPTERS.find(c=>page>=c.start&&page<=c.end)||PMP24_CHAPTERS[0];
+}
+
+function pmp24Section(h,en,vi){return {h,en,vi};}
+
+function applyPmp24TrainingCoverage(){
+  if(TRAINING.some(t=>t.id==='communications')) return;
+
+  const communications = {
+    id:'communications',
+    title:'4 · Communications Management',
+    blurb:'Lập kế hoạch, thực hiện và giám sát giao tiếp; kênh, media, lý thuyết truyền tin, lắng nghe, họp và báo cáo.',
+    sources:[],
+    sections:[
+      pmp24Section('Communication dimensions & methods · Kiểu và phương pháp',
+        '<b>Interactive</b> communication gives immediate feedback (meetings, calls); <b>push</b> sends information to named recipients (email, reports); <b>pull</b> lets a large audience retrieve it (portal, knowledge base). Choose formal/informal, written/oral and verbal/nonverbal channels to fit urgency, sensitivity, complexity and audience.',
+        '<b>Interactive</b> có phản hồi ngay (họp, gọi); <b>push</b> gửi tới người nhận xác định (email, báo cáo); <b>pull</b> cho số đông tự truy cập (portal, kho tri thức). Chọn formal/informal, written/oral và verbal/nonverbal theo độ gấp, nhạy cảm, phức tạp và đối tượng.'),
+      pmp24Section('Communications planning · Lập kế hoạch giao tiếp',
+        'A communications management plan defines <b>who needs what information, why, when, format, channel, owner, escalation path, language/time-zone needs, storage and feedback method</b>. Potential communication channels for <i>n</i> people = <b>n(n−1)/2</b>; the formula shows complexity, not the number of messages actually sent.',
+        'Communication Management Plan xác định <b>ai cần thông tin gì, vì sao, khi nào, định dạng, kênh, người chịu trách nhiệm, đường leo thang, ngôn ngữ/múi giờ, nơi lưu và cách lấy phản hồi</b>. Số kênh tiềm năng với <i>n</i> người = <b>n(n−1)/2</b>; đây là độ phức tạp tiềm năng, không phải số thông điệp thực tế.'),
+      pmp24Section('Sender–receiver model & noise · Mô hình truyền tin',
+        'The sender <b>encodes</b> an idea, transmits a message through a medium, and the receiver <b>decodes</b> it and gives feedback. Noise can be physical, semantic, cultural, emotional or technical. The sender remains responsible for making communication understandable and confirming shared meaning.',
+        'Người gửi <b>mã hoá</b> ý tưởng, truyền thông điệp qua phương tiện; người nhận <b>giải mã</b> và phản hồi. Nhiễu có thể vật lý, ngữ nghĩa, văn hoá, cảm xúc hoặc kỹ thuật. Người gửi vẫn chịu trách nhiệm làm thông điệp dễ hiểu và xác nhận hai bên hiểu giống nhau.'),
+      pmp24Section('Active listening & facilitation · Lắng nghe chủ động',
+        'Listen to understand: stay present, ask open and clarifying questions, paraphrase, reflect emotion, summarize and confirm action. In conflict or ambiguity, prefer a rich interactive channel over a one-way written message.',
+        'Lắng nghe để hiểu: tập trung, hỏi câu mở/làm rõ, diễn đạt lại, phản chiếu cảm xúc, tóm tắt và xác nhận hành động. Khi xung đột hoặc mơ hồ, ưu tiên kênh interactive giàu thông tin thay vì chỉ gửi văn bản một chiều.'),
+      pmp24Section('Effective meetings · Cuộc họp hiệu quả',
+        'Define a purpose and decision owner, invite only needed participants, circulate an agenda/pre-read, timebox discussion, facilitate balanced participation, record decisions/actions with owners and dates, then distribute minutes. A meeting is not automatically the best channel.',
+        'Xác định mục đích và người có quyền quyết định, mời đúng người, gửi agenda/pre-read, timebox thảo luận, điều phối để mọi người tham gia, ghi quyết định/hành động/người phụ trách/hạn và gửi minutes. Không phải vấn đề nào cũng cần họp.'),
+      pmp24Section('Reports & information radiators · Báo cáo và bảng trực quan',
+        'Tailor status, progress, forecast, variance, risk and exception reports to the audience. Dashboards and information radiators support pull communication and transparency; sensitive decisions still need controlled distribution and confirmation.',
+        'Tailoring báo cáo trạng thái, tiến độ, dự báo, sai lệch, rủi ro và ngoại lệ theo người đọc. Dashboard/information radiator hỗ trợ pull communication và minh bạch; quyết định nhạy cảm vẫn cần phân phối có kiểm soát và xác nhận.'),
+      pmp24Section('Monitor communications · Giám sát giao tiếp',
+        'Check whether information is received, understood, useful and timely—not merely sent. Use feedback, engagement data, meeting outcomes and issue trends; then adapt the plan, channel, frequency or message.',
+        'Kiểm tra thông tin có được nhận, hiểu, hữu ích và đúng lúc hay không—not chỉ “đã gửi”. Dùng phản hồi, dữ liệu gắn kết, kết quả họp và xu hướng issue; sau đó điều chỉnh kế hoạch, kênh, tần suất hoặc thông điệp.')
+    ],
+    traps:[
+      {en:'Sending is not the same as communicating; confirm understanding and feedback.',vi:'Gửi đi chưa đồng nghĩa giao tiếp thành công; phải xác nhận hiểu và phản hồi.'},
+      {en:'Use interactive communication for complex, sensitive or conflict-heavy topics.',vi:'Dùng interactive communication cho chủ đề phức tạp, nhạy cảm hoặc có xung đột.'},
+      {en:'Channels = n(n−1)/2 measures potential complexity, not message volume.',vi:'Kênh = n(n−1)/2 đo độ phức tạp tiềm năng, không phải số lượng thông điệp.'}
+    ]
+  };
+  TRAINING.splice(3,0,communications);
+
+  const extras = {
+    intro:[
+      pmp24Section('Project, program, portfolio & operations · Phân biệt cấp quản lý',
+        'A <b>project</b> creates a unique result; a <b>program</b> coordinates related projects for benefits unavailable when managed separately; a <b>portfolio</b> selects and governs work to achieve strategy; <b>operations</b> sustain the business. Projects and operations interact but use different success horizons.',
+        '<b>Project</b> tạo kết quả duy nhất; <b>program</b> phối hợp các dự án liên quan để đạt lợi ích tổng hợp; <b>portfolio</b> chọn và quản trị công việc theo chiến lược; <b>operations</b> duy trì hoạt động. Dự án và vận hành tương tác nhưng có chân trời thành công khác nhau.'),
+      pmp24Section('Value delivery system · Hệ thống giao giá trị',
+        'Projects operate inside a wider value delivery system linking strategy, portfolios, programs, products and operations. Success is not only scope/time/cost: confirm intended outcomes, benefits, adoption, sustainability and stakeholder value.',
+        'Dự án nằm trong hệ thống giao giá trị liên kết strategy, portfolio, program, product và operations. Thành công không chỉ scope/time/cost: cần xác nhận outcome, benefit, adoption, sustainability và giá trị cho stakeholder.')
+    ],
+    stakeholder:[
+      pmp24Section('Organizational structures · Cơ cấu tổ chức',
+        'Functional, weak/balanced/strong matrix, projectized and composite structures change the PM’s authority, resource availability and communication path. Tailor engagement and escalation to the real governance structure instead of assuming one universal model.',
+        'Functional, weak/balanced/strong matrix, projectized và composite làm thay đổi quyền của PM, khả năng huy động nguồn lực và đường giao tiếp. Tailoring engagement/leo thang theo governance thực tế, không giả định một mô hình chung.'),
+      pmp24Section('Register, plan, manage & monitor · Từ register đến theo dõi',
+        'The <b>stakeholder register</b> records identity, interests, influence, impact and initial classification. The engagement plan defines desired engagement and strategy. Manage through communication and collaboration; monitor the current-versus-desired gap and update the register, plan and <b>issue log</b> as conditions change.',
+        '<b>Stakeholder Register</b> ghi danh tính, lợi ích, ảnh hưởng, tác động và phân loại ban đầu. Engagement Plan xác định mức gắn kết mong muốn và chiến lược. Quản lý bằng giao tiếp/hợp tác; theo dõi khoảng cách current–desired và cập nhật register, plan, <b>issue log</b> khi hoàn cảnh đổi.')
+    ],
+    team:[
+      pmp24Section('Forming the team · Hình thành nhóm',
+        'Define roles with a RAM/RACI, establish a team charter/working agreements, acquire the needed skills and consider co-location, virtual collaboration, accessibility, culture and time zones. A group becomes a team through shared purpose and mutual accountability.',
+        'Xác định vai trò bằng RAM/RACI, lập team charter/working agreements, huy động kỹ năng cần thiết và cân nhắc co-location, làm việc ảo, accessibility, văn hoá, múi giờ. Một group trở thành team nhờ mục tiêu chung và trách nhiệm lẫn nhau.'),
+      pmp24Section('Develop, coach and measure · Phát triển, coaching và đo lường',
+        'Use training, mentoring, coaching, recognition, feedback and psychological safety to improve individual and team capability. Team performance assessments look at collaboration and outcomes, not individual utilization alone.',
+        'Dùng training, mentoring, coaching, recognition, feedback và psychological safety để nâng năng lực cá nhân/nhóm. Team performance assessment xem collaboration và outcome, không chỉ mức sử dụng từng cá nhân.')
+    ],
+    scope:[
+      pmp24Section('Scope planning & traceability · Kế hoạch và truy vết',
+        'The scope management plan explains how scope and requirements will be defined, validated and controlled. The <b>requirements traceability matrix (RTM)</b> links each requirement to its source, business objective, deliverable, test/acceptance evidence and status.',
+        'Scope Management Plan quy định cách xác định, nghiệm thu và kiểm soát scope/requirement. <b>RTM</b> nối mỗi requirement với nguồn, business objective, deliverable, test/bằng chứng chấp nhận và trạng thái.'),
+      pmp24Section('WBS architecture · Kiến trúc WBS',
+        'Decompose deliverable-oriented scope using the <b>100% rule</b>. A control account is a management control point; a work package is the lowest level normally estimated and controlled; a planning package holds future work not yet decomposed. The WBS dictionary adds detailed descriptions and acceptance information.',
+        'Phân rã scope theo deliverable bằng <b>100% rule</b>. Control account là điểm kiểm soát quản lý; work package là cấp thấp nhất thường được ước lượng/kiểm soát; planning package giữ việc tương lai chưa phân rã. WBS Dictionary bổ sung mô tả và thông tin chấp nhận.')
+    ],
+    schedule:[
+      pmp24Section('Schedule planning & network logic · Kế hoạch và logic mạng',
+        'Create activity and milestone lists, sequence activities with PDM relationships (<b>FS, SS, FF, SF</b>), leads/lags and dependencies, estimate resources/durations, then develop and baseline the schedule. Logic should reflect real work—not dates imposed without analysis.',
+        'Tạo activity/milestone list, sắp xếp bằng PDM (<b>FS, SS, FF, SF</b>), lead/lag và dependency, ước lượng resource/duration, rồi phát triển và baseline lịch. Logic phải phản ánh công việc thật—not chỉ áp ngày không phân tích.'),
+      pmp24Section('Schedule control · Kiểm soát lịch',
+        'Compare actuals and forecasts with the schedule baseline, analyze critical-path/float changes and root causes, then use approved corrective/preventive action or change control. Update forecasts and communicate impact; never hide delay with an unapproved baseline change.',
+        'So actual/forecast với schedule baseline, phân tích thay đổi critical path/float và nguyên nhân gốc, rồi dùng corrective/preventive action hoặc change control đã duyệt. Cập nhật dự báo và truyền thông tác động; không che trễ bằng đổi baseline chưa duyệt.')
+    ],
+    finance:[
+      pmp24Section('Cost types, estimates & reserves · Loại chi phí và dự phòng',
+        'Distinguish direct/indirect, fixed/variable and recurring/nonrecurring costs. Build estimates from scope and assumptions, document the basis of estimates, and separate <b>contingency reserve</b> for known-unknowns (inside the cost baseline) from <b>management reserve</b> for unknown-unknowns (outside the baseline but inside the project budget).',
+        'Phân biệt direct/indirect, fixed/variable và recurring/nonrecurring. Ước lượng từ scope/assumption, ghi basis of estimates; tách <b>contingency reserve</b> cho known-unknown (trong cost baseline) và <b>management reserve</b> cho unknown-unknown (ngoài baseline nhưng trong project budget).'),
+      pmp24Section('EVM interpretation · Diễn giải Earned Value',
+        '<b>CV=EV−AC</b>, <b>SV=EV−PV</b>, <b>CPI=EV/AC</b>, <b>SPI=EV/PV</b>. Positive variances and indexes above 1 are favorable. Forecast using the assumption that matches reality: EAC=BAC/CPI when cost performance continues; EAC=AC+(BAC−EV) when remaining work follows plan; EAC=AC+(BAC−EV)/(CPI×SPI) when both efficiencies continue.',
+        '<b>CV=EV−AC</b>, <b>SV=EV−PV</b>, <b>CPI=EV/AC</b>, <b>SPI=EV/PV</b>. Variance dương và index >1 là tốt. Chọn EAC theo giả định: BAC/CPI khi hiệu suất chi phí tiếp diễn; AC+(BAC−EV) khi phần còn lại theo kế hoạch; AC+(BAC−EV)/(CPI×SPI) khi cả cost và schedule efficiency tiếp diễn.')
+    ],
+    resource:[
+      pmp24Section('Resource structures & ownership · Cấu trúc và trách nhiệm',
+        'Use an organizational breakdown structure, resource breakdown structure and responsibility assignment matrix to connect work, resource categories and accountable roles. Estimate quantities/calendars, negotiate or acquire resources, then control availability and physical-resource use against the plan.',
+        'Dùng OBS, RBS và RAM để nối work, nhóm nguồn lực và vai trò chịu trách nhiệm. Ước lượng số lượng/calendar, đàm phán hoặc huy động nguồn lực, rồi kiểm soát availability và việc dùng physical resource so với kế hoạch.')
+    ],
+    quality:[
+      pmp24Section('Quality, grade, accuracy & precision · Các khái niệm dễ nhầm',
+        '<b>Quality</b> is conformance to requirements and fitness for use; <b>grade</b> is a category with different features. Accuracy is closeness to the true value; precision is repeatability. Prevention and designing quality in are preferred to inspection alone.',
+        '<b>Quality</b> là phù hợp yêu cầu và dùng được; <b>grade</b> là cấp/nhóm tính năng. Accuracy là gần giá trị thật; precision là độ lặp lại. Ưu tiên prevention và thiết kế chất lượng vào quy trình hơn chỉ inspection.'),
+      pmp24Section('Metrics, sampling & variation · Chỉ số và biến thiên',
+        'Define measurable quality metrics and checklists, choose appropriate statistical sampling, and distinguish common-cause from special-cause variation. Control limits describe process behavior; specification limits come from requirements. Investigate nonrandom patterns even when points remain within limits.',
+        'Xác định quality metric đo được/checklist, chọn statistical sampling phù hợp, phân biệt common-cause với special-cause variation. Control limit mô tả hành vi process; specification limit đến từ requirement. Điều tra pattern không ngẫu nhiên dù điểm còn trong giới hạn.')
+    ],
+    risk:[
+      pmp24Section('Risk taxonomy & artifacts · Phân loại và artifact',
+        'A <b>risk</b> is an uncertain future event/condition; an <b>issue</b> has already occurred. Manage individual project risks and overall project risk. Known risks go into the risk register with owners/triggers/responses; aggregated exposure, trends and overall risk belong in the risk report.',
+        '<b>Risk</b> là sự kiện/điều kiện tương lai chưa chắc; <b>issue</b> đã xảy ra. Quản lý individual risk và overall project risk. Known risk vào Risk Register với owner/trigger/response; exposure tổng hợp, xu hướng và overall risk vào Risk Report.'),
+      pmp24Section('Qualitative, quantitative & monitoring · Phân tích và theo dõi',
+        'Qualitative analysis prioritizes using probability, impact, urgency and other agreed factors. Quantitative analysis estimates aggregate effect using EMV/decision trees, simulation or sensitivity analysis when justified. Implement responses, watch triggers/residual/secondary risks, audit effectiveness and identify new risks continuously.',
+        'Qualitative analysis ưu tiên bằng probability, impact, urgency và factor đã thống nhất. Quantitative analysis ước lượng tác động tổng bằng EMV/decision tree, simulation hoặc sensitivity analysis khi phù hợp. Thực hiện response, theo dõi trigger/residual/secondary risk, audit hiệu quả và liên tục nhận diện risk mới.')
+    ],
+    agile:[
+      pmp24Section('Scrum pillars, values & commitments · Trụ cột, giá trị và cam kết',
+        'Scrum uses <b>transparency, inspection and adaptation</b>, supported by commitment, focus, openness, respect and courage. Product Backlog ↔ Product Goal; Sprint Backlog ↔ Sprint Goal; Increment ↔ Definition of Done. These commitments make progress and quality inspectable.',
+        'Scrum dùng <b>transparency, inspection, adaptation</b>, hỗ trợ bởi commitment, focus, openness, respect, courage. Product Backlog ↔ Product Goal; Sprint Backlog ↔ Sprint Goal; Increment ↔ Definition of Done. Các commitment làm tiến độ/chất lượng có thể kiểm tra.'),
+      pmp24Section('Agile family & tailoring · Họ phương pháp Agile',
+        'Agile is an umbrella mindset. Scrum provides an empirical product framework; Kanban manages flow; Lean removes waste; XP emphasizes engineering practices; other adaptive methods may fit different contexts. Tailor practices without removing the feedback, transparency and value principles that make them work.',
+        'Agile là tư duy bao trùm. Scrum là framework sản phẩm thực nghiệm; Kanban quản lý flow; Lean loại waste; XP nhấn mạnh engineering practice; phương pháp adaptive khác hợp bối cảnh khác. Tailoring practice nhưng không bỏ feedback, transparency và value principle cốt lõi.')
+    ],
+    value:[
+      pmp24Section('3Cs, INVEST & acceptance · User story tốt',
+        'A user story develops through <b>Card, Conversation, Confirmation</b>. Use INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable. Acceptance criteria confirm the story; verification checks conformance to specifications, while validation confirms the result solves the user need.',
+        'User story phát triển qua <b>Card, Conversation, Confirmation</b>. Dùng INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable. Acceptance Criteria xác nhận story; verification kiểm tra phù hợp specification, validation xác nhận kết quả giải đúng nhu cầu người dùng.'),
+      pmp24Section('Small batches & flow economics · Lô nhỏ và kinh tế dòng chảy',
+        'Smaller batches reduce feedback delay, inventory and rework risk. Limit WIP, finish before starting more, expose bottlenecks and optimize the whole flow rather than maximizing local utilization.',
+        'Batch nhỏ giảm độ trễ phản hồi, inventory và rủi ro rework. Giới hạn WIP, hoàn thành trước khi mở thêm việc, làm lộ bottleneck và tối ưu toàn flow thay vì tối đa hoá mức bận từng cá nhân.')
+    ],
+    adaptive:[
+      pmp24Section('Vision → roadmap → release → sprint · Từ tầm nhìn đến Sprint',
+        'Product vision explains the desired future and value; a roadmap expresses strategic themes/outcomes over time; release planning forecasts a coherent set of increments; sprint/iteration planning selects a near-term goal and work. Keep farther horizons less detailed and revise with evidence.',
+        'Product Vision nêu tương lai/giá trị mong muốn; Roadmap thể hiện theme/outcome chiến lược theo thời gian; Release Planning dự báo nhóm increment; Sprint/Iteration Planning chọn goal và work ngắn hạn. Kế hoạch càng xa càng ít chi tiết và cập nhật theo evidence.'),
+      pmp24Section('Relative estimating & team metrics · Ước lượng tương đối',
+        'Use story points, affinity sizing or planning poker to compare effort, complexity and uncertainty. The delivery team estimates; velocity is an empirical forecast based on completed work. Never convert it into an individual productivity target or compare unlike teams.',
+        'Dùng story point, affinity sizing hoặc planning poker để so effort, complexity, uncertainty. Delivery team ước lượng; velocity là forecast thực nghiệm từ work đã hoàn thành. Không biến thành KPI cá nhân hoặc so các team không tương đồng.')
+    ],
+    procurement:[
+      pmp24Section('Procurement documents & source selection · Hồ sơ và chọn nhà cung cấp',
+        '<b>RFI</b> explores market capability, <b>RFQ</b> requests price for a well-defined item, and <b>RFP</b> asks sellers to propose a solution. Use objective source-selection criteria, bidder conferences and conflict-of-interest controls; negotiate and award through authorized procurement governance.',
+        '<b>RFI</b> tìm hiểu năng lực thị trường, <b>RFQ</b> hỏi giá cho hạng mục rõ, <b>RFP</b> yêu cầu nhà cung cấp đề xuất giải pháp. Dùng source-selection criteria khách quan, bidder conference, kiểm soát conflict of interest; đàm phán/trao thầu theo procurement governance.'),
+      pmp24Section('Claims, changes & agile contracting · Khiếu nại và hợp đồng thích ứng',
+        'Process contract changes through the agreed contract-change system, document performance and seek negotiated settlement before formal claims escalation. Adaptive procurement can use incremental funding/delivery, capped T&M or target-cost/incentive structures while preserving commercial controls and acceptance evidence.',
+        'Xử lý contract change qua hệ thống thay đổi đã thống nhất, ghi performance và ưu tiên negotiated settlement trước khi leo thang claim. Adaptive procurement có thể funding/delivery theo increment, capped T&M hoặc target-cost/incentive nhưng vẫn giữ commercial control và bằng chứng acceptance.')
+    ],
+    examprep:[
+      pmp24Section('Learning system & deliberate practice · Hệ thống học',
+        'Use a repeatable habit loop: learn a concept, retrieve it without notes, answer mixed scenarios, analyze why each distractor is wrong, record the decision rule, and retest after spacing. Practice quality and error review matter more than passive reading volume.',
+        'Dùng vòng lặp thói quen: học khái niệm, tự nhớ không nhìn tài liệu, làm scenario trộn, phân tích vì sao distractor sai, ghi decision rule và retest cách quãng. Chất lượng practice/error review quan trọng hơn đọc thụ động nhiều.'),
+      pmp24Section('After an attempt or after passing · Sau lần thi',
+        'After an unsuccessful attempt, use the domain report and mistake patterns to diagnose gaps, rebuild a focused plan and schedule the next attempt under the current PMI rules. After passing, maintain the credential through current CCR/PDU requirements and apply the practices ethically at work.',
+        'Nếu chưa đỗ, dùng domain report và mistake pattern để chẩn đoán gap, lập kế hoạch tập trung và lên lịch thi lại theo quy định PMI hiện hành. Khi đã đỗ, duy trì chứng chỉ theo CCR/PDU hiện hành và áp dụng thực hành một cách có đạo đức.')
+    ]
+  };
+  Object.entries(extras).forEach(([id,sections])=>{
+    const module=TRAINING.find(t=>t.id===id);
+    if(module) module.sections.push(...sections);
+  });
+
+  const order=['intro','business','stakeholder','communications','team','scope','schedule','finance','resource','quality','risk','agile','value','adaptive','procurement','governance','examprep'];
+  TRAINING.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+  TRAINING.forEach((t,i)=>{
+    t.title=(i+1)+' · '+t.title.split('·').slice(1).join('·').trim();
+    const chapter=PMP24_CHAPTERS.find(c=>c.id===t.id);
+    if(chapter){
+      t.sources=t.sources||[];
+      t.sources.unshift({
+        label:`PMP Version 2.4 — slides ${chapter.start}–${chapter.end}`,
+        note:`Mapped coverage: ${chapter.concepts}.`
+      });
+    }
+  });
+}
 
 /* Auto-generated question bank. All questions original, PMP-style. */
 const QUESTION_BANK = [
@@ -8452,6 +9654,174 @@ function buildToc(){
   });
 }
 
+function openPmp24Module(id){
+  const i=TRAINING.findIndex(t=>t.id===id);
+  if(i<0)return;
+  renderLesson(i);
+  setTimeout(()=>document.getElementById('lesson')?.scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
+
+function openPmp24Slide(page){
+  const slide=PMP24_SLIDE_INDEX.find(s=>s.page===Number(page));
+  if(!slide)return;
+  openPmp24Module(slide.moduleId);
+  const ctx=document.getElementById('tutor-ctx');
+  if(ctx)ctx.textContent=`Context: slide ${slide.page} · ${slide.title}`;
+}
+
+function pmiStripHtml(value){
+  return String(value??'')
+    .replace(/<br\s*\/?>/gi,' ')
+    .replace(/<[^>]*>/g,' ')
+    .replace(/&nbsp;/gi,' ')
+    .replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&amp;/gi,'&')
+    .replace(/\s+/g,' ').trim();
+}
+
+function pmiNormalizeText(value){
+  return pmiStripHtml(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase();
+}
+
+const PMI_KNOWLEDGE_STOP_WORDS=new Set([
+  'the','and','for','with','what','when','where','which','this','that','from','into','about','how','why','are','is','to','of','in','on','a','an',
+  'toi','cho','voi','cua','theo','nay','kia','nhung','mot','cac','la','gi','tai','sao','nhu','nao','ve','va','trong','hay','giai','thich'
+]);
+
+function pmiKnowledgeTokens(value){
+  return pmiNormalizeText(value).split(/[^a-z0-9]+/).filter(x=>x.length>1&&!PMI_KNOWLEDGE_STOP_WORDS.has(x));
+}
+
+function renderPmp24Coverage(query=''){
+  const chapters=document.getElementById('pmp24-chapters');
+  const results=document.getElementById('pmp24-search-results');
+  const status=document.getElementById('pmp24-coverage-status');
+  const count=document.getElementById('pmp24-slide-count');
+  if(!chapters||!results)return;
+  if(status)status.textContent=`${PMP24_SLIDE_INDEX.length}/843 mapped`;
+  if(count)count.textContent=String(PMP24_SLIDE_INDEX.length);
+  chapters.innerHTML=PMP24_CHAPTERS.map(c=>`
+    <button class="chapter-card" type="button" onclick="openPmp24Module('${c.id}')">
+      <b>${escapeHtml(c.title)}</b>
+      <span>Slides ${c.start}–${c.end} · ${c.end-c.start+1} slides</span>
+    </button>`).join('');
+
+  const raw=String(query||'').trim();
+  if(!raw){results.classList.remove('open');results.innerHTML='';return;}
+  const normalized=pmiNormalizeText(raw);
+  const tokens=pmiKnowledgeTokens(raw);
+  const pageMatch=normalized.match(/(?:slide\s*)?(\d{1,3})\b/);
+  let matches=PMP24_SLIDE_INDEX.filter(s=>{
+    if(pageMatch&&Number(pageMatch[1])===s.page)return true;
+    const hay=pmiNormalizeText(`${s.title} ${s.moduleTitle} ${pmp24ChapterForSlide(s.page).concepts}`);
+    return tokens.length?tokens.every(t=>hay.includes(t)):hay.includes(normalized);
+  });
+  const total=matches.length;
+  matches=matches.slice(0,50);
+  results.classList.add('open');
+  results.innerHTML=matches.length
+    ? `<div class="slide-result" style="cursor:default"><span class="slide-no">${total} kết quả</span><span class="slide-title">Hiển thị tối đa 50 slide phù hợp</span><span class="slide-module">Version 2.4</span></div>`+
+      matches.map(s=>`<button class="slide-result" type="button" onclick="openPmp24Slide(${s.page})"><span class="slide-no">SLIDE ${String(s.page).padStart(3,'0')}</span><span class="slide-title">${escapeHtml(s.title)}${s.visualOnly?' · visual-only':''}</span><span class="slide-module">${escapeHtml(s.moduleTitle)}</span></button>`).join('')
+    : `<div class="slide-result" style="cursor:default"><span class="slide-no">0 kết quả</span><span class="slide-title">Thử thuật ngữ khác hoặc nhập số slide.</span><span class="slide-module">—</span></div>`;
+}
+
+function buildLocalKnowledgeRecords(){
+  const records=[];
+  TRAINING.forEach((t,moduleIndex)=>{
+    const moduleTitle=t.title.split('·').slice(1).join('·').trim();
+    t.sections.forEach((s,sectionIndex)=>{
+      records.push({
+        type:'section',moduleId:t.id,moduleIndex,moduleTitle,sectionIndex,
+        heading:pmiStripHtml(s.h),en:pmiStripHtml(s.en),vi:pmiStripHtml(s.vi),
+        search:pmiNormalizeText(`${moduleTitle} ${s.h} ${s.en} ${s.vi}`)
+      });
+    });
+    (t.traps||[]).forEach((trap,trapIndex)=>records.push({
+      type:'trap',moduleId:t.id,moduleIndex,moduleTitle,trapIndex,heading:'Exam trap',
+      en:pmiStripHtml(trap.en),vi:pmiStripHtml(trap.vi),
+      search:pmiNormalizeText(`${moduleTitle} ${trap.en} ${trap.vi}`)
+    }));
+  });
+  PMP24_CHAPTERS.forEach(c=>records.push({
+    type:'chapter',moduleId:c.id,moduleIndex:TRAINING.findIndex(t=>t.id===c.id),moduleTitle:c.title,
+    heading:`PMP Version 2.4 · slides ${c.start}–${c.end}`,en:c.concepts,vi:c.concepts,
+    search:pmiNormalizeText(`${c.title} ${c.concepts}`)
+  }));
+  return records;
+}
+
+function retrievePmiKnowledge(query,limit=6){
+  const normalized=pmiNormalizeText(query);
+  const tokens=pmiKnowledgeTokens(query);
+  const currentId=TRAINING[currentLesson]?.id;
+  const records=buildLocalKnowledgeRecords();
+  const scored=records.map(r=>{
+    const head=pmiNormalizeText(`${r.moduleTitle} ${r.heading}`);
+    let score=0;
+    if(normalized.length>2&&r.search.includes(normalized))score+=24;
+    tokens.forEach(token=>{
+      if(head.includes(token))score+=8;
+      if(r.search.includes(token))score+=3;
+    });
+    if(r.moduleId===currentId)score+=1;
+    if(r.type==='section')score+=.25;
+    return {...r,score};
+  }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
+  if(!scored.length){
+    return records.filter(r=>r.type==='section'&&r.moduleId===currentId).slice(0,limit);
+  }
+  const unique=[];
+  const seen=new Set();
+  for(const r of scored){
+    const key=`${r.moduleId}:${r.heading}`;
+    if(seen.has(key))continue;
+    seen.add(key);unique.push(r);
+    if(unique.length>=limit)break;
+  }
+  return unique;
+}
+
+function pmiIsVietnamese(value){
+  const raw=String(value||'').toLowerCase();
+  return /[ăâđêôơưàáảãạèéẻẽẹìíỉĩịòóỏõọùúủũụỳýỷỹỵ]/i.test(raw)||
+    /\b(tôi|giải thích|hãy|cho tôi|là gì|ví dụ|bài học|dự án|quản lý|rủi ro|phạm vi|tiến độ)\b/i.test(raw);
+}
+
+function pmiTruncate(value,max=560){
+  const text=pmiStripHtml(value);
+  return text.length>max?text.slice(0,max).replace(/\s+\S*$/,'')+'…':text;
+}
+
+function answerFromLocalKnowledge(question){
+  const vi=pmiIsVietnamese(question);
+  const hits=retrievePmiKnowledge(question,4);
+  const slideTokens=pmiKnowledgeTokens(question);
+  let slides=PMP24_SLIDE_INDEX.filter(s=>{
+    const hay=pmiNormalizeText(`${s.title} ${s.moduleTitle}`);
+    return slideTokens.length&&slideTokens.every(t=>hay.includes(t));
+  }).slice(0,8);
+  if(!slides.length&&hits[0]){
+    const chapter=PMP24_CHAPTERS.find(c=>c.id===hits[0].moduleId);
+    if(chapter)slides=PMP24_SLIDE_INDEX.filter(s=>s.page>=chapter.start&&s.page<=chapter.end).slice(0,3);
+  }
+  const intro=vi
+    ? '**Trả lời từ Local Knowledge** — không gọi API ngoài. App tìm trong PMBOK 8/ECO 2026 và nội dung đã ánh xạ từ PMP Version 2.4.'
+    : '**Local Knowledge answer** — no external API call. The app searched its PMBOK 8/ECO 2026 notes and PMP Version 2.4 mapping.';
+  const body=hits.map((h,i)=>{
+    const text=vi?(h.vi||h.en):(h.en||h.vi);
+    return `\n\n**${i+1}. ${h.moduleTitle} — ${h.heading}**\n${pmiTruncate(text)}`;
+  }).join('');
+  const slideLine=slides.length
+    ? `\n\n**${vi?'Đối chiếu slide':'Slide trace'}:** `+slides.map(s=>`${s.page} (${s.title})`).join('; ')
+    : '';
+  const next=vi
+    ? '\n\n**Cách dùng khi thi:** xác định approach và governance trước, đánh giá tác động trước khi hành động, ưu tiên giá trị, hợp tác và tailoring. Nếu cần ví dụ mới hoặc phân tích sâu theo bối cảnh riêng, chuyển sang **External AI**.'
+    : '\n\n**Exam lens:** identify the approach and governance first, assess impact before action, and favor value, collaboration and tailoring. Switch to **External AI** for a novel example or deeper contextual analysis.';
+  const templateHint=/template|biểu mẫu|bieu mau|charter|register|kế hoạch|ke hoach/i.test(question)
+    ? (vi?'\n\nBạn cũng có thể mở **PMI-style Template Builder** ngay bên dưới Tutor để tạo artifact có thể chỉnh sửa.':'\n\nYou can also use the **PMI-style Template Builder** below the Tutor to create an editable artifact.')
+    :'';
+  return intro+body+slideLine+next+templateHint;
+}
+
 function renderLesson(i, keepScroll){
   currentLesson = i;
   const t = TRAINING[i];
@@ -8519,109 +9889,353 @@ function renderLesson(i, keepScroll){
   if(!keepScroll) el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-/* ---------- AI Tutor (Claude API) ---------- */
-let chatHistory = [];
+/* ---------- Dual-source Study Tutor v2 ---------- */
+let tutorMode='local';
+const tutorHistories={local:[],external:[]};
 
-function addMsg(role, text){
-  const chat = document.getElementById('chat');
-  const hint = chat.querySelector('.hint');
-  if(hint) hint.remove();
-  const d = document.createElement('div');
-  d.className = 'msg ' + (role==='user'?'u':'a');
-  // light markdown: **bold**
-  d.innerHTML = text.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'\n');
+function formatTutorText(text){
+  return escapeHtml(String(text??'')).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+}
+
+function addMsg(role,text){
+  const chat=document.getElementById('chat');
+  const hint=chat.querySelector('.hint');
+  if(hint)hint.remove();
+  const d=document.createElement('div');
+  d.className='msg '+(role==='user'?'u':'a');
+  d.innerHTML=formatTutorText(text);
   chat.appendChild(d);
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop=chat.scrollHeight;
   return d;
 }
 
-async function sendChat(){
-  const input = document.getElementById('ask');
-  if(!(await pmiRequireAuth('ai'))) return false;
-  const btn = document.getElementById('sendBtn');
-  const q = input.value.trim();
-  if(!q) return;
-  input.value=''; btn.disabled=true; btn.textContent='…';
-  addMsg('user', q);
+function setTutorMode(mode){
+  tutorMode=mode==='external'?'external':'local';
+  const local=document.getElementById('tutor-mode-local');
+  const external=document.getElementById('tutor-mode-external');
+  const config=document.getElementById('tutor-config');
+  const note=document.getElementById('tutor-mode-note');
+  if(local){local.classList.toggle('active',tutorMode==='local');local.setAttribute('aria-selected',String(tutorMode==='local'));}
+  if(external){external.classList.toggle('active',tutorMode==='external');external.setAttribute('aria-selected',String(tutorMode==='external'));}
+  if(config)config.hidden=tutorMode!=='external';
+  if(note)note.textContent=tutorMode==='local'
+    ?'Tra cứu từ PMBOK 8, PMP ECO 2026 và bản đồ 843 slide Version 2.4 — không gọi API ngoài.'
+    :'Giải thích sâu theo ngữ cảnh mới bằng Gemini qua Supabase Gateway; API key không xuất hiện trong HTML.';
+  const chat=document.getElementById('chat');
+  if(chat)chat.innerHTML=`<div class="hint">${tutorMode==='local'
+    ?'Local Knowledge trả lời từ dữ liệu có sẵn và dẫn về module/slide liên quan.'
+    :'External AI nhận thêm các đoạn local liên quan làm grounding. Không đưa dữ liệu bí mật của dự án vào prompt.'}</div>`;
+  updateTutorConfigUI();
+  pmiApplyFeatureLocks();
+}
 
-  const t = TRAINING[currentLesson];
-  const titleText = t.title.split('·').slice(1).join('·').trim();
-  const lessonText = t.sections.map(s=>{
-    const en = s.en.replace(/<[^>]+>/g,'');
-    const vi = s.vi.replace(/<[^>]+>/g,'');
-    return `• ${s.h}\n  EN: ${en}\n  VI: ${vi}`;
-  }).join('\n');
-  const traps = (t.traps||[]).map(tr=>`EN: ${tr.en} | VI: ${tr.vi}`).join('\n');
-  const sources = (t.sources||[]).map(s=>`- ${s.label}${s.note?` (${s.note})`:''}`).join('\n');
+function updateTutorConfigUI(){
+  const help=document.getElementById('tutor-config-help');
+  if(help)help.innerHTML='API key chỉ được lưu trong <b>Supabase Secrets</b>. Edge Function kiểm tra cả đăng nhập và quyền <b>approved/admin</b>, ưu tiên model Gemini đã chọn và dùng OpenRouter free làm dự phòng. Xem <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini Free Tier</a>.';
+}
 
-  const system = `You are a friendly, expert PMP/PMI exam tutor helping a candidate prepare for the PMP exam currently in effect since July 2026 and aligned to the PMBOK Guide Eighth Edition. The course is taught bilingually in English and Vietnamese.
+function buildTutorSystem(question){
+  const t=TRAINING[currentLesson];
+  const titleText=t.title.split('·').slice(1).join('·').trim();
+  const lessonText=t.sections.map(s=>`• ${pmiStripHtml(s.h)}\n  EN: ${pmiStripHtml(s.en)}\n  VI: ${pmiStripHtml(s.vi)}`).join('\n');
+  const traps=(t.traps||[]).map(tr=>`EN: ${pmiStripHtml(tr.en)} | VI: ${pmiStripHtml(tr.vi)}`).join('\n');
+  const retrieved=retrievePmiKnowledge(question,6).map(r=>`[${r.moduleTitle} — ${r.heading}]\nEN: ${r.en}\nVI: ${r.vi}`).join('\n\n');
+  const queryTokens=pmiKnowledgeTokens(question);
+  const slides=PMP24_SLIDE_INDEX.filter(s=>{
+    const hay=pmiNormalizeText(`${s.title} ${s.moduleTitle}`);
+    return queryTokens.length&&queryTokens.every(token=>hay.includes(token));
+  }).slice(0,10).map(s=>`Slide ${s.page}: ${s.title} (${s.moduleTitle})`).join('\n');
+  return `You are a careful PMP/PMI study tutor for the PMP exam in effect from July 2026, aligned to PMBOK Guide Eighth Edition and the July 2026 PMP Examination Content Outline. The course is bilingual English–Vietnamese.
 
-The student is currently studying the module: "${t.title}".
-Lesson content they are reading (bilingual):
+CURRENT MODULE:
+${titleText}
+
+CURRENT LESSON:
 ${lessonText}
-Key exam traps for this module:
+
+EXAM TRAPS:
 ${traps}
-Recommended study references for this module:
-${sources}
+
+RETRIEVED LOCAL KNOWLEDGE FOR THIS QUESTION:
+${retrieved||'(No strong local match.)'}
+
+PMP VERSION 2.4 SLIDE TRACE:
+${slides||'(Use the mapped chapter, but do not claim verbatim slide content.)'}
 
 SOURCE DISCIPLINE:
-- Treat official PMI PMBOK 8 and the July 2026 PMP ECO as the source of truth when older material conflicts.
-- David McLachlan, Andrew Ramdayal, and ScrumPass are recommended study references. Do not pretend the full copyrighted source text is present unless it appears in the lesson context above.
-- Clearly label any useful explanation that goes beyond the supplied lesson as general PMP knowledge.
+- Official PMI PMBOK 8 and the July 2026 PMP ECO are authoritative when older course material conflicts.
+- PMBOK 8 uses 6 principles, 7 performance domains, 5 overlapping focus areas and non-prescriptive process guidance.
+- The July 2026 ECO weights are People 33%, Process 41%, Business Environment 26%; approximately 40% predictive and 60% adaptive/agile plus hybrid.
+- The attached PMP Version 2.4 deck is a study source mapped by slide number. Never pretend its full copyrighted wording is present and do not reproduce long passages.
+- Separate sourced local content from useful general explanation. If uncertain about a current PMI policy, say it must be checked on PMI.org.
+- Never invent an "official PMI template"; say PMI-style/aligned unless a specific official artifact is supplied.
 
-LANGUAGE RULE (very important):
-- Detect the language of the student's message. If they write in Vietnamese, answer in Vietnamese. If they write in English, answer in English. If they mix, mirror their dominant language. If they explicitly ask for a translation or "cả hai thứ tiếng", give both.
-- When explaining an English technical/PMI term to a Vietnamese speaker, give the English term first, then the Vietnamese meaning in parentheses.
+LANGUAGE:
+- Reply in the student's language. For Vietnamese, give the English PMI term first and the Vietnamese meaning in parentheses where useful.
 
 STYLE:
-- Keep answers focused and exam-relevant; short paragraphs, use **bold** for key terms.
-- Where useful, give a quick exam-style example or a memory tip (mẹo nhớ).
-- When the student would benefit from more study, you may point them to the recommended sources above by name (e.g. David McLachlan's PMP Cheat Sheet or question videos, or Andrew Ramdayal's Udemy PMP course).
-- Prefer the PMI/PMBOK 8th mindset: servant leadership, value delivery, collaborate before escalate, tailoring, assess changes before acting.
-- Be concise; do not pad.`;
+- Be concise, scenario-focused and practical. Use **bold** for key terms.
+- Prefer the PMI mindset: value, ethical stewardship, accountable leadership, servant leadership, collaboration before escalation, tailoring, sustainability and impact analysis before change.
+- For templates, preserve unknowns as [Cần điền / To complete] instead of fabricating project facts.`;
+}
 
-  chatHistory.push({role:'user', content:q});
-  const thinking = addMsg('assistant','…');
-
+async function sendChat(){
+  const input=document.getElementById('ask');
+  if(!(await pmiRequireAuth('ai')))return false;
+  const btn=document.getElementById('sendBtn');
+  const q=input.value.trim();
+  if(!q)return;
+  input.value='';btn.disabled=true;btn.textContent='…';
+  addMsg('user',q);
+  const history=tutorHistories[tutorMode];
+  history.push({role:'user',content:q});
+  const thinking=addMsg('assistant','…');
   try{
-    const text = await pmiAskTutor(system, chatHistory.slice(-8));
-    thinking.innerHTML = (text||'').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>') || "…";
-    chatHistory.push({role:'assistant', content:text});
+    const text=tutorMode==='local'
+      ?answerFromLocalKnowledge(q)
+      :await pmiAskExternalTutor(buildTutorSystem(q),history.slice(-8),1200);
+    thinking.innerHTML=formatTutorText(text||'…');
+    history.push({role:'assistant',content:text});
   }catch(e){
-    const msg = (e && e.message) ? e.message : String(e);
-    thinking.innerHTML = "Tutor chưa trả lời được.<br><span style='opacity:.8'>"+msg.replace(/</g,'&lt;')+"</span><br><br>Kiểm tra: (1) đã đăng nhập ở thẻ Tài khoản góc màn hình chưa, (2) Edge Function <b>albert-pmi-tutor</b> đã deploy và có OPENROUTER_API_KEY chưa. Bạn vẫn có thể xem nội dung Training; AI và Mock Test cần phiên đăng nhập hợp lệ.";
+    const msg=e?.message||String(e);
+    thinking.innerHTML=formatTutorText(`Tutor chưa trả lời được.\n${msg}\n\nNếu External AI lỗi, hãy kiểm tra Edge Function, Supabase Secrets hoặc quota Gemini/OpenRouter. Bạn có thể chuyển về Local Knowledge để tiếp tục tra cứu mà không gọi API ngoài.`);
   }finally{
-    btn.disabled=false; btn.textContent='Ask';
-    document.getElementById('chat').scrollTop = 999999;
+    btn.disabled=false;btn.textContent='Ask';
+    document.getElementById('chat').scrollTop=999999;
   }
 }
 
-/* ---------- AI transport: Supabase Edge Function -> OpenRouter (free) ---------- */
-async function pmiAskTutor(system, messages){
-  if(!pmiHasApprovedAccess()) throw new Error('Tài khoản chưa được quản trị viên duyệt để dùng AI Tutor.');
-  if(!window.pmiSupabase) throw new Error('Chưa cấu hình Supabase URL/Key trong file HTML.');
-  const sess = await pmiSupabase.auth.getSession();
-  if(sess.error || !sess.data || !sess.data.session){
+async function pmiAskExternalTutor(system,messages,maxTokens=1200){
+  if(!pmiHasApprovedAccess())throw new Error('Tài khoản chưa được quản trị viên duyệt để dùng AI Tutor.');
+  const model=document.getElementById('tutor-model')?.value||'gemini-3.5-flash-lite';
+  return pmiAskGateway(system,messages,model,maxTokens);
+}
+
+async function pmiAskGateway(system,messages,model,maxTokens){
+  if(!window.pmiSupabase)throw new Error('Chưa cấu hình Supabase URL/Key trong file HTML.');
+  const runtime=document.getElementById('tutor-runtime-status');
+  if(runtime)runtime.textContent='Trạng thái AI: đang kết nối Supabase Gateway…';
+  const sess=await pmiSupabase.auth.getSession();
+  if(sess.error||!sess.data?.session){
+    if(runtime)runtime.textContent='Trạng thái AI: phiên đăng nhập không hợp lệ.';
     throw new Error('Bạn cần đăng nhập trước khi dùng AI tutor.');
   }
-  const res = await fetch(PMI_SUPABASE_URL.replace(/\/$/,'') + '/functions/v1/albert-pmi-tutor', {
+  const res=await fetch(PMI_SUPABASE_URL.replace(/\/$/,'')+'/functions/v1/albert-pmi-tutor',{
     method:'POST',
     headers:{
-      'Authorization':'Bearer ' + sess.data.session.access_token,
-      'apikey': PMI_SUPABASE_KEY,
+      'Authorization':'Bearer '+sess.data.session.access_token,
+      'apikey':PMI_SUPABASE_KEY,
       'Content-Type':'application/json'
     },
-    body: JSON.stringify({ system: system, messages: messages, max_tokens: 1000 })
+    body:JSON.stringify({
+      provider:'auto',
+      model:model,
+      system:system,
+      messages:messages,
+      max_tokens:maxTokens||1200,
+      grounding:{source:'pmbok8-pmp-eco-2026-pmp-v2.4',slide_index_count:PMP24_SLIDE_INDEX.length}
+    })
   });
-  const raw = await res.text();
-  let data = null;
-  try { data = JSON.parse(raw); } catch(e){ throw new Error('Function trả về không phải JSON: ' + raw.slice(0,300)); }
-  if(!res.ok || data.ok === false){
-    throw new Error((data && data.error ? data.error : ('HTTP '+res.status)) + (data && data.detail ? (' — '+JSON.stringify(data.detail).slice(0,400)) : ''));
+  const raw=await res.text();
+  let data=null;
+  try{data=JSON.parse(raw);}catch(e){
+    if(runtime)runtime.textContent='Trạng thái AI: Edge Function trả về dữ liệu không hợp lệ.';
+    throw new Error('Function trả về không phải JSON: '+raw.slice(0,300));
   }
-  const answer = data.answer || data.reply || data.text || (data.result && data.result.answer) || '';
-  if(!answer) throw new Error('Function không trả về nội dung ("answer").');
+  if(!res.ok||data.ok===false){
+    if(runtime)runtime.textContent='Trạng thái AI: kết nối lỗi · '+(data?.error||('HTTP '+res.status));
+    throw new Error((data?.error||('HTTP '+res.status))+(data?.detail?(' — '+JSON.stringify(data.detail).slice(0,400)):''));
+  }
+  const answer=data.answer||data.reply||data.text||data.result?.answer||'';
+  if(!answer){
+    if(runtime)runtime.textContent='Trạng thái AI: model không trả về nội dung.';
+    throw new Error('Function không trả về nội dung ("answer").');
+  }
+  if(runtime){
+    const provider=data.provider==='google'?'Google Gemini':'OpenRouter';
+    runtime.textContent='Trạng thái AI: đã trả lời bằng '+provider+' · '+(data.model||model)+(data.fallback_used?' · fallback':'');
+  }
   return String(answer);
+}
+
+/* ================= PMI-STYLE TEMPLATE BUILDER ================= */
+const PMI_TEMPLATE_CATALOG = [
+  {id:'project-charter',name:'Project Charter',sections:[
+    ['Purpose & justification',['Problem/opportunity','Strategic alignment','Expected value and benefits']],
+    ['Measurable objectives & success criteria',['SMART objectives','Outcome/KPI targets','Acceptance authority']],
+    ['High-level scope',['In scope','Out of scope','Key deliverables']],
+    ['High-level plan',['Milestones','Budget/funding boundary','Preapproved resources']],
+    ['Governance & authority',['Sponsor','Project Manager authority','Decision/change thresholds']],
+    ['Assumptions, constraints & risks',['Key assumptions','Constraints','High-level risks']],
+    ['Approval',['Sponsor authorization','PM acceptance','Approval date']]
+  ]},
+  {id:'business-case',name:'Business Case & Benefits Management Plan',sections:[
+    ['Need and options',['Problem/opportunity','Do nothing option','Alternative solutions']],
+    ['Recommended option',['Rationale','Strategic alignment','Feasibility']],
+    ['Financial and nonfinancial value',['Costs','Benefits','NPV/ROI/payback if available']],
+    ['Benefits realization',['Benefit owner','Measure/baseline/target','Realization date and transition']],
+    ['Risk, compliance & sustainability',['Key threats/opportunities','Regulatory impact','Sustainability impact']],
+    ['Review gates',['Continue/change/stop criteria','Review cadence']]
+  ]},
+  {id:'stakeholder-register',name:'Stakeholder Register & Engagement Plan',table:['ID','Stakeholder / role','Interest / needs','Power / influence','Current → desired engagement','Strategy / channel','Owner','Review date']},
+  {id:'communications-plan',name:'Communications Management Plan',table:['Audience','Information / purpose','Format & channel','Frequency / trigger','Owner','Feedback / confirmation','Storage / confidentiality']},
+  {id:'team-charter-raci',name:'Team Charter & RACI / RAM',sections:[
+    ['Team purpose',['Mission','Shared outcomes','Operating principles']],
+    ['Working agreements',['Hours/time zones','Meeting rules','Communication response time','Definition of Ready/Done if adaptive']],
+    ['Decision and conflict rules',['Decision model','Conflict approach','Escalation path']],
+    ['Psychological safety & inclusion',['Expected behaviors','Accessibility/cultural needs']]
+  ],table:['Deliverable / activity','Accountable (A)','Responsible (R)','Consulted (C)','Informed (I)']},
+  {id:'rtm',name:'Requirements Traceability Matrix',table:['Req ID','Source / stakeholder','Requirement','Business objective','Deliverable / WBS','Acceptance / test evidence','Owner','Status']},
+  {id:'scope-wbs',name:'Scope Statement & WBS Dictionary',sections:[
+    ['Scope description',['Product/project scope','Major deliverables','Boundaries']],
+    ['Acceptance and exclusions',['Acceptance criteria','Explicit exclusions']],
+    ['Constraints and assumptions',['Constraints','Assumptions']],
+    ['WBS governance',['Decomposition approach','100% rule check','Control account ownership']]
+  ],table:['WBS ID','Work package / control account','Description','Owner','Acceptance criteria','Estimate / milestone','Assumptions']},
+  {id:'schedule-plan',name:'Schedule & Milestone Plan',sections:[
+    ['Schedule method',['Lifecycle/cadence','Scheduling tool','Units and calendars']],
+    ['Control rules',['Baseline approval','Variance thresholds','Forecast/change process']]
+  ],table:['ID','Milestone / activity','Predecessor / dependency','Owner','Planned start','Planned finish','Status / forecast']},
+  {id:'cost-evm',name:'Cost Baseline & EVM Tracker',sections:[
+    ['Cost management rules',['Currency/units','Estimating method','Control thresholds','Contingency vs management reserve']],
+    ['EVM rules',['Measurement method / earning rule','Reporting cadence','Forecast assumptions']]
+  ],table:['Period / control account','PV','EV','AC','SV','CV','SPI','CPI','EAC / forecast','Action']},
+  {id:'quality-plan',name:'Quality Management Plan & Checklist',sections:[
+    ['Standards and objectives',['Applicable standards','Quality objectives','Roles']],
+    ['Assurance and control',['Prevention/QA activities','QC/inspection/sampling','Nonconformance path']],
+    ['Continuous improvement',['Root-cause method','Improvement cadence']]
+  ],table:['Deliverable / process','Metric / specification','Method / sample','Frequency','Owner','Acceptance evidence','Result']},
+  {id:'resource-plan',name:'Resource Management Plan',sections:[
+    ['Resource strategy',['Roles/skills','Internal vs external','Location/time zones']],
+    ['Acquire, develop and release',['Acquisition timing','Training/coaching','Recognition','Release/transition']],
+    ['Control and escalation',['Availability thresholds','Physical-resource control','Escalation']]
+  ],table:['Role / resource','Quantity / capacity','Required dates','Owner / manager','Calendar / constraints','Status']},
+  {id:'risk-register',name:'Risk Register & RAID Log',table:['ID / type','Category','Cause → event → effect','Probability','Impact','Score / priority','Response / action','Owner','Trigger / due date','Residual / status']},
+  {id:'issue-log',name:'Issue Log',table:['Issue ID','Description / impact','Priority','Owner','Target resolution','Action / escalation','Status','Closed date']},
+  {id:'change-request',name:'Change Request & Change Log',sections:[
+    ['Requested change',['Description','Requester/date','Reason/value']],
+    ['Impact analysis',['Scope','Schedule','Cost','Quality/resources/risk','Benefits/sustainability']],
+    ['Recommendation and decision',['Options','PM recommendation','CCB/authority decision']],
+    ['Implementation',['Approved actions','Baseline/plan updates','Communication and verification']]
+  ],table:['CR ID','Summary','Requester','Submitted','Impact','Decision / authority','Implementation owner','Status']},
+  {id:'decision-log',name:'Decision Log',table:['Decision ID','Question / context','Options considered','Decision & rationale','Decision owner','Date','Impacts / actions','Review trigger']},
+  {id:'procurement-plan',name:'Procurement Plan & Procurement SOW',sections:[
+    ['Make-or-buy and strategy',['Need','Decision/rationale','Contract type and risk allocation']],
+    ['Statement of Work',['Scope/deliverables','Technical/quality requirements','Schedule/location','Acceptance']],
+    ['Solicitation and selection',['RFI/RFQ/RFP','Source-selection criteria/weights','Bidder communications']],
+    ['Contract control and close',['Change/claim process','Performance measures','Audit/close evidence']]
+  ]},
+  {id:'status-report',name:'Project Status Report',sections:[
+    ['Executive summary',['Overall RAG/status','What changed','Decision/help needed']],
+    ['Value and outcomes',['Benefits/KPI progress','Customer/stakeholder feedback']],
+    ['Delivery performance',['Scope','Schedule/forecast','Cost/forecast','Quality']],
+    ['Risks, issues and changes',['Top risks','Top issues','Pending/approved changes']],
+    ['Next period',['Priorities','Milestones','Owners']]
+  ]},
+  {id:'lessons-learned',name:'Lessons Learned Register',table:['ID','Event / context','What happened','Impact','Root cause','Lesson / recommendation','Owner','Apply when / where','Status']},
+  {id:'product-vision-roadmap',name:'Product Vision & Roadmap',sections:[
+    ['Product vision',['Target customer','Need/opportunity','Product/outcome','Differentiator']],
+    ['Product goal & measures',['Product Goal','Outcome metrics','Guardrails']],
+    ['Roadmap',['Themes/outcomes by horizon','Dependencies','Assumptions and review cadence']]
+  ],table:['Horizon / release','Outcome / theme','Key capability','Measure / target','Dependency / risk','Confidence']},
+  {id:'product-backlog',name:'Product Backlog & User Story',table:['ID','Epic / user story (As/I want/so that)','Acceptance criteria','Value / priority','Estimate','Dependency / risk','Status / release']},
+  {id:'release-plan',name:'Release Plan',sections:[
+    ['Release goal',['Target outcome','Users','Success measure']],
+    ['Forecast basis',['Team/capacity','Velocity range','Assumptions']],
+    ['Governance',['Acceptance/DoD','Release readiness','Feedback and reforecast cadence']]
+  ],table:['Iteration / date','Goal','Stories / capabilities','Forecast points','Dependency / risk','Acceptance / release status']},
+  {id:'retrospective',name:'Sprint / Iteration Retrospective',sections:[
+    ['Context and safety',['Iteration goal/result','Working agreement / safety check']],
+    ['Inspect',['What helped','What hindered','Evidence/metrics']],
+    ['Adapt',['Root cause','One or two improvement experiments','Owner and success measure']],
+    ['Follow-through',['Prior action review','Next review date']]
+  ]}
+];
+
+function initTemplateBuilder(){
+  const select=document.getElementById('template-type');
+  const date=document.getElementById('template-date');
+  if(select)select.innerHTML=PMI_TEMPLATE_CATALOG.map(t=>`<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+  if(date&&!date.value)date.value=new Date().toISOString().slice(0,10);
+}
+
+function generateProjectTemplate(){
+  const id=document.getElementById('template-type')?.value;
+  const spec=PMI_TEMPLATE_CATALOG.find(t=>t.id===id)||PMI_TEMPLATE_CATALOG[0];
+  const project=document.getElementById('template-project')?.value.trim()||'[Project name / Tên dự án]';
+  const approach=document.getElementById('template-approach')?.value||'Hybrid';
+  const pm=document.getElementById('template-pm')?.value.trim()||'[Project Manager]';
+  const sponsor=document.getElementById('template-sponsor')?.value.trim()||'[Sponsor / Product Owner]';
+  const date=document.getElementById('template-date')?.value||new Date().toISOString().slice(0,10);
+  const context=document.getElementById('template-context')?.value.trim()||'[Cần điền / To complete]';
+  let output=`# ${spec.name}\n\n`;
+  output+=`- **Project / Dự án:** ${project}\n- **Approach / Cách tiếp cận:** ${approach}\n- **Project Manager:** ${pm}\n- **Sponsor / Product Owner:** ${sponsor}\n- **Prepared / Ngày lập:** ${date}\n- **Version:** 0.1 Draft\n\n`;
+  output+=`## Context / Bối cảnh\n\n${context}\n\n`;
+  (spec.sections||[]).forEach(([title,prompts])=>{
+    output+=`## ${title}\n\n`;
+    prompts.forEach(prompt=>{output+=`- **${prompt}:** [Cần điền / To complete]\n`;});
+    output+='\n';
+  });
+  if(spec.table){
+    output+=`## Working register / Bảng làm việc\n\n| ${spec.table.join(' | ')} |\n| ${spec.table.map(()=>'---').join(' | ')} |\n| ${spec.table.map(()=>'[To complete]').join(' | ')} |\n\n`;
+  }
+  output+='## Tailoring & governance checks\n\n';
+  output+='- [ ] Artifact owner and approval authority confirmed\n';
+  output+='- [ ] Terminology, lifecycle and level of detail tailored to the project\n';
+  output+='- [ ] Compliance, ethics, accessibility and sustainability impacts considered\n';
+  output+='- [ ] Links to related baselines/registers/evidence added\n';
+  output+='- [ ] Review cadence and version control agreed\n\n';
+  output+='> PMI-style working template generated by ALBERT PMI Prep. Not an official PMI form; tailor it to organizational governance.\n';
+  const area=document.getElementById('template-output');
+  if(area)area.value=output;
+  const status=document.getElementById('template-status');
+  if(status)status.textContent=`Đã tạo ${spec.name}. Có thể chỉnh trực tiếp.`;
+  return output;
+}
+
+async function enhanceProjectTemplate(){
+  if(!(await pmiRequireAuth('ai')))return false;
+  let content=document.getElementById('template-output')?.value.trim()||'';
+  if(!content)content=generateProjectTemplate();
+  const context=document.getElementById('template-context')?.value.trim()||'No additional context.';
+  const spec=PMI_TEMPLATE_CATALOG.find(t=>t.id===document.getElementById('template-type')?.value)||PMI_TEMPLATE_CATALOG[0];
+  const status=document.getElementById('template-status');
+  if(status)status.textContent='External AI đang rà soát và hoàn thiện…';
+  const system=`You are a PMI-aligned project artifact coach. Improve the supplied ${spec.name} as practical Markdown aligned to PMBOK Guide Eighth Edition. Preserve headings and traceability. Use the supplied project facts only; never fabricate facts, approvals, metrics or decisions. Leave unknown values as [Cần điền / To complete]. Make acceptance criteria and ownership measurable where possible. Tailor for the named approach. Return only the revised Markdown. This is PMI-style, not an official PMI form.`;
+  try{
+    const improved=await pmiAskExternalTutor(system,[{role:'user',content:`PROJECT CONTEXT:\n${context}\n\nCURRENT TEMPLATE:\n${content}`}],2000);
+    const area=document.getElementById('template-output');
+    if(area)area.value=improved;
+    if(status)status.textContent='External AI đã hoàn thiện bản nháp; hãy kiểm tra trước khi phê duyệt.';
+  }catch(e){
+    if(status)status.textContent='AI chưa hoàn thiện được: '+(e?.message||String(e));
+  }
+}
+
+async function copyProjectTemplate(){
+  const area=document.getElementById('template-output');
+  if(!area?.value)generateProjectTemplate();
+  try{
+    await navigator.clipboard.writeText(area.value);
+    document.getElementById('template-status').textContent='Đã sao chép vào clipboard.';
+  }catch(e){
+    area.focus();area.select();document.execCommand('copy');
+    document.getElementById('template-status').textContent='Đã chọn và sao chép nội dung.';
+  }
+}
+
+function downloadProjectTemplate(){
+  const area=document.getElementById('template-output');
+  if(!area?.value)generateProjectTemplate();
+  const spec=PMI_TEMPLATE_CATALOG.find(t=>t.id===document.getElementById('template-type')?.value)||PMI_TEMPLATE_CATALOG[0];
+  const project=document.getElementById('template-project')?.value.trim()||'project';
+  const slug=pmiNormalizeText(`${project}-${spec.id}`).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'pmi-template';
+  const blob=new Blob([area.value],{type:'text/markdown;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=slug+'.md';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  document.getElementById('template-status').textContent='Đã tải file Markdown.';
 }
 
 /* ================= MOCK TEST ENGINE · PMBOK 8 / PMP ECO JULY 2026 ================= */
@@ -9429,7 +11043,7 @@ function applyTrainingSourcePolicy(){
     t.sources=t.sources||[];
     t.sources.forEach(src=>{if(!src.url){const hit=sourceLinks.find(([re])=>re.test(src.label||''));if(hit)src.url=hit[1];}});
     if(!t.sources.some(s=>/ScrumPass/i.test(s.label)))t.sources.push(scrumPass);
-    if(['intro','business','governance','examprep'].includes(t.id)&&!t.sources.some(s=>/^PMI/i.test(s.label)))t.sources.push(pmiPmbok);
+    if(!t.sources.some(s=>/^PMI/i.test(s.label)))t.sources.push(pmiPmbok);
     if(['business','examprep'].includes(t.id)&&!t.sources.some(s=>/Examination Content Outline/i.test(s.label)))t.sources.push(pmiEco);
   });
 }
@@ -9437,8 +11051,8 @@ function applyTrainingSourcePolicy(){
 
 /* =========================================================
    ALBERT PMI Prep — Supabase Auth + AI via Edge Function
-   Dùng lại project Supabase (giống app HSK). AI tutor gọi
-   Edge Function "albert-pmi-tutor" -> OpenRouter (model free).
+   Dùng lại project Supabase (giống app HSK). External AI gọi
+   Edge Function "albert-pmi-tutor"; mọi API key nằm trong Supabase Secrets.
    ========================================================= */
 var PMI_SUPABASE_URL = "https://pdsxreonrlrfcotszblj.supabase.co";
 var PMI_SUPABASE_KEY = "sb_publishable_HifldsDyYLTfaAVPhOVrAA_oCdXFAxw";
@@ -9756,7 +11370,7 @@ function pmiShowLoginGate(feature){
   if(title) title.textContent = 'Đăng nhập để dùng ' + name;
   if(msg) msg.textContent = pmiPendingFeature==='mock'
     ? 'Toàn bộ 10 đề thi thử, đồng hồ thi, kết quả và Mistake Notebook chỉ mở cho tài khoản đã đăng nhập.'
-    : 'AI Tutor cần phiên đăng nhập Supabase hợp lệ trước khi gửi câu hỏi tới Edge Function.';
+    : 'Study Tutor cần tài khoản đã được duyệt. Local Knowledge không gọi API ngoài; External AI dùng Edge Function với API key được bảo vệ trong Supabase.';
   if(gate){ gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); }
   var bar = document.getElementById('auth-bar');
   if(bar){ bar.classList.remove('auth-attention'); void bar.offsetWidth; bar.classList.add('auth-attention'); }
@@ -9792,7 +11406,9 @@ function pmiApplyFeatureLocks(){
   if(tutor)tutor.classList.toggle('auth-locked',!allowed);
   if(ask){
     ask.disabled=!allowed;
-    ask.placeholder=allowed?'Hỏi bằng tiếng Anh hoặc tiếng Việt… / Ask in English or Vietnamese…':(!loggedIn?'Đăng nhập để dùng AI Tutor…':(pmiApprovalStatus==='pending'?'Tài khoản đang chờ duyệt…':'Tài khoản chưa được cấp quyền…'));
+    ask.placeholder=allowed
+      ?(tutorMode==='local'?'Tra cứu PMBOK 8 / PMP Version 2.4…':'Hỏi External AI bằng tiếng Anh hoặc tiếng Việt…')
+      :(!loggedIn?'Đăng nhập để dùng Study Tutor…':(pmiApprovalStatus==='pending'?'Tài khoản đang chờ duyệt…':'Tài khoản chưa được cấp quyền…'));
   }
   if(send)send.disabled=!allowed;
   if(tab){
@@ -10069,9 +11685,13 @@ setInterval(function(){
 },90000);
 
 /* ---------- init ---------- */
+applyPmp24TrainingCoverage();
 applyTrainingSourcePolicy();
 buildToc();
-renderLesson(0);
+renderLesson(0,true);
+renderPmp24Coverage('');
+initTemplateBuilder();
+updateTutorConfigUI();
 renderExamGrid();
 pmiUpdateAuthUI();
 const countSetting = document.getElementById('set-count');
