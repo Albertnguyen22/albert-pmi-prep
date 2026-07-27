@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- BUILD: ALBERT-PMI-PMBOK8-PMP24-DUAL-TUTOR-V2 · 2026-07-27 -->
+<!-- BUILD: ALBERT-PMI-PMBOK8-FORMS72-AI-WORKSPACE-V3 · 2026-07-27 -->
 <!-- DEPLOYMENT: Upload only this file as /index.html in the GitHub Pages repository root. No .nojekyll or local assets are required. -->
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="albert-build" content="pmbok8-pmp24-dual-tutor-v2">
+<meta name="albert-build" content="pmbok8-forms72-ai-workspace-v3">
 <title>ALBERT PMI Prep · PMBOK 8th Edition · PMP July 2026</title>
 <style>
   :root{
@@ -129,9 +129,10 @@
   .chips button{font-size:12px;background:rgba(255,255,255,.08);color:var(--paper);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:6px 12px;cursor:pointer;transition:.15s}
   .chips button:hover{background:var(--amber);color:var(--ink);border-color:var(--amber)}
   .composer{display:flex;gap:10px;padding:14px 22px;border-top:1px solid rgba(255,255,255,.12);background:var(--ink-2)}
-  .composer input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:var(--paper);border-radius:10px;padding:11px 14px;font-size:14px;font-family:var(--sans)}
-  .composer input::placeholder{color:#7e91a8}
-  .composer input:focus{outline:2px solid var(--amber);border-color:transparent}
+  .composer input,.composer textarea{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);color:var(--paper);border-radius:10px;padding:11px 14px;font-size:14px;font-family:var(--sans)}
+  .composer textarea{resize:vertical;min-height:48px;max-height:180px;line-height:1.45}
+  .composer input::placeholder,.composer textarea::placeholder{color:#7e91a8}
+  .composer input:focus,.composer textarea:focus{outline:2px solid var(--amber);border-color:transparent}
   .composer button{background:var(--amber);color:var(--ink);border:0;border-radius:10px;padding:0 20px;font-weight:700;cursor:pointer;font-size:14px}
   .composer button:disabled{opacity:.5;cursor:default}
 
@@ -426,7 +427,8 @@
   .tutor.auth-locked .tutor-auth-lock{display:flex}
   .tutor-auth-lock-card{max-width:430px;text-align:center;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);border-radius:14px;padding:22px;color:var(--paper);box-shadow:0 18px 50px rgba(0,0,0,.25)}
   .tutor-auth-lock-card .lock-mark{font-size:30px;margin-bottom:8px}.tutor-auth-lock-card b{display:block;font-family:var(--serif);font-size:19px}.tutor-auth-lock-card span{display:block;color:#aebdd0;font-size:12.5px;margin:7px 0 14px}.tutor-auth-lock-card button{border:0;border-radius:9px;background:var(--amber);color:var(--ink);font:inherit;font-weight:800;padding:10px 16px;cursor:pointer}
-  #tab-mock.auth-required{opacity:.78}#tab-mock.auth-required::after{content:""}
+  #tab-ai.auth-required,#tab-mock.auth-required{opacity:.78}
+  #tab-ai.auth-required::after,#tab-mock.auth-required::after{content:""}
 
   .login-gate{position:fixed;inset:0;z-index:100000;background:rgba(9,18,31,.72);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}
   .login-gate.open{display:flex;animation:fade .18s ease}.login-gate-card{position:relative;width:min(500px,100%);background:var(--white);border:1px solid var(--line);border-radius:18px;padding:30px;text-align:center;box-shadow:0 28px 90px rgba(0,0,0,.38)}
@@ -688,10 +690,37 @@
   .tutor-model-inline select:disabled{opacity:.5;cursor:not-allowed}
   .tutor.auth-locked .tutor-modes,.tutor.auth-locked .chat,.tutor.auth-locked .chips,.tutor.auth-locked .composer{opacity:.18;filter:blur(.4px);pointer-events:none;user-select:none}
 
+  /* Full-page AI workspace with persistent local history */
+  .ai-workspace{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:stretch}
+  .ai-history-panel{min-height:680px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .ai-history-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 3px 11px;border-bottom:1px solid var(--line)}
+  .ai-history-head b{display:block;font-family:var(--serif);font-size:17px;margin-top:1px}
+  .ai-history-head button{border:0;border-radius:8px;background:var(--ink);color:var(--paper);padding:7px 9px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+  .ai-history-list{display:flex;flex-direction:column;gap:6px;padding:10px 0;overflow:auto;max-height:610px}
+  .ai-history-item{position:relative;width:100%;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--ink);padding:9px 30px 9px 9px;text-align:left;font:inherit;cursor:pointer}
+  .ai-history-item:hover{background:var(--paper-2)}
+  .ai-history-item.active{background:#fbf3e6;border-color:var(--amber)}
+  .ai-history-item b{display:block;font-size:12px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ai-history-item small{display:block;color:var(--muted);font-size:9.5px;margin-top:3px}
+  .ai-history-delete{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:24px;height:24px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:15px;cursor:pointer}
+  .ai-history-delete:hover{background:#f6e2dc;color:var(--red)}
+  .ai-history-empty{padding:20px 8px;color:var(--muted);font-size:11px;text-align:center}
+  .ai-history-clear{margin-top:auto;border:0;border-top:1px solid var(--line);background:transparent;color:var(--muted);padding:11px 5px 3px;font:inherit;font-size:10.5px;cursor:pointer}
+  .ai-history-clear:hover{color:var(--red)}
+  .ai-tutor{margin-top:0;min-height:680px;display:flex;flex-direction:column}
+  .ai-tutor .chat{flex:1;min-height:480px;max-height:calc(100vh - 285px);padding:22px 24px}
+  .ai-tutor .msg{max-width:min(88%,820px);font-size:14.5px;line-height:1.6}
+  .ai-tutor .composer{position:sticky;bottom:0}
+  .ai-tutor .tutor-auth-lock{inset:55px 0 0}
+
   /* PMI-style project template builder */
   .template-builder{margin-top:26px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
   .template-builder h2{font-family:var(--serif);font-size:23px;margin:2px 0 4px}
   .template-builder .template-sub{font-size:12.5px;color:var(--muted);margin:0 0 14px}
+  .template-reference{display:flex;gap:8px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;background:#eef3f8;border:1px solid #d3dee9;border-radius:10px;padding:10px 12px;margin:0 0 14px;color:#34465a;font-size:11.5px}
+  .template-reference b{color:var(--ink)}
+  .template-reference .template-count{flex:none;border-radius:999px;background:var(--ink);color:var(--paper);padding:4px 8px;font-size:10px;font-weight:800}
+  .template-guide{font-size:11.5px;color:var(--muted);background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin:10px 0 0}
   .template-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px}
   .template-grid label{font-size:11px;font-weight:800;color:var(--muted)}
   .template-grid select,.template-grid input,.template-context,.template-output{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);padding:9px 10px;font:inherit;font-size:13px}
@@ -710,6 +739,10 @@
     .coverage-stats{grid-template-columns:1fr 1fr}
     .template-grid{grid-template-columns:1fr 1fr}
     .template-grid label:first-child{grid-column:1/-1}
+    .ai-workspace{grid-template-columns:1fr}
+    .ai-history-panel{min-height:0}
+    .ai-history-list{max-height:180px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .ai-tutor{min-height:650px}
   }
   @media(max-width:600px){
     .pmp24-board{padding:17px 14px}.chapter-grid,.template-grid{grid-template-columns:1fr}
@@ -719,6 +752,9 @@
     .tutor-head .dot{flex-basis:auto!important;order:0!important;margin-left:0!important}
     .tutor-head #tutor-ctx{flex-basis:100%;order:3;margin-left:0}
     .template-builder{padding:18px 15px}.template-status{width:100%;margin-left:0}
+    .ai-history-list{grid-template-columns:1fr}
+    .ai-tutor{min-height:70vh}.ai-tutor .chat{min-height:52vh;max-height:none;padding:17px 15px}
+    .ai-tutor .composer{padding:12px}
   }
 </style>
 
@@ -834,6 +870,7 @@
 
       <div class="tabs" role="tablist">
         <button id="tab-train" class="active" onclick="showView('train')" role="tab">Training</button>
+        <button id="tab-ai" class="auth-required" onclick="showView('ai')" role="tab" data-locked="true">🔒 AI Tutor</button>
         <button id="tab-mock" class="auth-required" onclick="showView('mock')" role="tab" data-locked="true">🔒 Mock Test</button>
       </div>
     </div>
@@ -921,57 +958,16 @@
         </div>
         <article class="lesson" id="lesson"></article>
 
-        <!-- Dual-source Study Tutor -->
-        <div class="tutor auth-locked" id="pmi-tutor">
-          <div class="tutor-head">
-            <span class="dot"></span>
-            <b>Study Tutor · 2 hướng</b>
-            <span id="tutor-ctx">Context: —</span>
-          </div>
-          <div class="tutor-modes" role="tablist" aria-label="Study Tutor data source">
-            <button id="tutor-mode-local" class="active" type="button" role="tab" aria-selected="true" onclick="setTutorMode('local')">① Local Knowledge</button>
-            <button id="tutor-mode-external" type="button" role="tab" aria-selected="false" onclick="setTutorMode('external')">② External AI</button>
-            <label class="tutor-model-inline">
-              <select id="tutor-model" aria-label="Chọn model AI" onchange="updateTutorConfigUI()" disabled>
-                <option value="auto">Tự động · Gemini → OpenRouter dự phòng</option>
-                <optgroup label="Google Gemini">
-                  <option value="google|gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite</option>
-                  <option value="google|gemini-3.6-flash">Gemini 3.6 Flash</option>
-                </optgroup>
-                <optgroup label="OpenRouter miễn phí">
-                  <option value="openrouter|openai/gpt-oss-120b:free">GPT-OSS 120B · free</option>
-                  <option value="openrouter|z-ai/glm-4.5-air:free">GLM 4.5 Air · free</option>
-                  <option value="openrouter|openai/gpt-oss-20b:free">GPT-OSS 20B · free</option>
-                  <option value="openrouter|openrouter/free">OpenRouter Free Router</option>
-                </optgroup>
-              </select>
-            </label>
-          </div>
-          <div class="chat" id="chat">
-            <div class="hint">Chế độ <b>Local Knowledge</b> trả lời từ dữ liệu có sẵn trong app và dẫn về module/slide liên quan. Chuyển sang <b>External AI</b> khi cần ví dụ sâu hơn hoặc giải thích theo ngữ cảnh mới.</div>
-          </div>
-          <div class="chips" id="chips"></div>
-          <div class="composer">
-            <input id="ask" type="text" placeholder="Đăng nhập để dùng AI Tutor…" autocomplete="off"
-                   onkeydown="if(event.key==='Enter')sendChat()">
-            <button id="sendBtn" onclick="sendChat()">Ask</button>
-          </div>
-          <div id="tutor-auth-lock" class="tutor-auth-lock">
-            <div class="tutor-auth-lock-card">
-              <div class="lock-mark">🔒</div>
-              <b id="tutor-lock-title">Đăng nhập để sử dụng AI Study Tutor</b>
-              <span id="tutor-lock-message">Training vẫn mở để bạn học. Đăng nhập Supabase để đặt câu hỏi cho AI.</span>
-              <button id="tutor-lock-action" type="button" onclick="pmiShowLoginGate('ai')">Đăng nhập để hỏi AI</button>
-            </div>
-          </div>
-        </div>
-
         <section class="template-builder" id="template-builder">
           <span class="eyebrow">Project artifacts · Biểu mẫu dự án</span>
-          <h2>PMI-style Template Builder</h2>
-          <p class="template-sub">Tạo nhanh artifact theo thực hành PMI/PMBOK 8 cho predictive, agile hoặc hybrid; sau đó chỉnh trực tiếp hoặc nhờ External AI hoàn thiện theo bối cảnh dự án.</p>
+          <h2>Project Forms Library &amp; Word Builder</h2>
+          <p class="template-sub">Bộ form thực hành cho predictive, agile và hybrid, được cấu trúc lại để dùng ngay trong Word và cập nhật theo PMBOK 8.</p>
+          <div class="template-reference">
+            <span><b>Đủ 66 biểu mẫu</b> trong mục lục <i>A Project Manager’s Book of Forms, 3rd Edition</i>, cộng 6 form mở rộng về value, governance, sustainability và responsible AI. Cấu trúc trong app được viết lại, không sao chép nguyên văn biểu mẫu có bản quyền.</span>
+            <span class="template-count" id="template-form-count">72 forms</span>
+          </div>
           <div class="template-grid">
-            <label>Loại template
+            <label>Form / Biểu mẫu
               <select id="template-type"></select>
             </label>
             <label>Tên dự án
@@ -990,6 +986,7 @@
               <input id="template-date" type="date">
             </label>
           </div>
+          <div class="template-guide" id="template-guide"></div>
           <textarea id="template-context" class="template-context" placeholder="Bối cảnh, mục tiêu, phạm vi, ràng buộc, tiêu chí thành công hoặc dữ liệu bạn đã có…"></textarea>
           <div class="template-actions">
             <button class="generate" type="button" onclick="generateProjectTemplate()">Tạo template</button>
@@ -999,12 +996,72 @@
             <span class="template-status" id="template-status">Chưa tạo template.</span>
           </div>
           <textarea id="template-output" class="template-output" spellcheck="false" placeholder="Template sẽ xuất hiện tại đây và có thể chỉnh sửa trực tiếp."></textarea>
-          <p class="template-disclaimer">Đây là bộ biểu mẫu PMI-style do app tạo để hỗ trợ công việc, không phải biểu mẫu chính thức hoặc tài liệu được PMI chứng thực. Hãy tailoring theo governance và quy định của tổ chức.</p>
+          <p class="template-disclaimer">Nguồn danh mục: <a href="https://books.wiley.com/titles/9781119393986/" target="_blank" rel="noopener noreferrer">Wiley companion catalog, 3rd Edition</a>. File tạo bởi app là bản thích ứng nguyên bản theo PMBOK 8, không phải bản sao biểu mẫu chính thức của PMI/Wiley. Hãy tailoring theo governance của tổ chức.</p>
         </section>
 
         <div id="account-footer" style="display:none">
           <div class="account-caption"><span class="eyebrow">Account · Tài khoản</span><span>Module 16 · Exam Prep Strategy</span></div>
           <p class="account-note"><b>AI Tutor và Mock Test yêu cầu tài khoản đã được duyệt.</b> Sau khi đăng ký, tài khoản ở trạng thái chờ duyệt. Quản trị viên mở nút 🛡️ Quản trị trong menu tài khoản để duyệt hoặc từ chối thành viên.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AI STUDY TUTOR VIEW ============ -->
+  <section id="view-ai" class="view">
+    <span class="eyebrow">Study workspace · Local knowledge + External AI</span>
+    <h1 class="page">AI Study Tutor</h1>
+    <p class="subtitle">Không gian hỏi đáp toàn màn hình với lịch sử được lưu trên trình duyệt. Dùng Local Knowledge để bám PMBOK 8 và PMP Version 2.4; dùng External AI để mở rộng giải thích và ví dụ.</p>
+
+    <div class="ai-workspace">
+      <aside class="ai-history-panel" aria-label="Lịch sử trò chuyện AI">
+        <div class="ai-history-head">
+          <div><span class="eyebrow">History</span><b>Lịch sử hỏi đáp</b></div>
+          <button type="button" onclick="newTutorThread()">+ Mới</button>
+        </div>
+        <div id="tutor-history-list" class="ai-history-list"></div>
+        <button class="ai-history-clear" type="button" onclick="clearTutorHistory()">Xóa toàn bộ lịch sử</button>
+      </aside>
+
+      <div class="tutor ai-tutor auth-locked" id="pmi-tutor">
+        <div class="tutor-head">
+          <span class="dot"></span>
+          <b>Study Tutor · 2 hướng</b>
+          <span id="tutor-ctx">Context: —</span>
+        </div>
+        <div class="tutor-modes" role="tablist" aria-label="Study Tutor data source">
+          <button id="tutor-mode-local" class="active" type="button" role="tab" aria-selected="true" onclick="setTutorMode('local')">① Local Knowledge</button>
+          <button id="tutor-mode-external" type="button" role="tab" aria-selected="false" onclick="setTutorMode('external')">② External AI</button>
+          <label class="tutor-model-inline">
+            <select id="tutor-model" aria-label="Chọn model AI" onchange="updateTutorConfigUI()" disabled>
+              <option value="auto">Tự động · Gemini → OpenRouter dự phòng</option>
+              <optgroup label="Google Gemini">
+                <option value="google|gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite</option>
+                <option value="google|gemini-3.6-flash">Gemini 3.6 Flash</option>
+              </optgroup>
+              <optgroup label="OpenRouter miễn phí">
+                <option value="openrouter|openai/gpt-oss-120b:free">GPT-OSS 120B · free</option>
+                <option value="openrouter|z-ai/glm-4.5-air:free">GLM 4.5 Air · free</option>
+                <option value="openrouter|openai/gpt-oss-20b:free">GPT-OSS 20B · free</option>
+                <option value="openrouter|openrouter/free">OpenRouter Free Router</option>
+              </optgroup>
+            </select>
+          </label>
+        </div>
+        <div class="chat" id="chat"></div>
+        <div class="chips" id="chips"></div>
+        <div class="composer">
+          <textarea id="ask" rows="2" placeholder="Đăng nhập để dùng AI Tutor…" autocomplete="off"
+                    onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea>
+          <button id="sendBtn" onclick="sendChat()">Ask</button>
+        </div>
+        <div id="tutor-auth-lock" class="tutor-auth-lock">
+          <div class="tutor-auth-lock-card">
+            <div class="lock-mark">🔒</div>
+            <b id="tutor-lock-title">Đăng nhập để sử dụng AI Study Tutor</b>
+            <span id="tutor-lock-message">Training vẫn mở để bạn học. Đăng nhập Supabase để đặt câu hỏi cho AI.</span>
+            <button id="tutor-lock-action" type="button" onclick="pmiShowLoginGate('ai')">Đăng nhập để hỏi AI</button>
+          </div>
         </div>
       </div>
     </div>
@@ -9612,12 +9669,20 @@ const QUESTION_BANK = [
 
 /* ---------- View switching ---------- */
 async function showView(v){
-  if(v==='mock' && !(await pmiRequireAuth('mock'))) return false;
+  if((v==='mock'||v==='ai') && !(await pmiRequireAuth(v))) return false;
   if(v==='train') pmiPendingFeature=null;
   document.querySelectorAll('.view').forEach(e=>e.classList.remove('active'));
-  document.getElementById('view-'+v).classList.add('active');
+  const view=document.getElementById('view-'+v);
+  if(!view)return false;
+  view.classList.add('active');
   document.getElementById('tab-train').classList.toggle('active', v==='train');
+  document.getElementById('tab-ai').classList.toggle('active', v==='ai');
   document.getElementById('tab-mock').classList.toggle('active', v==='mock');
+  if(v==='ai'){
+    pmiPendingFeature=null;
+    renderTutorWorkspace();
+    setTimeout(()=>document.getElementById('ask')?.focus(),80);
+  }
   window.scrollTo({top:0,behavior:'smooth'});
   return true;
 }
@@ -9811,7 +9876,7 @@ function answerFromLocalKnowledge(question){
     ? '\n\n**Cách dùng khi thi:** xác định approach và governance trước, đánh giá tác động trước khi hành động, ưu tiên giá trị, hợp tác và tailoring. Nếu cần ví dụ mới hoặc phân tích sâu theo bối cảnh riêng, chuyển sang **External AI**.'
     : '\n\n**Exam lens:** identify the approach and governance first, assess impact before action, and favor value, collaboration and tailoring. Switch to **External AI** for a novel example or deeper contextual analysis.';
   const templateHint=/template|biểu mẫu|bieu mau|charter|register|kế hoạch|ke hoach/i.test(question)
-    ? (vi?'\n\nBạn cũng có thể mở **PMI-style Template Builder** ngay bên dưới Tutor để tạo artifact có thể chỉnh sửa.':'\n\nYou can also use the **PMI-style Template Builder** below the Tutor to create an editable artifact.')
+    ? (vi?'\n\nBạn cũng có thể mở **Template Builder** trong tab Training để tạo artifact Word có thể chỉnh sửa.':'\n\nYou can also use the **Template Builder** in the Training tab to create an editable Word artifact.')
     :'';
   return intro+body+slideLine+next+templateHint;
 }
@@ -9883,16 +9948,176 @@ function renderLesson(i, keepScroll){
   if(!keepScroll) el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-/* ---------- Dual-source Study Tutor v2 ---------- */
+/* ---------- Dual-source Study Tutor · persistent workspace ---------- */
+const PMI_TUTOR_HISTORY_KEY='albert-pmi-ai-history-v2';
+const PMI_TUTOR_ACTIVE_KEY='albert-pmi-ai-active-v2';
 let tutorMode='local';
-const tutorHistories={local:[],external:[]};
+let tutorThreads=[];
+let activeTutorThreadId=null;
 
 function formatTutorText(text){
   return escapeHtml(String(text??'')).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
 }
 
+function pmiTutorThreadId(){
+  return 't-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
+}
+
+function pmiTutorTitle(text){
+  const clean=String(text||'').replace(/\s+/g,' ').trim();
+  return clean?clean.slice(0,64):'Cuộc trò chuyện mới';
+}
+
+function loadTutorThreads(){
+  try{
+    const parsed=JSON.parse(localStorage.getItem(PMI_TUTOR_HISTORY_KEY)||'[]');
+    tutorThreads=(Array.isArray(parsed)?parsed:[]).filter(thread=>
+      thread&&typeof thread.id==='string'&&Array.isArray(thread.messages)
+    ).slice(0,30).map(thread=>({
+      id:thread.id,
+      title:pmiTutorTitle(thread.title),
+      mode:thread.mode==='external'?'external':'local',
+      createdAt:Number(thread.createdAt)||Date.now(),
+      updatedAt:Number(thread.updatedAt)||Date.now(),
+      messages:thread.messages.filter(message=>
+        message&&(message.role==='user'||message.role==='assistant')&&typeof message.content==='string'
+      ).slice(-40)
+    }));
+    activeTutorThreadId=localStorage.getItem(PMI_TUTOR_ACTIVE_KEY)||null;
+  }catch(e){
+    tutorThreads=[];activeTutorThreadId=null;
+  }
+  if(!tutorThreads.length)newTutorThread('local',false);
+  if(!tutorThreads.some(thread=>thread.id===activeTutorThreadId))activeTutorThreadId=tutorThreads[0].id;
+  const active=pmiActiveTutorThread();
+  tutorMode=active?.mode||'local';
+}
+
+function saveTutorThreads(){
+  tutorThreads.sort((a,b)=>b.updatedAt-a.updatedAt);
+  tutorThreads=tutorThreads.slice(0,30);
+  try{
+    localStorage.setItem(PMI_TUTOR_HISTORY_KEY,JSON.stringify(tutorThreads));
+    localStorage.setItem(PMI_TUTOR_ACTIVE_KEY,activeTutorThreadId||'');
+  }catch(e){}
+}
+
+function pmiActiveTutorThread(){
+  return tutorThreads.find(thread=>thread.id===activeTutorThreadId)||null;
+}
+
+function newTutorThread(mode=tutorMode,focus=true){
+  const now=Date.now();
+  const thread={
+    id:pmiTutorThreadId(),
+    title:'Cuộc trò chuyện mới',
+    mode:mode==='external'?'external':'local',
+    createdAt:now,
+    updatedAt:now,
+    messages:[]
+  };
+  tutorThreads.unshift(thread);
+  activeTutorThreadId=thread.id;
+  tutorMode=thread.mode;
+  saveTutorThreads();
+  renderTutorWorkspace();
+  if(focus)setTimeout(()=>document.getElementById('ask')?.focus(),40);
+  return thread;
+}
+
+function selectTutorThread(id){
+  const thread=tutorThreads.find(item=>item.id===id);
+  if(!thread)return;
+  activeTutorThreadId=thread.id;
+  tutorMode=thread.mode;
+  saveTutorThreads();
+  renderTutorWorkspace();
+}
+
+function deleteTutorThread(id,event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  const wasActive=id===activeTutorThreadId;
+  tutorThreads=tutorThreads.filter(thread=>thread.id!==id);
+  if(!tutorThreads.length){
+    newTutorThread('local',false);
+    return;
+  }
+  if(wasActive){
+    activeTutorThreadId=tutorThreads[0].id;
+    tutorMode=tutorThreads[0].mode;
+  }
+  saveTutorThreads();
+  renderTutorWorkspace();
+}
+
+function clearTutorHistory(){
+  if(!confirm('Xóa toàn bộ lịch sử AI được lưu trên trình duyệt này?'))return;
+  tutorThreads=[];activeTutorThreadId=null;
+  try{
+    localStorage.removeItem(PMI_TUTOR_HISTORY_KEY);
+    localStorage.removeItem(PMI_TUTOR_ACTIVE_KEY);
+  }catch(e){}
+  newTutorThread('local',false);
+}
+
+function renderTutorHistoryList(){
+  const list=document.getElementById('tutor-history-list');
+  if(!list)return;
+  if(!tutorThreads.length){
+    list.innerHTML='<div class="ai-history-empty">Chưa có lịch sử.</div>';
+    return;
+  }
+  list.innerHTML=tutorThreads.map(thread=>{
+    let when='';
+    try{when=new Date(thread.updatedAt).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});}catch(e){}
+    const mode=thread.mode==='external'?'External':'Local';
+    return `<div class="ai-history-item ${thread.id===activeTutorThreadId?'active':''}" role="button" tabindex="0"
+      onclick="selectTutorThread('${thread.id}')"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectTutorThread('${thread.id}');}">
+      <b>${escapeHtml(thread.title)}</b><small>${mode} · ${escapeHtml(when)}</small>
+      <button class="ai-history-delete" type="button" title="Xóa cuộc trò chuyện" aria-label="Xóa cuộc trò chuyện"
+        onclick="deleteTutorThread('${thread.id}',event)">×</button>
+    </div>`;
+  }).join('');
+}
+
+function renderTutorModeControls(){
+  const local=document.getElementById('tutor-mode-local');
+  const external=document.getElementById('tutor-mode-external');
+  const modelSelect=document.getElementById('tutor-model');
+  if(local){local.classList.toggle('active',tutorMode==='local');local.setAttribute('aria-selected',String(tutorMode==='local'));}
+  if(external){external.classList.toggle('active',tutorMode==='external');external.setAttribute('aria-selected',String(tutorMode==='external'));}
+  if(modelSelect)modelSelect.disabled=tutorMode!=='external';
+}
+
+function renderTutorChat(){
+  const chat=document.getElementById('chat');
+  if(!chat)return;
+  const thread=pmiActiveTutorThread();
+  chat.innerHTML='';
+  (thread?.messages||[]).forEach(message=>{
+    const item=document.createElement('div');
+    item.className='msg '+(message.role==='user'?'u':'a');
+    item.innerHTML=formatTutorText(message.content);
+    chat.appendChild(item);
+  });
+  if(!thread?.messages?.length)chat.innerHTML='<div class="hint">Nhập câu hỏi để bắt đầu.</div>';
+  chat.scrollTop=chat.scrollHeight;
+}
+
+function renderTutorWorkspace(){
+  const active=pmiActiveTutorThread();
+  if(active)tutorMode=active.mode;
+  renderTutorModeControls();
+  renderTutorHistoryList();
+  renderTutorChat();
+  updateTutorConfigUI();
+  pmiApplyFeatureLocks();
+}
+
 function addMsg(role,text){
   const chat=document.getElementById('chat');
+  if(!chat)return null;
   const hint=chat.querySelector('.hint');
   if(hint)hint.remove();
   const d=document.createElement('div');
@@ -9905,18 +10130,12 @@ function addMsg(role,text){
 
 function setTutorMode(mode){
   tutorMode=mode==='external'?'external':'local';
-  const local=document.getElementById('tutor-mode-local');
-  const external=document.getElementById('tutor-mode-external');
-  const modelSelect=document.getElementById('tutor-model');
-  if(local){local.classList.toggle('active',tutorMode==='local');local.setAttribute('aria-selected',String(tutorMode==='local'));}
-  if(external){external.classList.toggle('active',tutorMode==='external');external.setAttribute('aria-selected',String(tutorMode==='external'));}
-  if(modelSelect)modelSelect.disabled=tutorMode!=='external';
-  const chat=document.getElementById('chat');
-  if(chat)chat.innerHTML=tutorMode==='local'
-    ?'<div class="hint">Local Knowledge trả lời từ dữ liệu có sẵn và dẫn về module/slide liên quan.</div>'
-    :'';
-  updateTutorConfigUI();
-  pmiApplyFeatureLocks();
+  let thread=tutorThreads.find(item=>item.mode===tutorMode);
+  if(!thread)thread=newTutorThread(tutorMode,false);
+  activeTutorThreadId=thread.id;
+  thread.updatedAt=Date.now();
+  saveTutorThreads();
+  renderTutorWorkspace();
 }
 
 function getTutorAiRoute(){
@@ -9991,21 +10210,32 @@ async function sendChat(){
   const btn=document.getElementById('sendBtn');
   const q=input.value.trim();
   if(!q)return;
+  let thread=pmiActiveTutorThread();
+  if(!thread||thread.mode!==tutorMode)thread=newTutorThread(tutorMode,false);
   input.value='';btn.disabled=true;btn.textContent='…';
+  thread.messages.push({role:'user',content:q});
+  if(thread.title==='Cuộc trò chuyện mới')thread.title=pmiTutorTitle(q);
+  thread.updatedAt=Date.now();
+  saveTutorThreads();
+  renderTutorHistoryList();
   addMsg('user',q);
-  const history=tutorHistories[tutorMode];
-  history.push({role:'user',content:q});
   const thinking=addMsg('assistant','…');
   try{
     const text=tutorMode==='local'
       ?answerFromLocalKnowledge(q)
-      :await pmiAskExternalTutor(buildTutorSystem(q),history.slice(-8),2800);
-    thinking.innerHTML=formatTutorText(text||'…');
-    history.push({role:'assistant',content:text});
+      :await pmiAskExternalTutor(buildTutorSystem(q),thread.messages.slice(-12),3200);
+    if(thinking)thinking.innerHTML=formatTutorText(text||'…');
+    thread.messages.push({role:'assistant',content:String(text||'')});
   }catch(e){
     const msg=e?.message||String(e);
-    thinking.innerHTML=formatTutorText(`Tutor chưa trả lời được.\n${msg}\n\nNếu External AI lỗi, hãy kiểm tra Edge Function, Supabase Secrets hoặc quota Gemini/OpenRouter. Bạn có thể chuyển về Local Knowledge để tiếp tục tra cứu mà không gọi API ngoài.`);
+    const errorText=`Tutor chưa trả lời được.\n${msg}\n\nNếu External AI lỗi, hãy kiểm tra Edge Function, Supabase Secrets hoặc quota Gemini/OpenRouter. Bạn có thể chuyển về Local Knowledge để tiếp tục tra cứu mà không gọi API ngoài.`;
+    if(thinking)thinking.innerHTML=formatTutorText(errorText);
+    thread.messages.push({role:'assistant',content:errorText});
   }finally{
+    thread.updatedAt=Date.now();
+    thread.messages=thread.messages.slice(-40);
+    saveTutorThreads();
+    renderTutorHistoryList();
     btn.disabled=false;btn.textContent='Ask';
     document.getElementById('chat').scrollTop=999999;
   }
@@ -10060,7 +10290,7 @@ async function pmiAskGateway(system,messages,provider,model,maxTokens){
 }
 
 /* ================= PMI-STYLE TEMPLATE BUILDER ================= */
-const PMI_TEMPLATE_CATALOG = [
+const PMI_TEMPLATE_CATALOG_LEGACY = [
   {id:'project-charter',name:'Project Charter',sections:[
     ['Purpose & justification',['Problem/opportunity','Strategic alignment','Expected value and benefits']],
     ['Measurable objectives & success criteria',['SMART objectives','Outcome/KPI targets','Acceptance authority']],
@@ -10153,11 +10383,580 @@ const PMI_TEMPLATE_CATALOG = [
   ]}
 ];
 
+const PMI_FORM_GROUPS=[
+  ['initiating','1 · Initiating Forms'],
+  ['planning','2 · Planning Forms'],
+  ['executing','3 · Executing Forms'],
+  ['monitoring','4 · Monitoring & Controlling Forms'],
+  ['closing','5 · Closing Forms'],
+  ['agile','6 · Agile Forms'],
+  ['pmbok8','PMBOK 8 · Value, Governance & Responsible AI Extensions']
+];
+const PF_SECTION=(title,...fields)=>[title,fields];
+const PF_TABLE=(title,...columns)=>({title,columns});
+const PF_FORM=(code,group,id,name,purpose,domain,sections=[],tables=[],options={})=>({
+  code,group,id,name,purpose,domain,sections,tables,...options
+});
+
+/* Original, adaptable form structures based on the complete 3rd-edition catalog.
+   They are not reproductions of Wiley/PMI copyrighted form pages. */
+const PMI_TEMPLATE_CATALOG=[
+  PF_FORM('1.1','initiating','project-charter','Project Charter',
+    'Authorize the project or phase and define the Project Manager authority.','Governance',[
+      PF_SECTION('Purpose and authorization','Business need / opportunity','Strategic alignment','Measurable objectives and success criteria','High-level scope and key deliverables','Explicit exclusions'),
+      PF_SECTION('Governance and boundaries','Sponsor / initiating authority','Project Manager authority','Decision and escalation thresholds','Summary budget / funding boundary','Key assumptions and constraints')
+    ],[
+      PF_TABLE('High-level milestones','ID','Milestone / gate','Target date','Owner','Acceptance evidence'),
+      PF_TABLE('High-level risks and opportunities','ID','Risk / opportunity statement','Owner','Initial response')
+    ],{approval:['Sponsor / Initiating Authority','Project Manager']}),
+
+  PF_FORM('1.2','initiating','assumption-log','Assumption Log',
+    'Record assumptions and constraints, then validate them before they become hidden risk.','Governance',[
+      PF_SECTION('Control rules','Recording and coding convention','Validation method','Review cadence','Escalation threshold')
+    ],[
+      PF_TABLE('Assumptions and constraints','ID','Type','Description','Category / source','Owner','Validation evidence','Review date','Status / impact')
+    ]),
+
+  PF_FORM('1.3','initiating','stakeholder-register','Stakeholder Register',
+    'Identify stakeholders, their interests, influence and engagement needs.','Stakeholders',[
+      PF_SECTION('Identification basis','Sources used to identify stakeholders','Confidentiality / access rules','Review trigger')
+    ],[
+      PF_TABLE('Stakeholder register','ID','Stakeholder / role','Interest / expectations','Power / influence','Impact / attitude','Preferred communication','Owner','Status')
+    ]),
+
+  PF_FORM('1.4','initiating','stakeholder-analysis','Stakeholder Analysis',
+    'Analyze stakeholder power, interest, impact, attitude and relationship strategy.','Stakeholders',[
+      PF_SECTION('Analysis approach','Segmentation method','Engagement scale','Sensitivity / confidentiality rules')
+    ],[
+      PF_TABLE('Stakeholder analysis matrix','Stakeholder','Power','Interest','Impact','Current engagement','Desired engagement','Key concerns','Engagement strategy','Owner')
+    ]),
+
+  PF_FORM('2.1','planning','project-management-plan','Project Management Plan',
+    'Integrate subsidiary plans, baselines, governance and the selected delivery approach.','Governance',[
+      PF_SECTION('Delivery architecture','Life cycle and development approach','Phase / iteration structure','Tailoring decisions and rationale'),
+      PF_SECTION('Integrated baselines and plans','Scope baseline','Schedule baseline','Cost baseline','Quality, resource, communication, risk, procurement and stakeholder plans'),
+      PF_SECTION('Governance and control','Decision rights and stage gates','Performance measurement method','Change and configuration control','Knowledge management and reporting')
+    ],[
+      PF_TABLE('Plan component register','Component / baseline','Owner','Approval authority','Version / date','Review cadence','Location / link')
+    ],{approval:['Sponsor / Governance Authority','Project Manager']}),
+
+  PF_FORM('2.2','planning','change-management-plan','Change Management Plan',
+    'Define how changes are submitted, analyzed, decided, implemented and verified.','Governance',[
+      PF_SECTION('Change governance','Change categories','Decision authorities / CCB','Emergency change path','Thresholds and service levels'),
+      PF_SECTION('Workflow and control','Submission requirements','Integrated impact analysis','Decision recording','Baseline and configuration updates','Communication and verification')
+    ],[
+      PF_TABLE('Change authority matrix','Change category / threshold','Decision authority','Required analysis','Response target','Evidence / record')
+    ],{approval:['Sponsor / CCB Chair','Project Manager']}),
+
+  PF_FORM('2.3','planning','project-roadmap','Project Roadmap',
+    'Show the sequence of outcomes, capabilities, releases and major decision points.','Schedule',[
+      PF_SECTION('Roadmap basis','Vision / target outcome','Planning horizon','Prioritization method','Assumptions and confidence level')
+    ],[
+      PF_TABLE('Outcome roadmap','Horizon / phase / release','Outcome / theme','Key capability / deliverable','Success measure','Dependency','Risk / assumption','Decision gate','Owner')
+    ]),
+
+  PF_FORM('2.4','planning','scope-management-plan','Scope Management Plan',
+    'Define how product and project scope will be established, validated and controlled.','Scope',[
+      PF_SECTION('Scope planning','Scope definition method','WBS / scope structure method','Requirements-to-scope traceability'),
+      PF_SECTION('Validation and control','Acceptance and validation process','Scope baseline approval','Variance thresholds','Change and escalation process','Reporting cadence')
+    ],[
+      PF_TABLE('Scope roles and outputs','Scope activity / artifact','Responsible role','Approval / acceptance authority','Timing / cadence','Evidence')
+    ]),
+
+  PF_FORM('2.5','planning','requirements-management-plan','Requirements Management Plan',
+    'Plan requirement elicitation, analysis, prioritization, traceability, approval and change.','Scope',[
+      PF_SECTION('Requirements life cycle','Elicitation methods','Analysis and documentation standards','Prioritization model','Baseline / backlog control'),
+      PF_SECTION('Traceability and acceptance','Traceability attributes','Configuration and version control','Change process','Verification / validation method','Approval authority')
+    ],[
+      PF_TABLE('Requirement category rules','Requirement category','Owner','Documentation standard','Priority rule','Acceptance / test method')
+    ]),
+
+  PF_FORM('2.6','planning','requirements-documentation','Requirements Documentation',
+    'Document business, stakeholder, solution, transition, project and quality requirements.','Scope',[
+      PF_SECTION('Requirement context','Business objective / problem','Stakeholder need','Solution boundary','Transition needs','Compliance and quality constraints')
+    ],[
+      PF_TABLE('Requirements','Req ID','Category','Requirement statement','Source / rationale','Priority','Acceptance criteria','Owner','Status / version')
+    ],{approval:['Requirement Owner / Product Owner','Approving Authority']}),
+
+  PF_FORM('2.7','planning','requirements-traceability-matrix','Requirements Traceability Matrix',
+    'Trace every approved requirement from source and objective through delivery and acceptance evidence.','Scope',[],[
+      PF_TABLE('Requirements traceability matrix','Req ID','Source / stakeholder','Business objective','Requirement','Deliverable / WBS / backlog item','Acceptance criteria','Verification / validation evidence','Owner','Status')
+    ]),
+
+  PF_FORM('2.8','planning','project-scope-statement','Project Scope Statement',
+    'Define product scope, project scope, deliverables, acceptance criteria, exclusions and boundaries.','Scope',[
+      PF_SECTION('Scope description','Product scope description','Project scope description','Major deliverables','Interfaces and boundaries'),
+      PF_SECTION('Acceptance and exclusions','Acceptance criteria','Explicit exclusions','Constraints','Assumptions')
+    ],[
+      PF_TABLE('Deliverable acceptance summary','Deliverable','Description','Acceptance criteria','Acceptance authority','Due / milestone')
+    ],{approval:['Sponsor / Customer Representative','Project Manager']}),
+
+  PF_FORM('2.9','planning','work-breakdown-structure','Work Breakdown Structure',
+    'Decompose the total approved scope into manageable deliverables and work packages.','Scope',[
+      PF_SECTION('WBS design','Decomposition approach','Coding scheme','100 percent rule check','Control account convention')
+    ],[
+      PF_TABLE('WBS hierarchy','WBS code','Parent code','Deliverable / component','Work package / control account','Owner','Acceptance boundary')
+    ]),
+
+  PF_FORM('2.10','planning','wbs-dictionary','WBS Dictionary',
+    'Describe each WBS component and the boundaries, ownership and acceptance of the work package.','Scope',[],[
+      PF_TABLE('WBS dictionary','WBS ID','Work package / control account','Description and boundaries','Deliverables','Owner','Acceptance criteria','Milestones','Resources / estimate','Assumptions / constraints','Dependencies')
+    ]),
+
+  PF_FORM('2.11','planning','schedule-management-plan','Schedule Management Plan',
+    'Define scheduling methods, calendars, units, thresholds, maintenance and reporting.','Schedule',[
+      PF_SECTION('Schedule method','Scheduling approach and tool','Calendars and time units','Level of accuracy / precision','Progress measurement rules'),
+      PF_SECTION('Baseline and control','Schedule baseline approval','Variance thresholds','Forecasting method','Change control','Reporting format and cadence')
+    ],[
+      PF_TABLE('Schedule control definitions','Measure / threshold','Definition','Owner','Action when exceeded','Report / evidence')
+    ]),
+
+  PF_FORM('2.12','planning','activity-list','Activity List',
+    'List the schedule activities required to complete every work package.','Schedule',[],[
+      PF_TABLE('Activity list','Activity ID','WBS ID','Activity name','Description','Owner','Milestone flag','Status')
+    ]),
+
+  PF_FORM('2.13','planning','activity-attributes','Activity Attributes',
+    'Document the detailed planning attributes for each activity.','Schedule',[],[
+      PF_TABLE('Activity attributes','Activity ID','WBS ID','Description','Predecessors / successors','Relationship / lag','Lead','Resource requirements','Calendar / location','Constraints / assumptions','Responsible role')
+    ]),
+
+  PF_FORM('2.14','planning','milestone-list','Milestone List',
+    'Track mandatory, contractual, governance and delivery milestones.','Schedule',[],[
+      PF_TABLE('Milestone list','Milestone ID','Milestone / gate','Type','Required date','Forecast date','Owner','Acceptance / decision authority','Status / notes')
+    ]),
+
+  PF_FORM('2.15','planning','network-diagram','Network Diagram',
+    'Document activity dependencies and the logic used to develop the schedule network.','Schedule',[
+      PF_SECTION('Network conventions','Diagram / scheduling method','Relationship conventions','Lead / lag rules','External dependency treatment')
+    ],[
+      PF_TABLE('Dependency logic','From activity','Relationship','Lead / lag','To activity','Dependency type','Owner','Validation status')
+    ]),
+
+  PF_FORM('2.16','planning','duration-estimates','Duration Estimates',
+    'Record duration estimates, ranges, basis and confidence for schedule activities.','Schedule',[],[
+      PF_TABLE('Duration estimates','Activity ID','Activity','Estimate / range','Unit','Basis / method','Resource assumptions','Calendar assumptions','Confidence','Estimator','Date')
+    ]),
+
+  PF_FORM('2.17','planning','duration-estimating-worksheet','Duration Estimating Worksheet',
+    'Develop and compare analogous, parametric, three-point or bottom-up duration estimates.','Schedule',[
+      PF_SECTION('Estimating basis','Method selected','Historical reference / rate','Assumptions','Reserve approach')
+    ],[
+      PF_TABLE('Duration estimating worksheet','Activity ID','Quantity / driver','Productivity / rate','Optimistic','Most likely','Pessimistic','Calculated estimate','Reserve','Final estimate','Basis / notes')
+    ]),
+
+  PF_FORM('2.18','planning','project-schedule','Project Schedule',
+    'Present the approved and forecast dates, dependencies, float and progress of scheduled work.','Schedule',[
+      PF_SECTION('Schedule status basis','Data date','Baseline version','Calendar used','Critical path / critical chain method')
+    ],[
+      PF_TABLE('Project schedule','ID','Activity / milestone','Predecessor','Owner','Baseline start','Baseline finish','Forecast start','Forecast finish','Float','Percent complete','Status')
+    ]),
+
+  PF_FORM('2.19','planning','cost-management-plan','Cost Management Plan',
+    'Define estimating, budgeting, funding, reserves, performance measurement and cost control.','Finance',[
+      PF_SECTION('Cost conventions','Currency and units','Accuracy / precision','Estimating methods','Account / control structure'),
+      PF_SECTION('Budget and control','Cost baseline approval','Contingency and management reserve','EVM / performance rules','Variance thresholds','Forecast and reporting cadence')
+    ],[
+      PF_TABLE('Cost control rules','Measure / account','Calculation / definition','Threshold','Owner','Required action / report')
+    ]),
+
+  PF_FORM('2.20','planning','cost-estimates','Cost Estimates',
+    'Record point estimates or ranges with basis, assumptions, risks and estimating confidence.','Finance',[],[
+      PF_TABLE('Cost estimates','Cost ID','WBS / activity','Cost category','Estimate / range','Currency','Basis / method','Assumptions','Risk / reserve','Estimator','Date')
+    ]),
+
+  PF_FORM('2.21','planning','cost-estimating-worksheet','Cost Estimating Worksheet',
+    'Build a transparent bottom-up or parametric cost estimate by resource and cost driver.','Finance',[
+      PF_SECTION('Estimating basis','Estimate class / maturity','Rate source','Inflation / exchange assumptions','Reserve method')
+    ],[
+      PF_TABLE('Cost estimating worksheet','WBS / activity','Resource / item','Quantity','Unit','Unit rate','Base cost','Contingency','Total estimate','Basis / source')
+    ]),
+
+  PF_FORM('2.22','planning','cost-baseline','Cost Baseline',
+    'Create the approved time-phased budget used to measure cost performance.','Finance',[
+      PF_SECTION('Baseline control','Baseline version / approval date','Control accounts','Funding constraints','Management reserve treatment')
+    ],[
+      PF_TABLE('Time-phased cost baseline','Period / control account','Planned value','Cumulative planned value','Contingency reserve','Funding requirement','Funding limit','Notes')
+    ],{approval:['Sponsor / Funding Authority','Project Manager']}),
+
+  PF_FORM('2.23','planning','quality-management-plan','Quality Management Plan',
+    'Define standards, objectives, assurance, control, responsibilities and improvement methods.','Governance',[
+      PF_SECTION('Quality framework','Applicable standards / regulations','Quality objectives','Roles and independence','Cost of quality considerations'),
+      PF_SECTION('Assurance and control','Prevention / QA activities','QC / inspection / sampling','Nonconformance and corrective action','Continuous improvement method','Reporting cadence')
+    ],[
+      PF_TABLE('Quality activities','Deliverable / process','Standard / criterion','Assurance activity','Control / test method','Frequency','Owner','Evidence / record')
+    ]),
+
+  PF_FORM('2.24','planning','quality-metrics','Quality Metrics',
+    'Define objective measures, targets, tolerances, methods, owners and response thresholds.','Governance',[],[
+      PF_TABLE('Quality metrics','Metric ID','Deliverable / process','Metric / specification','Target','Tolerance / control limits','Measurement method / sample','Frequency','Owner','Response when missed')
+    ]),
+
+  PF_FORM('2.25','planning','responsibility-assignment-matrix','Responsibility Assignment Matrix',
+    'Map work to accountable, responsible, consulted and informed roles.','Resources',[
+      PF_SECTION('RACI rules','Role definitions','Exactly one Accountable rule','Escalation for unresolved ownership')
+    ],[
+      PF_TABLE('Responsibility assignment matrix','Deliverable / activity','Accountable A','Responsible R','Consulted C','Informed I','Approval / notes')
+    ]),
+
+  PF_FORM('2.26','planning','resource-management-plan','Resource Management Plan',
+    'Plan team and physical resources, acquisition, development, control, release and escalation.','Resources',[
+      PF_SECTION('Resource strategy','Roles and competency needs','Internal / external sourcing','Organization structure','Location / time zone / accessibility'),
+      PF_SECTION('Acquire, develop and release','Acquisition timing','Onboarding / training / coaching','Recognition','Performance and conflict approach','Release / transition'),
+      PF_SECTION('Physical resource control','Availability / inventory rules','Utilization thresholds','Issue and escalation process')
+    ],[
+      PF_TABLE('Resource governance','Resource category / role','Owner / manager','Acquisition source','Required dates','Control measure','Release criteria')
+    ]),
+
+  PF_FORM('2.27','planning','team-charter','Team Charter',
+    'Create shared purpose, values, working agreements, decision rules and team norms.','Resources',[
+      PF_SECTION('Team identity','Mission and shared outcomes','Values and expected behaviors','Team membership / roles'),
+      PF_SECTION('Working agreements','Hours / time zones','Meeting and communication norms','Decision method','Conflict approach and escalation','Psychological safety / inclusion','Definition of Ready / Done when applicable')
+    ],[
+      PF_TABLE('Team commitments','Commitment / ground rule','How measured / observed','Owner / facilitator','Review date')
+    ],{approval:['Team Members','Project Manager / Team Lead']}),
+
+  PF_FORM('2.28','planning','resource-requirements','Resource Requirements',
+    'Estimate the type, quantity, skills, timing and constraints of required resources.','Resources',[],[
+      PF_TABLE('Resource requirements','WBS / activity','Role / resource','Skill / specification','Quantity / capacity','Required start','Required finish','Location / calendar','Source','Owner','Status')
+    ]),
+
+  PF_FORM('2.29','planning','resource-breakdown-structure','Resource Breakdown Structure',
+    'Organize project resources hierarchically by category, type, skill or organizational source.','Resources',[
+      PF_SECTION('RBS design','Hierarchy / coding convention','Resource categories','Ownership and maintenance rules')
+    ],[
+      PF_TABLE('Resource breakdown structure','RBS code','Parent code','Resource category / type','Role / skill / item','Organization / source','Owner','Notes')
+    ]),
+
+  PF_FORM('2.30','planning','communications-management-plan','Communications Management Plan',
+    'Define information needs, formats, channels, cadence, owners, feedback and confidentiality.','Stakeholders',[
+      PF_SECTION('Communication governance','Communication objectives','Technology / accessibility','Confidentiality and retention','Escalation and feedback rules','Monitoring method')
+    ],[
+      PF_TABLE('Communication matrix','Audience / stakeholder','Information / purpose','Format / channel','Frequency / trigger','Sender / owner','Feedback / confirmation','Storage / confidentiality')
+    ]),
+
+  PF_FORM('2.31','planning','risk-management-plan','Risk Management Plan',
+    'Define methodology, roles, categories, scales, thresholds, timing, reserves and reporting.','Risk',[
+      PF_SECTION('Risk approach','Methodology and tools','Roles and responsibilities','Risk categories / RBS','Risk appetite and thresholds','Timing and review cadence'),
+      PF_SECTION('Analysis and control','Probability scale','Impact dimensions and scale','Urgency / proximity rules','Reserve approach','Reporting / audit / escalation')
+    ],[
+      PF_TABLE('Probability definitions','Level','Numeric range','Qualitative definition'),
+      PF_TABLE('Impact definitions','Impact level','Scope / quality','Schedule','Cost / finance','Value / reputation / compliance')
+    ],{approval:['Sponsor / Risk Owner','Project Manager']}),
+
+  PF_FORM('2.32','planning','risk-register','Risk Register',
+    'Record individual threats and opportunities, analysis, responses, ownership and residual exposure.','Risk',[],[
+      PF_TABLE('Risk register','Risk ID','Type / category','Cause → uncertain event → effect','Probability','Impact','Score / priority','Response strategy / actions','Risk owner','Action owner','Trigger / due date','Residual risk / status')
+    ]),
+
+  PF_FORM('2.33','planning','risk-report','Risk Report',
+    'Summarize overall project risk exposure, trends, top risks, responses and reserve adequacy.','Risk',[
+      PF_SECTION('Overall project risk','Overall exposure / rating','Trend and drivers','Risk appetite / threshold position','Reserve adequacy'),
+      PF_SECTION('Response performance','Top threats and opportunities','Response effectiveness','Emerging / systemic risks','Decisions or escalation required')
+    ],[
+      PF_TABLE('Priority risk summary','Risk ID','Threat / opportunity','Exposure / trend','Response status','Owner','Decision / support needed')
+    ]),
+
+  PF_FORM('2.34','planning','probability-impact-assessment','Probability and Impact Assessment',
+    'Assess probability and each impact dimension using the approved definitions and evidence.','Risk',[],[
+      PF_TABLE('Probability and impact assessment','Risk ID','Probability rating / evidence','Scope / quality impact','Schedule impact','Cost impact','Value / compliance impact','Overall impact','Urgency / proximity','Assessor / date')
+    ]),
+
+  PF_FORM('2.35','planning','probability-impact-matrix','Probability and Impact Matrix',
+    'Define the scoring matrix and response priority bands for threats and opportunities.','Risk',[
+      PF_SECTION('Matrix configuration','Scoring formula','Threat and opportunity treatment','Priority bands','Escalation threshold')
+    ],[
+      PF_TABLE('Probability-impact matrix','Probability / impact','Very low','Low','Moderate','High','Very high','Required response / escalation')
+    ],{approval:['Sponsor / Risk Governance Authority','Project Manager']}),
+
+  PF_FORM('2.36','planning','risk-data-sheet','Risk Data Sheet',
+    'Provide detailed analysis and response planning for one significant risk.','Risk',[
+      PF_SECTION('Risk definition','Risk ID / title','Cause, uncertain event and effect','Category / source','Affected objectives','Owner'),
+      PF_SECTION('Analysis','Probability and evidence','Impact by objective','Urgency / proximity / manageability','Assumptions and data quality'),
+      PF_SECTION('Response plan','Strategy','Preventive / contingent actions','Trigger','Contingency / fallback','Residual and secondary risks')
+    ],[
+      PF_TABLE('Risk response actions','Action ID','Action','Action owner','Due date','Cost / resource','Status','Evidence')
+    ],{approval:['Risk Owner','Project Manager']}),
+
+  PF_FORM('2.37','planning','procurement-management-plan','Procurement Management Plan',
+    'Plan make-or-buy decisions, sourcing, contract control, roles, risks and closeout.','Governance',[
+      PF_SECTION('Procurement framework','Needs / make-or-buy criteria','Contracting authority and roles','Standard documents / terms','Schedule and lead times'),
+      PF_SECTION('Control and close','Performance measures','Change / claim process','Risk and compliance controls','Records / audit','Acceptance and closeout')
+    ],[
+      PF_TABLE('Procurement packages','Package / SOW','Sourcing method','Contract type','Owner','Planned solicitation','Planned award','Acceptance / close criteria')
+    ]),
+
+  PF_FORM('2.38','planning','procurement-strategy','Procurement Strategy',
+    'Select the delivery method, contract type, procurement phases and market approach.','Governance',[
+      PF_SECTION('Strategic context','Scope / capability to procure','Market and supplier conditions','Delivery method options','Contract type / risk allocation','Procurement phases and timing','Coordination / licensing / compliance')
+    ],[
+      PF_TABLE('Strategy option analysis','Option','Advantages','Disadvantages / risks','Cost / schedule impact','Selection rationale')
+    ],{approval:['Procurement Authority','Project Manager']}),
+
+  PF_FORM('2.39','planning','source-selection-criteria','Source Selection Criteria',
+    'Define transparent evaluation criteria, weights, scoring and minimum requirements.','Governance',[
+      PF_SECTION('Evaluation method','Mandatory / pass-fail requirements','Weighted scoring method','Evaluator roles and conflict-of-interest control','Clarification and tie-break rules')
+    ],[
+      PF_TABLE('Source selection criteria','Criterion ID','Criterion / evidence','Mandatory?','Weight','Scoring guidance','Evaluator','Score / comment')
+    ],{approval:['Procurement Authority / Evaluation Chair','Project Manager']}),
+
+  PF_FORM('2.40','planning','stakeholder-engagement-plan','Stakeholder Engagement Plan',
+    'Plan strategies to move stakeholder engagement from current to desired levels.','Stakeholders',[
+      PF_SECTION('Engagement governance','Engagement objectives','Prioritization method','Cultural / accessibility considerations','Feedback and escalation','Monitoring cadence')
+    ],[
+      PF_TABLE('Stakeholder engagement actions','Stakeholder / group','Current engagement','Desired engagement','Key needs / resistance','Strategy / message','Channel / cadence','Owner','Measure / review date')
+    ]),
+
+  PF_FORM('3.1','executing','issue-log','Issue Log',
+    'Record and control current problems requiring resolution, decision or escalation.','Governance',[],[
+      PF_TABLE('Issue log','Issue ID','Description / impact','Date raised','Priority','Owner','Target resolution','Action / escalation','Decision needed','Status','Closed date')
+    ]),
+
+  PF_FORM('3.2','executing','decision-log','Decision Log',
+    'Preserve decisions, alternatives, rationale, authority, impacts and follow-up actions.','Governance',[],[
+      PF_TABLE('Decision log','Decision ID','Question / context','Options considered','Decision and rationale','Decision owner / authority','Date','Impacts / actions','Review trigger','Status')
+    ]),
+
+  PF_FORM('3.3','executing','change-request','Change Request',
+    'Submit one proposed change with integrated impact analysis and an accountable decision.','Governance',[
+      PF_SECTION('Requested change','Change ID / title','Requester / date','Description','Reason / expected value','Urgency'),
+      PF_SECTION('Integrated impact analysis','Scope / requirements','Schedule','Cost / funding','Quality / resources','Risk / procurement','Benefits / sustainability / compliance'),
+      PF_SECTION('Recommendation and implementation','Options considered','Recommendation','Implementation owner and plan','Verification and rollback')
+    ],[],{approval:['Change Authority / CCB','Project Manager','Requester / Product Owner']}),
+
+  PF_FORM('3.4','executing','change-log','Change Log',
+    'Track all change requests from submission through decision, implementation and verification.','Governance',[],[
+      PF_TABLE('Change log','Change ID','Summary','Requester / submitted','Category / priority','Integrated impact','Decision / authority','Decision date','Implementation owner','Verification','Status')
+    ]),
+
+  PF_FORM('3.5','executing','lessons-learned-register','Lessons Learned Register',
+    'Capture lessons continuously so the project can adapt and organizational knowledge can be reused.','Governance',[],[
+      PF_TABLE('Lessons learned register','Lesson ID','Event / context','What happened','Impact','Root cause / contributing factors','Lesson / recommendation','Owner','Apply when / where','Status / evidence')
+    ]),
+
+  PF_FORM('3.6','executing','quality-audit','Quality Audit',
+    'Assess whether project activities comply with planned processes, standards and improvement needs.','Governance',[
+      PF_SECTION('Audit definition','Audit objective / scope','Criteria / standard','Auditor and independence','Method / sampling','Date / participants'),
+      PF_SECTION('Audit conclusion','Overall conformity','Good practices','Systemic concerns','Immediate containment','Follow-up date')
+    ],[
+      PF_TABLE('Audit findings','Finding ID','Requirement / criterion','Evidence','Conformity / finding type','Root cause','Corrective action','Owner','Due date','Verification / closure')
+    ],{approval:['Lead Auditor','Process / Project Owner']}),
+
+  PF_FORM('3.7','executing','team-performance-assessment','Team Performance Assessment',
+    'Evaluate team effectiveness, capabilities, collaboration and agreed improvement actions.','Resources',[
+      PF_SECTION('Assessment context','Period / milestone','Assessment method','Participants / confidentiality','Team objectives'),
+      PF_SECTION('Assessment summary','Strengths','Gaps / barriers','Capability development','Psychological safety / collaboration','Recommended actions')
+    ],[
+      PF_TABLE('Team effectiveness dimensions','Dimension','Evidence / observation','Rating / trend','Improvement action','Owner','Review date')
+    ]),
+
+  PF_FORM('4.1','monitoring','team-member-status-report','Team Member Status Report',
+    'Provide a concise individual update on completed work, next work, blockers, risks and support needed.','Resources',[
+      PF_SECTION('Reporting period','Team member / role','Reporting period','Overall status','Capacity / availability'),
+      PF_SECTION('Work and support','Accomplishments','Planned next work','Blockers / issues','Risks / assumptions','Decisions or support needed')
+    ],[
+      PF_TABLE('Work item status','Work item / activity','Planned','Completed / forecast','Status','Blocker / dependency','Next action')
+    ]),
+
+  PF_FORM('4.2','monitoring','project-status-report','Project Status Report',
+    'Communicate value, delivery performance, forecasts, risks, decisions and next priorities.','Governance',[
+      PF_SECTION('Executive summary','Reporting period / data date','Overall RAG status','What changed','Top outcome / value progress','Decision or support needed'),
+      PF_SECTION('Integrated performance','Scope / requirements','Schedule / forecast','Cost / forecast','Quality','Resources / team','Stakeholder / communication'),
+      PF_SECTION('Forward view','Top risks and issues','Changes / decisions','Next-period priorities','Upcoming gates / milestones')
+    ],[
+      PF_TABLE('Milestone and outcome status','Outcome / milestone','Baseline / target','Forecast / actual','Status','Owner','Recovery / next action')
+    ],{approval:['Project Manager','Sponsor / Governance Body']}),
+
+  PF_FORM('4.3','monitoring','variance-analysis','Variance Analysis',
+    'Explain a material variance, its causes, impacts, forecast and corrective action.','Governance',[
+      PF_SECTION('Variance definition','Measure / baseline','Data date','Planned value','Actual / forecast value','Threshold breached'),
+      PF_SECTION('Analysis and response','Root cause','Impact on objectives / value','Trend / forecast','Corrective or preventive action','Change request / escalation needed')
+    ],[
+      PF_TABLE('Variance detail','Metric / control account','Baseline','Actual','Variance','Variance percent','Root cause','Forecast impact','Owner / action')
+    ]),
+
+  PF_FORM('4.4','monitoring','earned-value-analysis','Earned Value Analysis',
+    'Analyze integrated scope, schedule and cost performance using approved EVM rules.','Finance',[
+      PF_SECTION('EVM basis','Data date','Performance measurement baseline version','Earning rules','Management reserve','Forecast assumptions'),
+      PF_SECTION('Management interpretation','Schedule performance conclusion','Cost performance conclusion','Estimate-at-completion rationale','Corrective action / change')
+    ],[
+      PF_TABLE('Earned value analysis','Period / control account','PV','EV','AC','SV','CV','SPI','CPI','BAC','EAC','ETC','VAC','TCPI','Action / owner')
+    ]),
+
+  PF_FORM('4.5','monitoring','risk-audit','Risk Audit',
+    'Evaluate the effectiveness of risk processes, ownership, responses, reserves and reporting.','Risk',[
+      PF_SECTION('Audit definition','Scope / period','Criteria','Auditor / participants','Sampling method'),
+      PF_SECTION('Effectiveness assessment','Risk identification quality','Analysis consistency','Response implementation','Ownership and escalation','Reserve / reporting adequacy')
+    ],[
+      PF_TABLE('Risk audit findings','Finding ID','Risk / process area','Evidence','Effectiveness rating','Gap / root cause','Corrective action','Owner','Due / closure')
+    ]),
+
+  PF_FORM('4.6','monitoring','contractor-status-report','Contractor Status Report',
+    'Report supplier deliverables, schedule, cost, quality, risks, changes, invoices and support needs.','Governance',[
+      PF_SECTION('Contract status','Supplier / contract','Reporting period','Overall status','Contract value / invoiced / paid','Forecast completion'),
+      PF_SECTION('Management summary','Deliverables completed','Schedule / cost / quality performance','Risks / issues / claims','Changes / decisions','Customer actions needed')
+    ],[
+      PF_TABLE('Contract deliverable status','Deliverable / milestone','Contract date','Forecast / actual','Acceptance status','Invoice / payment','Issue / action','Owner')
+    ]),
+
+  PF_FORM('4.7','monitoring','procurement-audit','Procurement Audit',
+    'Review sourcing and contract administration for compliance, effectiveness and lessons.','Governance',[
+      PF_SECTION('Audit definition','Procurement / contract scope','Policy / criteria','Auditor and independence','Period / sample'),
+      PF_SECTION('Audit areas','Planning / make-or-buy','Solicitation and source selection','Contract formation','Change / claim control','Performance / records / ethics','Closeout readiness')
+    ],[
+      PF_TABLE('Procurement audit findings','Finding ID','Process / requirement','Evidence','Conformity / risk','Corrective action','Owner','Due date','Closure evidence')
+    ]),
+
+  PF_FORM('4.8','monitoring','contract-closeout-report','Contract Close-Out Report',
+    'Confirm contractual completion, acceptance, financial settlement, claims resolution and archived records.','Governance',[
+      PF_SECTION('Contract completion','Contract / supplier','Completion date','Deliverables accepted','Open claims / changes','Final financial position'),
+      PF_SECTION('Administrative closure','Final invoice / payment','Warranties / support','Property / data return','Records archived','Supplier performance / lessons')
+    ],[
+      PF_TABLE('Closeout checklist','Closeout item','Required evidence','Owner','Due date','Complete?','Reference / notes')
+    ],{approval:['Contract / Procurement Authority','Project Manager','Supplier Representative']}),
+
+  PF_FORM('4.9','monitoring','product-acceptance','Product Acceptance',
+    'Record objective verification and the authorized acceptance, conditional acceptance or rejection of a deliverable.','Scope',[
+      PF_SECTION('Deliverable identification','Product / deliverable','Version / configuration','Supplier / team','Acceptance authority','Acceptance date'),
+      PF_SECTION('Acceptance decision','Acceptance basis','Outstanding defects / punch items','Conditions / warranty','Decision: accept, conditional accept or reject')
+    ],[
+      PF_TABLE('Acceptance criteria and evidence','Criterion ID','Requirement / criterion','Test / inspection evidence','Result','Defect / exception','Disposition / owner')
+    ],{approval:['Customer / Product Acceptance Authority','Project Manager','Delivery Owner']}),
+
+  PF_FORM('5.1','closing','lessons-learned-summary','Lessons Learned Summary',
+    'Consolidate project lessons, root causes, recommendations and reusable knowledge at close.','Governance',[
+      PF_SECTION('Project overview','Project / phase summary','Objectives and outcomes','Approach / context','Participants'),
+      PF_SECTION('Summary insights','What worked and why','What did not work and why','Unexpected outcomes','Recommendations for future work','Reusable assets / knowledge transfer')
+    ],[
+      PF_TABLE('Priority lessons','Theme / area','Evidence / event','Root cause','Recommendation','Future owner / audience','Repository / link')
+    ],{approval:['Project Manager','Sponsor / PMO / Knowledge Owner']}),
+
+  PF_FORM('5.2','closing','project-phase-closeout','Project or Phase Close-Out',
+    'Confirm completion, transition, benefits ownership, financial closure, records and authorization to close.','Governance',[
+      PF_SECTION('Completion and performance','Objectives achieved','Deliverables accepted','Scope / schedule / cost / quality result','Business case / value outcome','Residual risk'),
+      PF_SECTION('Transition and administration','Operations / product transition','Benefits owner and review dates','Contracts / finance closed','Records archived','Resources released','Open items transferred'),
+      PF_SECTION('Closure decision','Reason for closure','Effective close date','Post-project review / benefit review','Communication completed')
+    ],[
+      PF_TABLE('Closeout checklist','Closure item','Acceptance / evidence','Owner','Due date','Status / reference'),
+      PF_TABLE('Transferred open items','Item','Type','New owner','Due / review date','Tracking location')
+    ],{approval:['Sponsor / Closing Authority','Project Manager','Operations / Product Owner']}),
+
+  PF_FORM('6.1','agile','product-vision','Product Vision',
+    'Align the team and stakeholders around target users, needs, outcomes, value and product guardrails.','Scope',[
+      PF_SECTION('Vision statement','Target customer / user','Need / opportunity','Product / service concept','Primary benefit / outcome','Differentiator'),
+      PF_SECTION('Product direction','Product goal','Outcome measures','Scope guardrails / non-goals','Key assumptions','Stakeholders / constraints')
+    ],[
+      PF_TABLE('Outcome hypotheses','Hypothesis / outcome','Target user','Measure / target','Experiment / evidence','Owner','Review date')
+    ],{approval:['Product Owner','Sponsor / Product Governance']}),
+
+  PF_FORM('6.2','agile','product-backlog','Product Backlog',
+    'Maintain an ordered, transparent and evolving list of product work linked to value and acceptance.','Scope',[
+      PF_SECTION('Backlog working agreement','Ordering factors','Definition of Ready','Definition of Done','Refinement cadence','Estimation method')
+    ],[
+      PF_TABLE('Product backlog','Item ID','Epic / feature / user story','Acceptance criteria','Value / outcome','Priority / order','Estimate','Dependency / risk','Release / sprint','Status')
+    ]),
+
+  PF_FORM('6.3','agile','release-plan','Release Plan',
+    'Forecast releases and iterations based on outcomes, backlog, capacity, dependencies and readiness.','Schedule',[
+      PF_SECTION('Release basis','Release goal / target outcome','Users / market','Forecast assumptions','Team / capacity','Velocity / throughput range'),
+      PF_SECTION('Governance and readiness','Acceptance / Definition of Done','Release readiness criteria','Compliance / operational readiness','Feedback and reforecast cadence')
+    ],[
+      PF_TABLE('Release forecast','Release / iteration','Goal / outcome','Backlog scope / capabilities','Forecast dates','Capacity / points','Dependencies / risks','Readiness / acceptance','Status')
+    ]),
+
+  PF_FORM('6.4','agile','retrospective','Retrospective',
+    'Inspect how the team worked and agree a small number of measurable improvement experiments.','Resources',[
+      PF_SECTION('Context and safety','Iteration / period','Goal and result','Participants','Working agreement / safety check'),
+      PF_SECTION('Inspect and learn','What helped','What hindered','Data / evidence','Root causes / patterns','Appreciations')
+    ],[
+      PF_TABLE('Improvement experiments','Experiment / action','Hypothesis / expected benefit','Owner','Start / due','Success measure','Review result')
+    ]),
+
+  PF_FORM('8.1','pmbok8','benefits-value-delivery-plan','Benefits & Value Delivery Plan',
+    'Connect outputs to outcomes, benefits, value measures, ownership and realization reviews.','Governance',[
+      PF_SECTION('Value architecture','Strategic objective','Target outcomes','Value definition / trade-offs','Benefit ownership','Disbenefits / unintended effects'),
+      PF_SECTION('Realization governance','Baselines and targets','Transition / adoption','Realization timing','Sustainment owner','Continue / pivot / stop criteria')
+    ],[
+      PF_TABLE('Benefits register','Benefit / disbenefit','Owner','Baseline','Target / measure','Realization date','Enabling deliverable','Assumption / risk','Status / evidence')
+    ],{approval:['Sponsor / Benefit Owner','Project Manager']}),
+
+  PF_FORM('8.2','pmbok8','governance-decision-rights','Governance & Decision Rights Plan',
+    'Define governance bodies, decision rights, thresholds, gates, escalation and accountability.','Governance',[
+      PF_SECTION('Governance model','Governance bodies / mandate','Decision principles','Delegated authority','Stage / value review gates','Assurance and audit'),
+      PF_SECTION('Escalation and transparency','Thresholds','Escalation path / timing','Conflict of interest','Decision record / communication','Review of governance effectiveness')
+    ],[
+      PF_TABLE('Decision rights matrix','Decision / threshold','Recommends','Decides / accountable','Consulted','Evidence required','Response time','Escalation')
+    ],{approval:['Sponsor / Governance Chair','Project Manager']}),
+
+  PF_FORM('8.3','pmbok8','sustainability-impact-assessment','Sustainability Impact Assessment',
+    'Assess environmental, social and economic impacts across the project and product life cycle.','Governance',[
+      PF_SECTION('Assessment boundary','Life-cycle boundary','Stakeholders / communities','Applicable commitments / regulation','Materiality method'),
+      PF_SECTION('Integration and trade-offs','Positive impacts','Adverse impacts','Alternatives considered','Mitigation / enhancement','Residual impact / disclosure')
+    ],[
+      PF_TABLE('Sustainability impacts','Impact ID','Dimension','Life-cycle stage','Affected stakeholder / environment','Magnitude / likelihood','Action / design response','Owner','Measure / target','Status')
+    ],{approval:['Sponsor / Sustainability Authority','Project Manager']}),
+
+  PF_FORM('8.4','pmbok8','ai-use-accountability-log','AI Use & Accountability Log',
+    'Record AI use cases, data, risks, human accountability, validation, transparency and monitoring.','Governance',[
+      PF_SECTION('Responsible AI controls','Approved use boundary','Human decision owner','Data classification / consent','Validation and bias method','Transparency / disclosure','Security / vendor controls','Incident and stop-use criteria')
+    ],[
+      PF_TABLE('AI use and accountability log','Use case / model','Purpose / decision supported','Data source / sensitivity','Human accountable owner','Validation / bias evidence','Limitations / risk','Approval','Monitoring / review','Status / incident')
+    ],{approval:['Business / Decision Owner','Data / AI Governance','Project Manager']}),
+
+  PF_FORM('8.5','pmbok8','tailoring-decision-register','Tailoring Decision Register',
+    'Document why methods, artifacts, controls and cadences were tailored to the project context.','Governance',[
+      PF_SECTION('Tailoring criteria','Product / delivery uncertainty','Complexity and scale','Regulation / risk','Team and stakeholder needs','Organizational governance')
+    ],[
+      PF_TABLE('Tailoring decisions','Decision ID','Area / practice','Standard approach','Tailored approach','Context / rationale','Risk / trade-off','Decision owner','Review trigger','Evidence / outcome')
+    ]),
+
+  PF_FORM('8.6','pmbok8','outcome-value-metrics-dashboard','Outcome & Value Metrics Dashboard',
+    'Track leading delivery indicators and lagging outcome / value measures without confusing output with benefit.','Governance',[
+      PF_SECTION('Measurement governance','Outcome and value definition','Data sources / quality','Baseline date','Review cadence','Decision thresholds')
+    ],[
+      PF_TABLE('Outcome and value metrics','Metric ID','Outcome / value hypothesis','Metric type','Baseline','Target','Current / trend','Data source / owner','Decision threshold','Action / learning')
+    ])
+];
+
 function initTemplateBuilder(){
   const select=document.getElementById('template-type');
   const date=document.getElementById('template-date');
-  if(select)select.innerHTML=PMI_TEMPLATE_CATALOG.map(t=>`<option value="${t.id}">${escapeHtml(t.name)}</option>`).join('');
+  if(select){
+    select.innerHTML=PMI_FORM_GROUPS.map(([group,label])=>{
+      const forms=PMI_TEMPLATE_CATALOG.filter(form=>form.group===group);
+      return `<optgroup label="${escapeAttr(label)}">${forms.map(form=>
+        `<option value="${escapeAttr(form.id)}">${escapeHtml(form.code)} · ${escapeHtml(form.name)}</option>`
+      ).join('')}</optgroup>`;
+    }).join('');
+    if(!select.dataset.guideBound){
+      select.addEventListener('change',renderTemplateGuide);
+      select.dataset.guideBound='true';
+    }
+  }
   if(date&&!date.value)date.value=new Date().toISOString().slice(0,10);
+  const count=document.getElementById('template-form-count');
+  if(count)count.textContent=`${PMI_TEMPLATE_CATALOG.length} forms`;
+  renderTemplateGuide();
+}
+
+function renderTemplateGuide(){
+  const id=document.getElementById('template-type')?.value;
+  const spec=PMI_TEMPLATE_CATALOG.find(form=>form.id===id)||PMI_TEMPLATE_CATALOG[0];
+  const guide=document.getElementById('template-guide');
+  if(!guide||!spec)return;
+  const group=PMI_FORM_GROUPS.find(([key])=>key===spec.group)?.[1]||spec.group;
+  guide.innerHTML=`<b>${escapeHtml(spec.code)} · ${escapeHtml(spec.name)}</b> · ${escapeHtml(group)} · PMBOK 8 ${escapeHtml(spec.domain)} domain<br>${escapeHtml(spec.purpose)}`;
+}
+
+function pmiTemplateCell(value){
+  return String(value??'').replace(/\|/g,'/').replace(/\r?\n/g,' ').trim();
+}
+
+function pmiTemplateEmptyTable(title,columns,rowCount=3){
+  let output=`## ${title}\n\n| ${columns.map(pmiTemplateCell).join(' | ')} |\n`;
+  output+=`| ${columns.map(()=>'---').join(' | ')} |\n`;
+  for(let i=0;i<rowCount;i++)output+=`| ${columns.map(()=>'[To complete]').join(' | ')} |\n`;
+  return output+'\n';
 }
 
 function generateProjectTemplate(){
@@ -10169,28 +10968,64 @@ function generateProjectTemplate(){
   const sponsor=document.getElementById('template-sponsor')?.value.trim()||'[Sponsor / Product Owner]';
   const date=document.getElementById('template-date')?.value||new Date().toISOString().slice(0,10);
   const context=document.getElementById('template-context')?.value.trim()||'[Cần điền / To complete]';
-  let output=`# ${spec.name}\n\n`;
-  output+=`- **Project / Dự án:** ${project}\n- **Approach / Cách tiếp cận:** ${approach}\n- **Project Manager:** ${pm}\n- **Sponsor / Product Owner:** ${sponsor}\n- **Prepared / Ngày lập:** ${date}\n- **Version:** 0.1 Draft\n\n`;
-  output+=`## Context / Bối cảnh\n\n${context}\n\n`;
-  (spec.sections||[]).forEach(([title,prompts])=>{
-    output+=`## ${title}\n\n`;
-    prompts.forEach(prompt=>{output+=`- **${prompt}:** [Cần điền / To complete]\n`;});
-    output+='\n';
+  const group=PMI_FORM_GROUPS.find(([key])=>key===spec.group)?.[1]||spec.group;
+  let output=`# ${spec.code} · ${spec.name}\n\n`;
+  output+=`> ${spec.purpose}\n\n`;
+  output+='## Document control / Kiểm soát tài liệu\n\n';
+  output+='| Field / Mục | Response / Nội dung |\n| --- | --- |\n';
+  [
+    ['Form family / Nhóm form',group],
+    ['PMBOK 8 performance domain',spec.domain],
+    ['Project / Dự án',project],
+    ['Approach / Cách tiếp cận',approach],
+    ['Project Manager',pm],
+    ['Sponsor / Product Owner',sponsor],
+    ['Prepared / Ngày lập',date],
+    ['Version / Status','0.1 Draft']
+  ].forEach(([label,value])=>{output+=`| **${pmiTemplateCell(label)}** | ${pmiTemplateCell(value)} |\n`;});
+  output+='\n## Project / form context\n\n'+context+'\n\n';
+  const blocks=[];
+  (spec.sections||[]).forEach(([title,fields])=>{
+    let text=`## ${title}\n\n| Field / Mục | Response / Evidence |\n| --- | --- |\n`;
+    fields.forEach(field=>{text+=`| **${pmiTemplateCell(field)}** | [Cần điền / To complete] |\n`;});
+    blocks.push({text:text+'\n',units:3+fields.length});
   });
-  if(spec.table){
-    output+=`## Working register / Bảng làm việc\n\n| ${spec.table.join(' | ')} |\n| ${spec.table.map(()=>'---').join(' | ')} |\n| ${spec.table.map(()=>'[To complete]').join(' | ')} |\n\n`;
+  (spec.tables||[]).forEach(table=>{
+    blocks.push({
+      text:pmiTemplateEmptyTable(table.title,table.columns,3),
+      units:table.columns.length>6?12:6,
+      forceNewPage:table.columns.length>6
+    });
+  });
+  if(spec.approval?.length){
+    const columns=['Role / Authority','Name','Decision / Approval','Signature / Evidence','Date'];
+    let text='## Approval / Phê duyệt\n\n';
+    text+=`| ${columns.join(' | ')} |\n| ${columns.map(()=>'---').join(' | ')} |\n`;
+    spec.approval.forEach(role=>{text+=`| **${pmiTemplateCell(role)}** | [To complete] | [To complete] | [To complete] | [To complete] |\n`;});
+    blocks.push({text:text+'\n',units:3+spec.approval.length});
   }
-  output+='## Tailoring & governance checks\n\n';
-  output+='- [ ] Artifact owner and approval authority confirmed\n';
-  output+='- [ ] Terminology, lifecycle and level of detail tailored to the project\n';
-  output+='- [ ] Compliance, ethics, accessibility and sustainability impacts considered\n';
-  output+='- [ ] Links to related baselines/registers/evidence added\n';
-  output+='- [ ] Review cadence and version control agreed\n\n';
-  output+='> PMI-style working template generated by ALBERT PMI Prep. Not an official PMI form; tailor it to organizational governance.\n';
+  let checks='## Tailoring & governance checks\n\n';
+  checks+='- [ ] Owner, approval authority and decision rights confirmed\n';
+  checks+='- [ ] Form tailored to the project context, delivery approach and organizational governance\n';
+  checks+='- [ ] Links to related baselines, registers, requirements and objective evidence added\n';
+  checks+='- [ ] Value, quality, compliance, ethics, accessibility and sustainability impacts considered\n';
+  checks+='- [ ] Review cadence, version control, retention and confidentiality agreed\n\n';
+  checks+=`> Catalog reference: A Project Manager's Book of Forms, 3rd Edition, form ${spec.code}. This is an original adaptable structure aligned to PMBOK 8, not a reproduction or official PMI form.\n`;
+  blocks.push({text:checks,units:9});
+
+  let pageUnits=20;
+  blocks.forEach(block=>{
+    if(pageUnits>0&&(block.forceNewPage||pageUnits+block.units>30)){
+      output+='[[PAGE_BREAK]]\n\n';
+      pageUnits=0;
+    }
+    output+=block.text;
+    pageUnits+=block.units;
+  });
   const area=document.getElementById('template-output');
   if(area)area.value=output;
   const status=document.getElementById('template-status');
-  if(status)status.textContent=`Đã tạo ${spec.name}. Có thể chỉnh trực tiếp.`;
+  if(status)status.textContent=`Đã tạo ${spec.code} · ${spec.name}. Có thể chỉnh trực tiếp rồi tải Word.`;
   return output;
 }
 
@@ -10202,7 +11037,7 @@ async function enhanceProjectTemplate(){
   const spec=PMI_TEMPLATE_CATALOG.find(t=>t.id===document.getElementById('template-type')?.value)||PMI_TEMPLATE_CATALOG[0];
   const status=document.getElementById('template-status');
   if(status)status.textContent='External AI đang rà soát và hoàn thiện…';
-  const system=`You are a PMI-aligned project artifact coach. Improve the supplied ${spec.name} as practical Markdown aligned to PMBOK Guide Eighth Edition. Preserve headings and traceability. Use the supplied project facts only; never fabricate facts, approvals, metrics or decisions. Leave unknown values as [Cần điền / To complete]. Make acceptance criteria and ownership measurable where possible. Tailor for the named approach. Return only the revised Markdown. This is PMI-style, not an official PMI form.`;
+  const system=`You are a PMI-aligned project artifact coach. Improve the supplied ${spec.code} ${spec.name} as practical Markdown aligned to PMBOK Guide Eighth Edition. Preserve the form code, every heading, every field, every table column, document control, traceability and approval roles. Use supplied project facts only; never fabricate facts, approvals, metrics or decisions. Leave unknown values as [Cần điền / To complete]. Make acceptance criteria, ownership, evidence and decision thresholds measurable where possible. Tailor for the named approach. Return only the revised Markdown. This is an original adaptable form, not an official PMI or Wiley form.`;
   try{
     const improved=await pmiAskExternalTutor(system,[{role:'user',content:`PROJECT CONTEXT:\n${context}\n\nCURRENT TEMPLATE:\n${content}`}],3200);
     const area=document.getElementById('template-output');
@@ -10244,6 +11079,11 @@ function pmiDocxInlineRuns(text,overrides={}){
 }
 
 function pmiDocxTableWidths(rows,columnCount,total=9360){
+  const firstHeader=String(rows?.[0]?.[0]||'').replace(/\*\*/g,'').toLowerCase();
+  if(columnCount===2&&/(field|mục|attribute|control item)/i.test(firstHeader)){
+    const labelWidth=Math.floor(total*.34);
+    return [labelWidth,total-labelWidth];
+  }
   const weights=Array.from({length:columnCount},()=>8);
   rows.forEach(row=>{
     for(let i=0;i<columnCount;i++){
@@ -10269,6 +11109,7 @@ function pmiDocxTable(rows,tableWidth=9360){
   }=window.docx;
   const columnCount=Math.max(1,...rows.map(row=>row.length));
   const widths=pmiDocxTableWidths(rows,columnCount,tableWidth);
+  const labelDetail=columnCount===2&&/(field|mục|attribute|control item)/i.test(String(rows?.[0]?.[0]||'').replace(/\*\*/g,''));
   const border={style:BorderStyle.SINGLE,size:4,color:'AAB7C4'};
   return new Table({
     width:{size:tableWidth,type:WidthType.DXA},
@@ -10283,7 +11124,9 @@ function pmiDocxTable(rows,tableWidth=9360){
         width:{size:widths[columnIndex],type:WidthType.DXA},
         margins:{top:80,bottom:80,left:120,right:120},
         verticalAlign:VerticalAlign.CENTER,
-        shading:rowIndex===0?{fill:'E8EEF5',type:ShadingType.CLEAR}:undefined,
+        shading:rowIndex===0
+          ?{fill:'E8EEF5',type:ShadingType.CLEAR}
+          :(labelDetail&&columnIndex===0?{fill:'F2F4F7',type:ShadingType.CLEAR}:undefined),
         children:[new Paragraph({
           spacing:{before:0,after:0,line:260},
           children:pmiDocxInlineRuns(row[columnIndex]||'',{
@@ -10313,6 +11156,10 @@ function pmiMarkdownToDocxChildren(markdown,tableWidth=9360){
     const raw=lines[i];
     const line=raw.trim();
     if(!line||/^```/.test(line))continue;
+    if(line==='[[PAGE_BREAK]]'){
+      children.push(new Paragraph({pageBreakBefore:true,spacing:{before:0,after:0},children:[]}));
+      continue;
+    }
 
     if(line.startsWith('|')&&i+1<lines.length&&/^\s*\|?[\s:|-]+\|?\s*$/.test(lines[i+1])){
       const rows=[];
@@ -10478,10 +11325,16 @@ function pmiBuildWordDocument(markdown,title='PMI-style Project Template'){
         default:new Footer({children:[new Paragraph({
           alignment:AlignmentType.RIGHT,
           spacing:{before:100,after:0},
-          children:[new TextRun({
-            font:'Calibri',size:17,color:'7A8694',
-            children:['ALBERT PMI Prep · PMI-style working template · Page ',PageNumber.CURRENT]
-          })]
+          children:[
+            new TextRun({
+              text:'ALBERT PMI Prep · PMBOK 8 adaptable form · Page ',
+              font:'Calibri',size:17,color:'7A8694'
+            }),
+            new TextRun({
+              children:[PageNumber.CURRENT],
+              font:'Calibri',size:17,color:'7A8694'
+            })
+          ]
         })]})
       },
       children
@@ -10502,7 +11355,7 @@ async function downloadProjectTemplate(){
   const slug=pmiNormalizeText(`${project}-${spec.id}`).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'pmi-template';
   try{
     if(status)status.textContent='Đang tạo file Word…';
-    const doc=pmiBuildWordDocument(area.value,spec.name);
+    const doc=pmiBuildWordDocument(area.value,`${spec.code} ${spec.name}`);
     const blob=await window.docx.Packer.toBlob(doc);
     const url=URL.createObjectURL(blob);
     const a=document.createElement('a');
@@ -11404,7 +12257,8 @@ function pmiStopProtectedActivityForApproval(){
   if(run)run.style.display='none'; if(result)result.style.display='none'; if(home)home.style.display='block';
   if(notebook)notebook.style.display='none'; if(select)select.style.display='block';
   var mock=document.getElementById('view-mock');
-  if(mock&&mock.classList.contains('active'))showView('train');
+  var ai=document.getElementById('view-ai');
+  if((mock&&mock.classList.contains('active'))||(ai&&ai.classList.contains('active')))showView('train');
 }
 
 function pmiShowApprovalGate(status){
@@ -11647,7 +12501,7 @@ function pmiShowLoginGate(feature){
   if(title) title.textContent = 'Đăng nhập để dùng ' + name;
   if(msg) msg.textContent = pmiPendingFeature==='mock'
     ? 'Toàn bộ 10 đề thi thử, đồng hồ thi, kết quả và Mistake Notebook chỉ mở cho tài khoản đã đăng nhập.'
-    : 'Study Tutor cần tài khoản đã được duyệt. Local Knowledge không gọi API ngoài; External AI dùng Edge Function với API key được bảo vệ trong Supabase.';
+    : 'AI Study Tutor cần tài khoản đã được quản trị viên duyệt.';
   if(gate){ gate.classList.add('open'); gate.setAttribute('aria-hidden','false'); }
   var bar = document.getElementById('auth-bar');
   if(bar){ bar.classList.remove('auth-attention'); void bar.offsetWidth; bar.classList.add('auth-attention'); }
@@ -11676,7 +12530,8 @@ function pmiApplyFeatureLocks(){
   var tutor=document.getElementById('pmi-tutor');
   var ask=document.getElementById('ask');
   var send=document.getElementById('sendBtn');
-  var tab=document.getElementById('tab-mock');
+  var aiTab=document.getElementById('tab-ai');
+  var mockTab=document.getElementById('tab-mock');
   var lockTitle=document.getElementById('tutor-lock-title');
   var lockMessage=document.getElementById('tutor-lock-message');
   var lockAction=document.getElementById('tutor-lock-action');
@@ -11688,12 +12543,19 @@ function pmiApplyFeatureLocks(){
       :(!loggedIn?'Đăng nhập để dùng Study Tutor…':(pmiApprovalStatus==='pending'?'Tài khoản đang chờ duyệt…':'Tài khoản chưa được cấp quyền…'));
   }
   if(send)send.disabled=!allowed;
-  if(tab){
-    tab.classList.toggle('auth-required',!allowed);
-    tab.setAttribute('data-locked',allowed?'false':'true');
-    tab.removeAttribute('aria-disabled');
-    tab.textContent=allowed?'Mock Test':(!loggedIn?'🔒 Mock Test':'⏳ Mock Test');
-    tab.title=allowed?'Mở 10 đề thi thử':(!loggedIn?'Đăng nhập để mở Mock Test':'Tài khoản phải được quản trị viên duyệt');
+  if(aiTab){
+    aiTab.classList.toggle('auth-required',!allowed);
+    aiTab.setAttribute('data-locked',allowed?'false':'true');
+    aiTab.removeAttribute('aria-disabled');
+    aiTab.textContent=allowed?'AI Tutor':(!loggedIn?'🔒 AI Tutor':'⏳ AI Tutor');
+    aiTab.title=allowed?'Mở AI Study Tutor':(!loggedIn?'Đăng nhập để mở AI Tutor':'Tài khoản phải được quản trị viên duyệt');
+  }
+  if(mockTab){
+    mockTab.classList.toggle('auth-required',!allowed);
+    mockTab.setAttribute('data-locked',allowed?'false':'true');
+    mockTab.removeAttribute('aria-disabled');
+    mockTab.textContent=allowed?'Mock Test':(!loggedIn?'🔒 Mock Test':'⏳ Mock Test');
+    mockTab.title=allowed?'Mở 10 đề thi thử':(!loggedIn?'Đăng nhập để mở Mock Test':'Tài khoản phải được quản trị viên duyệt');
   }
   if(lockTitle)lockTitle.textContent=allowed?'AI Study Tutor đã mở':(!loggedIn?'Đăng nhập để sử dụng AI Study Tutor':(pmiApprovalStatus==='rejected'?'Tài khoản chưa được cấp quyền':'Tài khoản đang chờ quản trị viên duyệt'));
   if(lockMessage)lockMessage.textContent=!loggedIn?'Training vẫn mở để bạn học. Sau khi đăng ký, quản trị viên phải duyệt tài khoản trước khi AI được mở.':(pmiApprovalStatus==='rejected'?'Tài khoản đã bị từ chối. Liên hệ quản trị viên để được hỗ trợ.':'AI Tutor và Mock Test sẽ mở ngay sau khi tài khoản được duyệt.');
@@ -11772,7 +12634,7 @@ function pmiHandleAuthSuccess(){
   pmiHideApprovalGate();pmiCloseLoginGate();pmiCloseAuthMenu();
   var pending=pmiPendingFeature;pmiPendingFeature=null;
   if(pending==='mock')setTimeout(function(){showView('mock');},50);
-  else if(pending==='ai')setTimeout(function(){var ask=document.getElementById('ask');if(ask)ask.focus();},80);
+  else if(pending==='ai')setTimeout(function(){showView('ai');},50);
   return true;
 }
 
@@ -11788,7 +12650,9 @@ function pmiHandleSignedOut(){
   var notebook=document.getElementById('mistake-panel'), select=document.getElementById('exam-select-area');
   if(run) run.style.display='none'; if(result) result.style.display='none'; if(home) home.style.display='block';
   if(notebook) notebook.style.display='none'; if(select) select.style.display='block';
-  if(document.getElementById('view-mock') && document.getElementById('view-mock').classList.contains('active')) showView('train');
+  var mockView=document.getElementById('view-mock');
+  var aiView=document.getElementById('view-ai');
+  if((mockView&&mockView.classList.contains('active'))||(aiView&&aiView.classList.contains('active')))showView('train');
 }
 
 async function pmiInitAuth(){
@@ -11968,6 +12832,8 @@ buildToc();
 renderLesson(0,true);
 renderPmp24Coverage('');
 initTemplateBuilder();
+loadTutorThreads();
+renderTutorWorkspace();
 updateTutorConfigUI();
 renderExamGrid();
 pmiUpdateAuthUI();
