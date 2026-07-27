@@ -574,6 +574,7 @@
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/docx@9.6.1/dist/index.iife.js"></script>
 
 <style id="pmi-admin-approval-css">
   body.pmi-approval-blocked{overflow:hidden!important}
@@ -679,17 +680,13 @@
   .coverage-note{font-size:11.5px;color:#9fb0c3;margin:10px 0 0}
 
   /* Dual-source Study Tutor */
-  .tutor-modes{display:flex;gap:7px;padding:12px 22px 0;flex-wrap:wrap}
+  .tutor-modes{display:flex;align-items:center;gap:7px;padding:12px 22px 0;flex-wrap:wrap}
   .tutor-modes button{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#aebdd0;border-radius:9px;padding:8px 12px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
   .tutor-modes button.active{background:var(--amber);border-color:var(--amber);color:var(--ink)}
-  .tutor-mode-note{padding:8px 22px 0;color:#9fb0c3;font-size:11.5px}
-  .tutor-config{margin:10px 22px 0;padding:12px;border:1px solid rgba(255,255,255,.13);border-radius:10px;background:rgba(255,255,255,.05)}
-  .tutor-config-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-  .tutor-config label{display:block;color:#aebdd0;font-size:10.5px;font-weight:800}
-  .tutor-config select,.tutor-config input{display:block;width:100%;margin-top:5px;background:var(--ink-2);color:var(--paper);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 9px;font:inherit;font-size:12px}
-  .tutor-config small{display:block;color:#8fa2b8;font-size:10.5px;line-height:1.45;margin-top:8px}
-  .tutor-config a{color:#f4b765}
-  .tutor.auth-locked .tutor-modes,.tutor.auth-locked .tutor-mode-note,.tutor.auth-locked .tutor-config,.tutor.auth-locked .chat,.tutor.auth-locked .chips,.tutor.auth-locked .composer{opacity:.18;filter:blur(.4px);pointer-events:none;user-select:none}
+  .tutor-model-inline{display:block;min-width:250px;max-width:360px;flex:1 1 280px}
+  .tutor-model-inline select{display:block;width:100%;margin:0;background:var(--ink-2);color:var(--paper);border:1px solid rgba(255,255,255,.18);border-radius:9px;padding:8px 10px;font:inherit;font-size:12px;font-weight:800}
+  .tutor-model-inline select:disabled{opacity:.5;cursor:not-allowed}
+  .tutor.auth-locked .tutor-modes,.tutor.auth-locked .chat,.tutor.auth-locked .chips,.tutor.auth-locked .composer{opacity:.18;filter:blur(.4px);pointer-events:none;user-select:none}
 
   /* PMI-style project template builder */
   .template-builder{margin-top:26px;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
@@ -715,10 +712,10 @@
     .template-grid label:first-child{grid-column:1/-1}
   }
   @media(max-width:600px){
-    .pmp24-board{padding:17px 14px}.chapter-grid,.template-grid,.tutor-config-grid{grid-template-columns:1fr}
+    .pmp24-board{padding:17px 14px}.chapter-grid,.template-grid{grid-template-columns:1fr}
     .template-grid label:first-child{grid-column:auto}.coverage-search{flex-direction:column}.coverage-search button{min-height:42px}
     .slide-result{grid-template-columns:54px 1fr}.slide-result .slide-module{grid-column:2;text-align:left}
-    .tutor-modes,.tutor-mode-note{padding-left:16px;padding-right:16px}.tutor-config{margin-left:16px;margin-right:16px}
+    .tutor-modes{padding-left:16px;padding-right:16px}.tutor-model-inline{flex-basis:100%;max-width:none}
     .tutor-head .dot{flex-basis:auto!important;order:0!important;margin-left:0!important}
     .tutor-head #tutor-ctx{flex-basis:100%;order:3;margin-left:0}
     .template-builder{padding:18px 15px}.template-status{width:100%;margin-left:0}
@@ -934,24 +931,21 @@
           <div class="tutor-modes" role="tablist" aria-label="Study Tutor data source">
             <button id="tutor-mode-local" class="active" type="button" role="tab" aria-selected="true" onclick="setTutorMode('local')">① Local Knowledge</button>
             <button id="tutor-mode-external" type="button" role="tab" aria-selected="false" onclick="setTutorMode('external')">② External AI</button>
-          </div>
-          <div class="tutor-mode-note" id="tutor-mode-note">Tra cứu từ PMBOK 8, PMP ECO 2026 và bản đồ 843 slide Version 2.4 — không gọi API ngoài.</div>
-          <div class="tutor-config" id="tutor-config" hidden>
-            <div class="tutor-config-grid">
-              <label>Kết nối
-                <select id="tutor-transport" disabled aria-label="Kết nối AI được bảo vệ">
-                  <option value="gateway">Supabase Gateway · API key được bảo vệ</option>
-                </select>
-              </label>
-              <label>Model
-                <select id="tutor-model">
-                  <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite · khuyến nghị</option>
-                  <option value="gemini-3.6-flash">Gemini 3.6 Flash · chuyên sâu hơn</option>
-                </select>
-              </label>
-            </div>
-            <small id="tutor-config-help">API key chỉ được lưu trong Supabase Secrets và không nằm trong file HTML. Edge Function xác thực đăng nhập, kiểm tra trạng thái đã phê duyệt, ưu tiên Gemini và tự chuyển sang OpenRouter khi Gemini hết quota hoặc tạm lỗi.</small>
-            <small id="tutor-runtime-status" aria-live="polite">Trạng thái AI: sẵn sàng qua Supabase Gateway.</small>
+            <label class="tutor-model-inline">
+              <select id="tutor-model" aria-label="Chọn model AI" onchange="updateTutorConfigUI()" disabled>
+                <option value="auto">Tự động · Gemini → OpenRouter dự phòng</option>
+                <optgroup label="Google Gemini">
+                  <option value="google|gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite</option>
+                  <option value="google|gemini-3.6-flash">Gemini 3.6 Flash</option>
+                </optgroup>
+                <optgroup label="OpenRouter miễn phí">
+                  <option value="openrouter|openai/gpt-oss-120b:free">GPT-OSS 120B · free</option>
+                  <option value="openrouter|z-ai/glm-4.5-air:free">GLM 4.5 Air · free</option>
+                  <option value="openrouter|openai/gpt-oss-20b:free">GPT-OSS 20B · free</option>
+                  <option value="openrouter|openrouter/free">OpenRouter Free Router</option>
+                </optgroup>
+              </select>
+            </label>
           </div>
           <div class="chat" id="chat">
             <div class="hint">Chế độ <b>Local Knowledge</b> trả lời từ dữ liệu có sẵn trong app và dẫn về module/slide liên quan. Chuyển sang <b>External AI</b> khi cần ví dụ sâu hơn hoặc giải thích theo ngữ cảnh mới.</div>
@@ -1001,7 +995,7 @@
             <button class="generate" type="button" onclick="generateProjectTemplate()">Tạo template</button>
             <button class="enhance" type="button" onclick="enhanceProjectTemplate()">AI hoàn thiện</button>
             <button class="copy" type="button" onclick="copyProjectTemplate()">Sao chép</button>
-            <button class="download" type="button" onclick="downloadProjectTemplate()">Tải .md</button>
+            <button class="download" type="button" onclick="downloadProjectTemplate()">Tải Word (.docx)</button>
             <span class="template-status" id="template-status">Chưa tạo template.</span>
           </div>
           <textarea id="template-output" class="template-output" spellcheck="false" placeholder="Template sẽ xuất hiện tại đây và có thể chỉnh sửa trực tiếp."></textarea>
@@ -9913,25 +9907,37 @@ function setTutorMode(mode){
   tutorMode=mode==='external'?'external':'local';
   const local=document.getElementById('tutor-mode-local');
   const external=document.getElementById('tutor-mode-external');
-  const config=document.getElementById('tutor-config');
-  const note=document.getElementById('tutor-mode-note');
+  const modelSelect=document.getElementById('tutor-model');
   if(local){local.classList.toggle('active',tutorMode==='local');local.setAttribute('aria-selected',String(tutorMode==='local'));}
   if(external){external.classList.toggle('active',tutorMode==='external');external.setAttribute('aria-selected',String(tutorMode==='external'));}
-  if(config)config.hidden=tutorMode!=='external';
-  if(note)note.textContent=tutorMode==='local'
-    ?'Tra cứu từ PMBOK 8, PMP ECO 2026 và bản đồ 843 slide Version 2.4 — không gọi API ngoài.'
-    :'Giải thích sâu theo ngữ cảnh mới bằng Gemini qua Supabase Gateway; API key không xuất hiện trong HTML.';
+  if(modelSelect)modelSelect.disabled=tutorMode!=='external';
   const chat=document.getElementById('chat');
-  if(chat)chat.innerHTML=`<div class="hint">${tutorMode==='local'
-    ?'Local Knowledge trả lời từ dữ liệu có sẵn và dẫn về module/slide liên quan.'
-    :'External AI nhận thêm các đoạn local liên quan làm grounding. Không đưa dữ liệu bí mật của dự án vào prompt.'}</div>`;
+  if(chat)chat.innerHTML=tutorMode==='local'
+    ?'<div class="hint">Local Knowledge trả lời từ dữ liệu có sẵn và dẫn về module/slide liên quan.</div>'
+    :'';
   updateTutorConfigUI();
   pmiApplyFeatureLocks();
 }
 
+function getTutorAiRoute(){
+  const raw=document.getElementById('tutor-model')?.value||'auto';
+  if(raw==='auto')return {provider:'auto',model:'gemini-3.5-flash-lite'};
+  const separator=raw.indexOf('|');
+  if(separator<1)return {provider:'auto',model:'gemini-3.5-flash-lite'};
+  const provider=raw.slice(0,separator);
+  const model=raw.slice(separator+1);
+  return {
+    provider:provider==='google'||provider==='openrouter'?provider:'auto',
+    model:model||'gemini-3.5-flash-lite'
+  };
+}
+
 function updateTutorConfigUI(){
-  const help=document.getElementById('tutor-config-help');
-  if(help)help.innerHTML='API key chỉ được lưu trong <b>Supabase Secrets</b>. Edge Function kiểm tra cả đăng nhập và quyền <b>approved/admin</b>, ưu tiên model Gemini đã chọn và dùng OpenRouter free làm dự phòng. Xem <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener noreferrer">Gemini Free Tier</a>.';
+  const route=getTutorAiRoute();
+  const select=document.getElementById('tutor-model');
+  if(select)select.title=route.provider==='auto'
+    ?'Tự động ưu tiên Gemini và chuyển sang OpenRouter khi cần'
+    :(route.provider==='google'?'Google Gemini · ':'OpenRouter · ')+route.model;
 }
 
 function buildTutorSystem(question){
@@ -9993,7 +9999,7 @@ async function sendChat(){
   try{
     const text=tutorMode==='local'
       ?answerFromLocalKnowledge(q)
-      :await pmiAskExternalTutor(buildTutorSystem(q),history.slice(-8),1200);
+      :await pmiAskExternalTutor(buildTutorSystem(q),history.slice(-8),2800);
     thinking.innerHTML=formatTutorText(text||'…');
     history.push({role:'assistant',content:text});
   }catch(e){
@@ -10005,19 +10011,17 @@ async function sendChat(){
   }
 }
 
-async function pmiAskExternalTutor(system,messages,maxTokens=1200){
+async function pmiAskExternalTutor(system,messages,maxTokens=2800){
   if(!pmiHasApprovedAccess())throw new Error('Tài khoản chưa được quản trị viên duyệt để dùng AI Tutor.');
-  const model=document.getElementById('tutor-model')?.value||'gemini-3.5-flash-lite';
-  return pmiAskGateway(system,messages,model,maxTokens);
+  const route=getTutorAiRoute();
+  return pmiAskGateway(system,messages,route.provider,route.model,maxTokens);
 }
 
-async function pmiAskGateway(system,messages,model,maxTokens){
+async function pmiAskGateway(system,messages,provider,model,maxTokens){
   if(!window.pmiSupabase)throw new Error('Chưa cấu hình Supabase URL/Key trong file HTML.');
-  const runtime=document.getElementById('tutor-runtime-status');
-  if(runtime)runtime.textContent='Trạng thái AI: đang kết nối Supabase Gateway…';
+  const modelSelect=document.getElementById('tutor-model');
   const sess=await pmiSupabase.auth.getSession();
   if(sess.error||!sess.data?.session){
-    if(runtime)runtime.textContent='Trạng thái AI: phiên đăng nhập không hợp lệ.';
     throw new Error('Bạn cần đăng nhập trước khi dùng AI tutor.');
   }
   const res=await fetch(PMI_SUPABASE_URL.replace(/\/$/,'')+'/functions/v1/albert-pmi-tutor',{
@@ -10028,32 +10032,29 @@ async function pmiAskGateway(system,messages,model,maxTokens){
       'Content-Type':'application/json'
     },
     body:JSON.stringify({
-      provider:'auto',
+      provider:provider||'auto',
       model:model,
       system:system,
       messages:messages,
-      max_tokens:maxTokens||1200,
+      max_tokens:maxTokens||2800,
       grounding:{source:'pmbok8-pmp-eco-2026-pmp-v2.4',slide_index_count:PMP24_SLIDE_INDEX.length}
     })
   });
   const raw=await res.text();
   let data=null;
   try{data=JSON.parse(raw);}catch(e){
-    if(runtime)runtime.textContent='Trạng thái AI: Edge Function trả về dữ liệu không hợp lệ.';
     throw new Error('Function trả về không phải JSON: '+raw.slice(0,300));
   }
   if(!res.ok||data.ok===false){
-    if(runtime)runtime.textContent='Trạng thái AI: kết nối lỗi · '+(data?.error||('HTTP '+res.status));
     throw new Error((data?.error||('HTTP '+res.status))+(data?.detail?(' — '+JSON.stringify(data.detail).slice(0,400)):''));
   }
   const answer=data.answer||data.reply||data.text||data.result?.answer||'';
   if(!answer){
-    if(runtime)runtime.textContent='Trạng thái AI: model không trả về nội dung.';
     throw new Error('Function không trả về nội dung ("answer").');
   }
-  if(runtime){
-    const provider=data.provider==='google'?'Google Gemini':'OpenRouter';
-    runtime.textContent='Trạng thái AI: đã trả lời bằng '+provider+' · '+(data.model||model)+(data.fallback_used?' · fallback':'');
+  if(modelSelect){
+    const providerLabel=data.provider==='google'?'Google Gemini':'OpenRouter';
+    modelSelect.title=(data.fallback_used?'Fallback → ':'')+providerLabel+' · '+(data.model||model);
   }
   return String(answer);
 }
@@ -10203,7 +10204,7 @@ async function enhanceProjectTemplate(){
   if(status)status.textContent='External AI đang rà soát và hoàn thiện…';
   const system=`You are a PMI-aligned project artifact coach. Improve the supplied ${spec.name} as practical Markdown aligned to PMBOK Guide Eighth Edition. Preserve headings and traceability. Use the supplied project facts only; never fabricate facts, approvals, metrics or decisions. Leave unknown values as [Cần điền / To complete]. Make acceptance criteria and ownership measurable where possible. Tailor for the named approach. Return only the revised Markdown. This is PMI-style, not an official PMI form.`;
   try{
-    const improved=await pmiAskExternalTutor(system,[{role:'user',content:`PROJECT CONTEXT:\n${context}\n\nCURRENT TEMPLATE:\n${content}`}],2000);
+    const improved=await pmiAskExternalTutor(system,[{role:'user',content:`PROJECT CONTEXT:\n${context}\n\nCURRENT TEMPLATE:\n${content}`}],3200);
     const area=document.getElementById('template-output');
     if(area)area.value=improved;
     if(status)status.textContent='External AI đã hoàn thiện bản nháp; hãy kiểm tra trước khi phê duyệt.';
@@ -10224,19 +10225,295 @@ async function copyProjectTemplate(){
   }
 }
 
-function downloadProjectTemplate(){
+/* ---------- DOCX EXPORT START ---------- */
+function pmiDocxInlineRuns(text,overrides={}){
+  const {TextRun}=window.docx;
+  const pieces=String(text??'').split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+  return pieces.map(piece=>{
+    const bold=/^\*\*[\s\S]+\*\*$/.test(piece);
+    const clean=bold?piece.slice(2,-2):piece;
+    return new TextRun({
+      text:clean,
+      font:'Calibri',
+      size:overrides.size||22,
+      color:overrides.color||'1F2937',
+      bold:bold||!!overrides.bold,
+      italics:!!overrides.italics
+    });
+  });
+}
+
+function pmiDocxTableWidths(rows,columnCount,total=9360){
+  const weights=Array.from({length:columnCount},()=>8);
+  rows.forEach(row=>{
+    for(let i=0;i<columnCount;i++){
+      const length=String(row[i]||'').replace(/\*\*/g,'').length;
+      weights[i]=Math.max(weights[i],Math.min(42,Math.max(8,length)));
+    }
+  });
+  const sum=weights.reduce((a,b)=>a+b,0)||columnCount;
+  let widths=weights.map(weight=>Math.max(480,Math.floor(total*weight/sum)));
+  const initial=widths.reduce((a,b)=>a+b,0);
+  if(initial>total){
+    widths=widths.map(width=>Math.max(360,Math.floor(width*total/initial)));
+  }
+  const current=widths.reduce((a,b)=>a+b,0);
+  widths[widths.length-1]+=total-current;
+  return widths;
+}
+
+function pmiDocxTable(rows,tableWidth=9360){
+  const {
+    Table,TableRow,TableCell,Paragraph,WidthType,TableLayoutType,
+    BorderStyle,ShadingType,VerticalAlign
+  }=window.docx;
+  const columnCount=Math.max(1,...rows.map(row=>row.length));
+  const widths=pmiDocxTableWidths(rows,columnCount,tableWidth);
+  const border={style:BorderStyle.SINGLE,size:4,color:'AAB7C4'};
+  return new Table({
+    width:{size:tableWidth,type:WidthType.DXA},
+    indent:{size:120,type:WidthType.DXA},
+    columnWidths:widths,
+    layout:TableLayoutType.FIXED,
+    borders:{top:border,bottom:border,left:border,right:border,insideHorizontal:border,insideVertical:border},
+    margins:{top:80,bottom:80,left:120,right:120},
+    rows:rows.map((row,rowIndex)=>new TableRow({
+      tableHeader:rowIndex===0,
+      children:Array.from({length:columnCount},(_,columnIndex)=>new TableCell({
+        width:{size:widths[columnIndex],type:WidthType.DXA},
+        margins:{top:80,bottom:80,left:120,right:120},
+        verticalAlign:VerticalAlign.CENTER,
+        shading:rowIndex===0?{fill:'E8EEF5',type:ShadingType.CLEAR}:undefined,
+        children:[new Paragraph({
+          spacing:{before:0,after:0,line:260},
+          children:pmiDocxInlineRuns(row[columnIndex]||'',{
+            size:18,
+            bold:rowIndex===0,
+            color:rowIndex===0?'0F2D4A':'1F2937'
+          })
+        })]
+      }))
+    }))
+  });
+}
+
+function pmiMarkdownMaxTableColumns(markdown){
+  return String(markdown||'').replace(/\r\n?/g,'\n').split('\n').reduce((max,line)=>{
+    const trimmed=line.trim();
+    if(!trimmed.startsWith('|'))return max;
+    return Math.max(max,trimmed.replace(/^\||\|$/g,'').split('|').length);
+  },0);
+}
+
+function pmiMarkdownToDocxChildren(markdown,tableWidth=9360){
+  const {Paragraph}=window.docx;
+  const lines=String(markdown||'').replace(/\r\n?/g,'\n').split('\n');
+  const children=[];
+  for(let i=0;i<lines.length;i++){
+    const raw=lines[i];
+    const line=raw.trim();
+    if(!line||/^```/.test(line))continue;
+
+    if(line.startsWith('|')&&i+1<lines.length&&/^\s*\|?[\s:|-]+\|?\s*$/.test(lines[i+1])){
+      const rows=[];
+      const splitRow=value=>value.trim().replace(/^\||\|$/g,'').split('|').map(cell=>cell.trim());
+      rows.push(splitRow(line));
+      i+=2;
+      while(i<lines.length&&lines[i].trim().startsWith('|')){
+        rows.push(splitRow(lines[i]));
+        i++;
+      }
+      i--;
+      children.push(pmiDocxTable(rows,tableWidth));
+      children.push(new Paragraph({spacing:{before:0,after:80},children:[]}));
+      continue;
+    }
+
+    let match=line.match(/^#\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({style:'PmiTitle',children:pmiDocxInlineRuns(match[1],{size:44,bold:true,color:'0F1C2E'})}));
+      continue;
+    }
+    match=line.match(/^##\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({style:'PmiHeading1',children:pmiDocxInlineRuns(match[1],{size:32,bold:true,color:'2E74B5'})}));
+      continue;
+    }
+    match=line.match(/^###\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({style:'PmiHeading2',children:pmiDocxInlineRuns(match[1],{size:26,bold:true,color:'2E74B5'})}));
+      continue;
+    }
+    match=line.match(/^-\s+\[\s\]\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({
+        numbering:{reference:'pmi-checklist',level:0},
+        children:pmiDocxInlineRuns(match[1])
+      }));
+      continue;
+    }
+    match=line.match(/^-\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({
+        numbering:{reference:'pmi-bullets',level:0},
+        children:pmiDocxInlineRuns(match[1])
+      }));
+      continue;
+    }
+    match=line.match(/^\d+\.\s+(.+)$/);
+    if(match){
+      children.push(new Paragraph({
+        numbering:{reference:'pmi-decimal',level:0},
+        children:pmiDocxInlineRuns(match[1])
+      }));
+      continue;
+    }
+    match=line.match(/^>\s*(.+)$/);
+    if(match){
+      children.push(new Paragraph({
+        style:'PmiNote',
+        children:pmiDocxInlineRuns(match[1],{size:19,italics:true,color:'52606D'})
+      }));
+      continue;
+    }
+    if(/^---+$/.test(line))continue;
+    children.push(new Paragraph({children:pmiDocxInlineRuns(line)}));
+  }
+  return children;
+}
+
+function pmiBuildWordDocument(markdown,title='PMI-style Project Template'){
+  const {
+    Document,Paragraph,TextRun,Footer,PageNumber,AlignmentType,
+    LevelFormat,LineRuleType,PageOrientation
+  }=window.docx;
+  const landscape=pmiMarkdownMaxTableColumns(markdown)>6;
+  const tableWidth=landscape?12840:9240;
+  const children=pmiMarkdownToDocxChildren(markdown,tableWidth);
+  return new Document({
+    title,
+    subject:'PMI-style project management working template',
+    creator:'ALBERT PMI Prep',
+    lastModifiedBy:'ALBERT PMI Prep',
+    description:'Editable PMI-style project artifact generated by ALBERT PMI Prep.',
+    styles:{
+      default:{
+        document:{
+          run:{font:'Calibri',size:22,color:'1F2937'},
+          paragraph:{spacing:{before:0,after:120,line:300,lineRule:LineRuleType.AUTO}}
+        }
+      },
+      paragraphStyles:[
+        {
+          id:'PmiTitle',name:'PMI Template Title',basedOn:'Normal',next:'Normal',quickFormat:true,
+          run:{font:'Calibri',size:44,bold:true,color:'0F1C2E'},
+          paragraph:{spacing:{before:0,after:240,line:300,lineRule:LineRuleType.AUTO},keepNext:true}
+        },
+        {
+          id:'PmiHeading1',name:'PMI Heading 1',basedOn:'Normal',next:'Normal',quickFormat:true,
+          run:{font:'Calibri',size:32,bold:true,color:'2E74B5'},
+          paragraph:{spacing:{before:360,after:200,line:300,lineRule:LineRuleType.AUTO},keepNext:true,outlineLevel:0}
+        },
+        {
+          id:'PmiHeading2',name:'PMI Heading 2',basedOn:'Normal',next:'Normal',quickFormat:true,
+          run:{font:'Calibri',size:26,bold:true,color:'2E74B5'},
+          paragraph:{spacing:{before:280,after:140,line:300,lineRule:LineRuleType.AUTO},keepNext:true,outlineLevel:1}
+        },
+        {
+          id:'PmiNote',name:'PMI Note',basedOn:'Normal',next:'Normal',quickFormat:true,
+          run:{font:'Calibri',size:19,italics:true,color:'52606D'},
+          paragraph:{
+            spacing:{before:80,after:120,line:280,lineRule:LineRuleType.AUTO},
+            indent:{left:360,right:240}
+          }
+        }
+      ]
+    },
+    numbering:{
+      config:[
+        {
+          reference:'pmi-bullets',
+          levels:[{
+            level:0,format:LevelFormat.BULLET,text:'•',alignment:AlignmentType.LEFT,
+            style:{
+              run:{font:'Calibri',size:22,color:'0F1C2E'},
+              paragraph:{indent:{left:540,hanging:270},spacing:{after:80,line:300,lineRule:LineRuleType.AUTO}}
+            }
+          }]
+        },
+        {
+          reference:'pmi-checklist',
+          levels:[{
+            level:0,format:LevelFormat.BULLET,text:'☐',alignment:AlignmentType.LEFT,
+            style:{
+              run:{font:'Segoe UI Symbol',size:21,color:'0F1C2E'},
+              paragraph:{indent:{left:540,hanging:270},spacing:{after:80,line:300,lineRule:LineRuleType.AUTO}}
+            }
+          }]
+        },
+        {
+          reference:'pmi-decimal',
+          levels:[{
+            level:0,format:LevelFormat.DECIMAL,text:'%1.',alignment:AlignmentType.LEFT,
+            style:{
+              run:{font:'Calibri',size:22,color:'0F1C2E'},
+              paragraph:{indent:{left:540,hanging:270},spacing:{after:80,line:300,lineRule:LineRuleType.AUTO}}
+            }
+          }]
+        }
+      ]
+    },
+    sections:[{
+      properties:{
+        page:{
+          size:{
+            width:12240,
+            height:15840,
+            orientation:landscape?PageOrientation.LANDSCAPE:PageOrientation.PORTRAIT
+          },
+          margin:{top:1440,right:1440,bottom:1440,left:1440,header:708,footer:708}
+        }
+      },
+      footers:{
+        default:new Footer({children:[new Paragraph({
+          alignment:AlignmentType.RIGHT,
+          spacing:{before:100,after:0},
+          children:[new TextRun({
+            font:'Calibri',size:17,color:'7A8694',
+            children:['ALBERT PMI Prep · PMI-style working template · Page ',PageNumber.CURRENT]
+          })]
+        })]})
+      },
+      children
+    }]
+  });
+}
+
+async function downloadProjectTemplate(){
   const area=document.getElementById('template-output');
   if(!area?.value)generateProjectTemplate();
+  const status=document.getElementById('template-status');
+  if(!window.docx?.Packer){
+    if(status)status.textContent='Không tải được thư viện Word. Hãy kiểm tra mạng rồi thử lại.';
+    return;
+  }
   const spec=PMI_TEMPLATE_CATALOG.find(t=>t.id===document.getElementById('template-type')?.value)||PMI_TEMPLATE_CATALOG[0];
   const project=document.getElementById('template-project')?.value.trim()||'project';
   const slug=pmiNormalizeText(`${project}-${spec.id}`).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'pmi-template';
-  const blob=new Blob([area.value],{type:'text/markdown;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=slug+'.md';document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  document.getElementById('template-status').textContent='Đã tải file Markdown.';
+  try{
+    if(status)status.textContent='Đang tạo file Word…';
+    const doc=pmiBuildWordDocument(area.value,spec.name);
+    const blob=await window.docx.Packer.toBlob(doc);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=slug+'.docx';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+    if(status)status.textContent='Đã tải file Word (.docx).';
+  }catch(e){
+    if(status)status.textContent='Không tạo được file Word: '+(e?.message||String(e));
+  }
 }
+/* ---------- DOCX EXPORT END ---------- */
 
 /* ================= MOCK TEST ENGINE · PMBOK 8 / PMP ECO JULY 2026 ================= */
 const BLUEPRINT = {People:0.33, Process:0.41, Business:0.26};
